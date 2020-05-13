@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "购物车",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark",
+  "usingComponents": {
+    "carts-item": "../../components/carts-item/carts-item",
+    "recommend-goods": "../../components/recommend-goods/recommend-goods"
+  }
+}

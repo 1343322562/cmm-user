@@ -1,0 +1,24 @@
+.head{background-color:#fff;position:fixed;top:0;left:0;height:90rpx;width:100%;border-bottom:2rpx solid #e8e8e8;z-index:10}
+.head>.act{position:absolute;left:0;bottom:0;transition: left 0.2s ease-in-out;}
+.head>.act::before{content:"";height:3px;width:50%;position:absolute;left:25%;bottom:0;background-color:#d40000}
+.head>.btn2{display:flex;}
+.head>.btn2 view{flex-grow:1;text-align:center;color:#999;height:90rpx;line-height:90rpx;width:0px;}
+.head>.btn2 .act{color:#d40000}
+
+.list{padding:110rpx 0 20rpx 0;}
+.li{width:96%;margin-left:1%;overflow:hidden;margin-bottom:20rpx;}
+.l{background-color:#d40000;color:#fff;float:left;height:200rpx;width:30%;text-align:center;margin-left:20rpx;position:relative}
+.l::before{content:"";position:absolute;left:-6rpx;top:0;width:10rpx;height:100%;background:url('http://zksrimg.oss-cn-beijing.aliyuncs.com/images/wxmini/yh-dh-coupIcon.png')repeat-y left center;background-size:60rpx;}
+.r{margin-left:32%;background-color:#fff;padding-left:2%;height:200rpx;overflow:hidden}
+.name{font-size:30rpx;padding-top:20rpx;}
+.money{margin-top:40rpx;}
+.max{font-size:30rpx;}
+.money>text{font-size:1.8em;}
+.time{font-size:28rpx;color:#999;border-bottom:1px solid #ddd;overflow:hidden;height:60rpx;margin-top:10rpx;}
+.btn{color:#d40000;border:1px solid #d40000;border-radius:10rpx;float:right;padding:4rpx 10rpx;font-size:26rpx;margin-right:20rpx;}
+.explain{font-size:28rpx;color:#999;height:60rpx; line-height:60rpx;position:relative}
+.c{background-color:#fff;width:97%;margin-left:20rpx;float:right;box-shadow:0px 5px 10px #eee inset;border:1px solid #ddd;}
+.title{text-align:center;height:80rpx;line-height:80rpx;width:90%;border-bottom:1px solid #ddd;margin:0 auto 20rpx auto;}
+.cnt{width:90%;margin:20rpx auto;color:#999;font-size:28rpx;}
+.explain>.icon{position:absolute;top:18rpx;right:20rpx;display:block;width:36rpx;}
+.explain>.icon.down{transform:rotate(180deg)}

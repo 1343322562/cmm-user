@@ -1,0 +1,11 @@
+<view wx:if="{{list.length}}" class='box'>
+  <view class='title'><image class='icon' src="../../images/wishList_icon_use.png" /><text>购物车帮您挑选</text></view>
+  <view class='list'>
+    <view class='li' wx:for="{{list}}" wx:key="index">
+      <image  class="img" mode="aspectFit" src="{{item.goodsImgUrl}}" />
+      <view class='name'>{{item.itemName}}</view>
+      <view class='price'>￥{{item.price}}/{{item.unit}}</view>
+      <view class='carts' catchtap='addCarts' data-index="{{index}}"><image class='icon' src="../../images/carts.png" /></view>
+    </view>
+  </view>
+</view>

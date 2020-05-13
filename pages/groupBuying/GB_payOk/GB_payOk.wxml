@@ -1,0 +1,9 @@
+<view class="main">
+  <icon type="success" wx:if="{{ pageType=='1'}}" size="80" color="#fa6418"/>
+  <text class="title">{{pageType=='1'?'付款成功':"付款失败"}}</text>
+  <view class="cnt" wx:if="{{ pageType=='2'}}">
+    <text>未完成的付款订单会为您保留15分钟</text>
+    <text>可在我的团购订单中再次支付</text>
+  </view>
+  <view class="btn" bindtap="openPage">{{pageType=='1'?'继续逛逛':'去付款' }}</view>
+</view>

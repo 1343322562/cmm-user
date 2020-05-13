@@ -1,0 +1,63 @@
+<view class="page-detail" wx:if="{{pageObj.id}}">
+  <image class="topImg" mode="widthFix" src="{{tgGoodsUrl+pageObj.imgUrl}}" />
+
+  <view class="det-price">
+    <text class="s">￥{{pageObj.price}}</text>
+    <text class="y" wx:if="{{pageObj.origPrice}}">￥{{pageObj.origPrice}}</text>
+  </view>
+  <view class="det-name">{{pageObj.itemName}}</view>
+  <view class="det-goodsSize">
+    <view class='sellNum'>已卖<text>{{pageObj.saleCount}}</text>份</view>
+    <view>
+      <view>产品规格 :
+        <text>{{pageObj.itemSize}}</text>
+      </view>
+      <view wx:if="{{pageObj.teamType=='0'}}">订货规格 :
+        <text>{{(pageObj.itemQty||1)+pageObj.unitNo}}</text>
+      </view>
+    </view>
+    <view>
+      <view wx:if="{{pageObj.teamType=='0'}}">起订规格 :
+        <text>{{(pageObj.minQty||1)+pageObj.unitNo}}</text>
+      </view>
+      <view wx:if="{{pageObj.maxQty>0}}">单人限购 :
+        <text>{{pageObj.maxQty}}</text>
+      </view>
+      
+    </view>
+  </view>
+  <view class="det-msg">{{pageObj.notice}}</view>
+  <view class="det-addBtn" wx:if="{{pageObj.teamType=='0'}}">
+    <view>金额小计 :
+      <text>￥{{cartsObj.amt||0}}</text>
+    </view>
+    <view class="det-btn">
+      <text bindtap="changeNum" data-type="0"></text>
+      <view>{{cartsObj.qty||0}}</view>
+      <text bindtap="changeNum" data-type="1"></text>
+    </view>
+  </view>
+
+  <view class="det-mzList" wx:if="{{pageObj.teamType=='1'}}">
+    <view class="title">套餐选择</view>
+    <view class="list">
+      <block wx:for="{{pageObj.relationOutVos}}" wx:key="{{index}}">
+      <view class="{{'li'+(mzSelect==index?' act':'')}}" bindtap="selectMz" data-index="{{index}}">
+        <view>买{{item.buyQty}}赠{{item.sendQty}}</view>
+        <view class="price">￥{{item.totalMoney}}</view>
+        <view>买立省:￥{{item.cpTotalMoney}}</view>
+      </view>
+      </block>
+    </view>
+  </view>
+
+  <view class="det-bottomBtn">
+    <view>需要支付
+      <text>￥{{payMoney}}</text>
+    </view>
+    <view class="{{payMoney>0?'act':''}}" bindtap="goPay">去支付</view>
+  </view>
+  <block wx:for="{{pageObj.detailUrl}}" wx:key="{{index}}">
+    <image class="topImg" mode="widthFix" src="{{tgGoodsUrl+item}}" />
+  </block>
+</view>

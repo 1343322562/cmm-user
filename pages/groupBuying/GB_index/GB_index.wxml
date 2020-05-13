@@ -1,0 +1,48 @@
+<view wx:if="{{pageObj.id}}">
+  <image class="topImg" mode="widthFix" src="{{tgGoodsUrl + pageObj.topImg}}" />
+  <view class="ind-list">
+    <view class="li" wx:for="{{pageObj.detailOutVos}}" wx:key="{{index}}" wx:if="{{timeList[index].type!='2'}}">
+      <view class="promotion">
+        <view class="{{'type '+(item.teamType=='1'?'mz':'tj')}}">{{item.teamType=='1'?'买赠团':'特价团'}}</view>
+        <view class="time">
+          <view class="start">距{{timeList[index].type=='0'?'开始':'结束'}}
+            <text>{{timeList[index].r}}</text>天
+            <text>{{timeList[index].s}}</text>:
+            <text>{{timeList[index].f}}</text>:
+            <text>{{timeList[index].m}}</text>
+          </view>
+          <view class="title">{{item.notice}}</view>
+        </view>
+      </view>
+      <view class="goods">
+        <view class="img" style="{{ 'background-image:url('+tgGoodsUrl+'/'+item.imgUrl+')' }}"></view>
+        <view class="goods-info">
+          <view class="name">{{item.itemName}}</view>
+          <view class="info">
+            <text class="l">订货规格 : {{item.itemSize}}</text>
+            <text class="r">已销 : {{item.saleCount}}份</text>
+          </view>
+          <view class="price">
+            <text class="sellingPrice">￥<text>{{item.price}}</text></text>
+            <text class="originPrrice" wx:if="{{item.origPrice}}">￥{{item.origPrice}}</text>
+          </view>
+        </view>
+      </view>
+      <view data-index="{{index}}" data-id="{{item.id}}" class="btn{{timeList[index].type=='0'?' act':''}}" bindtap="goDetails">我要参团</view>
+    </view>
+  </view>
+
+  <view class="ind-introduce">
+    <view class="title"></view>
+    <view class="content">
+      <view wx:for="{{pageObj.teamRule}}" wx:key="{{index}}">{{item}}</view>
+    </view>
+  </view>
+</view>
+
+<view class="pageData_null" wx:if="{{pageLoading&&!pageObj.id}}">
+  <image mode="widthFix" src="../../../images/pageData-null.png"/>
+  <view class="page_text">暂时没有团购活动~~</view>
+</view>
+
+<view class='goOrderList' catchtap='goOrderList'>查看团购订单</view>

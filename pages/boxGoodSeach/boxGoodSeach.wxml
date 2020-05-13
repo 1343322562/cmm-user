@@ -1,0 +1,30 @@
+<!--pages/boxGoodSeach/boxGoodSeach.wxml-->
+<!-- 搜索箱码区域 -->
+<view class="search">
+  <view class='item form'>
+    <image bindtap="focusInput" class='icon' src="../../images/search_page_icon.png" />
+    <input id="label" class='input' focus="{{focus == true}}" value="{{searchText}}" bindconfirm='seachBoxCode' confirm-type="search" maxlength='30' placeholder='请输入箱码' />
+    <view class="openCode" catchtap='openScanCode' ><image class='code' src="../../images/openCode.png" /></view>
+  </view>
+</view>
+<!-- 商品信息弹出框区域 -->
+<view class = "container" wx:if="{{searchText !== ''}}">
+  <view class = "goodInfoBox">
+    <view class = "boxBlock shopTitle">
+      <text selectable class="shopName">{{ shopName }}</text>
+      <text selectable class="expressNum">运单号：{{ expressNum }}</text>
+    </view>
+    <view class = "boxBlock mainContent">
+      <image mode="aspectFit" src="http://16717627.s21i.faiusr.com/4/ABUIABAEGAAgo9Ks5QUo4O-BTTDdAjjcAQ.png.webp"></image>
+      <view class="boxBlock goodsTItle">
+        <view>{{ goodTitle }}</view>
+      </view>
+      <view class="goodProps">
+        <view wx:for="{{goodProps}}" wx:key="index">{{ item }} {{ index }}</view>
+      </view>
+    </view>
+    <view class = "boxBlock confirm">
+      <button bindtap="readEnd" class="confirmBtn">Message</button>
+    </view>
+  </view>
+</view>

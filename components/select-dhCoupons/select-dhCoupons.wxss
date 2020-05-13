@@ -1,0 +1,19 @@
+.mask{position:fixed;top:0;left:0;width:100%;bottom:0;background-color:rgba(0,0,0,.4);z-index:100}
+.box{background-color: #fff;position: absolute;top: 50%;left: 5%;width: 90%;margin-top: -490rpx}
+.box>.title{text-align: center;font-size: 32rpx;margin-top: 25rpx;margin-bottom: 5rpx;}
+.box>.msg{font-size: 24rpx;color: #777;text-align: center;letter-spacing: 2rpx;}
+.box>.btn{margin-top: 20prx;padding: 20rpx 0;text-align: center}
+.box>.btn .item{width: 220rpx;line-height: 70rpx;display: inline-block;margin: 0 30rpx;border-radius: 10rpx;border: 1px solid #000;color: #000}
+.box>.btn .item:last-child{background-color: #000;color: #fff;}
+.box>.list{border-top: 1px solid #e4e4e4;border-bottom: 1px solid #e4e4e4;height: 690rpx;width: 90%;margin: 0 auto;margin-top: 40rpx;padding: 20rpx 0;}
+.list .li{background-color: #f9d7ce;position: relative;box-shadow: 5rpx 10rpx 10rpx #d2d2d2;width: 95%;margin: 0 auto 20rpx auto;color: #333;padding: 20rpx 0;}
+.list .li>.info{padding:0 20rpx;font-size: 24rpx;}
+.list .li>.info .name{font-size: 32rpx;font-weight: bold;color: #bd050a}
+.list .li>.info .time{font-size: 20rpx;margin-top: 35rpx;}
+.list .li>.use{position: absolute;bottom: 50rpx;right: 20rpx;background-color: #bd050a;color: #fcf9e8;border-radius: 10rpx;width: 120rpx;line-height: 60rpx;text-align: center;}
+.list .li>.goCarts{position: absolute;right: 20rpx;bottom: 40rpx;width: 220rpx;height: 80rpx;text-align: center}
+.list .li>.goCarts .item{height: 100%;width: 80rpx;position: absolute;top: 0}
+.list .li>.goCarts .item>.icon{width: 50rpx;height: 50rpx;margin-top: 14rpx;}
+.list .li>.goCarts .minus{left: 0}
+.list .li>.goCarts .num{display: inline-block;line-height:80rpx}
+.list .li>.goCarts .add{right: 0}

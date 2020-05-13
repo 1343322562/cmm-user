@@ -1,0 +1,12 @@
+.mask{position:fixed;top:0;left:0;width:100%;bottom:0;background-color:rgba(0,0,0,.4);z-index:100}
+.box{background-color: #fff;position: absolute;top: 50%;left: 5%;width: 90%;padding-bottom: 30rpx;margin-top: -500rpx}
+.box>.title{text-align: center;font-size: 32rpx;margin-top: 25rpx;margin-bottom: 5rpx;}
+.box>.msg{font-size: 24rpx;color: #777;text-align: center;letter-spacing: 2rpx;}
+.box>.noUse{color: #666;position: absolute;top: 0rpx;right: 0rpx;width: 150rpx;text-align: center;line-height: 100rpx;}
+.box>.list{border-top: 1px solid #e4e4e4;border-bottom: 1px solid #e4e4e4;height: 800rpx;width: 90%;margin: 0 auto;margin-top: 40rpx;padding: 20rpx 0;}
+.list .li{overflow: hidden;background-color: #e7303c;color: #fff;position: relative;box-shadow: 5rpx 10rpx 10rpx #d2d2d2;width: 95%;margin: 0 auto 20rpx auto;}
+.list .li>.tag{position: absolute;top: 0;left: 0;text-align: center;width: 90rpx;height: 70rpx;line-height: 50rpx;background-color: #920f0a;color: #e7303c;border-radius: 0 0 100% 0;font-size: 34rpx}
+.list .li>.money{text-align: center;font-size: 80rpx;font-weight: bold;}
+.list .li>.info{text-align: center;margin-top: -20rpx;font-size: 26rpx}
+.list .li>.time{margin:30rpx 0 0 10rpx;font-size: 20rpx;padding-bottom: 10rpx;color: #f2f2f2}
+.list .li>.nowUse{border:1px solid #fff;width: 120rpx;line-height: 120rpx;border-radius: 100%;position:absolute;top: -22rpx;right:-20rpx;font-size: 22rpx;text-align: center;transform:rotate(-30deg);}

@@ -1,0 +1,15 @@
+<view class="item" wx:if="{{openType=='liquidation'}}">
+  <view class='name'>发票类型</view>
+  <view class='typeList'>
+    <text class="text{{selectIndex==index?' act':''}}" catchtap="selected" data-index="{{index}}" wx:for="{{typeList}}" wx:key="index">{{item}}</text>
+  </view>
+</view>
+<view class="item">
+  <view class='name'>纳税人名称</view>
+  <input class='input' placeholder='请填写纳税姓名' value="{{taxpayer}}" bindinput='getValue' data-type="taxpayer" type='text' maxlength='30' />
+</view>
+<view class="item">
+  <view class='name'>税务登记人号码</view>
+  <input class='input' placeholder='请填写税务登记人号码' value="{{taxNumber}}" bindinput='getValue' data-type="taxNumber" type='text' maxlength='30' />
+</view>
+<view class='save' bindtap='save'>保存</view>

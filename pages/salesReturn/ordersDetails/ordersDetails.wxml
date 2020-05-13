@@ -1,0 +1,40 @@
+
+<view class="detailsPage">
+  <view class='block'>
+    <view class='blockTitle'>退单信息<text class='right'>{{orders.master.statusStr}}</text></view>
+    <view class='p'><text class='name'>退单ID</text><text class='content'>{{orders.master.operId}}</text></view>
+    <view class='p'><text class='name'>退货编号</text><text class='content'>{{orders.master.sheetNo}}</text></view>
+    <view class='p'><text class='name'>创建时间</text><text class='content'>{{orders.master.createDate}}</text></view>
+    <view class='p'><text class='name'>生成时间</text><text class='content'>{{orders.master.modifyDate}}</text></view>
+    <view class='p'><text class='name'>退单商品</text><text class='content'>x{{orders.master.sheetQty}}</text></view>
+    <view class='p'><text class='name'>退单金额</text><text class='content'>￥{{orders.master.sheetAmt}}</text></view>
+  </view>
+  <view class='block'>
+    <view class='blockTitle'>退货商品</view>
+    <view class='goodsList'>
+  
+      <view class='li' wx:for="{{orders.details}}" wx:for-item="goods" wx:key="index">
+        <view class='info'>
+          <view class='name'>{{goods.itemName}}</view>
+          <view class='size'>规格:{{goods.itemSize}}</view>
+        </view>
+        <view class='total'>
+          <view class='price'>￥{{goods.avgPrice}}</view>
+          <view class='num'>x{{goods.realQty}}</view>
+          <view class='subtotal'>小计:￥{{goods.subAmt}}</view>
+        </view>
+      </view>
+
+    </view>
+  </view>
+  <view class='block'>
+    <view class='blockTitle'>备注</view>
+    <view class='p'>{{orders.master.memo||'无备注信息'}}</view>
+  </view>
+
+  <view class='buttom'>
+    <text catchtap='callPhone' data-phone="{{orders.master.routeManPhone}}">联系商家</text>
+    <text catchtap='callPhone' data-phone="{{orders.master.saleManTel}}" >联系业务员</text>
+  </view>
+
+</view>

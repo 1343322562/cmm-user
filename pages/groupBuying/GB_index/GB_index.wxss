@@ -1,0 +1,23 @@
+.topImg{width:100%;}
+.ind-list>.li{background-color:#fff;margin-bottom:20rpx;padding:0 20rpx;position:relative;padding-bottom:25rpx;}
+.ind-list .promotion{overflow:hidden;}
+.promotion>.type{color:#fff;width:120rpx;height:80rpx;float:left;background:url('http://zksrimg.oss-cn-beijing.aliyuncs.com/images/wxmini/group-ind-icons.png')no-repeat;background-size:410rpx;text-align:center;line-height:60rpx;font-size:32rpx;}
+.promotion>.type.tj{background-position:0 0;}.promotion>.type.mz{background-position-x:-130rpx;}
+.promotion>.time{margin-left:140rpx;font-size:26rpx;padding-top:10rpx;}
+.time>.start,.det-time>span:first-child{color:#999;}
+.time>.start text,.det-time>span:first-child text{color:#fff;background-color:#000;width:50rpx;display:inline-block;text-align:center;border-radius:6rpx;margin:0 4rpx;}
+.time>.title{color:#f2920c;padding-left:40rpx;position:relative;}
+.time>.title::before{content:"";position:absolute;left:0;top:0;width:35rpx;height:35rpx;background:url('http://zksrimg.oss-cn-beijing.aliyuncs.com/images/wxmini/group-ind-icons.png')no-repeat -310rpx 6rpx;background-size:480rpx;}
+.ind-list .goods{overflow:hidden;padding:10rpx 0;position:relative}
+.goods .img{float:left;width:190rpx;height:190rpx;background:no-repeat center center;background-size:100%;}
+.goods-info>.name{font-size:28rpx;}
+.goods-info>.info{font-size:24rpx;padding:10rpx 0 10rpx 0;color:#b2b2b2;overflow:hidden;}
+.goods-info>.info .l{float:left;}.goods-info>.info .r{float:right;}
+.goods-info>.price{font-size:28rpx;}
+.goods-info .sellingPrice{color:#ec283a;}.goods-info .originPrrice{color:#a0a0a0;text-decoration: line-through;}.sellingPrice text{font-size:1.5em;font-weight:bold;}
+.ind-list .btn{position:absolute;bottom:20rpx;right:20rpx;color:#fff;text-align:center;width:160rpx;height:70rpx;line-height:70rpx;background-color:#e60012;font-size:28rpx;border-radius:10rpx;}
+.ind-list .btn.act{background-color:#a0a0a0}
+.ind-introduce{padding:20rpx;background:#fff;}
+.ind-introduce>.title{width:80%;padding-top:15%;background:url('http://zksrimg.oss-cn-beijing.aliyuncs.com/images/wxmini/group-ind-icons.png')no-repeat 0 bottom;margin:20rpx auto;background-size:100%;}
+.ind-introduce>.content{font-size:28rpx;color:#707070;margin-top:40rpx;}
+.goOrderList{position: fixed;top: 50rpx;right: 0;background-color: rgba(0, 0, 0, .5);color: #fff;text-align: center;line-height: 60rpx;border-radius: 40rpx 0 0 40rpx;z-index: 100;padding: 0 15rpx;font-size: 22rpx;}

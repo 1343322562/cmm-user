@@ -1,0 +1,4 @@
+.bgImg{width:160rpx;height:190rpx;margin:80rpx auto;display:block;}
+.payOkText{text-align:center;color:red;font-size:46rpx;font-weight:bold;}
+.goIndex{text-align:center}
+.goIndex>text{display:inline-block;height:120rpx;width:200rpx;border:1px solid #e8901a;line-height:120rpx;border-radius:20rpx;color:#e8901a;margin:40rpx 20rpx;}

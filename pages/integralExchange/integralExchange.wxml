@@ -1,0 +1,30 @@
+<view class='info'>剩余{{nameStr}}: <text>{{money}}</text>{{nameStr}}</view>
+<view class='goodsList'>
+  <view class='li' wx:for="{{list}}"  wx:key="index">
+    <view class="img{{item.type == '1'?' act':''}}">
+      <image class='icon' wx:if="{{item.type != '1'}}" src="{{item.goodsImgUrl}}" />
+      <block wx:else>
+        <view class='cup_title'>{{item.cupType}}券</view>
+        <view class='money'>
+          <text>￥{{item.couponsOutVo.subAmt}}</text>
+        </view>
+        <view class='date' wx:if="{{item.couponsOutVo.limitType == '1'}}"><text>开始时间:{{item.couponsOutVo.startTime}}</text><text>结束时间:{{item.couponsOutVo.endTime}}</text></view>
+        <view class='date' wx:else>有效时间:{{item.couponsOutVo.limitDay}}天</view>
+      </block>
+    </view>
+    <view class='name'>
+      <text class='text'>{{item.type != '1'?item.itemName:item.couponsOutVo.instructions}}</text>
+    </view>
+    <view  class="size{{item.type == '1'?' act':''}}">{{item.type != '1'?("规格:"+item.itemSize):('使用条件: 满'+item.couponsOutVo.limitAmt+'可用')}}</view>
+    <view class='price'>
+      <text class='now'>{{item.salePoint}}{{nameStr}}</text>
+      <text class='before'>￥{{item.oldPrice}}</text>
+    </view>
+    <view class="btn{{item.residueQty>0?'':' null'}}" bindtap="integral" data-index="{{index}}" >{{item.residueQty>0?'兑换':'兑完了'}}</view>
+  </view>
+</view>
+<text  class="page-bottom-null" wx:if="{{goodsList.length}}"></text>
+<view class="pageData_null" wx:if="{{!list.length&&pageLoading}}">
+  <image mode="widthFix" src="../../images/pageData-null.png"/>
+  <view class="page_text">活动已结束~~</view>
+</view>
