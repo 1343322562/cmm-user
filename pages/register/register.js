@@ -139,7 +139,7 @@ Page({
     })
   },
   getAddress(lng, lat) {
-    console.log(lng, lat)
+    // 百度地图 API，返回定位的位置信息
     this.qqmapsdk.reverseGeocoder({
       location: {
         longitude: lng,
@@ -153,7 +153,7 @@ Page({
           const formatted_addresses = ret.result.formatted_addresses.recommend
           this.setData({ 
             selectedCity, // 级联选择器 预选择 地址
-            formatted_addresses
+            formatted_addresses // 初始化并渲染 详细地址
           })
         } else {
           alert('GPS定位失败,请检查网络是否正常')
@@ -165,7 +165,21 @@ Page({
       }
     })
   },
+  // 用户选择地址
+  chooseLocaltion () {
+    const _this = this
+    wx.chooseLocation({
+      success: function (res) {
+        console.info(res);
+        _this.setData({
+          formatted_addresses: res.address
+        })
+      },
+    })
+  },
+  // 获取用户坐标
   getUserLoaction(type) {
+    console.log(type)
     const partnerCode = this.data.partnerCode
     wx.getLocation({
       type: 'gcj02',
@@ -275,7 +289,8 @@ Page({
     this.setData({ partnerCode })
     // if (partnerCode == '1035') {
       this.qqmapsdk = new QQMapWX({ key: 
-        partnerCode == '1035' ? 'O5DBZ-ODGCJ-3ECFZ-FKMGH-HCLRJ-V5FIS' :'O5DBZ-ODGCJ-3ECFZ-FKMGH-HCLRJ-V5FIS'
+        'O5DBZ-ODGCJ-3ECFZ-FKMGH-HCLRJ-V5FIS'
+        // partnerCode == '1035' ? 'O5DBZ-ODGCJ-3ECFZ-FKMGH-HCLRJ-V5FIS' : ''
       })
     // }
     wx.getSetting({

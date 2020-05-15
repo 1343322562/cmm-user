@@ -41,7 +41,12 @@ Page{background-color: #fff;}
 .getTargetLocaltion image{
   height: 60rpx;
   width: 60rpx;
+  box-shadow: 0rpx 0rpx 30rpx rgb(67,165,242);
+  background-image: radial-gradient(rgb(255, 255, 255) , rgb(137, 208, 248));
+  border-radius: 20%;
 }
+
+
 
 .addressInputPosition{
   padding-right: 80rpx;

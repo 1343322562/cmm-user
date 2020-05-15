@@ -1,11 +1,11 @@
 <view class="head">
   <view class="act" style="{{('left:'+(tabIndex*(100/tabTitle.length))+'%;width:'+(100/tabTitle.length)+'%')}}"></view>
   <view class="btn2">
-    <view  wx:for="{{tabTitle}}" wx:key="{{index}}" class="{{tabIndex==index?'act':''}}" data-index="{{index}}" bindtap="changeTab">{{item}}</view>
+    <view  wx:for="{{tabTitle}}" wx:key="index" class="{{tabIndex==index?'act':''}}" data-index="{{index}}" bindtap="changeTab">{{item}}</view>
   </view>
 </view>
 <view class="list">
-  <view class="li" wx:for="{{list[tabIndex]}}" wx:key="{{index}}">
+  <view class="li" wx:for="{{list[tabIndex]}}" wx:key="index">
     <view class="l">
       <view class="money">￥<text>{{item.subAmt}}</text></view>
       <view class="max">满{{item.limitAmt}}元可用</view>

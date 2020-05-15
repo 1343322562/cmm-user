@@ -173,8 +173,10 @@ Page({
     API.Goods.searchItemCls({
       data: { branchNo, token, username, platform },
       success: (res) => {
+        console.log(res)
         if (res.code == 0 && res.data) {
           const { firstCls, secondCls, modularCls} = res.data
+          console.log("modularCls:", modularCls)
           let classifyList = []
           let classifyObj = {}
           firstCls.forEach(item => {

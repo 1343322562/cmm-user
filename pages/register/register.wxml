@@ -26,8 +26,8 @@
 <view class='form'>
   <view class='name'>详细地址</view>
   <input bindinput='getValue' data-type="shopAddrass" value="{{ formatted_addresses }}" class='input addressInputPosition' maxlength='20' placeholder='请输入详细地址' />
-  <view bindtap="getUserLoaction" class="getTargetLocaltion">
-    <image src="../../images/position.png"></image>
+  <view bindtap="chooseLocaltion" class="getTargetLocaltion">
+    <image mode="aspectFit" src="../../images/position.png"></image>
   </view>
 </view>
 
