@@ -8,9 +8,21 @@ Page({
     searchText: '', // 搜索的文本
     focus: false, // 控制 input 的 focus
     shopName: '店家名称',
-    expressNum: 'YH158736215574863600064',
-    goodTitle: '康师傅康师傅康师傅康师傅康师康师傅康师傅傅康师傅康师傅康师傅康师傅sdfsdfdfsdfs',
-    goodProps: ['230ml * 1a8 瓶', '230mla * 18 asd瓶', '230ml * 180 瓶']
+    // 商品属性列表
+    goodPropsList: {
+      dcBranchName: "长沙便利店",
+      itemName: "好益多230乳酸菌饮品好益多230乳酸菌饮品好益多230乳酸菌饮品好益多230乳酸菌饮品",
+      sheetNo: "YH1804031148047617",
+      unitNo: "7",
+      checkQty: 50.000000,
+      unitName: "瓶",
+      boxNo: "1008611",
+      itemRem: "hyd230rsjyp",
+      validDay: 210.00,
+      itemSubno: "6925982180769",
+      itemNo: "110056",
+      itemSize: "230ml*18"
+    }
   },
   // 点击图标，触发 input 的 focus。
   focusInput() {

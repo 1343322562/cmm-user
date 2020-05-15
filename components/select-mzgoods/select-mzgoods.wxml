@@ -25,10 +25,6 @@
           </view>
         </view>
       </view>
-
-      
-     
-
     </scroll-view>
     <view class='btn'>
       <view class='item' bindtap="cancel">不要赠品</view>

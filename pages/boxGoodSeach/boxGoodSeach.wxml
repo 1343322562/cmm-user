@@ -1,4 +1,3 @@
-<!--pages/boxGoodSeach/boxGoodSeach.wxml-->
 <!-- 搜索箱码区域 -->
 <view class="search">
   <view class='item form'>
@@ -7,20 +6,21 @@
     <view class="openCode" catchtap='openScanCode' ><image class='code' src="../../images/openCode.png" /></view>
   </view>
 </view>
-<!-- 商品信息弹出框区域 -->
+<!-- 商品信息 Dialog 区域 -->
 <view class = "container" wx:if="{{searchText !== ''}}">
   <view class = "goodInfoBox">
     <view class = "boxBlock shopTitle">
-      <text selectable class="shopName">{{ shopName }}</text>
-      <text selectable class="expressNum">运单号：{{ expressNum }}</text>
+      <text selectable class="shopName">{{ goodPropsList.dcBranchName }}</text>
+      <text selectable class="expressNum">运单号：{{ goodPropsList.sheetNo }}</text>
     </view>
     <view class = "boxBlock mainContent">
       <image mode="aspectFit" src="http://16717627.s21i.faiusr.com/4/ABUIABAEGAAgo9Ks5QUo4O-BTTDdAjjcAQ.png.webp"></image>
       <view class="boxBlock goodsTItle">
-        <view>{{ goodTitle }}</view>
+        <view>{{ goodPropsList.itemName }}</view>
       </view>
       <view class="goodProps">
-        <view wx:for="{{goodProps}}" wx:key="index">{{ item }} {{ index }}</view>
+        <view>{{ goodPropsList.itemSize }} {{ goodPropsList.unitName }}</view>
+        <view>{{ goodPropsList.itemSize }} {{ goodPropsList.unitName }}</view>
       </view>
     </view>
     <view class = "boxBlock confirm">

@@ -53,6 +53,7 @@
       <text wx:for="{{mjObj}}" wx:key="index">满 ￥{{item.reachVal}} 减 ￥{{item.bonousAmt}}<text wx:if="{{index!=(mjObj.length-1)}}">,</text></text>
     </view>
   </view>
+  <!-- 满赠区域 (没有赠品时不会显示)-->
   <view class='contentBlock' wx:if="{{giftList.length}}" catchtap='showGiftList'>
     <image class="icon" src="../../images/settle_icon_0.png" />
     <text class='text'>满赠</text>
@@ -61,7 +62,20 @@
       <image class="icon" src="../../images/goRight_icon.png" />
     </view>
   </view>
+<!-- 
+满赠区域副本；减少了条件显示；(有没有赠品都会显示此区域)
+  <view class='contentBlock' catchtap='showGiftList'>
+    <image class="icon" src="../../images/settle_icon_0.png" />
+    <text class='text'>满赠</text>
+    <view class="right{{selectedGiftNum?' act':''}}">
+      <text wx:if="{{giftList.length}}">{{selectedGiftNum?('已选择'+selectedGiftNum+'组赠品'):'未选择赠品'}}</text>
+      <text wx:else>无赠品</text>
+      <image class="icon" src="../../images/goRight_icon.png" />
+    </view>
+  </view>
+ -->
 </view>
+
 
 <view class="block" >
   <view class='contentBlock' wx:if="{{sourceType == '0'}}" catchtap='showDhCoupons'>
@@ -130,6 +144,12 @@
   </view>
   
 </view>
+
+<!-- 各类优惠选择的 Dialog 组件 -->
 <select-coupons show="{{showSelectCoupons}}" now="{{selectedCoupons}}" list="{{couponsList}}" bindselectCoupons="selectCoupons" />
 <select-mzgoods show="{{showSelectMzgoods}}" now="{{selectedGift}}" list="{{giftList}}" bindselectGift="selectGift"  />
+<!-- 
+赠品 Dialog 副本; 满足赠品条件时，一进页面自动弹出选择赠品 Dialog
+<select-mzgoods show="{{giftList.length}}" now="{{selectedGift}}" list="{{giftList}}" bindselectGift="selectGift"  /> 
+-->
 <select-dhCoupons show="{{showSelectDhCoupons}}" now="{{selectedDhCoupons}}" list="{{dhCouponsList}}" bindselectDhCoupons="selectDhCoupons" />

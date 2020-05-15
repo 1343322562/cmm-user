@@ -69,6 +69,7 @@ Page({
       this.setData({ showSelectDhCoupons: true })
     }
   },
+  // 点击满赠 ,支付方式为 货到付款时，不支持满赠，并提示用户
   showGiftList () {
     const { payWay } = this.data
     if (payWay == '0' && this.codPayMzFlag == '0') {
@@ -216,6 +217,7 @@ Page({
             } else if (type == 'BG') {
               const BG = this.promotionObj.BG.giftGoods
               let goodsList = this.data.goodsList
+              console.log(goodsList)
               let BGnum = 0
               item.items.forEach(item2 => {
                 item2.items.forEach(no => {
@@ -612,6 +614,7 @@ Page({
       requestItemList.push(data)
     })
     this.itemNos = itemNos
+    console.log(goodsList)
     this.setData({
       wxPayRate,
       wxPayRateOpen,

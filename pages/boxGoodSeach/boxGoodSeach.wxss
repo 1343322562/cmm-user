@@ -91,8 +91,8 @@ Page {
 }
 
 .shopName {
+  font-weight: bold;
   margin: 20rpx 0 0;
-  font-family: SimHei, STHeiti, STHeiti, STHupo;
   font-size: 1.2em;
   color: #161616;
 }
@@ -115,8 +115,13 @@ Page {
   max-width: 100%;
 }
 
-/* 两行溢出显示省略号，只适用 webkit 及 移动端 */
 
+
+.goodsTItle {
+  text-align: center;
+}
+
+/* 两行溢出显示省略号，只适用 webkit 及 移动端 */
 .goodsTItle > view {
   letter-spacing: 0.1em;
   font-family: SimHei;
