@@ -98,7 +98,7 @@ Page {
 }
 
 .expressNum {
-  margin: 0 0 8rpx;
+  line-height: 1.6em;
   font-family: SimHei, STHeiti, STHeiti;
   font-size: 0.9em;
   color: #a09f9f;
@@ -154,6 +154,6 @@ Page {
 
 .goodProps view {
   color: #a09f9f;
-  line-height: 1.3em;
+  line-height: 1.4em;
   font-size: 0.9em;
 }
