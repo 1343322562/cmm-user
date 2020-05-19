@@ -170,6 +170,7 @@ const actions = {
     }
   },
   [types.CHANGE_CARTS](param) { // add delete minus
+    console.log(param)
     let cartsObj = commit[types.GET_CARTS]()
     if (cartsObj.keyArr.length>=300){
       toast('购物车已达到最大商品数量!')
@@ -245,6 +246,7 @@ const actions = {
     const beforeTime = wx.getStorageSync('updateCartsTime')
     const newTime = +new Date()
     items = JSON.stringify(updateCarts?items:[])
+    console.log(items)
     if (!param.format||updateCarts || !beforeTime || (newTime - beforeTime) >= (1000 * 60 * 5)) {
       API.Carts.getShoppingCartInfo({
         data: { items, platform, token, username, branchNo },

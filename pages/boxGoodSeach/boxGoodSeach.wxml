@@ -3,28 +3,55 @@
   <view class='item form'>
     <image bindtap="focusInput" class='icon' src="../../images/search_page_icon.png" />
     <input id="label" class='input' focus="{{focus == true}}" value="{{searchText}}" bindconfirm='seachBoxCode' confirm-type="search" maxlength='30' placeholder='请输入箱码' />
-    <view class="openCode" catchtap='openScanCode' ><image class='code' src="../../images/openCode.png" /></view>
+    <view class="openCode" catchtap='openScanCode'>
+      <image class='code' src="../../images/openCode.png" />
+    </view>
   </view>
 </view>
 <!-- 商品信息 Dialog 区域 -->
-<view class = "container" wx:if="{{searchText !== ''}}">
-  <view class = "goodInfoBox">
-    <view class = "boxBlock shopTitle">
-      <text selectable class="shopName">{{ goodPropsList.dcBranchName }}</text>
-      <text selectable class="expressNum">运单号：{{ goodPropsList.sheetNo }}</text>
-    </view>
-    <view class = "boxBlock mainContent">
-      <image mode="aspectFit" src="http://16717627.s21i.faiusr.com/4/ABUIABAEGAAgo9Ks5QUo4O-BTTDdAjjcAQ.png.webp"></image>
-      <view class="boxBlock goodsTItle">
-        <view>{{ goodPropsList.itemName }}</view>
+<view class="container" wx:if="{{ goodInfoCard }}">
+  <view class="wholeBox">
+    <view class="topBackGround">
+      <view class="storesInfoBox">
+        <view class="storesName">
+          <view class="name">{{ sheetMap.dBranchName }}</view>
+          <view class="num"> 编号:{{ sheetMap.dBranchNo }}</view>
+        </view>
+        <view class="storesCity">{{ sheetMap.dBranchAddress }}</view>
+        <view class="bossInfo">
+          <view class="label">门店老板：</view>
+          <view class="content">{{ sheetMap.dBranchMan }} {{ sheetMap.sendMobile }}</view>
+        </view>
       </view>
-      <view class="goodProps">
-        <view>{{ goodPropsList.itemSize }} {{ goodPropsList.unitName }}</view>
-        <view>{{ goodPropsList.itemSize }} {{ goodPropsList.unitName }}</view>
+    </view>
+    <view class="expressInfoBox">
+      <view class="title">物流信息</view>
+      <view class="expressInfo">
+        <view class="items"><text>订单编号 </text><text class="content"> {{ sheetMap.sheetNo }}</text></view>
+        <view class="items"><text>线路信息 </text><text class="content"> {{ sheetMap.routeName }}</text></view>
+        <view class="items"><text>司机信息 </text><text class="content"> {{ sheetMap.routeSendName }} {{ sheetMap.sendMobile }}</text></view>
+        <view class="items"><text>收货地址 </text><text class="content"> {{ sheetMap.dbranchInfoStr }}</text></view>
+      </view>
+    </view>
+    <view class="goodInfoBox">
+      <view class="title">商品信息</view>
+      <view class="goodInfo">
+        <image src="{{ sheetMap.cmmPrint1 }}"  />
+        <view class="content">
+          <view class="staticProps">
+            <view class="goodName">{{ boxList.itemName }}</view>
+            <view class="props">规格:{{ boxList.itemSize }} 单位:{{ boxList.unitName }}</view>
+          </view>
+          <view class="variableParams">
+            <view class="price">￥{{ boxList.validDay }}</view>
+            <view class="Num">×{{ boxList.checkQty }}</view>
+            <view class="totalPrice">小计:￥{{ boxList.checkQty * boxList.validDay}}</view>
+          </view>
+        </view>
       </view>
     </view>
     <view class = "boxBlock confirm">
-      <button bindtap="readEnd" class="confirmBtn">Message</button>
-    </view>
+      <button bindtap="readEnd" class="confirmBtn">确认</button>
+    </view> 
   </view>
 </view>

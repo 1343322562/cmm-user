@@ -25,8 +25,10 @@ Page({
     })
   },
   addCarts (e) {
+    console.log("立即抢购bindtapOBJ：",e)
     const index = e.currentTarget.dataset.index
     const list = this.data.list[this.data.nowSelectDate]
+    console.log(list)
     const item = list.item[index]
     if (list.type != '1' || (item.stockQty <= 0)) return
     let requestData = deepCopy(this.requestData)

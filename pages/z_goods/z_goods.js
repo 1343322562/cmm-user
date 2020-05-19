@@ -18,6 +18,7 @@ Page({
     const no = e.currentTarget.dataset.no
     const supplierObj = this.data.supplierObj
     const { goodsImgUrl, supplierName, itemClsName, supplierTel, minDeliveryMomey, supplierNo} = supplierObj[no]
+    // 跳转页面传参
     goPage('supplierGoods',{
       config: { goodsImgUrl, supplierName, itemClsName, supplierTel, minDeliveryMomey, supplierNo}
     })
@@ -29,6 +30,7 @@ Page({
       data: { branchNo, token, platform, username, condition:''},
       success: res => {
         const list = res.data
+        console.log(list)
         if (res.code == 0 && list) {
           let supplierObj = {}
           let supplierKey = this.data.supplierKey
@@ -42,6 +44,7 @@ Page({
               supplierKey[cls].push(no)
             }
           })
+          console.log(supplierKey)
           this.setData({ supplierObj})
           setTimeout(()=>{
             this.setData({ supplierKey })

@@ -68,71 +68,146 @@ Page {
   top: 0;
 }
 
-.goodInfoBox {
-  width: 80%;
+.wholeBox {
+  width: 90%;
   min-height: 600rpx;
-  background-color: #f0efef;
+  background-color: #fff;
   margin: 120rpx auto 0;
   border-radius: 10rpx;
 }
 
-.boxBlock {
-  width: 100%;
-  background-color: #fff;
-  border: 1rpx solid #fff;
-  /* 这里使用 border 是为了 margin 不溢出 */
+
+.topBackGround{
+  height: 100rpx;
+background-color: rgb(41, 49, 60);
+position: relative;
+}
+.storesInfoBox{
+width: 90%;
+background-color: #fff;
+position: absolute;
+top: 40%;
+left: 5%;
+border-radius: 25rpx;
+box-shadow: 3rpx 1rpx 12rpx #d3d3d3;
+
+}
+.storesInfoBox>.storesName{
+width: 90%;
+margin: 10rpx auto;
+line-height: 50rpx;
+overflow: hidden;
 }
 
-.shopTitle {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
+.storesName>.name{
+float: left;
+font-size: 35rpx;
+font-weight: bold;
+}
+.storesName>.num{
+float: right;
+vertical-align: middle;
+color: #a09f9f;
+}
+.storesInfoBox>.storesCity{
+color: #a09f9f;
+width: 90%;
+margin: 0 auto;
 }
 
-.shopName {
-  font-weight: bold;
-  margin: 20rpx 0 0;
-  font-size: 1.2em;
-  color: #161616;
+.bossInfo {
+  width: 90%;
+  margin: 12rpx auto 20rpx;
 }
-
-.expressNum {
-  line-height: 1.6em;
-  font-family: SimHei, STHeiti, STHeiti;
-  font-size: 0.9em;
+.bossInfo>.content {
   color: #a09f9f;
+  vertical-align: middle;
+  display: inline-block;
+}
+.bossInfo>.label {
+  vertical-align: middle;
+  display: inline-block;
 }
 
-.mainContent {
-  width: 100%;
-  display: block;
+.expressInfoBox{
+width: 90%;
+background-color: #fff;
+margin: 170rpx auto 0;
+}
+.wholeBox .title{
+  font-size: 32rpx;
+font-weight: bold;
+}
+.expressInfoBox>.expressInfo{
+  width: 95%;
+margin: 20rpx auto;
 }
 
-.mainContent > image {
-  display: block;
-  margin: 0 auto;
-  max-width: 100%;
+.expressInfo>.items{
+  line-height: 53rpx;
+}
+.expressInfo>.items>.content{
+  color: #aaa9a9;
+  padding-left: 15rpx;
+}
+.goodInfoBox{
+width: 90%;
+margin: 50rpx auto 30rpx;
+
+}
+.goodInfo{
+  margin-top: 30rpx;
+  border-bottom: 2rpx solid #eee;
+padding-bottom: 15rpx;
+
+}
+.goodInfo image{
+height: 130rpx;
+width: 130rpx;
+
+  background-color: rgb(211, 210, 210);
+}
+.goodInfo>.content{
+  display: inline-block;
+margin-left: 15rpx;
+width: 75%;
+vertical-align: top;
+}
+
+.staticProps{
+color: #aaa9a9;
+float: left;
+
+
+}
+.goodName{
+font-size: 30rpx;
+}
+.props{
+  font-size: 24rpx; 
+  line-height: 50rpx;
+
+}
+.variableParams{
+  float: right;
+}
+.price{
+font-size: 30rpx;
+text-align: right;
+}
+.totalPrice,.Num {
+color: #aaa9a9;
+font-size: 26rpx;
+text-align: right;
+}
+
+.Num{
+  line-height: 50rpx;
 }
 
 
-
-.goodsTItle {
-  text-align: center;
-}
-
-/* 两行溢出显示省略号，只适用 webkit 及 移动端 */
-.goodsTItle > view {
-  letter-spacing: 0.1em;
-  font-family: SimHei;
-  width: 80%;
-  margin: 0 auto;
-  word-break: break-all;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  overflow: hidden;
+.confirm{
+  border: 1rpx solid #fff;
 }
 
 .confirmBtn {
@@ -147,13 +222,3 @@ Page {
   background-color: #67696d;
 }
 
-.goodProps {
-  width: 70%;
-  margin: 10rpx auto;
-}
-
-.goodProps view {
-  color: #a09f9f;
-  line-height: 1.4em;
-  font-size: 0.9em;
-}

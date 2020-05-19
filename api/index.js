@@ -4,6 +4,7 @@ export default {
     getOpenId: (param) => ajax.post(`minipay/getOpenId.do`, param), // 获取openId
     getCommonSetting: (param) => ajax.post(`supplymini/getCommonSetting.do`, param), // 获取系统配置
     getAllPromotion: (param) => ajax.post(`supplymini/getAllPromotion.do`, param), // 获取所有促销信息
+    getSupplierAllPromotion: (param) => ajax.post(`supplymini/getSupplierAllPromotion.do`, param), // 获取直配当日的限购促销信息
     getAccBranchInfoAmt: (param) => ajax.post(`supplymini/getAccBranchInfoAmt.do`, param), // 获取余额信息
     searchSupplyCoupons: (param) => ajax.post(`supplymini/searchSupplyCoupons.do`, param), // 获取优惠券
     searchSupplyCoupons2: (param) => ajax.post(`supplymini/searchCouponList.do`, param),   // 获取优惠券（新版本）
@@ -16,7 +17,7 @@ export default {
     deleteInvoiceHead: (param) => ajax.post(`supplymini/deleteInvoiceHead.do`, param), // 删除发票信息
     selectInvoiceHead: (param) => ajax.post(`supplymini/selectInvoiceHead.do`, param), // 查询发票信息
     getCartRecommend: (param) => ajax.post(`supplymini/getCartRecommend.do`, param), // 获取购物车推荐商品
-    findByBoxNo: (param) => ajax.post(`supplymini/findByBoxNo.do`, param), // 获取箱码查询的商品信息
+    findByBoxNo: (param) => ajax.post(`supplymini/findByBoxNo.do`, param) // 根据箱码获取商品信息
   },
   Login: {
     supplyLoginPwd: (param) => ajax.post(`supplymini/supplyLoginPwd.do`, param), // 账号密码登录

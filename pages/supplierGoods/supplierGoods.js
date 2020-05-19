@@ -9,8 +9,8 @@ Page({
     config: null,
     pageLoading: false,
     clsList: [],
-    goodsList: [],
-    goodsObj: {},
+    goodsList: [], // 商品编号
+    goodsObj: {},  // 商品信息。 渲染页面的逻辑是根据 goodsList 来查找 goodsObj 中的数据，并渲染至页面
     totalLength: '',
     partnerCode: getApp().data.partnerCode,
     nowSelectCls: '',
@@ -93,6 +93,7 @@ Page({
     API.Goods.supplierItemSearch({
       data: { condition:'', modifyDate:'', supcustNo, pageIndex: 1, pageSize: 1000, itemClsNo, token, platform, username},
       success: res => {
+        console.log(res)
         if(res.code == 0 && res.data) {
           const list = res.data.itemData || []
           let goodsList = []
@@ -145,6 +146,7 @@ Page({
       data: { branchNo, token, platform, username, condition: '', supplierNo: this.supplierNo},
       success: res => {
         const list = res.data
+        console.log(list)
         if (res.code == 0 && list && list.length) {
           list.forEach(item => {
             const cls = item.managementType
@@ -166,13 +168,23 @@ Page({
     this.zcGoodsUrl = getApp().data.zcGoodsUrl
     if (opt.config) {
       const config = JSON.parse(opt.config)
+      console.log("SUP:", config)
       this.supplierNo = config.supplierNo
+      const { branchNo, token, platform, username } = this.userObj
+      // 获取促销信息
+      API.Public.getSupplierAllPromotion({
+        data: { branchNo, token, platform, username, supplierNo: this.supplierNo },
+        success: res => {
+          console.log(res)
+        }
+      })
       this.setData({ config })
     } else {
       this.supplierNo = opt.supplierNo
       this.getSupplier()
     }
     this.getCls()
+    
   },
   onReady () {
   },

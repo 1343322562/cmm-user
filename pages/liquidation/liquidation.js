@@ -23,8 +23,8 @@ Page({
     showSelectCoupons: false, // 显示优惠券
     showSelectMzgoods: false, // 显示选择满赠
     showSelectDhCoupons: false, // 显示兑换券
-    wxPayRate:'', //微信手续费率
-    wxPayRateOpen:'0',  //微信手续费开关
+    wxPayRate:'', // 微信手续费率
+    wxPayRateOpen:'0',  // 微信手续费开关
     memo: '', // 备注
     payWayList: [
       { name: '储值支付', type:'2',icon:'yue',show:true},
@@ -34,6 +34,7 @@ Page({
     isUseBlendWay: false, // 是否使用混合支付
     payWay: '', // 支付方式 0货到付款 1在线支付 2储值支付 4混合支付
   },
+  // 设置备注
   getMemo (e) {
     this.setData({ memo: e.detail.value.trim()})
   },
@@ -138,8 +139,10 @@ Page({
     }
   },
   changePayWay (e,auto) {
+    console.log(e,auto, this.data)
     let payWay = typeof e =='object'? e.currentTarget.dataset.type:e
     let { selectedCoupons, mjObj, selectedGiftNum, selectedGift, payWay: nowPayWay, storedValue, realPayAmt, isUseBlendWay } = this.data
+    console.log(mjObj)
     if (isUseBlendWay && payWay == '2' && auto!='auto')return
     if (payWay=='0') {
       let msg = []
@@ -164,6 +167,7 @@ Page({
           success: ret => {
             if (ret.confirm) {
               this.setData({ selectedCoupons, mjObj, selectedGiftNum, selectedGift })
+              console.log("payWay: ", payWay)
               this.switchPayWay(payWay)
             }
           }
@@ -191,7 +195,7 @@ Page({
   },
   getUserInfo () {
     const { branchNo, token, platform, username} = this.userObj
-    API.Public.getAccBranchInfoAmt({
+    API.Public.getAccBranchInfoAmt({ // 获取余额信息
       data: { branchNo, token, platform, username},
       success: res => {
         if (res.code == 0 && res.data){
@@ -201,6 +205,7 @@ Page({
       }
     })
   },
+  // 满减满赠 数据获取( mjList:满减信息)
   getMjMz(itemList) {
     const { branchNo, token, username, platform, dbBranchNo: dbranchNo } = this.userObj
     API.Liquidation.getSettlementPromotion({
@@ -248,7 +253,7 @@ Page({
             }
             
           })
-          this.baseMj = mjList
+          this.baseMj = mjList // 挂载满减信息对象
           obj.giftList = giftList
           this.setData(obj)
         }
@@ -335,6 +340,7 @@ Page({
         })
         if (selectedCoupons) discountsMoney += selectedCoupons.subAmt
       }
+      console.log("满减数据： ",this.baseMj)
       // 计算满减
       if ((payWay != '0' || this.codPayMjFlag == '1') && this.baseMj) {
         if (payWay != '1' && this.baseMj.onlinePayFlag == '1') {
@@ -344,6 +350,7 @@ Page({
           mjObj.forEach(a => {
             discountsMoney += a.bonousAmt
           })
+          console.log(mjObj, discountsMoney)
         }
       }
       realPayAmt = Number((realPayAmt - discountsMoney).toFixed(2))

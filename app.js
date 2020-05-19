@@ -1,17 +1,23 @@
 App({
   data: { 
+    // partnerCode: '1036',
+    // baseImgUrl:'http://erp.yhfws.cn',
+    // 15511588626  
+    // partnerCode: '1000',
+    // baseImgUrl:'http://39.100.103.135:8080/',
     partnerCode: '1000',
-    baseImgUrl:'http://39.100.103.135:8080/',
+    baseImgUrl: 'http://192.168.2.13:8082/',
+    // 15576615400 
     // partnerCode: '1034',
     // baseImgUrl:'http://39.100.103.135:8080/',
-    // partnerCode: '1000',
-    // baseImgUrl:'http://mmj.zksr.cn/zksrb2b-web/',
+    // partnerCode: '1029',
+    // baseImgUrl:'http://39.98.164.194:8081/',
     ww:'', // 屏幕宽度
     hh:'', // 屏幕高
     imgUrl: '', // erp图片域名
     goodsUrl: '', // 普通商品图片
     tgGoodsUrl: '', // 团购商品图片
-    zcGoodsUrl: '', //  直配商品图片
+    zcGoodsUrl: '', // 直配商品图片
     zhGoodsUrl: '', // 组合商品图片 
     indexImgUrl: '', // 首页活动图
 

@@ -15,6 +15,7 @@
 <view class='goodsList'>
   <view class='li'  wx:for="{{goodsList}}" wx:for-item="itemNo" wx:key="index" data-no="{{itemNo}}" bindtap='goGoodsDetails'>
     <view class='img'>
+    <!-- 获取商品编号，根据商品编号再根据 goodsObj 中的数据渲染页面 -->
       <image class='icon' src="{{goodsObj[itemNo].goodsImgUrl}}" />
       <image wx:if="{{goodsObj[itemNo].isProhibit=='1'}}" class='noReturnAllowed'  src="../../images/noReturnAllowed.png" />
     </view>

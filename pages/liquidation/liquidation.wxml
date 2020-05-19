@@ -46,14 +46,15 @@
       <image class="icon" src="../../images/goRight_icon.png" />
     </view>
   </view>
-  <view class='contentBlock' wx:if="{{sourceType == '0'&&mjObj.length}}">
+    <!-- 满减区域 (满减条件： 统配 && 满减数据)-->
+  <view class='contentBlock' wx:if="{{sourceType == '0' && mjObj.length}}">
     <image class="icon" src="../../images/settle_icon_1.png" />
     <text class='text'>满减</text>
     <view class='right act'>
       <text wx:for="{{mjObj}}" wx:key="index">满 ￥{{item.reachVal}} 减 ￥{{item.bonousAmt}}<text wx:if="{{index!=(mjObj.length-1)}}">,</text></text>
     </view>
   </view>
-  <!-- 满赠区域 (没有赠品可选择时不会显示)-->
+  <!-- 满赠区域 (没有赠品可选择时，不会显示此区域)-->
   <view class='contentBlock' wx:if="{{giftList.length}}" catchtap='showGiftList'>
     <image class="icon" src="../../images/settle_icon_0.png" />
     <text class='text'>满赠</text>

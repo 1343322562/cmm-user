@@ -20,10 +20,12 @@ Page({
     this.setData({ cartsList, cartsObj })
   },
   getCartsData() {
+    console.log("getCartsData")
     const { goodsUrl,zcGoodsUrl,zhGoodsUrl} = getApp().data
     const promotionObj = wx.getStorageSync('allPromotion')
     dispatch[types.GET_CHANGE_CARTS]({
       success: (ret) => {
+        console.log(ret)
         wx.stopPullDownRefresh()
         hideLoading()
         let obj = { pageLoading: true}

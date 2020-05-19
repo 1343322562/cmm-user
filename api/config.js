@@ -1,10 +1,9 @@
-// 数据请求配置
 import urlConfig from './type'
 export default {
-  baseURL: urlConfig[getApp().data.partnerCode], // 获取对应 partnerCode 的 请求根路径
+  baseURL: urlConfig[getApp().data.partnerCode],
   post (url, param) {
     this.ajax('post', url, param)
-  }, 
+  },
   get (url, param) {
     this.ajax('get', url, param)
   },
@@ -23,12 +22,12 @@ export default {
       },
       dataType: 'json',
       data: requestObj ,
-      success: (response) => {
+      success:  (response) => {
         const data = (typeof response === 'object' ? response.data : response)
         if (!data || data.code == 2) {
           wx.setStorageSync('isWxLogin', true)
           setTimeout(() => { wx.hideLoading()},800)
-          const page = getCurrentPages()[0].route.indexOf('login')
+          const page = getCurrentPages()[0].route.indexOf('login') // 获取当前页面栈。数组中第一个为首页，最后一个为当前页面。
           wx.showModal({
             title: '温馨提示',
             content: data.msg,
