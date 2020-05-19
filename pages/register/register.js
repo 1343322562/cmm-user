@@ -41,6 +41,7 @@ Page({
     API.Login.searchBranchArea({
       data: { platform:'3' },
       success: res => {
+        console.log("res:", res)
         if (res.code == 0) {
           const areaList = res.data || []
           this.setData({ areaList})
@@ -76,6 +77,7 @@ Page({
     if(doorPic && doorPic.length >0)data.doorPic = doorPic;
     
     for (let i in data) {
+      console.log(data)
       if (!data[i] && (partnerCode != '1035' || (i != 'branchClsno'))) {
         console.log(i)
         toast('信息填写不完整')
@@ -153,7 +155,8 @@ Page({
           const formatted_addresses = ret.result.formatted_addresses.recommend
           this.setData({ 
             selectedCity, // 级联选择器 预选择 地址
-            formatted_addresses // 初始化并渲染 详细地址
+            formatted_addresses, // 初始化并渲染 详细地址
+            shopAddrass: formatted_addresses
           })
         } else {
           alert('GPS定位失败,请检查网络是否正常')
@@ -281,6 +284,7 @@ Page({
 
   /** 生命周期*/
   onLoad (opt) {
+    console.log(opt)
     this.phone = opt.phone
     this.getAgreement()
     this.getAreaList()

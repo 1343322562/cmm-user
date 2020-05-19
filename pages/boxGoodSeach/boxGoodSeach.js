@@ -104,9 +104,11 @@ Page({
   openScanCode () {
     wx.scanCode({
       success (res) {
-        // 1. 从 res 获取 箱码 boxCode
-        // 2. 将 boxCode 设置为 seachText 
-        // 3. 调用 getBoxData 方法传参并获取数据
+        let boxCode = res.result
+        this.setData({
+          seachText: boxCode
+        })
+        this.getBoxData(boxCode)
       },
       fail () {
         toast('调用失败，请手动输入箱码')

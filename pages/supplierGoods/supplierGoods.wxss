@@ -32,6 +32,14 @@ Page{background-color: #fff}
 .goodsList>.li .goCarts>.btn .minus{left: 0}
 .goodsList>.li .goCarts>.btn .num{display: inline-block;line-height:80rpx}
 .goodsList>.li .goCarts>.btn .add{right: 0}
+.goodsList .timeLimitSales{
+  width: 50rpx;
+  height: 45rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.goodsList .oldPrice{text-decoration: line-through}
 /*购物车按钮*/
 .goCartsPage{text-align: center;position: fixed;z-index: 10;bottom:180rpx;right: 50rpx;width: 100rpx;height: 100rpx;border-radius: 100%;background-color: #fff;border:1px solid #e4e4e4;box-shadow: 5rpx 5rpx 10rpx #ddd;color: #777;font-size: 20rpx;}
 .goCartsPage>.icon{width: 50rpx;height: 50rpx;margin-top: 10rpx;}

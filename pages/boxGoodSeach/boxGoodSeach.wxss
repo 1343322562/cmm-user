@@ -76,137 +76,153 @@ Page {
   border-radius: 10rpx;
 }
 
-
-.topBackGround{
+.topBackGround {
   height: 100rpx;
-background-color: rgb(41, 49, 60);
-position: relative;
-}
-.storesInfoBox{
-width: 90%;
-background-color: #fff;
-position: absolute;
-top: 40%;
-left: 5%;
-border-radius: 25rpx;
-box-shadow: 3rpx 1rpx 12rpx #d3d3d3;
-
-}
-.storesInfoBox>.storesName{
-width: 90%;
-margin: 10rpx auto;
-line-height: 50rpx;
-overflow: hidden;
+  background-color: rgb(41, 49, 60);
+  position: relative;
 }
 
-.storesName>.name{
-float: left;
-font-size: 35rpx;
-font-weight: bold;
+.storesInfoBox {
+  width: 90%;
+  background-color: #fff;
+  position: absolute;
+  top: 40%;
+  left: 5%;
+  border-radius: 25rpx;
+  box-shadow: 3rpx 1rpx 12rpx #d3d3d3;
 }
-.storesName>.num{
-float: right;
-vertical-align: middle;
-color: #a09f9f;
+
+.storesInfoBox>.storesName {
+  width: 90%;
+  margin: 10rpx auto;
+  line-height: 50rpx;
+  overflow: hidden;
 }
-.storesInfoBox>.storesCity{
-color: #a09f9f;
-width: 90%;
-margin: 0 auto;
+
+.storesName>.name {
+  float: left;
+  font-size: 35rpx;
+  font-weight: bold;
+}
+
+.storesName>.num {
+  float: right;
+  vertical-align: middle;
+  color: #a09f9f;
+}
+
+.storesInfoBox>.storesCity {
+  color: #a09f9f;
+  width: 90%;
+  margin: 0 auto;
 }
 
 .bossInfo {
   width: 90%;
   margin: 12rpx auto 20rpx;
 }
+
 .bossInfo>.content {
   color: #a09f9f;
   vertical-align: middle;
   display: inline-block;
 }
+
 .bossInfo>.label {
   vertical-align: middle;
   display: inline-block;
 }
 
-.expressInfoBox{
-width: 90%;
-background-color: #fff;
-margin: 170rpx auto 0;
-}
-.wholeBox .title{
-  font-size: 32rpx;
-font-weight: bold;
-}
-.expressInfoBox>.expressInfo{
-  width: 95%;
-margin: 20rpx auto;
+.expressInfoBox {
+  width: 90%;
+  background-color: #fff;
+  margin: 170rpx auto 0;
 }
 
-.expressInfo>.items{
+.wholeBox .title {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.expressInfoBox>.expressInfo {
+  width: 95%;
+  margin: 20rpx auto;
+}
+
+.expressInfo>.items {
   line-height: 53rpx;
 }
-.expressInfo>.items>.content{
+
+.expressInfo>.items>.content {
   color: #aaa9a9;
   padding-left: 15rpx;
 }
-.goodInfoBox{
-width: 90%;
-margin: 50rpx auto 30rpx;
 
+.goodInfoBox {
+  width: 90%;
+  margin: 50rpx auto 30rpx;
 }
-.goodInfo{
+
+.goodInfo {
   margin-top: 30rpx;
   border-bottom: 2rpx solid #eee;
-padding-bottom: 15rpx;
-
+  padding-bottom: 15rpx;
+  position: relative;
 }
-.goodInfo image{
-height: 130rpx;
-width: 130rpx;
 
+.goodInfo image {
+  height: 130rpx;
+  width: 130rpx;
   background-color: rgb(211, 210, 210);
 }
-.goodInfo>.content{
+
+.goodInfo>.content {
   display: inline-block;
-margin-left: 15rpx;
-width: 75%;
-vertical-align: top;
+  margin-left: 15rpx;
+  width: 75%;
+  vertical-align: top;
 }
 
-.staticProps{
-color: #aaa9a9;
-float: left;
-
-
+.staticProps {
+  color: #aaa9a9;
+  float: left;
 }
-.goodName{
-font-size: 30rpx;
+
+.goodName {
+  font-size: 30rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 320rpx;
 }
-.props{
-  font-size: 24rpx; 
+
+.props {
+  font-size: 24rpx;
   line-height: 50rpx;
-
 }
-.variableParams{
+
+.variableParams {
   float: right;
-}
-.price{
-font-size: 30rpx;
-text-align: right;
-}
-.totalPrice,.Num {
-color: #aaa9a9;
-font-size: 26rpx;
-text-align: right;
+  position: absolute;
+  right: 0;
 }
 
-.Num{
+.price {
+  font-size: 30rpx;
+  text-align: right;
+}
+
+.totalPrice, .Num {
+  color: #aaa9a9;
+  font-size: 26rpx;
+  text-align: right;
+}
+
+.Num {
   line-height: 50rpx;
 }
 
-
-.confirm{
+.confirm {
   border: 1rpx solid #fff;
 }
 
@@ -221,4 +237,3 @@ text-align: right;
 .confirmBtn:active {
   background-color: #67696d;
 }
-

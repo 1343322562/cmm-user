@@ -10,7 +10,7 @@ Page({
     pageLoading: false,
     clsList: [],
     goodsList: [], // 商品编号
-    goodsObj: {},  // 商品信息。 渲染页面的逻辑是根据 goodsList 来查找 goodsObj 中的数据，并渲染至页面
+    goodsObj: {},  // 商品信息。 渲染商品逻辑：根据 goodsList 来查找 goodsObj 中的数据，并渲染至页面
     totalLength: '',
     partnerCode: getApp().data.partnerCode,
     nowSelectCls: '',
@@ -55,6 +55,7 @@ Page({
             hideLoading()
             this.setData({ pageLoading: true })
           }
+          console.log("获取goodlist")
           this.setData({ clsList })
           this.getGoodsList()
         } else {
@@ -111,6 +112,35 @@ Page({
           })
           let newArr = goodsList.concat(fineGoodsList)
           const totalLength = newArr.length
+          // 获取促销信息
+          console.log(this.data.goodsObj)
+          API.Public.getSupplierAllPromotion({
+            data: { branchNo, token, platform, username, supplierNo: this.supplierNo },
+            success: res => {
+              let a = res.data
+              // 将促销字段，推入对应的商品对象，页面通过 促销子段是否存在来渲染促销信息
+              new Promise((resolve, reject) => {
+                for (let key in a) {
+                  if (key.includes('RSD')) {
+                    let todayPromotion = a[key]
+                    console.log(todayPromotion)
+                    resolve(todayPromotion)
+                  }
+                }
+              }).then(todayPromotion => {
+                let todayPromotionKeyArr = Object.keys(todayPromotion)
+                console.log(goodsObj)
+                todayPromotionKeyArr.map(item => {
+                  for (let key in goodsObj) {
+                    if (goodsObj[key].itemNo == item) {
+                      goodsObj[key].todayPromotion = todayPromotion[key]
+                    }
+                  }
+                })
+                console.log("changes", goodsObj)
+              })
+            }
+          })
           this.setData({
             goodsObj: goodsObj,
             totalLength: totalLength
@@ -166,24 +196,18 @@ Page({
   onLoad (opt) {
     this.userObj = wx.getStorageSync('userObj')
     this.zcGoodsUrl = getApp().data.zcGoodsUrl
+    // 判断是否有传来的参数
     if (opt.config) {
       const config = JSON.parse(opt.config)
       console.log("SUP:", config)
       this.supplierNo = config.supplierNo
-      const { branchNo, token, platform, username } = this.userObj
-      // 获取促销信息
-      API.Public.getSupplierAllPromotion({
-        data: { branchNo, token, platform, username, supplierNo: this.supplierNo },
-        success: res => {
-          console.log(res)
-        }
-      })
       this.setData({ config })
     } else {
       this.supplierNo = opt.supplierNo
-      this.getSupplier()
+      this.getSupplier() // 无参数接收时，自动获取供应商
     }
-    this.getCls()
+    this.getCls()  // 获取类别数据
+    const { branchNo, token, platform, username } = this.userObj
     
   },
   onReady () {
@@ -192,6 +216,7 @@ Page({
     this.getCartsData()
   },
   onReachBottom: function () {
+    console.log(this.data.goodsObj)
     if (!this.isLoading && baseGoodsList.length) {
       this.isLoading = true
       let newArr = this.data.goodsList
