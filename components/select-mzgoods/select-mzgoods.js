@@ -16,7 +16,7 @@ Component({
       } else {
         now[no] = index
       }
-      this.setData({ now})
+      this.setData({ now })
     },
     cancel () {
       this.triggerEvent('selectGift', {})

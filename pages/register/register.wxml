@@ -1,6 +1,7 @@
 <block wx:if="{{pageLoading}}">
 
-<view  class='title'>注册信息填写</view>
+<view class="title">基本信息</view>
+
 <view class='form'>
   <view class='name'>{{partnerCode=='1029'?'用户名称':'店铺名'}}</view>
   <input bindinput='getValue' data-type="branchName"  class='input'  maxlength='20' placeholder="请输入{{partnerCode=='1029'?'用户名称':'店铺名'}}" />
@@ -9,6 +10,9 @@
   <view class='name'>{{partnerCode=='1029'?'联系人':'店主姓名'}}</view>
   <input bindinput='getValue' data-type="bossName" class='input' maxlength='20' placeholder="请输入{{partnerCode=='1029'?'联系人':'店主姓名'}}" />
 </view>
+
+<view class="title">位置信息</view>
+
 <view class='form' wx:if="{{partnerCode!='1035'}}">
   <view class='name'>区域</view>
   <picker bindchange="selectArea" class="input"  range="{{areaList}}" range-key="branchClsname">
@@ -31,7 +35,47 @@
   </view>
 </view>
 
+<view class="title">营业时间</view>
+
+<view class='form'>
+  <view class='name'>营业开始</view>
+  <picker class="getTargetLocaltion" data-id="1" mode="time" value="{{businessTime.openTime}}" start="00:00" end="23:59" bindchange="changeTime">
+     <view class="picker">
+       {{businessTime.openTime}}
+    </view>
+  </picker>
+</view>
+<view class='form'>
+  <view class='name'>营业结束</view>
+  <picker class="getTargetLocaltion" data-id="2" mode="time" value="{{businessTime.closeTime}}" bindchange="changeTime">
+     <view class="picker">
+       {{businessTime.closeTime}}
+    </view>
+  </picker>
+</view>
+
+<view class="title">送货时间</view>
+
+<view class='form'>
+  <view class='name'>送货开始</view>
+  <picker class="getTargetLocaltion" data-id="3" mode="time" value="{{transportTime.openTime}}" bindchange="changeTime">
+     <view class="picker">
+       {{transportTime.openTime}}
+    </view>
+  </picker>
+</view>
+<view class='form'>
+  <view class='name'>送货结束</view>
+  <picker class="getTargetLocaltion" data-id="4"  mode="time" value="{{transportTime.closeTime}}" bindchange="changeTime">
+     <view class="picker">
+       {{transportTime.closeTime}}
+    </view>
+  </picker>
+</view>
+
 <!-- 门头照 -->
+<view class="title">图片上传</view>
+
 <block wx:if="{{onOffTakePhoto}}">
   <view class="photo-main">
     <view class="photo-title">上传营业执照</view>

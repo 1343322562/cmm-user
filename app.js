@@ -3,10 +3,10 @@ App({
     // partnerCode: '1036',
     // baseImgUrl:'http://erp.yhfws.cn',
     // 15511588626  
-    // partnerCode: '1000',
-    // baseImgUrl:'http://39.100.103.135:8080/',
+    // partnerCode: '1041',
+    // baseImgUrl:'http://27.221.51.122:1180/',
     partnerCode: '1000',
-    baseImgUrl: 'http://192.168.2.13:8082/',
+    baseImgUrl: 'http://mmj.zksr.cn:8888/',
     // 15576615400 
     // partnerCode: '1034',
     // baseImgUrl:'http://39.100.103.135:8080/',

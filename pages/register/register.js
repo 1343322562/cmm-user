@@ -4,6 +4,8 @@ import { showLoading, hideLoading, alert, toast, gcj02tobd09 } from '../../tool/
 import QQMapWX from '../../tool/qqmap-wx-jssdk.js'
 Page({
   data: {
+    businessTime: { openTime:'00:00', closeTime:'23:59'  },   // 营业的时间
+    transportTime: { openTime: '00:00', closeTime: '23:59' }, // 送货时间
     bossName:'',
     branchName:'',
     areaName:'',
@@ -19,6 +21,37 @@ Page({
     licencePic:'',                                     // 上传营业执照后台返回路径信息
     doorPic:'',                                        // 上传门头照后台返回路径信息
     formatted_addresses: ''                            // 具体地址
+  },
+  // 选择时间后触发
+  changeTime (e) {
+    console.log(e)
+    let currentID = Number(e.currentTarget.dataset.id) // 1：营业开始时间； 2.营业结束时间 3.送货开始时间 4.送货结束时间
+    console.log(currentID)
+    switch(currentID) {
+      case 1:
+      console.log(321)
+        this.setData({
+          'businessTime.openTime': e.detail.value 
+        })
+        break;
+      case 2:
+        this.setData({
+          'businessTime.closeTime': e.detail.value
+        })
+        break;
+      case 3:
+        this.setData({
+          'transportTime.openTime': e.detail.value
+        })
+        break;
+      case 4:
+        this.setData({
+          'transportTime.closeTime': e.detail.value
+        })
+        break;
+    }
+    console.log(this.data.businessTime)
+    console.log(this.data.transportTime)
   },
   getValue(e) {
     const k = e.currentTarget.dataset.type
@@ -62,6 +95,10 @@ Page({
     }
     let data ={
       phone: this.phone||'',
+      privateStringbusiStartTime: this.data.businessTime.openTime,
+      privateStringbusiEndTime: this.data.businessTime.closeTime,
+      privateStringdeliveryStartTime: this.data.transportTime.openTime,
+      privateStringdeliveryEndTime: this.data.transportTime.closeTime,
       bossName,
       branchClsno: this.areaId||'',
       branchName,
@@ -85,6 +122,7 @@ Page({
       }
     }
     showLoading('提交中...')
+    console.lg("data:", data)
     API.Login.supplyRegister({
       data: data,
       success: res => {
