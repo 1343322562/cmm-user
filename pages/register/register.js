@@ -5,7 +5,7 @@ import QQMapWX from '../../tool/qqmap-wx-jssdk.js'
 Page({
   data: {
     businessTime: { openTime:'00:00', closeTime:'23:59'  },   // 营业的时间
-    transportTime: { openTime: '00:00', closeTime: '23:59' }, // 送货时间
+    deliveryTime: { openTime: '00:00', closeTime: '23:59' }, // 送货时间
     bossName:'',
     branchName:'',
     areaName:'',
@@ -41,17 +41,15 @@ Page({
         break;
       case 3:
         this.setData({
-          'transportTime.openTime': e.detail.value
+          'deliveryTime.openTime': e.detail.value
         })
         break;
       case 4:
         this.setData({
-          'transportTime.closeTime': e.detail.value
+          'deliveryTime.closeTime': e.detail.value
         })
         break;
     }
-    console.log(this.data.businessTime)
-    console.log(this.data.transportTime)
   },
   getValue(e) {
     const k = e.currentTarget.dataset.type
@@ -95,10 +93,10 @@ Page({
     }
     let data ={
       phone: this.phone||'',
-      privateStringbusiStartTime: this.data.businessTime.openTime,
-      privateStringbusiEndTime: this.data.businessTime.closeTime,
-      privateStringdeliveryStartTime: this.data.transportTime.openTime,
-      privateStringdeliveryEndTime: this.data.transportTime.closeTime,
+      busiStartTime: this.data.businessTime.openTime, // 营业时间
+      busiEndTime: this.data.businessTime.closeTime,  
+      deliveryStartTime: this.data.deliveryTime.openTime, // 送货时间
+      deliveryEndTime: this.data.deliveryTime.closeTime,
       bossName,
       branchClsno: this.areaId||'',
       branchName,

@@ -13,7 +13,7 @@ Page{background-color: #fff;}
 .checkbox{margin-left: 60rpx;}
 .agreement{color: red;}
 .bottom-copyright{margin-bottom: 40rpx;}
-
+.timeVertical{line-height: 60rpx;}
 /* 门头照 */
 .photo-main{
   display: flex;

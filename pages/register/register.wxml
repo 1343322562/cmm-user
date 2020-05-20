@@ -39,7 +39,7 @@
 
 <view class='form'>
   <view class='name'>营业开始</view>
-  <picker class="getTargetLocaltion" data-id="1" mode="time" value="{{businessTime.openTime}}" start="00:00" end="23:59" bindchange="changeTime">
+  <picker class="getTargetLocaltion timeVertical" data-id="1" mode="time" value="{{businessTime.openTime}}" start="00:00" end="23:59" bindchange="changeTime">
      <view class="picker">
        {{businessTime.openTime}}
     </view>
@@ -47,7 +47,7 @@
 </view>
 <view class='form'>
   <view class='name'>营业结束</view>
-  <picker class="getTargetLocaltion" data-id="2" mode="time" value="{{businessTime.closeTime}}" bindchange="changeTime">
+  <picker class="getTargetLocaltion timeVertical" data-id="2" mode="time" value="{{businessTime.closeTime}}" bindchange="changeTime">
      <view class="picker">
        {{businessTime.closeTime}}
     </view>
@@ -58,17 +58,17 @@
 
 <view class='form'>
   <view class='name'>送货开始</view>
-  <picker class="getTargetLocaltion" data-id="3" mode="time" value="{{transportTime.openTime}}" bindchange="changeTime">
+  <picker class="getTargetLocaltion timeVertical" data-id="3" mode="time" value="{{deliveryTime.openTime}}" bindchange="changeTime">
      <view class="picker">
-       {{transportTime.openTime}}
+       {{deliveryTime.openTime}}
     </view>
   </picker>
 </view>
 <view class='form'>
   <view class='name'>送货结束</view>
-  <picker class="getTargetLocaltion" data-id="4"  mode="time" value="{{transportTime.closeTime}}" bindchange="changeTime">
+  <picker class="getTargetLocaltion timeVertical" data-id="4"  mode="time" value="{{deliveryTime.closeTime}}" bindchange="changeTime">
      <view class="picker">
-       {{transportTime.closeTime}}
+       {{deliveryTime.closeTime}}
     </view>
   </picker>
 </view>
