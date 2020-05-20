@@ -220,41 +220,12 @@ Page({
           let mjList = []
           res.data.forEach(item => {
             const type = item.promotionType
+            // 满赠 || 满减 数据对象赋值
             if (type == 'RMJ') {
               mjList.push(item)
-            } else if (type == 'BG') {
-              const BG = this.promotionObj.BG.giftGoods
-              let goodsList = this.data.goodsList
-              console.log(goodsList)
-              let BGnum = 0
-              item.items.forEach(item2 => {
-                item2.items.forEach(no => {
-                  let goods = BG[no.itemNo][no.id]
-                  BGnum += no.qty
-                  goodsList.push({
-                    itemNo:no.itemNo,
-                    itemName: no.itemName,
-                    promotionSheetNo: goods.sheetNo,
-                    promotionType: type,
-                    realQty: no.qty,
-                    price: 0,
-                    itemSize: goods.itemSize,
-                    isGift: true,
-                    preNo: no.parentItemNoSet.join(','),
-                    itemType: '2',
-                    parentItemQty: (goods.buyQty + ':' + goods.giftQty),
-                    id: no.id,
-                    subtotal: 0,
-                    goodsImgUrl: this.goodsUrl + no.itemNo + '/' + getGoodsImgSize(goods.giftImgName)
-                  })
-                })
-              })
-              obj.BGnum = BGnum
-              obj.goodsList = goodsList
-            } else if (type == 'SZ' || type == 'BF') {
+            } else if ( type == 'RBF') {
               giftList.push(item)
             }
-            
           })
           this.baseMj = mjList // 挂载满减信息对象
           console.log(mjList)
@@ -391,7 +362,7 @@ Page({
   },
   setOrderAction () {
     console.log(this.mjmzLoading , this.exchangeLoading , this.couponsLoading)
-    if (this.mjmzLoading && this.exchangeLoading && this.couponsLoading) {
+    if (this.mjmzLoading) {
       console.log(5645614614561)
       hideLoading()
       let { totalMoney, couponsList, payWay, selectedCoupons, selectedGiftNum, giftList} = this.data
@@ -423,9 +394,24 @@ Page({
         }
       }
       realPayAmt = Number((realPayAmt - discountsMoney).toFixed(2))
+      // 满足赠品条件时，显示赠品 Dialog
       const showSelectMzgoods = (this.selectedGiftType != 'no' && giftList.length && !selectedGiftNum && (payWay != '0' ||this.codPayMzFlag == '1')) ? true : false
-      this.setData({ realPayAmt, discountsMoney, selectedCoupons, mjObj, showSelectMzgoods})
+      let bestGift = this.chooseBestGift(giftList) // 返回最优惠的赠品
+
+      this.setData({ selectedGift: bestGift, realPayAmt, discountsMoney, selectedCoupons, mjObj, showSelectMzgoods })
     }
+  },
+  // 选择最优惠的赠品(只对第一组赠品生效)
+  chooseBestGift(giftList) {
+    let bestGiftValue = 0 // 比较值
+    let bestGift = {}     // 最优对象
+    for (let index in giftList[0].items) {
+      if (giftList[0].items[index].items.length > bestGiftValue) {
+        bestGiftValue = giftList[0].items[index].items.length
+        bestGift[giftList[0].promotionSheetNo] = Number(index)
+      }
+    }
+    return bestGift
   },
   goInvoicePage () {
     const ticketType = this.data.ticketType

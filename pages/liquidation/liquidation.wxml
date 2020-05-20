@@ -46,7 +46,7 @@
       <image class="icon" src="../../images/goRight_icon.png" />
     </view>
   </view>
-    <!-- 满减区域 (满减条件： 统配 && 满减数据)-->
+    <!-- 满减区域 (满减条件：  满减数据)-->
   <view class='contentBlock' wx:if="{{mjObj.length}}">
     <image class="icon" src="../../images/settle_icon_1.png" />
     <text class='text'>满减</text>
@@ -136,5 +136,5 @@
 
 <!-- 各类优惠选择的 Dialog 组件 -->
 <select-coupons show="{{showSelectCoupons}}" now="{{selectedCoupons}}" list="{{couponsList}}" bindselectCoupons="selectCoupons" />
-<select-mzgoods show="{{giftList.length}}" now="{{selectedGift}}" list="{{giftList}}" bindselectGift="selectGift"  /> 
+<select-mzgoods show="{{showSelectMzgoods}}" now="{{selectedGift}}" list="{{giftList}}" bindselectGift="selectGift"  /> 
 <select-dhCoupons show="{{showSelectDhCoupons}}" now="{{selectedDhCoupons}}" list="{{dhCouponsList}}" bindselectDhCoupons="selectDhCoupons" />

@@ -20,11 +20,17 @@ Component({
     },
     cancel () {
       this.triggerEvent('selectGift', {})
+      this.setData({
+        show: false
+      })
     },
     confirm () {
       const now = this.data.now || {}
       if (Object.keys(now).length) {
         this.triggerEvent('selectGift', now)
+        this.setData({
+          show: false
+        })
       } else {
         wx.showToast({ title: '请选择赠品', icon:'none'})
       }
