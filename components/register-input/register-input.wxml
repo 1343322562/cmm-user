@@ -1,0 +1,19 @@
+<!-- register 注册页面组件 -->
+<view class="title">{{ formTitle }}</view>
+
+<view class='form' wx:if="{{isShowInput1}}">
+  <view class='name'>{{ inputTitle1 }}</view>
+  <slot name="top1"/> 
+</view>
+
+<view class='form'>
+  <view class='name'>{{ inputTitle2 }}</view>
+  <slot name="buttom1"/>
+</view>
+
+<!-- 填写位置信息时需要有三个 input -->
+<view class='form' wx:if="{{isShowInput3}}">
+  <view class='name'>{{ inputTitle3 }}</view>
+  <slot name="foot1"/>
+  <slot name="foot2"/>
+</view>

@@ -2,9 +2,9 @@ Page{background-color: #fff;}
 .title{font-size: 23rpx;color: #999;margin:56rpx 0 10rpx 25rpx;}
 .form{height: 115rpx;display: flex;padding: 0 30rpx;border-bottom: 2rpx solid #f2f2f2;position: relative}
 .form>.name{flex-grow: 1;line-height: 110rpx;width: 0;}
-.form>.input{display: block;flex-grow:4;margin: 0 auto;height: 100%;font-size: 30rpx;text-align: right;width: 0}
-.form>.input .content{line-height: 110rpx;color: #777;}
-.form>.input .text{display: block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;width: 100%;line-height: 110rpx;}
+.form>.input, register .input{display: block;flex-grow:4;margin: 0 auto;height: 100%;font-size: 30rpx;text-align: right;width: 0}
+.form>.input .content,register .content{line-height: 110rpx;color: #777;}
+.form>.input .text, register .text{display: block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;width: 100%;line-height: 110rpx;}
 .form>.input .text.addr{width: 80%;}
 .submit{width: 85%;margin: 50rpx auto;text-align: center;color: #fff;line-height: 90rpx;font-size: 32rpx;background-color: #999}
 .submit.act{background-color:#d40000;}
