@@ -23,7 +23,7 @@
     <view class='info'>
       <view class='name'>{{goodsObj[itemNo].itemName}}</view>
       <view class='size'>{{goodsObj[itemNo].itemSize}}</view>
-      <view class='size oldPrice'>￥500.00</view>
+      <!-- <view class='size oldPrice'>￥500.00</view> -->
       <view class='price' wx:if="{{partnerCode!='1039'}}">
         <text class='now'>￥{{goodsObj[itemNo].price}}/{{goodsObj[itemNo].unit}}</text>
         <text class='before' wx:if="{{goodsObj[itemNo].orgiPrice&&goodsObj[itemNo].price!=goodsObj[itemNo].orgiPrice}}">￥{{goodsObj[itemNo].orgiPrice}}</text>

@@ -47,7 +47,7 @@
     </view>
   </view>
     <!-- 满减区域 (满减条件： 统配 && 满减数据)-->
-  <view class='contentBlock' wx:if="{{sourceType == '0' && mjObj.length}}">
+  <view class='contentBlock' wx:if="{{mjObj.length}}">
     <image class="icon" src="../../images/settle_icon_1.png" />
     <text class='text'>满减</text>
     <view class='right act'>

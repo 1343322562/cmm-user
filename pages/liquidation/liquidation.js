@@ -205,12 +205,77 @@ Page({
       }
     })
   },
-  // 满减满赠 数据获取( mjList:满减信息)
+  // 直配 满减满赠 数据获取(itemList: 支付商品信息,supplier：入驻商编号)
+  getSupplierMjMz(itemList, supplierNo) {
+    console.log("mjList:", itemList, "this.user:", this.userObj)
+
+    const { branchNo, token, username, platform, dbBranchNo: dbranchNo } = this.userObj
+    API.Liquidation.getSupplierSettlementPromotion({
+      data:{ branchNo, token, username, platform, supplierNo, dbranchNo, data: itemList },
+      success: res => {
+        console.log(res)
+        if (res.code == 0 && res.data) {
+          let obj = {}
+          let giftList = []
+          let mjList = []
+          res.data.forEach(item => {
+            const type = item.promotionType
+            if (type == 'RMJ') {
+              mjList.push(item)
+            } else if (type == 'BG') {
+              const BG = this.promotionObj.BG.giftGoods
+              let goodsList = this.data.goodsList
+              console.log(goodsList)
+              let BGnum = 0
+              item.items.forEach(item2 => {
+                item2.items.forEach(no => {
+                  let goods = BG[no.itemNo][no.id]
+                  BGnum += no.qty
+                  goodsList.push({
+                    itemNo:no.itemNo,
+                    itemName: no.itemName,
+                    promotionSheetNo: goods.sheetNo,
+                    promotionType: type,
+                    realQty: no.qty,
+                    price: 0,
+                    itemSize: goods.itemSize,
+                    isGift: true,
+                    preNo: no.parentItemNoSet.join(','),
+                    itemType: '2',
+                    parentItemQty: (goods.buyQty + ':' + goods.giftQty),
+                    id: no.id,
+                    subtotal: 0,
+                    goodsImgUrl: this.goodsUrl + no.itemNo + '/' + getGoodsImgSize(goods.giftImgName)
+                  })
+                })
+              })
+              obj.BGnum = BGnum
+              obj.goodsList = goodsList
+            } else if (type == 'SZ' || type == 'BF') {
+              giftList.push(item)
+            }
+            
+          })
+          this.baseMj = mjList // 挂载满减信息对象
+          console.log(mjList)
+          obj.giftList = giftList
+          this.setData(obj)
+        }
+      },
+      complete: () => {
+        this.mjmzLoading = true
+        this.setOrderAction()
+      }
+    })
+  },
+  // 统配 满减满赠 数据获取( itemList: 支付商品信息)
   getMjMz(itemList) {
+    console.log("mjList:", itemList, "this.user:", this.userObj)
     const { branchNo, token, username, platform, dbBranchNo: dbranchNo } = this.userObj
     API.Liquidation.getSettlementPromotion({
       data: { branchNo, token, platform, username, dbranchNo, data: itemList },
       success: res => {
+        console.log("getSettlementPromotion:", res)
         if (res.code == 0 && res.data) {
           let obj = {}
           let giftList = []
@@ -259,6 +324,8 @@ Page({
         }
       },
       complete: () => {
+        this.exchangeLoading = true
+        this.couponsLoading = true
         this.mjmzLoading = true
         this.setOrderAction()
       }
@@ -323,7 +390,9 @@ Page({
     this.setData({ selectedCoupons, mjObj, giftList, selectedGiftNum, selectedGift })
   },
   setOrderAction () {
+    console.log(this.mjmzLoading , this.exchangeLoading , this.couponsLoading)
     if (this.mjmzLoading && this.exchangeLoading && this.couponsLoading) {
+      console.log(5645614614561)
       hideLoading()
       let { totalMoney, couponsList, payWay, selectedCoupons, selectedGiftNum, giftList} = this.data
       let realPayAmt = totalMoney
@@ -605,6 +674,7 @@ Page({
     payWayList[0].show = czPay == '1' //&& obj.items[0].sourceType == '0'
     payWayList[1].show = wxPay == '1' //&& obj.items[0].sourceType == '0'
     payWayList[2].show = codPay == '1'
+    console.log("obj.items:",obj.items)
     let goodsList = obj.items[0].datas
     const sourceType = obj.items[0].sourceType
     this.supcustNo = obj.items[0].sourceNo
@@ -653,6 +723,10 @@ Page({
       this.getCoupons(requestItemList)
       this.getExchangeCoupons()
     } else { // 直配
+      requestItemList = JSON.stringify(requestItemList)
+      showLoading('加载促销...')
+      const supplierNo = obj.items[0].sourceNo
+      this.getSupplierMjMz(requestItemList, supplierNo)
     }
   },
   onReady () {
