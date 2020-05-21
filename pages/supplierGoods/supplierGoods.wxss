@@ -24,7 +24,9 @@ Page{background-color: #fff}
 .goodsList>.li .info>.name{display: -webkit-box; word-break: break-all; -webkit-box-orient: vertical; -webkit-line-clamp:2; overflow: hidden; text-overflow:ellipsis;font-weight: 500;}
 .goodsList>.li .info>.size{font-size: 26rpx;color: #888}
 .goodsList>.li .info>.price{color: red;font-size: 32rpx}
-.goodsList>.li .info>.price .before{margin-left: 10rpx;text-decoration:line-through;font-size: .8em;color: #999}
+.goodsList>.li .info>.price .now{display: inline-block;}
+.goodsList>.li .info>.price .before{vertical-align: 2rpx;margin-left: 10rpx;text-decoration:line-through;font-size: .8em;color: #999;display: inline-block;}
+.goodsList>.li .info>.price .limitPromotionTime{font-size: .7em;color: #999;line-height: 28rpx;}
 .goodsList>.li .goCarts{position: absolute;right: 0;bottom: 20rpx;width: 190rpx}
 .goodsList>.li .goCarts>.btn{position: relative;height: 80rpx;text-align: center}
 .goodsList>.li .goCarts>.btn .item{height: 100%;width: 80rpx;position: absolute;top: 0}

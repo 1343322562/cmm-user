@@ -12,6 +12,7 @@
            <view class='name'>满￥{{zItem.reachVal}}</view>
            <view class='msg'>赠送赠品{{zItem.items.length}}样</view>
            <image class="use" wx:if="{{now[item.promotionSheetNo] === zIndex}}" src="../../images/liquidation_page_icon_gift_hook.png" />
+           <view class="indicator" wx:if="{{now[item.promotionSheetNo] === zIndex}}"></view>
           </view>
 
         </view>

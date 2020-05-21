@@ -1,7 +1,7 @@
 import * as types from '../../store/types.js'
 import API from '../../api/index.js'
 import dispatch from '../../store/actions.js'
-import { showLoading, hideLoading, alert, getGoodsImgSize,goPage } from '../../tool/index.js'
+import { showLoading, hideLoading, alert, getGoodsImgSize, goPage, toast } from '../../tool/index.js'
 const maxNum = 20
 let baseGoodsList
 Page({
@@ -17,6 +17,7 @@ Page({
     cartsObj: {}
   },
   changeCarts(e) {
+    console.log("changeCarts:", e)
     const { type, no } = e.currentTarget.dataset
     const sourceNo = this.supplierNo
     const goods = this.data.goodsObj[no]
@@ -26,7 +27,22 @@ Page({
       branchNo,
       sourceNo
     }
+
+    // 本来想在赋值 cartsObj 之前就 判断 是否达到限制值。需要加判断 第一次进来时 触发，之后再达到限制范围时再触发
+    console.log(this.data.cartsObj, goods, this.data.cartsObj[goods.itemNo])
+    console.log(this.data.cartsObj, goods, this.data.cartsObj[goods.itemNo])
+    console.log(this.data.cartsObj, goods, this.data.cartsObj[goods.itemNo])
     const cartsObj = dispatch[types.CHANGE_CARTS]({ goods, type, config })
+    console.log(cartsObj, goods, cartsObj[goods.itemNo])
+    console.log(cartsObj, goods, cartsObj[goods.itemNo])
+    console.log(cartsObj, goods, cartsObj[goods.itemNo])
+    if (!!goods.todayPromotion && cartsObj[goods.itemNo].realQty > goods.todayPromotion.limitedQty) {
+      console.log("rjinglai")
+      cartsObj[goods.itemNo].realQty = this.data.cartsObj[goods.itemNo].realQty
+      toast('已达到最大限购数量')
+      return
+    }
+    
     cartsObj && this.setData({ cartsObj: cartsObj })
   },
   getCartsData() {
@@ -118,33 +134,46 @@ Page({
             data: { branchNo, token, platform, username, supplierNo: this.supplierNo },
             success: res => {
               let a = res.data
-              // 将促销字段，推入对应的商品对象，页面通过 促销子段是否存在来渲染促销信息
-              new Promise((resolve, reject) => {
-                for (let key in a) {
-                  if (key.includes('RSD')) {
-                    let todayPromotion = a[key]
-                    console.log(todayPromotion)
-                    resolve(todayPromotion)
-                  }
-                }
-              }).then(todayPromotion => {
-                let todayPromotionKeyArr = Object.keys(todayPromotion)
-                console.log(goodsObj)
-                todayPromotionKeyArr.map(item => {
-                  for (let key in goodsObj) {
-                    if (goodsObj[key].itemNo == item) {
-                      goodsObj[key].todayPromotion = todayPromotion[key]
+              let promKey // 获取 以 RSD 开头的下标 (促销信息)
+              for (let key in a) {   
+                if (key.includes('RSD')) { promKey = key }
+              }
+              console.log(res, promKey)
+              if (res.code == 0 && res.data && Object.keys(a[promKey]).length != 0){  // 最后判断是否为空对象
+                // 将促销字段，推入对应的商品对象，页面通过 促销子段是否存在来渲染促销信息
+                new Promise((resolve, reject) => {
+                  let todayPromotion = a[promKey]
+                  resolve(todayPromotion)
+                }).then(todayPromotion => {        // 将当日促销信息推入 goodsObj
+                  let todayPromotionKeyArr = Object.keys(todayPromotion)
+                  todayPromotionKeyArr.map(item => {
+                    for (let key in goodsObj) {
+                      if (goodsObj[key].itemNo == item) {
+                        todayPromotion[key].endDate = todayPromotion[key].endDate.slice(0, 10)      // 截取年月日
+                        todayPromotion[key].startDate = todayPromotion[key].startDate.slice(0, 10)  // 截取年月日
+                        goodsObj[key].todayPromotion = todayPromotion[key]
+                      }
                     }
-                  }
+                  })
+                  console.log("changed", goodsObj, goodsObj['00010000'].todayPromotion, goodsObj['00010008'].todayPromotion, totalLength)
+                  this.setData({
+                    goodsObj: goodsObj,
+                    totalLength: totalLength
+                  })
                 })
-                console.log("changes", goodsObj)
-              })
+              } else {
+                this.setData({
+                  goodsObj: goodsObj,
+                  totalLength: totalLength
+                })
+              }
             }
           })
-          this.setData({
-            goodsObj: goodsObj,
-            totalLength: totalLength
-          })
+          console.log("changed", goodsObj)
+          // this.setData({    这是 140 行代码 原来的位置，因增加了异步操作，位置改变。这一行具体还不知道有其它作用，以此注释。
+          //   goodsObj: goodsObj,
+          //   totalLength: totalLength
+          // })
           setTimeout(()=>{
             this.setData({
               goodsList: newArr.splice(0, maxNum),
@@ -211,6 +240,7 @@ Page({
     
   },
   onReady () {
+    console.log(this.data.goodsObj)
   },
   onShow () {
     this.getCartsData()

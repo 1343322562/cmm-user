@@ -20,4 +20,5 @@
 .box>.list .li>.content .li2>.num{overflow: hidden;font-size: 22rpx;color: #646464}
 .box>.list .li>.content .li2>.num .l{float: left;margin-left: 20rpx;}
 .box>.list .li>.content .li2>.num .r{float: right}
-.box>.list .li>.content::before{content: "";position: absolute;top: -40rpx;left: 50%;width: 0;height: 0;border-width: 25rpx;border-style: solid;border-color: transparent;border-bottom-color: #e4e4e4;margin-left: -25rpx}
+/* .box>.list .li>.content::before{content: "";position: absolute;top: -40rpx;left: 50%;width: 0;height: 0;border-width: 25rpx;border-style: solid;border-color: transparent;border-bottom-color: #e4e4e4;margin-left: -25rpx} */
+.indicator{position: absolute;border: 40rpx solid transparent;content: "";height: 0;width: 0;border-bottom-color: #e6e6e6;top: 50rpx;left: 50rpx;}

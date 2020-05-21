@@ -396,12 +396,16 @@ Page({
       realPayAmt = Number((realPayAmt - discountsMoney).toFixed(2))
       // 满足赠品条件时，显示赠品 Dialog
       const showSelectMzgoods = (this.selectedGiftType != 'no' && giftList.length && !selectedGiftNum && (payWay != '0' ||this.codPayMzFlag == '1')) ? true : false
-      let bestGift = this.chooseBestGift(giftList) // 返回最优惠的赠品
-
-      this.setData({ selectedGift: bestGift, realPayAmt, discountsMoney, selectedCoupons, mjObj, showSelectMzgoods })
+      console.log(this.data.sourceType)
+      
+      if (giftList.length != 0) {
+        let bestGift = this.chooseBestGift(giftList)  // 返回最优惠的赠品
+        this.setData({ selectedGift: bestGift }) 
+      } 
+      this.setData({ realPayAmt, discountsMoney, selectedCoupons, mjObj, showSelectMzgoods })
     }
   },
-  // 选择最优惠的赠品(只对第一组赠品生效)
+  // 选择最优惠的赠品(只计算第一组赠品)
   chooseBestGift(giftList) {
     let bestGiftValue = 0 // 比较值
     let bestGift = {}     // 最优对象

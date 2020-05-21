@@ -34,6 +34,7 @@ Component({
       const type = value ? 'input' :'delete'
       if (type == 'delete') {
         cartsObj.data = cartsObj.data.filter((t, i) => i !== index)
+        console.log(10000)
         dispatch[types.CHANGE_CARTS]({ goods, type, config })
         if (cartsObj.data.length) {
           this.setData({ goods: cartsObj })
@@ -42,6 +43,7 @@ Component({
           this.triggerEvent('deleteCarts', cartsObj.type)
         }
       } else  {
+        console.log(10000)
         const newCarts = dispatch[types.CHANGE_CARTS]({ goods, type, config, value })
         if (newCarts) {
           cartsObj.data[index].realQty = newCarts[goods.itemNo].realQty
@@ -159,6 +161,7 @@ Component({
             cartsObj.data.map(goods => {
               if (!goods.cancelSelected) {
                 keyArr.push(goods.itemNo)
+                console.log(10000)
                 dispatch[types.CHANGE_CARTS]({ goods, type: 'delete', config })
               }
             })
@@ -250,6 +253,7 @@ Component({
           success: (res) => {
             if (res.confirm) {
               cartsObj.data = cartsObj.data.filter((t, i) => i !== index)
+              console.log(10000)
               dispatch[types.CHANGE_CARTS]({ goods, type, config })
               if (cartsObj.data.length) {
                 this.setData({ goods: cartsObj })
@@ -261,6 +265,7 @@ Component({
           }
         })
       } else {
+        console.log(10000)
         const newCarts = dispatch[types.CHANGE_CARTS]({ goods, type, config })
         if (newCarts) {
           cartsObj.data[index].realQty = newCarts[goods.itemNo].realQty
