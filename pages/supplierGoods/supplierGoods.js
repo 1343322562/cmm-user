@@ -27,23 +27,20 @@ Page({
       branchNo,
       sourceNo
     }
-
-    // 本来想在赋值 cartsObj 之前就 判断 是否达到限制值。需要加判断 第一次进来时 触发，之后再达到限制范围时再触发
-    console.log(this.data.cartsObj, goods, this.data.cartsObj[goods.itemNo])
-    console.log(this.data.cartsObj, goods, this.data.cartsObj[goods.itemNo])
-    console.log(this.data.cartsObj, goods, this.data.cartsObj[goods.itemNo])
-    const cartsObj = dispatch[types.CHANGE_CARTS]({ goods, type, config })
-    console.log(cartsObj, goods, cartsObj[goods.itemNo])
-    console.log(cartsObj, goods, cartsObj[goods.itemNo])
-    console.log(cartsObj, goods, cartsObj[goods.itemNo])
-    if (!!goods.todayPromotion && cartsObj[goods.itemNo].realQty > goods.todayPromotion.limitedQty) {
-      console.log("rjinglai")
-      cartsObj[goods.itemNo].realQty = this.data.cartsObj[goods.itemNo].realQty
-      toast('已达到最大限购数量')
-      return
-    }
+    if (this.maxLimitAdd(goods, type) == 1) return // 是否达到今日限购活动限购标准(直配)。 返回 1，则达到限购值  
     
+    const cartsObj = dispatch[types.CHANGE_CARTS]({ goods, type, config })
     cartsObj && this.setData({ cartsObj: cartsObj })
+  },
+  // （直配）今日促销商品，达到最大值停止添加商品
+  maxLimitAdd(goods, type){  // goods：当前 ADD 的商品对象; type：当前增添的 type
+    let currentRealQty = !!this.data.cartsObj[goods.itemNo] && this.data.cartsObj[goods.itemNo].realQty  // 当前商品真实数量
+    let currentLimitedQty = 'todayPromotion' in goods && goods.todayPromotion.limitedQty  // 当前商品今日促销的限购数量
+    if (!!this.data.cartsObj[goods.itemNo] && 'todayPromotion' in goods && currentRealQty >= currentLimitedQty && type == "add") {
+      toast('已达到最大限购数量')
+      return 1 // 达到限购值
+    }
+    return 0 // 没达到限购值
   },
   getCartsData() {
     dispatch[types.GET_CHANGE_CARTS]({
@@ -102,8 +99,52 @@ Page({
       this.getGoodsList()
     }
   },
+  // 获取 今日限购的促销信息(直配)
+  getSupplierPromotionInfo(branchNo, token, platform, username, goodsObj, totalLength) {
+    // 获取促销信息
+    API.Public.getSupplierAllPromotion({
+      data: { branchNo, token, platform, username, supplierNo: this.supplierNo },
+      success: res => {
+        let data= res.data
+        let promKey // 获取 以 RSD 开头的下标 (促销信息)
+        for (let key in data) {   
+          if (key.includes('RSD')) { promKey = key }
+        }
+        console.log(res, promKey)
+        if (res.code == 0 && res.data && Object.keys(data[promKey]).length != 0){  // 最后判断 data[promKey] 是否为空对象
+          // 将促销字段，推入对应的商品对象，页面通过 促销子段 (存在与否) 来渲染促销信息
+          new Promise((resolve, reject) => {
+            let todayPromotion = data[promKey]
+            resolve(todayPromotion)
+          }).then(todayPromotion => {        // 将当日促销信息推入 goodsObj
+            let todayPromotionKeyArr = Object.keys(todayPromotion)
+            todayPromotionKeyArr.map(item => {
+              for (let key in goodsObj) {
+                if (goodsObj[key].itemNo == item) {
+                  todayPromotion[key].endDate = todayPromotion[key].endDate.slice(0, 10)      // 截取年月日
+                  todayPromotion[key].startDate = todayPromotion[key].startDate.slice(0, 10)  // 截取年月日
+                  goodsObj[key].todayPromotion = todayPromotion[key]
+                }
+              }
+            })
+            // goodsObj 中有促销字段 todayPromotion
+            this.setData({
+              goodsObj: goodsObj,
+              totalLength: totalLength
+            })
+          })
+        } else {
+          // goodsObj 中没有促销字段 todayPromotion
+          this.setData({
+            goodsObj: goodsObj,
+            totalLength: totalLength
+          })
+        }
+      }
+    })
+  },
   getGoodsList () {
-    showLoading('请稍后...')
+    showLoading('请稍候...')
     const { nowSelectCls: itemClsNo } = this.data
     const supcustNo = this.supplierNo
     const { branchNo, token, platform, username } = this.userObj
@@ -128,52 +169,8 @@ Page({
           })
           let newArr = goodsList.concat(fineGoodsList)
           const totalLength = newArr.length
-          // 获取促销信息
-          console.log(this.data.goodsObj)
-          API.Public.getSupplierAllPromotion({
-            data: { branchNo, token, platform, username, supplierNo: this.supplierNo },
-            success: res => {
-              let a = res.data
-              let promKey // 获取 以 RSD 开头的下标 (促销信息)
-              for (let key in a) {   
-                if (key.includes('RSD')) { promKey = key }
-              }
-              console.log(res, promKey)
-              if (res.code == 0 && res.data && Object.keys(a[promKey]).length != 0){  // 最后判断是否为空对象
-                // 将促销字段，推入对应的商品对象，页面通过 促销子段是否存在来渲染促销信息
-                new Promise((resolve, reject) => {
-                  let todayPromotion = a[promKey]
-                  resolve(todayPromotion)
-                }).then(todayPromotion => {        // 将当日促销信息推入 goodsObj
-                  let todayPromotionKeyArr = Object.keys(todayPromotion)
-                  todayPromotionKeyArr.map(item => {
-                    for (let key in goodsObj) {
-                      if (goodsObj[key].itemNo == item) {
-                        todayPromotion[key].endDate = todayPromotion[key].endDate.slice(0, 10)      // 截取年月日
-                        todayPromotion[key].startDate = todayPromotion[key].startDate.slice(0, 10)  // 截取年月日
-                        goodsObj[key].todayPromotion = todayPromotion[key]
-                      }
-                    }
-                  })
-                  console.log("changed", goodsObj, goodsObj['00010000'].todayPromotion, goodsObj['00010008'].todayPromotion, totalLength)
-                  this.setData({
-                    goodsObj: goodsObj,
-                    totalLength: totalLength
-                  })
-                })
-              } else {
-                this.setData({
-                  goodsObj: goodsObj,
-                  totalLength: totalLength
-                })
-              }
-            }
-          })
-          console.log("changed", goodsObj)
-          // this.setData({    这是 140 行代码 原来的位置，因增加了异步操作，位置改变。这一行具体还不知道有其它作用，以此注释。
-          //   goodsObj: goodsObj,
-          //   totalLength: totalLength
-          // })
+          this.getSupplierPromotionInfo(branchNo, token, platform, username, goodsObj, totalLength) // 获取并处理今日限购的促销信息(直配)
+
           setTimeout(()=>{
             this.setData({
               goodsList: newArr.splice(0, maxNum),
