@@ -29,31 +29,11 @@ Page({
       branchNo,
       sourceNo
     }
-    if (this.maxLimitAdd(goods, type, this.data.cartsObj) == 1) return // 是否达到今日限购活动限购标准(直配)。 返回 1，则达到限购值  
+    // if (this.maxLimitAdd(goods, type, this.data.cartsObj) == 1) return // 是否达到今日限购活动限购标准(直配)。 返回 1，则达到限购值  
     
-    const cartsObj = dispatch[types.CHANGE_CARTS]({ goods, type, config })
+    const cartsObj = dispatch[types.CHANGE_CARTS]({ goods, type, config }, this.data.cartsObj)
+    if (!cartsObj) return 
     cartsObj && this.setData({ cartsObj: cartsObj })
-  },
-  // （直配）今日促销商品，达到最大值停止添加商品
-  maxLimitAdd(goods, type, cartsObj = 0){  // goods：当前 ADD 的商品对象; type：当前增添的 type; 若有 cartObj ，则是在采页面增加
-    if (cartsObj == 0) {
-      let currentRealQty = 'todayPromotion' in goods && goods.realQty  // 当前商品真实数量
-      let currentLimitedQty = 'todayPromotion' in goods && goods.todayPromotion.limitedQty  // 当前商品今日促销的限购数量
-      if ('todayPromotion' in goods && currentRealQty >= currentLimitedQty && type == "add") {
-        toast('已达限时促销最大限购数')
-        return 1 // 达到限购值
-      }
-      return 0 // 没达到限购值
-    } else {
-      let currentRealQty = !!cartsObj[goods.itemNo] && cartsObj[goods.itemNo].realQty  
-      let currentLimitedQty = 'todayPromotion' in goods && goods.todayPromotion.limitedQty  
-      if (!!cartsObj[goods.itemNo] && 'todayPromotion' in goods && currentRealQty >= currentLimitedQty && type == "add") {
-        toast('已达到最大限购数量')
-        return 1 // 达到限购值
-      }
-      return 0 // 没达到限购值
-    }
-    
   },
   getCartsData() {
     dispatch[types.GET_CHANGE_CARTS]({
@@ -114,10 +94,12 @@ Page({
   },
   // 获取 今日限购的促销信息(直配)
   getSupplierPromotionInfo(branchNo, token, platform, username, goodsObj, totalLength) {
+    console.log(branchNo)
     // 获取促销信息
     API.Public.getSupplierAllPromotion({
       data: { branchNo, token, platform, username, supplierNo: this.supplierNo },
       success: res => {
+        console.log("supplierNo", this.supplierNo)
         let data= res.data
         console.log("促销信息", data)
 
@@ -189,6 +171,7 @@ Page({
           })
           let newArr = goodsList.concat(fineGoodsList)
           const totalLength = newArr.length
+          
           this.getSupplierPromotionInfo(branchNo, token, platform, username, goodsObj, totalLength) // 获取并处理今日限购的促销信息(直配)
 
           setTimeout(()=>{

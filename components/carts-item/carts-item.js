@@ -19,10 +19,11 @@ Component({
   methods: {
     inputBlur (e) {
       let goods = this.data.goods 
-      console.log(goods)
-      this.setData({ goods})
+      console.log(goods, e)
+      this.setData({ goods })
     },
     inputConfirm(e) {
+      console.log(e, this.data.goods )
       const value = Number(e.detail.value.trim()) || 0
       const index = e.currentTarget.dataset.index
       let cartsObj = this.data.goods
@@ -33,6 +34,18 @@ Component({
         branchNo: cartsObj.branchNo
       }
       const type = value ? 'input' :'delete'
+      // 超过限购数量
+      if (
+        type == 'input'
+        && 'todayPromotion' in cartsObj.data[index]
+        && value > cartsObj.data[index].todayPromotion.limitedQty
+      ){
+        cartsObj.data[index].realQty = cartsObj.data[index].todayPromotion.limitedQty
+        this.setData({ goods: cartsObj })
+        toast('已达限时促销最大限购数')
+        return
+      }
+      // 删除商品
       if (type == 'delete') {
         cartsObj.data = cartsObj.data.filter((t, i) => i !== index)
         console.log(10000)
@@ -269,49 +282,88 @@ Component({
       } else {
         console.log(10000, type)
         console.log(goods, this)
-        if (this.maxLimitAdd(goods, type) == 1) return // 是否达到今日限购活动限购标准(直配)。 返回 1，则达到限购值  
         const newCarts = dispatch[types.CHANGE_CARTS]({ goods, type, config })
+        console.log("newCarts", newCarts)
         if (newCarts) {
           cartsObj.data[index].realQty = newCarts[goods.itemNo].realQty
           MsAndDrCount(goods, newCarts[goods.itemNo], type)
           this.setData({ goods: cartsObj })
           this.countMoney()
+        } else {
+          return
         }
       }
     },
-    // （直配）今日促销商品，达到最大值停止添加商品
-    maxLimitAdd(goods, type) {  // goods：当前 ADD 的商品对象; type：当前增添的 type
-      let currentRealQty = 'todayPromotion' in goods && goods.realQty  // 当前商品真实数量
-      let currentLimitedQty = 'todayPromotion' in goods && goods.todayPromotion.limitedQty  // 当前商品今日促销的限购数量
-      if ('todayPromotion' in goods && currentRealQty >= currentLimitedQty && type == "add") {
-        toast('已达限时促销最大限购数')
-        return 1 // 达到限购值
-      }
-      return 0 // 没达到限购值
-    },
+    // 请求直配商品促销数据
+    getSupplierAllPromotion(branchNo, token, platform, username, goodsData){
+      API.Public.getSupplierAllPromotion({
+        data: { branchNo, token, platform, username, supplierNo: goodsData.sourceNo },
+        success: res => {
+          if (res.code == 0 && res.data){
+            let data = res.data
+            let promKey // 获取 以 RSD 开头的下标 (促销信息)
+            for (let key in data) {
+              console.log(key.includes('RMJ'), data[key].length, key.includes('RBF'))
+              if (key.includes('RMJ') && data[key].length != 0) { this.setData({ rmj: true }) }
+              if (key.includes('RBF') && data[key].length != 0) { this.setData({ rbf: true }) }
+              if (key.includes('RSD')) { promKey = key }
+            }
+            wx.setStorageSync('supplierPromotion', data[promKey]) // 储存 限购信息
+            console.log(data[promKey])
+            console.log(res, goodsData)
+            let supplierPromotion = data[promKey]
+            goodsData.data.forEach(item => {
+              if (item.promotionCollections.includes('RMJ')) item['RMJ'] = '满减商品'
+              if (item.promotionCollections.includes('RBF')) item['RBF'] = '满赠商品'
+              if (item.promotionCollections.includes('RSD')) item['RSD'] = '限时抢购'
+              // 直配限时购买信息
+              for (let key in supplierPromotion) {
+                if (item['itemNo'] == key) {
+                  console.log(item['itemNo'] == key)
+                  supplierPromotion[key].startDate = supplierPromotion[key].startDate.slice(0, 10)
+                  supplierPromotion[key].endDate = supplierPromotion[key].endDate.slice(0, 10)
+                  supplierPromotion[key].limitedQty = supplierPromotion[key].limitedQty
+                  item['todayPromotion'] = supplierPromotion[key]
+                }
+              }
+            })
+          }
+          this.setData({ goods: goodsData })
+        }
+      })
+    }
   },
+  
   attached() {
     this.countMoney()
     const { ww } = getApp().data
     this.ww = ww
-    console.log("321", this.data.goods)
-    let supplierPromotion = wx.getStorageSync('supplierPromotion')
     let goodsData = this.data.goods
-    goodsData.data.forEach(item => {
-      if (item.promotionCollections.includes('RMJ')) item['RMJ'] = '满减商品'
-      if (item.promotionCollections.includes('RBF')) item['RBF'] = '满赠商品'
-      if (item.promotionCollections.includes('RSD')) item['RSD'] = '限时抢购'
-      // 直配限时购买信息
-      for (let key in supplierPromotion ) {
-        if (item['itemNo'] == key) {
-          supplierPromotion[key].startDate = supplierPromotion[key].startDate.slice(0, 10)
-          supplierPromotion[key].endDate = supplierPromotion[key].endDate.slice(0, 10)
-          supplierPromotion[key].limitedQty = supplierPromotion[key].limitedQty
-          item.todayPromotion = supplierPromotion[key]
-        }
+
+    if (goodsData.sourceType == 1) {
+      let supplierPromotion = wx.getStorageSync('supplierPromotion')
+      // 缓存中无直配促销信息，请求促销接口。有促销信息则直接使用
+      if (!supplierPromotion) {
+        const { branchNo, token, platform, username } = wx.getStorageSync('userObj')
+        this.getSupplierAllPromotion(branchNo, token, platform, username, goodsData)
+      } else {
+        goodsData.data.forEach(item => { // 商品对象中 添加促销信息
+          if (item.promotionCollections.includes('RMJ')) item['RMJ'] = '满减商品'
+          if (item.promotionCollections.includes('RBF')) item['RBF'] = '满赠商品'
+          if (item.promotionCollections.includes('RSD')) item['RSD'] = '限时抢购'
+          // 直配限时购买信息
+          for (let key in supplierPromotion) {
+            if (item['itemNo'] == key) {
+              console.log(item['itemNo'] == key)
+              supplierPromotion[key].startDate = supplierPromotion[key].startDate.slice(0, 10)
+              supplierPromotion[key].endDate = supplierPromotion[key].endDate.slice(0, 10)
+              supplierPromotion[key].limitedQty = supplierPromotion[key].limitedQty
+              item['todayPromotion'] = supplierPromotion[key]
+            }
+          }
+        })
+        this.setData({ goods: goodsData })
       }
-    })
-    this.setData({ goods: goodsData })
-    console.log(this.data.goods)
+    }
   }
 })
