@@ -22,7 +22,13 @@
     </view>
     <view class='info'>
       <view class='name'>{{goodsObj[itemNo].itemName}}</view>
-      <view class='size'>{{goodsObj[itemNo].itemSize}}</view>
+      
+      <view class="rmj" wx:if="{{ rmj }}">满减</view>
+      <view class="rbf" wx:if="{{ rbf }}">满赠</view>
+      <view class='size'>
+      {{goodsObj[itemNo].itemSize}}
+      
+      </view>
       
       <view class='price' wx:if="{{partnerCode!='1039'}}">
       <!-- 普通促销信息 -->

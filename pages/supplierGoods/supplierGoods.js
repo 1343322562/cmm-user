@@ -11,6 +11,8 @@ Page({
     clsList: [],
     goodsList: [], // 商品编号
     goodsObj: {},  // 商品信息。 渲染商品逻辑：根据 goodsList 来查找 goodsObj 中的数据，并渲染至页面
+    rmj: false, // 直配是否满减
+    rbf: false, // 直配是否开启满增
     totalLength: '',
     partnerCode: getApp().data.partnerCode,
     nowSelectCls: '',
@@ -27,20 +29,31 @@ Page({
       branchNo,
       sourceNo
     }
-    if (this.maxLimitAdd(goods, type) == 1) return // 是否达到今日限购活动限购标准(直配)。 返回 1，则达到限购值  
+    if (this.maxLimitAdd(goods, type, this.data.cartsObj) == 1) return // 是否达到今日限购活动限购标准(直配)。 返回 1，则达到限购值  
     
     const cartsObj = dispatch[types.CHANGE_CARTS]({ goods, type, config })
     cartsObj && this.setData({ cartsObj: cartsObj })
   },
   // （直配）今日促销商品，达到最大值停止添加商品
-  maxLimitAdd(goods, type){  // goods：当前 ADD 的商品对象; type：当前增添的 type
-    let currentRealQty = !!this.data.cartsObj[goods.itemNo] && this.data.cartsObj[goods.itemNo].realQty  // 当前商品真实数量
-    let currentLimitedQty = 'todayPromotion' in goods && goods.todayPromotion.limitedQty  // 当前商品今日促销的限购数量
-    if (!!this.data.cartsObj[goods.itemNo] && 'todayPromotion' in goods && currentRealQty >= currentLimitedQty && type == "add") {
-      toast('已达到最大限购数量')
-      return 1 // 达到限购值
+  maxLimitAdd(goods, type, cartsObj = 0){  // goods：当前 ADD 的商品对象; type：当前增添的 type; 若有 cartObj ，则是在采页面增加
+    if (cartsObj == 0) {
+      let currentRealQty = 'todayPromotion' in goods && goods.realQty  // 当前商品真实数量
+      let currentLimitedQty = 'todayPromotion' in goods && goods.todayPromotion.limitedQty  // 当前商品今日促销的限购数量
+      if ('todayPromotion' in goods && currentRealQty >= currentLimitedQty && type == "add") {
+        toast('已达限时促销最大限购数')
+        return 1 // 达到限购值
+      }
+      return 0 // 没达到限购值
+    } else {
+      let currentRealQty = !!cartsObj[goods.itemNo] && cartsObj[goods.itemNo].realQty  
+      let currentLimitedQty = 'todayPromotion' in goods && goods.todayPromotion.limitedQty  
+      if (!!cartsObj[goods.itemNo] && 'todayPromotion' in goods && currentRealQty >= currentLimitedQty && type == "add") {
+        toast('已达到最大限购数量')
+        return 1 // 达到限购值
+      }
+      return 0 // 没达到限购值
     }
-    return 0 // 没达到限购值
+    
   },
   getCartsData() {
     dispatch[types.GET_CHANGE_CARTS]({
@@ -106,10 +119,17 @@ Page({
       data: { branchNo, token, platform, username, supplierNo: this.supplierNo },
       success: res => {
         let data= res.data
+        console.log("促销信息", data)
+
         let promKey // 获取 以 RSD 开头的下标 (促销信息)
-        for (let key in data) {   
+        for (let key in data) {
+          console.log(key.includes('RMJ'), data[key].length , key.includes('RBF'))
+          if (key.includes('RMJ') && data[key].length != 0) { this.setData({ rmj: true }) }  
+          if (key.includes('RBF') && data[key].length != 0) { this.setData({ rbf: true }) }    
           if (key.includes('RSD')) { promKey = key }
         }
+        wx.setStorageSync('supplierPromotion', data[promKey]) // 储存 限购信息，在购物车中拿到
+        console.log(data[promKey])
         console.log(res, promKey)
         if (res.code == 0 && res.data && Object.keys(data[promKey]).length != 0){  // 最后判断 data[promKey] 是否为空对象
           // 将促销字段，推入对应的商品对象，页面通过 促销子段 (存在与否) 来渲染促销信息

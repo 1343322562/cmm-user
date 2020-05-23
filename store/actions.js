@@ -169,9 +169,39 @@ const actions = {
       param.success && param.success(beforeObj)
     }
   },
-  [types.CHANGE_CARTS](param) { // add delete minus
-    console.log(param)
+  // （直配）今日促销商品，达到最大值停止添加商品
+  // maxLimitAdd(goods, type, cartsObjs) {  // goods：当前 ADD 的商品对象; type：当前增添的 type; 若有 cartObj ，则是在采页面增加
+  //   if (cartsObjs == 0) { // 0: 在结算页添加商品 ； 1：在商品采购页添加商品
+  //     let currentRealQty = goods.realQty  // 当前商品真实数量
+  //     let currentLimitedQty = goods.todayPromotion.limitedQty  // 当前商品今日促销的限购数量
+  //     if (currentRealQty >= currentLimitedQty) {
+  //       toast('已达限时促销最大限购数')
+  //       return 1 // 达到限购值
+  //     }
+  //     return 0 // 没达到限购值
+  //   } else {
+  //     let currentRealQty = !!cartsObjs[goods.itemNo] && cartsObjs[goods.itemNo].realQty
+  //     let currentLimitedQty = goods.todayPromotion.limitedQty
+  //     if (!!cartsObjs[goods.itemNo] && currentRealQty >= currentLimitedQty) {
+  //       toast('已达限时促销最大限购数')
+  //       return 1 // 达到限购值
+  //     }
+  //     return 0 // 没达到限购值
+  //   }
+  // },
+  [types.CHANGE_CARTS](param) { // add delete minus； cartsObj 为促销信息，主要用来实现直配的限时促销，达到限购值，停止加购
+  // 直配中商品数量若满足限时促销中的 限购值，则停止加购
+    // console.log(this.maxLimitAdd(param.goods, param.type, cartsObjs), cartsObjs)
+    // if (
+    //   param.config.sourceType == "1"     // 直配
+    //   && 'todayPromotion' in param.goods // todayPromotion：限时促销
+    //   && param.type == "add"             // 增加商品
+    //   && this.maxLimitAdd(param.goods, param.type, cartsObjs) == 1  // 1：达到最大限购值
+    // ) return 
+    console.log("当前商品对象",param)
     let cartsObj = commit[types.GET_CARTS]()
+    console.log("cartsObj", cartsObj, 'todayPromotion' in param.goods)
+
     if (cartsObj.keyArr.length>=300){
       toast('购物车已达到最大商品数量!')
       return
@@ -231,15 +261,18 @@ const actions = {
       cartsObj[itemNo] || cartsObj.keyArr.push(itemNo)
       cartsObj[itemNo] = item
     }
-    commit[types.SAVE_CARTS](cartsObj)
+    console.log(cartsObj)
+    commit[types.SAVE_CARTS](cartsObj) // 缓存 cartsObj
     wx.setStorageSync('updateCarts', true)
     // wx.setStorage({key: 'updateCarts',data: true})
     return cartsObj
   },
   [types.GET_CHANGE_CARTS](param) {
+    console.log(param)
     const updateCarts = wx.getStorageSync('updateCarts')
     const { branchNo, token, username, platform } = wx.getStorageSync('userObj')
     const cartsObj = commit[types.GET_CARTS]()
+    console.log('updateCarts', updateCarts, 'cartsObj', cartsObj)
     if (param.nowUpdate && updateCarts && cartsObj.num) param.success(cartsObj)
     let items = []
     cartsObj.keyArr.forEach(itemNo => items.push(cartsObj[itemNo]))
@@ -251,6 +284,7 @@ const actions = {
       API.Carts.getShoppingCartInfo({
         data: { items, platform, token, username, branchNo },
         success: (res) => {
+          console.log(res)
           let newCartsObj = { num: 0, keyArr:[]}
           if (res.code == 0 && res.data) {
             res.data.forEach(config => {
@@ -271,6 +305,7 @@ const actions = {
                 newCartsObj.num += goods.realQty
               })
             })
+            console.log(newCartsObj)
             commit[types.SAVE_CARTS](newCartsObj)
             wx.setStorage({ key: 'updateCarts', data: false })
             wx.setStorage({ key: 'updateCartsTime', data: +new Date() })

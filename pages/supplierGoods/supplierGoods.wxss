@@ -41,6 +41,9 @@ Page{background-color: #fff}
   top: 0;
   left: 0;
 }
+.rmj, .rbf{display: inline-block;line-height: 30rpx;font-size: 22rpx;border: 1px solid red;color: red;position: absolute;top: 23rpx;border-radius: 10rpx;padding: 0 6rpx;}
+.rmj{right: 15rpx;}
+.rbf{right: 80rpx;}
 .goodsList .oldPrice{text-decoration: line-through}
 /*购物车按钮*/
 .goCartsPage{text-align: center;position: fixed;z-index: 10;bottom:180rpx;right: 50rpx;width: 100rpx;height: 100rpx;border-radius: 100%;background-color: #fff;border:1px solid #e4e4e4;box-shadow: 5rpx 5rpx 10rpx #ddd;color: #777;font-size: 20rpx;}

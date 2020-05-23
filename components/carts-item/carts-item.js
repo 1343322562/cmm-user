@@ -19,6 +19,7 @@ Component({
   methods: {
     inputBlur (e) {
       let goods = this.data.goods 
+      console.log(goods)
       this.setData({ goods})
     },
     inputConfirm(e) {
@@ -43,7 +44,7 @@ Component({
           this.triggerEvent('deleteCarts', cartsObj.type)
         }
       } else  {
-        console.log(10000)
+        console.log(10000, type)
         const newCarts = dispatch[types.CHANGE_CARTS]({ goods, type, config, value })
         if (newCarts) {
           cartsObj.data[index].realQty = newCarts[goods.itemNo].realQty
@@ -237,6 +238,7 @@ Component({
       this.countMoney()
     },
     changeGoodsNum(e) {
+      console.log(this)
       const index = e.currentTarget.dataset.index
       const type = e.currentTarget.dataset.type
       let cartsObj = this.data.goods
@@ -253,7 +255,7 @@ Component({
           success: (res) => {
             if (res.confirm) {
               cartsObj.data = cartsObj.data.filter((t, i) => i !== index)
-              console.log(10000)
+              console.log(10000, type)
               dispatch[types.CHANGE_CARTS]({ goods, type, config })
               if (cartsObj.data.length) {
                 this.setData({ goods: cartsObj })
@@ -265,7 +267,9 @@ Component({
           }
         })
       } else {
-        console.log(10000)
+        console.log(10000, type)
+        console.log(goods, this)
+        if (this.maxLimitAdd(goods, type) == 1) return // 是否达到今日限购活动限购标准(直配)。 返回 1，则达到限购值  
         const newCarts = dispatch[types.CHANGE_CARTS]({ goods, type, config })
         if (newCarts) {
           cartsObj.data[index].realQty = newCarts[goods.itemNo].realQty
@@ -274,11 +278,40 @@ Component({
           this.countMoney()
         }
       }
-    }
+    },
+    // （直配）今日促销商品，达到最大值停止添加商品
+    maxLimitAdd(goods, type) {  // goods：当前 ADD 的商品对象; type：当前增添的 type
+      let currentRealQty = 'todayPromotion' in goods && goods.realQty  // 当前商品真实数量
+      let currentLimitedQty = 'todayPromotion' in goods && goods.todayPromotion.limitedQty  // 当前商品今日促销的限购数量
+      if ('todayPromotion' in goods && currentRealQty >= currentLimitedQty && type == "add") {
+        toast('已达限时促销最大限购数')
+        return 1 // 达到限购值
+      }
+      return 0 // 没达到限购值
+    },
   },
   attached() {
     this.countMoney()
     const { ww } = getApp().data
     this.ww = ww
+    console.log("321", this.data.goods)
+    let supplierPromotion = wx.getStorageSync('supplierPromotion')
+    let goodsData = this.data.goods
+    goodsData.data.forEach(item => {
+      if (item.promotionCollections.includes('RMJ')) item['RMJ'] = '满减商品'
+      if (item.promotionCollections.includes('RBF')) item['RBF'] = '满赠商品'
+      if (item.promotionCollections.includes('RSD')) item['RSD'] = '限时抢购'
+      // 直配限时购买信息
+      for (let key in supplierPromotion ) {
+        if (item['itemNo'] == key) {
+          supplierPromotion[key].startDate = supplierPromotion[key].startDate.slice(0, 10)
+          supplierPromotion[key].endDate = supplierPromotion[key].endDate.slice(0, 10)
+          supplierPromotion[key].limitedQty = supplierPromotion[key].limitedQty
+          item.todayPromotion = supplierPromotion[key]
+        }
+      }
+    })
+    this.setData({ goods: goodsData })
+    console.log(this.data.goods)
   }
 })

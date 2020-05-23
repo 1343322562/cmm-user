@@ -91,6 +91,8 @@ Page({
   onShow() {
     this.refreshCarts()
     this.replenishFlag != '0' && this.isReplenish()
+    console.log("cartsObj", this.data.cartsObj)
+    console.log("cartsList", this.data.cartsList)
   },
   onHide () {
     this.setData({ pageLoading: false })

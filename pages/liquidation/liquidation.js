@@ -210,6 +210,7 @@ Page({
     console.log("mjList:", itemList, "this.user:", this.userObj)
 
     const { branchNo, token, username, platform, dbBranchNo: dbranchNo } = this.userObj
+    console.log("dbBranchNo", dbranchNo)
     API.Liquidation.getSupplierSettlementPromotion({
       data:{ branchNo, token, username, platform, supplierNo, dbranchNo, data: itemList },
       success: res => {
@@ -671,6 +672,9 @@ Page({
     let requestItemList = []
     let itemNos = []
     goodsList.forEach(goods => { /* itemType 0组合商品 1 普通商品 2 赠品  */
+      if (goods.promotionCollections.includes('RMJ')) goods['RMJ'] = '满减商品'
+      if (goods.promotionCollections.includes('RBF')) goods['RBF'] = '满赠商品'
+      if (goods.promotionCollections.includes('RSD')) goods['RSD'] = '限时抢购'
       const itemNo = goods.itemNo
       itemNos.push(itemNo)
       let data = { itemNo: itemNo, qty: String(goods.realQty), price: String(goods.price) }
@@ -682,6 +686,7 @@ Page({
     })
     this.itemNos = itemNos
     console.log(goodsList)
+
     this.setData({
       wxPayRate,
       wxPayRateOpen,
