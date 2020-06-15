@@ -14,6 +14,14 @@
 .supplierList>.li .startMoney{position: absolute;top: 45%;right: 40rpx;color: #666;}
 .supplierList>.li .startMoney>text{color: red;margin-left: 5rpx;}
 /*搜索*/
+.searchShop-box{
+  position: fixed;
+bottom: 93rpx;
+background-color: #eee;
+height: 30rpx;
+width: 30rpx;
+
+}
 .search{background-color: #fff;display: flex;position: fixed;left: 0;top: 0;width: 100%;border-bottom: 1px solid #e8e8e8;z-index: 10;padding: 15rpx 0;}
 .search>.item{width: 0;}
 .search>.form{flex-grow: 4;position: relative;background-color: #f2f2f2;height: 70rpx;border-radius: 15rpx;margin:0 20rpx}

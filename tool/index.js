@@ -57,7 +57,9 @@ export const goPage = (l, o, s, f, c) => { // 跳转页面
   s && (obj.success = s);
   f && (obj.fail = f);
   c && (obj.complete = c);
+  console.log(obj)
   wx.navigateTo(obj)
+  console.log(1)
 }
 export const emojiReg = (str) => { // 格式化字符
   const emojiReg = new RegExp(/[\uD83C|\uD83D|\uD83E][\uDC00-\uDFFF][\u200D|\uFE0F]|[\uD83C|\uD83D|\uD83E][\uDC00-\uDFFF]|[0-9|*|#]\uFE0F\u20E3|[0-9|#]\u20E3|[\u203C-\u3299]\uFE0F\u200D|[\u203C-\u3299]\uFE0F|[\u2122-\u2B55]|\u303D|\u3030|\uA9|\uAE|\u3030/gi)
@@ -173,9 +175,15 @@ export const getGoodsTag = (goods, promotionObj,type) => { // 获取促销标签
   const MJ = promotionObj.MJ.fullReduction ? 'fullReduction' : (promotionObj.MJ.cls[itemClsno] ? 'cls' : (promotionObj.MJ.brand[brandNo] ? 'brand' : (promotionObj.MJ.goods[itemNo] ? 'goods' : false)))
   const ZK = promotionObj.ZK.allDiscount || (promotionObj.ZK.cls[itemClsno] || (promotionObj.ZK.brand[brandNo] || promotionObj.ZK.goods[itemNo] || false))
   const BF = promotionObj.BF.all.length || (promotionObj.BF.cls[itemClsno] || (promotionObj.BF.brand[brandNo] || promotionObj.BF.goods[itemNo] || false))
+  const SZInfo = 'giftInfo' in promotionObj['SZ'] ? promotionObj['SZ'].giftInfo : false
+  const SZStockType = 'stockType' in promotionObj['SZ'] ? promotionObj['SZ'].stockType : false
+  const SZFilterArr = 'filterArr' in promotionObj['SZ'] ? promotionObj['SZ'].filterArr : false
   if (MJ) obj.MJ = MJ
   if (BG) obj.BG = BG
   if (BF) obj.BF = true
+  if (SZInfo) obj.SZInfo = SZInfo                  // SZ配送信息
+  if (SZStockType) obj.SZStockType = SZStockType   // SZ配送种类
+  if (SZFilterArr) obj.SZFilterArr = SZFilterArr   // SZ过滤条件
 
   if (promotionObj.FS[itemNo]) {
     obj.FS = true
@@ -184,6 +192,10 @@ export const getGoodsTag = (goods, promotionObj,type) => { // 获取促销标签
     const price = promotionObj.FS[itemNo].price
     obj.sdPrice = price
     type || (obj.price = price)
+  } else if (promotionObj.MQ[itemNo]) {
+    obj['MQ'] = {}
+    obj['MQ'].buyQty = promotionObj.MQ[itemNo].buyQty
+    obj['MQ'].subMoney = promotionObj.MQ[itemNo].subMoney
   } else if (promotionObj.SD[itemNo]) {
     obj.SD = true
     obj.promotionSheetNo = promotionObj.SD[itemNo].sheetNo

@@ -18,8 +18,9 @@
     <view class='blockTitle'>付款信息</view>
     <view class='p'><text class='name'>商品总价</text><text class='content'>￥{{order.orgiSheetAmt}}</text></view>
     <view class='p'><text class='name'>优惠金额</text><text class='content'>￥{{order.discountsTotalAmt}}</text></view>
+    <view class='p'><text class='name'>代金卷</text><text class='content'>￥{{order.vouchersAmt}}</text></view>
     <view class='p' wx:if="{{order.doAmt}}"><text class='name' >缺货金额</text><text class='content'>￥{{order.stockoutAmt}}</text></view>
-    <view class='p'><text class='name'>应付金额</text><text class='content'>￥{{order.sheetAmt}}</text></view>
+    <view class='p'><text class='name'>应付金额</text><text class='content'>￥{{order.realPayAmt}}</text></view>
     <view class='p'><text class='name'>已付金额</text><text class='content b t-red'>￥{{order.paymentAmtStr}}</text></view>
     
   </view>
@@ -60,7 +61,7 @@
 
 </view>
 <view class='statusPage' wx:if="{{tabIndex==1}}">
-  <view class="flow_li" wx:for="{{orderFlowObj}}" wx:key="{{index}}">
+  <view class="flow_li" wx:for="{{orderFlowObj}}" wx:key="index">
     <view class="left">
       <view>{{item.createDate[0]}}</view>
       <view>{{item.createDate[1]}}</view>

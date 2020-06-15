@@ -14,16 +14,14 @@ Component({
     isSelectAll: true,
     cartsMoney: 0,
     selectNum: 0,
-    selectTypeNum: 0,
+    selectTypeNum: 0
   },
   methods: {
     inputBlur (e) {
       let goods = this.data.goods 
-      console.log(goods, e)
       this.setData({ goods })
     },
     inputConfirm(e) {
-      console.log(e, this.data.goods )
       const value = Number(e.detail.value.trim()) || 0
       const index = e.currentTarget.dataset.index
       let cartsObj = this.data.goods
@@ -48,7 +46,6 @@ Component({
       // 删除商品
       if (type == 'delete') {
         cartsObj.data = cartsObj.data.filter((t, i) => i !== index)
-        console.log(10000)
         dispatch[types.CHANGE_CARTS]({ goods, type, config })
         if (cartsObj.data.length) {
           this.setData({ goods: cartsObj })
@@ -57,7 +54,6 @@ Component({
           this.triggerEvent('deleteCarts', cartsObj.type)
         }
       } else  {
-        console.log(10000, type)
         const newCarts = dispatch[types.CHANGE_CARTS]({ goods, type, config, value })
         if (newCarts) {
           cartsObj.data[index].realQty = newCarts[goods.itemNo].realQty
@@ -175,7 +171,6 @@ Component({
             cartsObj.data.map(goods => {
               if (!goods.cancelSelected) {
                 keyArr.push(goods.itemNo)
-                console.log(10000)
                 dispatch[types.CHANGE_CARTS]({ goods, type: 'delete', config })
               }
             })
@@ -251,7 +246,6 @@ Component({
       this.countMoney()
     },
     changeGoodsNum(e) {
-      console.log(this)
       const index = e.currentTarget.dataset.index
       const type = e.currentTarget.dataset.type
       let cartsObj = this.data.goods
@@ -268,7 +262,6 @@ Component({
           success: (res) => {
             if (res.confirm) {
               cartsObj.data = cartsObj.data.filter((t, i) => i !== index)
-              console.log(10000, type)
               dispatch[types.CHANGE_CARTS]({ goods, type, config })
               if (cartsObj.data.length) {
                 this.setData({ goods: cartsObj })
@@ -280,10 +273,7 @@ Component({
           }
         })
       } else {
-        console.log(10000, type)
-        console.log(goods, this)
         const newCarts = dispatch[types.CHANGE_CARTS]({ goods, type, config })
-        console.log("newCarts", newCarts)
         if (newCarts) {
           cartsObj.data[index].realQty = newCarts[goods.itemNo].realQty
           MsAndDrCount(goods, newCarts[goods.itemNo], type)
@@ -293,6 +283,7 @@ Component({
           return
         }
       }
+      console.log('商品数量更改')
     },
     // 请求直配商品促销数据
     getSupplierAllPromotion(branchNo, token, platform, username, goodsData){
@@ -303,23 +294,19 @@ Component({
             let data = res.data
             let promKey // 获取 以 RSD 开头的下标 (促销信息)
             for (let key in data) {
-              console.log(key.includes('RMJ'), data[key].length, key.includes('RBF'))
               if (key.includes('RMJ') && data[key].length != 0) { this.setData({ rmj: true }) }
               if (key.includes('RBF') && data[key].length != 0) { this.setData({ rbf: true }) }
               if (key.includes('RSD')) { promKey = key }
             }
             wx.setStorageSync('supplierPromotion', data[promKey]) // 储存 限购信息
-            console.log(data[promKey])
-            console.log(res, goodsData)
             let supplierPromotion = data[promKey]
             goodsData.data.forEach(item => {
-              if (item.promotionCollections.includes('RMJ')) item['RMJ'] = '满减商品'
-              if (item.promotionCollections.includes('RBF')) item['RBF'] = '满赠商品'
-              if (item.promotionCollections.includes('RSD')) item['RSD'] = '限时抢购'
+              if ('promotionCollections' in goods && item.promotionCollections.includes('RMJ')) item['RMJ'] = '满减商品'
+              if ('promotionCollections' in goods && item.promotionCollections.includes('RBF')) item['RBF'] = '满赠商品'
+              if ('promotionCollections' in goods && item.promotionCollections.includes('RSD')) item['RSD'] = '限时抢购'
               // 直配限时购买信息
               for (let key in supplierPromotion) {
                 if (item['itemNo'] == key) {
-                  console.log(item['itemNo'] == key)
                   supplierPromotion[key].startDate = supplierPromotion[key].startDate.slice(0, 10)
                   supplierPromotion[key].endDate = supplierPromotion[key].endDate.slice(0, 10)
                   supplierPromotion[key].limitedQty = supplierPromotion[key].limitedQty
@@ -348,13 +335,12 @@ Component({
         this.getSupplierAllPromotion(branchNo, token, platform, username, goodsData)
       } else {
         goodsData.data.forEach(item => { // 商品对象中 添加促销信息
-          if (item.promotionCollections.includes('RMJ')) item['RMJ'] = '满减商品'
-          if (item.promotionCollections.includes('RBF')) item['RBF'] = '满赠商品'
-          if (item.promotionCollections.includes('RSD')) item['RSD'] = '限时抢购'
+          if ('promotionCollections' in item && item.promotionCollections.includes('RMJ')) item['RMJ'] = '满减商品'
+          if ('promotionCollections' in item && item.promotionCollections.includes('RBF')) item['RBF'] = '满赠商品'
+          if ('promotionCollections' in item && item.promotionCollections.includes('RSD')) item['RSD'] = '限时抢购'
           // 直配限时购买信息
           for (let key in supplierPromotion) {
             if (item['itemNo'] == key) {
-              console.log(item['itemNo'] == key)
               supplierPromotion[key].startDate = supplierPromotion[key].startDate.slice(0, 10)
               supplierPromotion[key].endDate = supplierPromotion[key].endDate.slice(0, 10)
               supplierPromotion[key].limitedQty = supplierPromotion[key].limitedQty

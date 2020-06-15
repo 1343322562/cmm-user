@@ -30,7 +30,7 @@
       <text class="l3">金额小计</text>
     </view>
     <view class="od-itemList">
-      <view class="li" wx:for="{{orderObj.detailOutVos}}" wx:key="{{index}}">
+      <view class="li" wx:for="{{orderObj.detailOutVos}}" wx:key="index">
         <view class="l1">
           <view class="name"><text class="t-red">[{{orderObj.sendFlag=='0'?'未发放':'已发放'}}]</text>[{{item.teamType=='0'?'特价':'买赠'}}]{{item.itemName}}</view>
           <view class="t-gry">{{item.itemNo}}</view>

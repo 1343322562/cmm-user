@@ -33,6 +33,7 @@ Page({
     API.Index.getIndexSetting({
       data: { branchNo, token, username, platform, dbranchNo },
       success: (res) => {
+        console.log('getIndexSetting')
         console.log(res)
         if (res.code == 0) {
           let list = res.data,
@@ -69,12 +70,15 @@ Page({
               keyList.push(false);
             }
           }
+          console.log('getIndexSettinglast')
           this.setData({ pageObjKey: keyList, pageObj: list, random: +new Date(), categoryList});
         } else {
           alert(res.msg)
         }
       },
       complete: () => {
+
+        console.log('getIndexSettingComplete')
         hideLoading()
         this.setData({ pageLoading: true})
         wx.stopPullDownRefresh()
@@ -119,6 +123,7 @@ Page({
   },
   goPage (e) {
     let { type, val, title,supplier} = e.currentTarget.dataset
+    console.log(type)
     val = val?val.replace(/\s+/g, ""):''
     if (type == '1' && val == '1') { // 优惠券领取
       goPage('getCoupons')
@@ -135,7 +140,9 @@ Page({
     } else if (type == '8') { // 组合促销
       goPage('activity', { title, type, value: val })
     } else if (type == '9') { // 秒杀
+      console.log(type)
       goPage('seckill')
+      console.log(type)
     } else if (type == '10') { // 入驻商商品列表
       goPage('activity', { title, type, value: val, supplierNo:supplier||'' })
     } else if (type == '11') { // 跳转到入驻商
@@ -158,11 +165,16 @@ Page({
       }
     })
   },
-  onShow () {
-    const userObj = wx.getStorageSync('userObj')
+  onShow() {
+    console.log('sshow', this.userObj)
+    console.log(this.userObj)
+    // if (!this.userObj) { this.userObj = wx.getStorageSync('userObj'); console.log(1000) }
+    console.log(10)
+    const userObj = getApp().data['userObj'] || wx.getStorageSync('userObj')
     if (userObj) this.userObj = userObj
     this.getCartsData()
     this.getAllPromotion()
+    console.log(20)
   },
   onShareAppMessage() {
     return {
@@ -170,7 +182,8 @@ Page({
     }
   },
   onLoad (opt) {
-    this.userObj = wx.getStorageSync('userObj')
+    console.log('sload', this.userObj, getApp())
+    this.userObj = getApp().data['userObj'] || wx.getStorageSync('userObj')
     getApp().data.goodsUrl || (commit[types.SET_ALL_GOODS_IMG_URL]())
     const { goodsUrl, indexImgUrl } = getApp().data
     this.goodsUrl = goodsUrl

@@ -1,7 +1,7 @@
 <view wx:if="{{pageObj.id}}">
   <image class="topImg" mode="widthFix" src="{{tgGoodsUrl + pageObj.topImg}}" />
   <view class="ind-list">
-    <view class="li" wx:for="{{pageObj.detailOutVos}}" wx:key="{{index}}" wx:if="{{timeList[index].type!='2'}}">
+    <view class="li" wx:for="{{pageObj.detailOutVos}}" wx:key="index" wx:if="{{timeList[index].type!='2'}}">
       <view class="promotion">
         <view class="{{'type '+(item.teamType=='1'?'mz':'tj')}}">{{item.teamType=='1'?'买赠团':'特价团'}}</view>
         <view class="time">
@@ -35,7 +35,7 @@
   <view class="ind-introduce">
     <view class="title"></view>
     <view class="content">
-      <view wx:for="{{pageObj.teamRule}}" wx:key="{{index}}">{{item}}</view>
+      <view wx:for="{{pageObj.teamRule}}" wx:key="index">{{item}}</view>
     </view>
   </view>
 </view>

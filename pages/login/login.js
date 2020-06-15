@@ -173,10 +173,8 @@ Page({
     API.Goods.searchItemCls({
       data: { branchNo, token, username, platform },
       success: (res) => {
-        console.log(res)
         if (res.code == 0 && res.data) {
           const { firstCls, secondCls, modularCls} = res.data
-          console.log("modularCls:", modularCls)
           let classifyList = []
           let classifyObj = {}
           firstCls.forEach(item => {
@@ -238,7 +236,7 @@ Page({
   },
   getConfig({ branchNo, token, username, platform }) {
     API.Public.getCommonSetting({
-      data: { branchNo, token, username, platform},
+      data: { branchNo, token, username, platform },
       success: (res) => {
         if (res.code == 0) {
           const data = res.data
@@ -284,12 +282,15 @@ Page({
       API.Login[tabBarIndex ? 'supplyLogin' :'supplyLoginPwd']({
         data: request,
         success: (res) => {
+          console.log(12232323232323232323)
           if (res.code == 0) {
             let data = res.data
             let isRepetition = false
             let editIndex = 0
             data.platform = '3'
             wx.setStorageSync('userObj', data)
+            getApp().data['userObj'] = data
+            console.log('asdassssssssssssda')
             userList.forEach((item,index)=> {
               if (item.user == name) {
                 isRepetition = true
@@ -331,11 +332,12 @@ Page({
     goPage('verificationPhone', { openType })
   },
   onLoad (opt) {
+    
     this.getAgreement()
     const nowDate = new Date()
     const dateStr = String(nowDate.getFullYear()) + (nowDate.getMonth() + 1) + nowDate.getDate()
     const user = wx.getStorageSync('userObj')
-    if (dateStr == '2020422' && !opt.isLogin && !wx.getStorageSync('isWxLogin') && (!user || user.isLogin)) {
+    if (dateStr == '2020611' && !opt.isLogin && !wx.getStorageSync('isWxLogin') && (!user || user.isLogin)) {
       showLoading()
       let request = {
         url: 'https://mmj.zksr.cn/zksrb2b-web/djk.json',

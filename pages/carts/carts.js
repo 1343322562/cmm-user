@@ -20,7 +20,6 @@ Page({
     this.setData({ cartsList, cartsObj })
   },
   getCartsData() {
-    console.log("getCartsData")
     const { goodsUrl,zcGoodsUrl,zhGoodsUrl} = getApp().data
     const promotionObj = wx.getStorageSync('allPromotion')
     dispatch[types.GET_CHANGE_CARTS]({
@@ -91,14 +90,12 @@ Page({
   onShow() {
     this.refreshCarts()
     this.replenishFlag != '0' && this.isReplenish()
-    console.log("cartsObj", this.data.cartsObj)
-    console.log("cartsList", this.data.cartsList)
   },
   onHide () {
     this.setData({ pageLoading: false })
   },
   refreshCarts (){
-    showLoading('请稍后...')
+    showLoading('请稍候...')
     this.getCartsData()
   },
   onPullDownRefresh() {

@@ -28,7 +28,6 @@ Page({
     console.log("立即抢购bindtapOBJ：",e)
     const index = e.currentTarget.dataset.index
     const list = this.data.list[this.data.nowSelectDate]
-    console.log(list)
     const item = list.item[index]
     if (list.type != '1' || (item.stockQty <= 0)) return
     let requestData = deepCopy(this.requestData)
@@ -47,6 +46,7 @@ Page({
     API.Carts.addItemToCar({
       data: requestData,
       success: res => {
+        console.log(res, requestData)
         if (res.code == 0) {
           alert('抢购成功，商品已加入购物车',{
             confirmText: '查看',
@@ -124,7 +124,7 @@ Page({
     list.length && this.changeTime(nowSelectDate);
   },
   onLoad (opt) {
-    const { branchNo, token, platform, username, dbBranchNo} = wx.getStorageSync('userObj')
+    const { branchNo, token, platform, username, dbBranchNo } = getApp().data['userObj'] || wx.getStorageSync('userObj')
     this.goodsUrl = getApp().data.goodsUrl
     this.dbBranchNo = dbBranchNo
     this.requestData = { branchNo, token, platform, username}

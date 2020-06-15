@@ -1,9 +1,9 @@
-<!-- <view class="search">
+<view class="search">
   <view class='item form' catchtap='goSearch'>
     <image class='icon' src="../../images/search_page_icon.png" />
     <view class='input'>请输入你想要搜索的商品信息</view>
   </view>
-</view> -->
+</view>
 <scroll-view scroll-x class="clsList">
   <view class= "li{{nowSelectedCls =='all'?' act':''}}"  catchtap='changeCls' data-no="all" >全部</view>
   <view class="li{{nowSelectedCls == item.supcustCls?' act':''}}" wx:for="{{clsList}}" wx:key="index" catchtap='changeCls' data-no="{{item.supcustCls}}">{{item.supcustName}}</view>
@@ -20,6 +20,8 @@
   </view>
 </view>
 
+
+<!-- <view class="searchShop-box"><image height="30rpx" width="30rpx" src="../../images/search_page_icon.png" /></view> -->
 <view class="pageData_null" wx:if="{{!supplierKey[nowSelectedCls].length&&pageLoading}}">
   <image mode="widthFix" src="../../images/pageData-null.png"/>
   <view class="page_text">当前类别无数据~</view>

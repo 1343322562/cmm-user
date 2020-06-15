@@ -41,7 +41,7 @@
   <view class="det-mzList" wx:if="{{pageObj.teamType=='1'}}">
     <view class="title">套餐选择</view>
     <view class="list">
-      <block wx:for="{{pageObj.relationOutVos}}" wx:key="{{index}}">
+      <block wx:for="{{pageObj.relationOutVos}}" wx:key="index">
       <view class="{{'li'+(mzSelect==index?' act':'')}}" bindtap="selectMz" data-index="{{index}}">
         <view>买{{item.buyQty}}赠{{item.sendQty}}</view>
         <view class="price">￥{{item.totalMoney}}</view>
@@ -57,7 +57,7 @@
     </view>
     <view class="{{payMoney>0?'act':''}}" bindtap="goPay">去支付</view>
   </view>
-  <block wx:for="{{pageObj.detailUrl}}" wx:key="{{index}}">
+  <block wx:for="{{pageObj.detailUrl}}" wx:key="index">
     <image class="topImg" mode="widthFix" src="{{tgGoodsUrl+item}}" />
   </block>
 </view>

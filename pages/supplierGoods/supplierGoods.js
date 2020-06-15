@@ -19,7 +19,6 @@ Page({
     cartsObj: {}
   },
   changeCarts(e) {
-    console.log("changeCarts:", e)
     const { type, no } = e.currentTarget.dataset
     const sourceNo = this.supplierNo
     const goods = this.data.goodsObj[no]
@@ -61,7 +60,6 @@ Page({
             hideLoading()
             this.setData({ pageLoading: true })
           }
-          console.log("获取goodlist")
           this.setData({ clsList })
           this.getGoodsList()
         } else {
@@ -94,26 +92,19 @@ Page({
   },
   // 获取 今日限购的促销信息(直配)
   getSupplierPromotionInfo(branchNo, token, platform, username, goodsObj, totalLength) {
-    console.log(branchNo)
     // 获取促销信息
     API.Public.getSupplierAllPromotion({
       data: { branchNo, token, platform, username, supplierNo: this.supplierNo },
       success: res => {
-        console.log("supplierNo", this.supplierNo)
         let data= res.data
-        console.log("促销信息", data)
-
-        let promKey // 获取 以 RSD 开头的下标 (促销信息)
-        for (let key in data) {
-          console.log(key.includes('RMJ'), data[key].length , key.includes('RBF'))
-          if (key.includes('RMJ') && data[key].length != 0) { this.setData({ rmj: true }) }  
-          if (key.includes('RBF') && data[key].length != 0) { this.setData({ rbf: true }) }    
-          if (key.includes('RSD')) { promKey = key }
-        }
-        wx.setStorageSync('supplierPromotion', data[promKey]) // 储存 限购信息，在购物车中拿到
-        console.log(data[promKey])
-        console.log(res, promKey)
-        if (res.code == 0 && res.data && Object.keys(data[promKey]).length != 0){  // 最后判断 data[promKey] 是否为空对象
+        if (res.code == 0 && res.data) {
+          let promKey // 获取 以 RSD 开头的下标 (促销信息)
+          for (let key in data) {
+            if (key.includes('RMJ') && data[key].length != 0) { this.setData({ rmj: true }) }  
+            if (key.includes('RBF') && data[key].length != 0) { this.setData({ rbf: true }) }    
+            if (key.includes('RSD')) { promKey = key }
+          }
+          wx.setStorageSync('supplierPromotion', data[promKey]) // 储存 限购信息，在购物车中拿到
           // 将促销字段，推入对应的商品对象，页面通过 促销子段 (存在与否) 来渲染促销信息
           new Promise((resolve, reject) => {
             let todayPromotion = data[promKey]
@@ -153,7 +144,6 @@ Page({
     API.Goods.supplierItemSearch({
       data: { condition:'', modifyDate:'', supcustNo, pageIndex: 1, pageSize: 1000, itemClsNo, token, platform, username},
       success: res => {
-        console.log(res)
         if(res.code == 0 && res.data) {
           const list = res.data.itemData || []
           let goodsList = []
@@ -205,7 +195,6 @@ Page({
       data: { branchNo, token, platform, username, condition: '', supplierNo: this.supplierNo},
       success: res => {
         const list = res.data
-        console.log(list)
         if (res.code == 0 && list && list.length) {
           list.forEach(item => {
             const cls = item.managementType
@@ -228,7 +217,6 @@ Page({
     // 判断是否有传来的参数
     if (opt.config) {
       const config = JSON.parse(opt.config)
-      console.log("SUP:", config)
       this.supplierNo = config.supplierNo
       this.setData({ config })
     } else {
@@ -240,7 +228,6 @@ Page({
     
   },
   onReady () {
-    console.log(this.data.goodsObj)
   },
   onShow () {
     this.getCartsData()

@@ -5,7 +5,7 @@ import { toast, alert, getGoodsImgSize, getGoodsTag, deepCopy, setParentGoodsCar
 Page({
   data: {
     imgList: [],
-    imgDetailsList: [],
+    imgDetailsList: "",
     goodsType:'', // 0 统配  1 直配
     goods: {},
     promotionList:[],
@@ -105,6 +105,14 @@ Page({
             }
             wx.setNavigationBarTitle({title: goods.itemName})
             goods.minSellAmt = Number(((goods.orgiPrice || goods.price) * (goods.minSupplyQty || 1)).toFixed(2))
+            // 处理直配 限时销售的数据
+            if ('promotionNos' in goods && goods['promotionNos'].includes('RSD')){
+              this.getSupplierRSD(goods, this.data.cartsObj)
+            }
+            if ('promotionNos' in goods 
+            && (goods['promotionNos'].includes('RSD') || goods['promotionNos'].includes('RMJ') || goods['promotionNos'].includes('RBF'))) {
+              this.getSupplierPromotion(goods)
+            }
             this.setData({ goods, imgList })
             goodsType || this.getAllPromotion()
           } else {
@@ -128,9 +136,79 @@ Page({
       this.getAllPromotion(itemNo)
     }
   },
+  // 获取直配 限时促销信息 ,处理限购数量
+  getSupplierRSD(goods, cartsObj, type){
+    if (goods['itemNo'] in cartsObj && type == 'add') {   // 添加真实数量
+      goods['realQty'] = cartsObj[goods['itemNo']].realQty
+      return
+    } 
+    let supplierPromotionInfo = wx.getStorageSync('supplierPromotion')
+    supplierPromotionInfo[goods['itemNo']].startDate = supplierPromotionInfo[goods['itemNo']].startDate.slice(0, 10)
+    supplierPromotionInfo[goods['itemNo']].endDate = supplierPromotionInfo[goods['itemNo']].endDate.slice(0, 10)
+    goods['todayPromotion'] = supplierPromotionInfo[goods['itemNo']]
+  },
+  // 处理 直配促销页面渲染信息
+  getSupplierPromotion(goods){
+    let { branchNo, token, platform, username } = wx.getStorageSync('userObj')
+    API.Public.getSupplierAllPromotion({
+      data: { branchNo, token, platform, username, supplierNo: this.supcustNo },
+      success: res => {
+        let data = res.data
+        if (res.code == 0 && res.data) {
+          let promoList = this.data.promotionList
+          for (let key in data){
+            // 满减
+            if (key.includes('RMJ') && goods['promotionNos'].includes('RMJ')) {
+              let dataRMJ = data[key]
+              dataRMJ.map(item => {
+                let startIndex = goods['promotionNos'].indexOf('RMJ')
+                let numRMJ = goods['promotionNos'].slice(startIndex, startIndex + 19)
+                if (numRMJ == item.sheetNo) {
+                  if (promoList.length == 0){
+                    promoList.push({ name: '类别满减', msg: [item.memo] })
+                  } else {
+                    promoList[promoList.length - 1].msg.push(item.memo)
+                  }
+                }
+              })
+            }
+            // 满赠
+            if (key.includes('RBF') && goods['promotionNos'].includes('RBF')) {
+              let dataRBF = data[key]
+              dataRBF.map((item, index) => {
+                let startIndex = goods['promotionNos'].indexOf('RBF')
+                let numRBF = goods['promotionNos'].slice(startIndex, startIndex + 19)
+                if (numRBF == item.sheetNo) {
+                  if (promoList.length == 0) {
+                    promoList.push({ name: '类别满赠', msg: [item.memo] })
+                  } else if (promoList.length == 1 && promoList[promoList.length - 1].name != '类别满赠'){ 
+                    promoList.push({ name: '类别满赠', msg: [item.memo] })
+                  }else{
+                    promoList[promoList.length - 1].msg.push(item.memo)
+                  }
+                }
+              })
+            }
+          }
+          if ('todayPromotion' in goods) {
+            let startDate = goods.todayPromotion.startDate.slice(0, 10) 
+            let endDate = goods.todayPromotion.endDate.slice(0, 10)
+            promoList.push({ name: '限时促销', msg: ['活动时间: ' + startDate + ' 至 ' + endDate] })
+          }
+          this.setData({
+            promotionList: promoList
+          })
+        }
+      }
+    })
+    
+  },
+
   changeCarts(e) {
     const type = e.currentTarget.dataset.type
     const { goodsType,goods} = this.data
+    if ('todayPromotion' in goods) this.getSupplierRSD(goods, this.data.cartsObj, type) // 若存在直配限时促销,则更新真实商品数量
+    
     if (goods.specType != '2') {
       const config = {
         sourceType: String(goodsType),
@@ -166,6 +244,7 @@ Page({
       }
     })
   },
+  // 获取图文详情
   getGoodsImgDetail () {
     const imgUrl = getApp().data.imgUrl
     let request = deepCopy(this.requestObj)
@@ -174,14 +253,9 @@ Page({
       data: request,
       success: res => {
         const data = res.data
+        // 富文本数据处理
         if (res.code == 0 && data) {
-          const list = data.substring(data.indexOf("src='") + 5).split("src='")
-          let imgDetailsList = []
-          list.forEach(str => {
-            let url = str.substring(0, str.indexOf("'"))
-            if (url.indexOf('http') == -1) url = imgUrl + '/' + url
-            imgDetailsList.push(url)
-          })
+          let imgDetailsList = data.replace(/&lt;/g, '<').replace(/&gt;/g, '>')
           this.setData({ imgDetailsList })
         }
       }
@@ -218,6 +292,14 @@ Page({
               msg: [(tag.FS ? ('活动期间,首次下单且购买数量不超过 '+tag.sdMaxQty+' 享受优惠价格￥'+tag.sdPrice) : (tag.SD ? ('购买数量不超过 ' + tag.drMaxQty + ' 参与促销活动，特价￥' + tag.drPrice) : ('当前' + tag.zkType + '下单立即享受' + tag.discount + '优惠')))]
             })
           }
+          if (tag.SZInfo.length) {
+            let realArr = tag.SZInfo.sort((a, b) => a - b)
+            let msg = `首单满 ${realArr[0]} 送赠品` 
+            promotionList.push({
+              name: '首单满赠',
+              msg: [msg]
+            })
+          }
           if (tag.MS) {
             promotionList.push({
               name: '秒杀促销',
@@ -232,6 +314,13 @@ Page({
               msg.msg.push('满 ' + giftInfo.buyQty + ' 送' + giftInfo.giftQty + ' [' + giftInfo.giftName +']')
             }
             promotionList.push(msg)
+          }
+          if('MQ' in tag) {
+            const msg = `满 ${tag.MQ['buyQty']} 减 ${tag.MQ['subMoney']}`
+            promotionList.push({
+              name: '数量满减',
+              msg: [msg]
+            })
           }
           if (tag.MJ) {
             let msg = { name: (tag.MJ == 'fullReduction' ? '全场' : (tag.MJ == 'cls' ? '类别' : (tag.MJ == 'brand' ? '品牌' : '商品'))) + '满减',msg:[] }
@@ -273,7 +362,6 @@ Page({
           })
           this.setData({ promotionList })
         }
-
       }
     })
   },

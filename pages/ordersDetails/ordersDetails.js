@@ -96,6 +96,7 @@ Page({
           order.discountAmt = Number(order.discountAmt)
           order.discountsTotalAmt = (order.orgiSheetAmt - order.realPayAmt - (order.vouchersAmt || 0)).toFixed(2)
           order.stockoutAmt = (Number(order.realSheetAmt) - Number(order.doAmt)).toFixed(2)
+          order.vouchersAmt = (Number(order.vouchersAmt)).toFixed(2)
           /*
             1、如果payWay 字段 是  0，并且sheetSource 字段为： "yewuyuan"（平台业务员）或者是   "huozhu" （货主业务员）,就是“未付款"
             2、如果payWay 字段 是  1或者4 ，支付状态取acctFlag 付款状态 字段的值

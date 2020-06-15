@@ -1,7 +1,7 @@
 <view class="headImg"></view>
 <view class="title">优惠券任选</view>
 <view class="list">
-  <block wx:for="{{list}}" wx:key="{{index}}">
+  <block wx:for="{{list}}" wx:key="index">
 
     <view class="{{'li'+((item.isGet||item.couldReceive=='1')?' act':'')}}" data-index="{{index}}"  bindtap="getCoupons">
        <view class="cnt">
@@ -17,7 +17,7 @@
 
 <view class="bottom">
   <view class="topTitle">活动规则</view>
-  <view class="cnt" wx:for="{{cupInfo}}" wx:key="{{index}}">{{item}}</view>
+  <view class="cnt" wx:for="{{cupInfo}}" wx:key="index">{{item}}</view>
 </view>
 
 <view class="shareGoIndexPage" wx:if="{{isSharePage}}" bindtap="goPageIndex">

@@ -12,7 +12,6 @@ const mutations = {
   },
   [types.SAVE_CARTS](data) {
     setTabBarNum(data.num)
-    console.log(data)
     wx.setStorageSync('cartsObj', data)
     // wx.setStorage({ key: 'cartsObj', data: data })
   },

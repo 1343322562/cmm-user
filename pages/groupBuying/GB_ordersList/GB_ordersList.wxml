@@ -8,7 +8,7 @@
   
   <view class="orders-content">
     <view class="list-ul">
-      <block wx:for="{{orderList}}" wx:key="{{index}}">
+      <block wx:for="{{orderList}}" wx:key="index">
         <view class="li" data-no="{{item.sheetNo}}" bindtap="openDetails">
 
           <view class="top">

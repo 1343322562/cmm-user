@@ -2,6 +2,7 @@ import API from '../../api/index.js'
 import { goPage,toast,alert } from '../../tool/index.js'
 Page({
   data: {
+    partnerCode: '',
     userObj: {},
     salesmanObj:null,
     orderNum: {},
@@ -68,6 +69,9 @@ Page({
     }
     this.getOrderNum()
     this.getSalesman()
+    this.setData({
+      partnerCode: getApp().data.partnerCode
+    })
   },
   getOrderNum () {
     

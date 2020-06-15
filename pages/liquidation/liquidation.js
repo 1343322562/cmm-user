@@ -139,10 +139,8 @@ Page({
     }
   },
   changePayWay (e,auto) {
-    console.log(e,auto, this.data)
     let payWay = typeof e =='object'? e.currentTarget.dataset.type:e
     let { selectedCoupons, mjObj, selectedGiftNum, selectedGift, payWay: nowPayWay, storedValue, realPayAmt, isUseBlendWay } = this.data
-    console.log(mjObj)
     if (isUseBlendWay && payWay == '2' && auto!='auto')return
     if (payWay=='0') {
       let msg = []
@@ -167,7 +165,6 @@ Page({
           success: ret => {
             if (ret.confirm) {
               this.setData({ selectedCoupons, mjObj, selectedGiftNum, selectedGift })
-              console.log("payWay: ", payWay)
               this.switchPayWay(payWay)
             }
           }
@@ -207,14 +204,11 @@ Page({
   },
   // 直配 满减满赠 数据获取(itemList: 支付商品信息,supplier：入驻商编号)
   getSupplierMjMz(itemList, supplierNo) {
-    console.log("mjList:", itemList, "this.user:", this.userObj)
-
+    console.log("mjList:", itemList)
     const { branchNo, token, username, platform, dbBranchNo: dbranchNo } = this.userObj
-    console.log("dbBranchNo", dbranchNo)
     API.Liquidation.getSupplierSettlementPromotion({
       data:{ branchNo, token, username, platform, supplierNo, dbranchNo, data: itemList },
       success: res => {
-        console.log(res)
         if (res.code == 0 && res.data) {
           let obj = {}
           let giftList = []
@@ -229,7 +223,6 @@ Page({
             }
           })
           this.baseMj = mjList // 挂载满减信息对象
-          console.log(mjList)
           obj.giftList = giftList
           this.setData(obj)
         }
@@ -247,7 +240,7 @@ Page({
     API.Liquidation.getSettlementPromotion({
       data: { branchNo, token, platform, username, dbranchNo, data: itemList },
       success: res => {
-        console.log("getSettlementPromotion:", res)
+        console.log(res)
         if (res.code == 0 && res.data) {
           let obj = {}
           let giftList = []
@@ -259,7 +252,6 @@ Page({
             } else if (type == 'BG') {
               const BG = this.promotionObj.BG.giftGoods
               let goodsList = this.data.goodsList
-              console.log(goodsList)
               let BGnum = 0
               item.items.forEach(item2 => {
                 item2.items.forEach(no => {
@@ -361,10 +353,9 @@ Page({
     this.mjmzLoading = false
     this.setData({ selectedCoupons, mjObj, giftList, selectedGiftNum, selectedGift })
   },
+  // 优惠计算
   setOrderAction () {
-    console.log(this.mjmzLoading , this.exchangeLoading , this.couponsLoading)
     if (this.mjmzLoading) {
-      console.log(5645614614561)
       hideLoading()
       let { totalMoney, couponsList, payWay, selectedCoupons, selectedGiftNum, giftList} = this.data
       let realPayAmt = totalMoney
@@ -391,13 +382,11 @@ Page({
           mjObj.forEach(a => {
             discountsMoney += a.bonousAmt
           })
-          console.log(mjObj, discountsMoney)
         }
       }
       realPayAmt = Number((realPayAmt - discountsMoney).toFixed(2))
       // 满足赠品条件时，显示赠品 Dialog
       const showSelectMzgoods = (this.selectedGiftType != 'no' && giftList.length && !selectedGiftNum && (payWay != '0' ||this.codPayMzFlag == '1')) ? true : false
-      console.log(this.data.sourceType)
       
       if (giftList.length != 0) {
         let bestGift = this.chooseBestGift(giftList)  // 返回最优惠的赠品
@@ -665,16 +654,15 @@ Page({
     payWayList[0].show = czPay == '1' //&& obj.items[0].sourceType == '0'
     payWayList[1].show = wxPay == '1' //&& obj.items[0].sourceType == '0'
     payWayList[2].show = codPay == '1'
-    console.log("obj.items:",obj.items)
     let goodsList = obj.items[0].datas
     const sourceType = obj.items[0].sourceType
     this.supcustNo = obj.items[0].sourceNo
     let requestItemList = []
     let itemNos = []
     goodsList.forEach(goods => { /* itemType 0组合商品 1 普通商品 2 赠品  */
-      if (goods.promotionCollections.includes('RMJ')) goods['RMJ'] = '满减商品'
-      if (goods.promotionCollections.includes('RBF')) goods['RBF'] = '满赠商品'
-      if (goods.promotionCollections.includes('RSD')) goods['RSD'] = '限时抢购'
+      if ('promotionCollections' in goods && goods.promotionCollections.includes('RMJ')) goods['RMJ'] = '满减商品'
+      if ('promotionCollections' in goods && goods.promotionCollections.includes('RBF')) goods['RBF'] = '满赠商品'
+      if ('promotionCollections' in goods && goods.promotionCollections.includes('RSD')) goods['RSD'] = '限时抢购'
       const itemNo = goods.itemNo
       itemNos.push(itemNo)
       let data = { itemNo: itemNo, qty: String(goods.realQty), price: String(goods.price) }
@@ -685,7 +673,6 @@ Page({
       requestItemList.push(data)
     })
     this.itemNos = itemNos
-    console.log(goodsList)
 
     this.setData({
       wxPayRate,

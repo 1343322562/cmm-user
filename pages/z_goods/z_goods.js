@@ -30,7 +30,6 @@ Page({
       data: { branchNo, token, platform, username, condition:''},
       success: res => {
         const list = res.data
-        console.log(list)
         if (res.code == 0 && list) {
           let supplierObj = {}
           let supplierKey = this.data.supplierKey
@@ -44,7 +43,6 @@ Page({
               supplierKey[cls].push(no)
             }
           })
-          console.log(supplierKey)
           this.setData({ supplierObj})
           setTimeout(()=>{
             this.setData({ supplierKey })
@@ -60,7 +58,6 @@ Page({
   onLoad (opt) {
     // 此处缓存在 login 页面中设置
     const clsList = wx.getStorageSync('supcustAllCls')||[]
-    console.log(clsList)
     let supplierKey = {all:[]}
     clsList.forEach(item => {
       supplierKey[item.supcustCls] = []

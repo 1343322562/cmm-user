@@ -15,20 +15,24 @@
     </view>
     <view class='goodsMsg' wx:if="{{goods.attachInfo}}">{{goods.attachInfo}}</view>
     <view class='price'>
-      <text class='now'>￥{{goods.price}}{{goods.specType =='2'?'起':('/'+goods.unit)}}</text>
-      <text class='before' wx:if="{{goods.orgiPrice&&goods.price!=goods.orgiPrice&&goods.specType!='2'}}">￥{{goods.orgiPrice}}</text>
+    <!-- 统配 -->
+      <text class='now'  wx:if="{{!goods.todayPromotion}}">￥{{goods.price}}{{goods.specType =='2'?'起':('/'+goods.unit)}}</text>
+      <text class='before' wx:if="{{!goods.todayPromotion&&goods.orgiPrice&&goods.price!=goods.orgiPrice&&goods.specType!='2'}}">￥{{goods.orgiPrice}}</text>
       <text class="discountMoney"  wx:if="{{goods.discountMoney}}">优惠{{goods.discountMoney}}元</text>
+    <!-- 直配 -->
+    <text class='now' wx:if="{{goods.todayPromotion}}">￥{{goods.todayPromotion.price}}/{{goods.unit}}</text>
+    <text class='before' wx:if="{{goods.todayPromotion}}">￥{{goods.todayPromotion.oldPrice}}</text>
+    
     </view>
     <view class='recommend' wx:if="{{goods.salePrice&&referencePriceFlag=='1'&&goods.isBind != '1'}}">
       <view class='price2' >建议零售价<text> ￥{{goods.salePrice}}</text></view>
     </view>
     <view class='barcode' wx:if="{{goods.isBind != '1'}}">商品条码: {{goods.itemSubno||'----'}}</view>
   </view>
-
-  <view class='block' wx:if="{{promotionList.length||BFpromotionList.length}}">
+  <view class='block' wx:if="{{promotionList.length || BFpromotionList.length || goods.SZInfo.length != 0}}">
     <view class="contentTitle">促销信息</view>
-    <view class='promotionList'>
 
+    <view class='promotionList'>
       <view class='item' wx:for="{{promotionList}}" wx:key="index">
         <view class='type'>{{item.name}}</view>
         <view class='msg'>
@@ -91,7 +95,7 @@
       </view>
       <view class="item">
         <text class="name">限购</text>:
-        <text class="text">{{goods.maxSupplyQty||'不限购'}}</text>
+        <text class="text">{{goods.todayPromotion.limitedQty ||goods.maxSupplyQty||'不限购'}}</text>
       </view>
       <view class="item">
         <text class="name">品牌类型</text>:
@@ -99,7 +103,7 @@
       </view>
       <view class="item">
         <text class="name">库存</text>:
-        <text class="text">{{goods.stockQty>0?goods.stockQty:0}}</text>
+        <text class="text">{{goods.todayPromotion.totalQty || (goods.stockQty>0?goods.stockQty:0)}}</text>
       </view>
       <view class="item">
         <text class="name">保 质 期</text>:
@@ -123,11 +127,9 @@
       </view>
     </view>
   </view>
-  <view class='goodsImgDetails block' wx:if="{{imgDetailsList.length}}">
+  <view class='goodsImgDetails block' wx:if="{{imgDetailsList}}">
     <view class="contentTitle">图文详情</view>
-    <block wx:for="{{imgDetailsList}}" wx:key="index">
-      <image class="img" src="{{item}}" mode="widthFix" />
-    </block>
+    <rich-text nodes="{{imgDetailsList}}"></rich-text>
   </view>
 
   <view class='collectGoods' wx:if="{{goods.deliveryType!='1'&&goods.isBind != '1'}}" catchtap='changeCollectGoods'><image class="icon" src="../../images/collect_icon_{{collectObj[goods.itemNo]?'true':'false'}}.png" mode="widthFix" /></view>

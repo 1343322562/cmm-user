@@ -1,6 +1,6 @@
 
   <view class="dh_list">
-    <view class="li" wx:for="{{list}}" wx:key="{{index}}">
+    <view class="li" wx:for="{{list}}" wx:key="index">
       <view class="l" bindtap="openCarts">点击兑换</view>
       <view class="r">
         <view class="name">{{item.itemName}}</view>

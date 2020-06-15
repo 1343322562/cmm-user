@@ -37,7 +37,7 @@ const actions = {
     }
   },
   [types.GET_ALL_PROMOTION](param) {
-    const { branchNo, token, username, platform, dbBranchNo: dbranchNo } = wx.getStorageSync('userObj')
+    const { branchNo, token, username, platform, dbBranchNo: dbranchNo } = getApp().data['userObj'] || wx.getStorageSync('userObj')
     let obj = {
       // 买赠
       BG: { goods: {}, cls: {}, brand: {}, giftGoods: {} },
@@ -54,7 +54,11 @@ const actions = {
       // 秒杀
       MS: {},
       // 买满赠
-      BF: { all: [], goods: {}, cls: {}, brand: {} }
+      BF: { all: [], goods: {}, cls: {}, brand: {} },
+      // 首赠
+      SZ: { giftInfo:[], stockType: [], filterArr: [] },
+      // 数量满减
+      MQ: {}
     }
     const beforeTime = wx.getStorageSync('promotionTime')
     const beforeObj = wx.getStorageSync('allPromotion')
@@ -85,6 +89,27 @@ const actions = {
                     })
                   })
                 }
+              } else if (i == 'SZ') {
+                item.map((i, index)  => {
+                  if('reachVal' in i) obj.SZ['giftInfo'].push(i.reachVal)  // SZ 信息
+                  obj.SZ['stockType'].push(item[index].stockType)        // SZ 配送信息（全部: 0 常温: 1 低温:2）
+                  if (item.length && item[index].filterValue) {          // SZ 过滤信息
+                    let tempArr = item[index].filterValue.split(',')
+                    if (obj.SZ['filterArr'].length) {
+                      obj.SZ['filterArr'].push(tempArr)
+                      return
+                    }
+                    obj.SZ['filterArr'].push(tempArr)
+                  }
+                })
+              } else if (i == 'MQ' && Object.keys(item).length) {
+                for (let index in item ) {
+                  let MQKeys = item[index][0].itemNo
+                  obj.MQ[MQKeys] = {}
+                  obj.MQ[MQKeys].buyQty = item[index][0].buyQty
+                  obj.MQ[MQKeys].subMoney = item[index][0].subMoney
+                }
+                let itemNo = obj[i][item[0]]
               } else if (i == 'SD' || i == 'FS'|| i == 'MS') {
                 for (let z in item) {
                   const goods = item[z]
@@ -170,10 +195,8 @@ const actions = {
     }
   },
   // （直配）今日促销商品，达到最大值停止添加商品
-  maxLimitAdd(goods, type, cartsObjs) {  // goods：当前 ADD 的商品对象; type：当前增添的 type; 若有 cartObj ，则是在采页面增加\
-    console.log(cartsObjs)
+  maxLimitAdd(goods, type, cartsObjs) {  // goods：当前 ADD 的商品对象; type：当前增添的 type; 若有 cartsObj ，则是在采页面增加\
     if (cartsObjs == 0) { // 0: 在结算页添加商品 ； 1：在商品采购页添加商品
-      console.log("cartsObjs", 1)
       let currentRealQty = goods.realQty  // 当前商品真实数量
       let currentLimitedQty = goods.todayPromotion.limitedQty  // 当前商品今日促销的限购数量
       if (currentRealQty >= currentLimitedQty) {
@@ -181,12 +204,10 @@ const actions = {
         return 1 // 达到限购值
       }
       return 0 // 没达到限购值
-    } else { 
-      console.log("cartsObjs", 1)
+    } else {
       let currentRealQty = !!cartsObjs[goods.itemNo] && cartsObjs[goods.itemNo].realQty
       let currentLimitedQty = goods.todayPromotion.limitedQty
       if (!!cartsObjs[goods.itemNo] && currentRealQty >= currentLimitedQty) {
-        console.log(12154546)
         toast('已达限时促销最大限购数')
         return 1 // 达到限购值
       }
@@ -195,7 +216,6 @@ const actions = {
   },
   [types.CHANGE_CARTS](param, cartsObjs = 0) { // add delete minus； cartsObj 为促销信息，主要用来实现直配的限时促销，达到限购值，停止加购
   // 直配中商品数量若满足限时促销中的 限购值，则停止加购
-    console.log(param)
     if (
       param.config.sourceType == "1"     // 直配
       && ('todayPromotion' in param.goods || 'RSD' in param.goods)  // todayPromotion：限时促销(采购页);  'RSD'：采购页面
@@ -204,10 +224,7 @@ const actions = {
     ){
       return 
     }
-    console.log("当前商品对象",param)
     let cartsObj = commit[types.GET_CARTS]()
-    console.log("cartsObj", cartsObj, 'todayPromotion' in param.goods)
-
     if (cartsObj.keyArr.length>=300){
       toast('购物车已达到最大商品数量!')
       return
@@ -267,30 +284,25 @@ const actions = {
       cartsObj[itemNo] || cartsObj.keyArr.push(itemNo)
       cartsObj[itemNo] = item
     }
-    console.log(cartsObj)
     commit[types.SAVE_CARTS](cartsObj) // 缓存 cartsObj
     wx.setStorageSync('updateCarts', true)
     // wx.setStorage({key: 'updateCarts',data: true})
     return cartsObj
   },
   [types.GET_CHANGE_CARTS](param) {
-    console.log(param)
     const updateCarts = wx.getStorageSync('updateCarts')
-    const { branchNo, token, username, platform } = wx.getStorageSync('userObj')
+    const { branchNo, token, username, platform } = getApp().data['userObj'] || wx.getStorageSync('userObj')
     const cartsObj = commit[types.GET_CARTS]()
-    console.log('updateCarts', updateCarts, 'cartsObj', cartsObj)
     if (param.nowUpdate && updateCarts && cartsObj.num) param.success(cartsObj)
     let items = []
     cartsObj.keyArr.forEach(itemNo => items.push(cartsObj[itemNo]))
     const beforeTime = wx.getStorageSync('updateCartsTime')
     const newTime = +new Date()
     items = JSON.stringify(updateCarts?items:[])
-    console.log(items)
     if (!param.format||updateCarts || !beforeTime || (newTime - beforeTime) >= (1000 * 60 * 5)) {
       API.Carts.getShoppingCartInfo({
         data: { items, platform, token, username, branchNo },
         success: (res) => {
-          console.log(res)
           let newCartsObj = { num: 0, keyArr:[]}
           if (res.code == 0 && res.data) {
             res.data.forEach(config => {
@@ -311,11 +323,12 @@ const actions = {
                 newCartsObj.num += goods.realQty
               })
             })
-            console.log(newCartsObj)
             commit[types.SAVE_CARTS](newCartsObj)
             wx.setStorage({ key: 'updateCarts', data: false })
             wx.setStorage({ key: 'updateCartsTime', data: +new Date() })
           } else {
+            // 秒杀商品,会出现问题.原因是第二次添加商品时,没有缓存添加商品的购物车信息,在下面添加了.
+            commit[types.SAVE_CARTS](newCartsObj)
             newCartsObj = cartsObj
             if (res.code == 0) wx.setStorage({ key: 'updateCarts', data: true })
           }

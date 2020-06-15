@@ -143,7 +143,6 @@ Page({
         }
         if (res.code == 0 && res.data) {
           const list = res.data.itemData || []
-          
           list.forEach(goods => {
             const itemNo = goods.itemNo
             if (goods.itemBrandname && !brandObj[goods.itemBrandno] && !itemBrandnos) {
@@ -158,6 +157,26 @@ Page({
                 goods.orgiPrice = goods.price
                 goods.price
               }
+              tag['SZInfo'].map((SZItem, index) => {
+                if ('SZInfo' in tag && 'SZStockType' in tag) {
+                  // 按类促销（SZ）
+                  if ('SZFilterArr' in tag) {
+                    tag['SZFilterArr'][index].map(filterVal => {
+                      if (filterVal == goods['itemClsno'] || filterVal == goods['itemNo'] || goods['itemBrandname']) {
+                        if (tag['SZStockType'][index] == 0) { goods['SZInfo'] = tag['SZInfo'][index];  goods['SZStockType'] = tag['SZStockType'][index]; }
+                        if (tag['SZStockType'][index] == goods['stockType'] || (tag['SZStockType'][index] == '1' && goods['stockType'] == '0' )) { goods['SZInfo'] = tag['SZInfo'][index];  goods['SZStockType'] = tag['SZStockType'][index]}
+                      }
+                    })
+                    
+                  } else {
+                  // 全部促销 
+                    if (tag['SZStockType'][index] == 0) { goods['SZInfo'] = tag['SZInfo'][index];  goods['SZStockType'] = tag['SZStockType'][index]}
+                    if (tag['SZStockType'][index] == goods['stockType'] || (tag['SZStockType'][index] == '1' && goods['stockType'] == '0' )) { goods['SZInfo'] = tag['SZInfo'][index];  goods['SZStockType'] = tag['SZStockType'][index]}
+                    delete tag['SZInfo']; delete tag['SZStockType']
+                  }
+                }
+              })
+              delete tag['SZInfo']; delete tag['SZStockType']; delete tag['SZFilterArr']; // 删除多余 tag 属性
               goods = Object.assign(goods, tag)
             } else {
               (goods.stockQty > 0 || goods.deliveryType == '3' || goods.specType =='2') ? goodsList.push(itemNo) : fineGoodsList.push(itemNo)
@@ -171,7 +190,6 @@ Page({
             }
             goodsObj[itemNo] = goods
           })
-
         }
         let newArr = (promotionGoodsList.concat(goodsList)).concat(promotionFineGoodsList.concat(fineGoodsList))
         if (screenSelect!='0') {
