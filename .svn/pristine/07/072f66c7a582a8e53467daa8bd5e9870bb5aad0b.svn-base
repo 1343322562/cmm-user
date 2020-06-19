@@ -1,0 +1,33 @@
+Page{background-color: #fff;}
+.title{text-align: center;font-size: 40rpx;margin-bottom: 50rpx;}
+.form{height: 110rpx;display: flex;padding: 0 30rpx;border-bottom: 2rpx solid #f2f2f2;position: relative}
+.form>.name{flex-grow: 1;line-height: 110rpx;width: 0;}
+.form>.input{display: block;flex-grow:4;margin: 0 auto;height: 100%;font-size: 30rpx;text-align: right;width: 0}
+.form>.input .content{line-height: 110rpx;color: #777;}
+.form>.input .text{display: block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;width: 100%;line-height: 110rpx;}
+.form>.input .text.addr{width: 80%;}
+.submit{width: 85%;margin: 50rpx auto;text-align: center;color: #fff;line-height: 90rpx;font-size: 32rpx;background-color: #999}
+.submit.act{background-color:#d40000;}
+.location{position: absolute;top: 10rpx;right: 0;width: 130rpx;height: 90rpx;border-left: 2rpx solid #e4e4e4;text-align: center;}
+.location>.icon{width:60rpx;height: 60rpx;margin-top: 10rpx;}
+.checkbox{margin-left: 60rpx;}
+.agreement{color: red;}
+.bottom-copyright{margin-bottom: 40rpx;}
+
+/* 门头照 */
+.photo-main{
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 20rpx;
+}
+.photo-title{
+  font-size: 36rpx;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+.photo-img{
+  background-color: #F6F6F6;
+  width: auto;
+  height: 50vw;
+}

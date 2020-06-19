@@ -1,0 +1,8 @@
+.list{padding: 20rpx 0 80rpx 0;}
+.list>.li{background-color: #fff;position: relative;height: 80rpx;padding: 20rpx;}
+.list>.li .icon{width: 80rpx;height: 80rpx;border-radius: 100%;overflow: hidden;border: 1px solid #e4e4e4;position: absolute;top: 20rpx;left: 20rpx;}
+.list>.li .info{margin-left: 110rpx;}
+.list>.li .info>.user{color: #555;font-size: 32rpx;}
+.list>.li .info>.name{color: #777;font-size: 26rpx}
+.list>.li .right{position: absolute;top: 40rpx;right: 20rpx;color: #d40000}
+.button{text-align: center;line-height: 90rpx;background-color: #fff;border: 1px solid #e4e4e4;width: 90%;margin: 0 auto;color: #555;}

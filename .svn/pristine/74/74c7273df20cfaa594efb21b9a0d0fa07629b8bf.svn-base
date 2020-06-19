@@ -1,0 +1,4 @@
+.main{text-align:center;padding-top:160rpx;}
+.title{display:block;font-weight:bold;font-size:40rpx;margin:20rpx 0;}
+.cnt{color:#909090;font-size:28rpx;}.cnt>text{display:block}
+.btn{width:80%;color:#fff;background-color:#fa6418;margin:120rpx auto 0 auto;border-radius:20rpx;height:100rpx;line-height:100rpx;font-size:32rpx;}

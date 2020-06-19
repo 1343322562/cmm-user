@@ -1,0 +1,22 @@
+<view class="chauffeur">
+  <view class='name'>
+    <text>配送员：{{obj.realname}}</text>
+    <image class='icon' src="../../images/grade_star1.png" mode="widthFix" />
+    <text class='nowGrade'>{{obj.avgAcc}}</text>
+  </view>
+  <view class='supplier'>{{obj.branchName}}</view>
+  <view class='rating'>
+    <text>{{obj.gradeName}}</text>
+    <image class='icon' src="../../images/crown.png" mode="widthFix" />
+  </view>
+</view>
+<view class='starTitle'>配送评价</view>
+<view  class="starList">
+  <image wx:for="{{starList}}" catchtap='selected' data-index="{{index}}" wx:key="index" class='icon' src="../../images/grade_star{{(index+1)<=selectIndex?'1':''}}.png" mode="widthFix" />
+</view>
+<view class='typeList'>
+  <text class="text{{typeSelected[index]?' act':''}}" catchtap='typeSelect' data-index="{{index}}" wx:for="{{typeList}}" wx:key="index">{{item.template_describe}}</text>
+</view>
+<view class='title'>自定义评价</view>
+<textarea class='textarea' bindinput='getContent'></textarea>
+<view class='submit' catchtap='submitGrade'>提交评价</view>

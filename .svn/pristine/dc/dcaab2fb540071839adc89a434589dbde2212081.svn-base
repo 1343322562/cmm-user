@@ -1,0 +1,17 @@
+Page{background-color: #fff}
+.chauffeur{padding: 60rpx 40rpx 40rpx 40rpx;position: relative}
+.chauffeur>.supplier{color: #666}
+.chauffeur>.name{font-size: 32rpx;}
+.chauffeur>.name .icon{vertical-align: middle;width: 30rpx;height: 30rpx;margin: -8rpx 6rpx 0 20rpx;}
+.chauffeur>.name .nowGrade{color: red}
+.chauffeur>.rating{position: absolute;top: 68rpx;right: 40rpx;color: #777;}
+.chauffeur>.rating .icon{width: 38rpx;height: 38rpx;vertical-align: middle;margin-left: 10rpx;margin-top: -8rpx;}
+.starTitle{font-size: 35rpx;text-align: center;font-weight: bold;}
+.starList{text-align: center;padding: 40rpx 0;}
+.starList>.icon{width: 60rpx;height: 60rpx;margin: 0 20rpx;}
+.typeList{width: 80%;margin:  30rpx auto;}
+.typeList>.text{background-color: #f2f2f2;color: #777;padding: 15rpx 18rpx;margin:0 20rpx 20rpx 0;font-size: 24rpx;display: inline-block}
+.typeList>.text.act{background-color: #f49b1e;color: #fff;}
+.title{padding: 40rpx;}
+.textarea{background: #f2f2f2;display: block;margin: 0 auto;width: 80%;border-radius: 10rpx;height: 160rpx;}
+.submit{background-color: #dd4242;color: #fff;text-align: center;line-height: 80rpx;margin: 40rpx auto;width: 80%;}

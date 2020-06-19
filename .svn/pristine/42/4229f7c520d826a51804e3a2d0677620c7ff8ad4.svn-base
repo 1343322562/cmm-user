@@ -1,0 +1,94 @@
+<block wx:if="{{pageLoading}}">
+
+  <register formTitle="基本信息" 
+    inputTitle1="{{partnerCode=='1029'?'用户名称':'店铺名'}}" 
+    inputTitle2="{{partnerCode=='1029'?'联系人':'店主姓名'}}"
+  >
+    <input slot="top1" bindinput='getValue' data-type="branchName" class='input' maxlength='20' placeholder="请输入{{partnerCode=='1029'?'用户名称':'店铺名'}}" />
+    <input slot="buttom1" bindinput='getValue' data-type="bossName" class='input' maxlength='20' placeholder="请输入{{partnerCode=='1029'?'联系人':'店主姓名'}}" />
+  </register>
+
+
+  <register formTitle="位置信息" 
+    isShowInput1="{{partnerCode!='1035'}}" 
+    isShowInput3="true" 
+    inputTitle1="区域" 
+    inputTitle2="省市区" 
+    inputTitle3="详细地址"
+  >
+    <!-- 区域 -->
+    <picker slot="top1" bindchange="selectArea" class="input" range="{{areaList}}" range-key="branchClsname">
+      <view class='content' wx:if="{{!areaName}}">点击选择</view>
+      <text class='text' wx:else>{{areaName}}</text>
+    </picker>
+    <!-- 省市区 -->
+    <picker slot="buttom1" mode="region" bindchange="selectCity" value="{{selectedCity}}" class="input">
+      <text class='text' wx:if="{{selectedCity.length}}">{{selectedCity[0]}} {{selectedCity[1]}} {{selectedCity[2]}}</text>
+      <text class="content" wx:else>点击选择</text>
+    </picker>
+    <!-- 详细地址 -->
+    <input slot="foot1" bindinput='getValue' data-type="shopAddrass" value="{{ formatted_addresses }}" class='input addressInputPosition' maxlength='20' placeholder='请输入详细地址' />
+    <view slot="foot2" bindtap="chooseLocaltion" class="getTargetLocaltion">
+      <image mode="aspectFit" src="../../images/position.png"></image>
+    </view>
+  </register>
+
+  <register formTitle="营业时间" 
+    inputTitle1="营业开始" 
+    inputTitle2="营业结束"
+  >
+    <picker slot="top1" class="getTargetLocaltion timeVertical" data-id="1" mode="time" value="{{businessTime.openTime}}" start="00:00" end="23:59" bindchange="changeTime">
+      <view class="picker">
+        {{businessTime.openTime}}
+      </view>
+    </picker>
+    <picker slot="buttom1" class="getTargetLocaltion timeVertical" data-id="2" mode="time" value="{{businessTime.closeTime}}" bindchange="changeTime">
+      <view class="picker">
+        {{businessTime.closeTime}}
+      </view>
+    </picker>
+  </register>
+
+  <register formTitle="送货时间" 
+    inputTitle1="送货开始" 
+    inputTitle2="送货结束"
+  >
+    <picker slot="top1" class="getTargetLocaltion timeVertical" data-id="3" mode="time" value="{{deliveryTime.openTime}}" bindchange="changeTime">
+      <view class="picker">
+        {{deliveryTime.openTime}}
+      </view>
+    </picker>
+    <picker slot="buttom1" class="getTargetLocaltion timeVertical" data-id="4" mode="time" value="{{deliveryTime.closeTime}}" bindchange="changeTime">
+      <view class="picker">
+        {{deliveryTime.closeTime}}
+      </view>
+    </picker>
+  </register>
+
+
+  <!-- 门头照 -->
+  <view class="title">图片上传</view>
+
+  <block wx:if="{{onOffTakePhoto}}">
+    <view class="photo-main">
+      <view class="photo-title">上传营业执照</view>
+      <image class="photo-img" mode="aspectFit" src="{{saleImageURL}}" bindtap="onTakePhotoSaleImage" />
+    </view>
+
+    <view class="photo-main">
+      <view class="photo-title">拍摄门头照</view>
+      <image class="photo-img" mode="aspectFit" src="{{headerImageURL}}" bindtap="onTakePhotoHeaderImage" />
+    </view>
+  </block>
+
+  <view class="submit{{read?' act':''}}" catchtap="submit">注册</view>
+
+  <checkbox-group bindchange="isRead" class="bottom-copyright">
+    <label class="checkbox">
+      <checkbox value="read" />
+      <text>我已阅读并同意</text>
+    </label>
+    <text class='agreement' catchtap='lookAgreement'>《用户协议》</text>
+  </checkbox-group>
+
+</block>

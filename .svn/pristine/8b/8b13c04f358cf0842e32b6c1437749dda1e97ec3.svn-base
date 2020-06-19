@@ -1,0 +1,51 @@
+<view class="head">
+  <view class='img'><image src="{{config.goodsImgUrl}}" class="icon" /></view>
+  <view class='info'>
+    <view class='name'>{{config.supplierName}}</view>
+    <view class="startMoney">起订:<text>￥{{config.minDeliveryMomey}}</text></view>
+    <view class='manage'>简介:{{config.itemClsName}}</view>
+    <view class='phone'>商户电话:{{config.supplierTel}}</view>
+  </view>
+  <scroll-view class='clsList' scroll-x>
+    <view class="li{{nowSelectCls==''?' act':''}}" catchtap='changeTab' data-no="">全部</view>
+    <view class="li{{nowSelectCls==item.itemClsno?' act':''}}" wx:for="{{clsList}}" wx:key="index" catchtap='changeTab' data-no="{{item.itemClsno}}">{{item.itemClsname}}</view>
+  </scroll-view>
+</view>
+
+<view class='goodsList'>
+  <view class='li'  wx:for="{{goodsList}}" wx:for-item="itemNo" wx:key="index" data-no="{{itemNo}}" bindtap='goGoodsDetails'>
+    <view class='img'>
+      <image class='icon' src="{{goodsObj[itemNo].goodsImgUrl}}" />
+      <image wx:if="{{goodsObj[itemNo].isProhibit=='1'}}" class='noReturnAllowed'  src="../../images/noReturnAllowed.png" />
+    </view>
+    <view class='info'>
+      <view class='name'>{{goodsObj[itemNo].itemName}}</view>
+      <view class='size'>{{goodsObj[itemNo].itemSize}}</view>
+      <view class='price' wx:if="{{partnerCode!='1039'}}">
+        <text class='now'>￥{{goodsObj[itemNo].price}}/{{goodsObj[itemNo].unit}}</text>
+        <text class='before' wx:if="{{goodsObj[itemNo].orgiPrice&&goodsObj[itemNo].price!=goodsObj[itemNo].orgiPrice}}">￥{{goodsObj[itemNo].orgiPrice}}</text>
+      </view>
+    </view>
+    <view wx:if="{{!cartsObj[itemNo].realQty&&goodsObj[itemNo].minSupplyQty>1}}" class='minSupplyQty'>起订数量{{goodsObj[itemNo].minSupplyQty}}</view>
+    <view class='goCarts'>
+      <view class='btn'>
+        <block wx:if="{{cartsObj[itemNo].realQty}}">
+        <view class='minus item' catchtap='changeCarts' data-no="{{itemNo}}" data-type="minus"><image class='icon' src="../../images/goodsList_minus_carts.png" /></view>
+        <text class='num'>{{cartsObj[itemNo].realQty}}</text>
+        </block>
+        <view class='add item' catchtap='changeCarts' data-no="{{itemNo}}" data-type="add"><image class='icon' src="../../images/goodsList_add_carts{{goodsObj[itemNo].isStock?'':'Null'}}.png" /></view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class='goodsList_null' wx:if="{{goodsList.length===totalLength}}">
+   <image class='icon' src="../../images/goodsList_bottom_null.png" />
+  </view>
+<view class="pageData_null" wx:if="{{pageLoading && !goodsList.length}}">
+  <image mode="widthFix" src="../../images/pageData-null.png" />
+  <view class="page_text">没有商品数据~</view>
+</view>
+<view class='goCartsPage' catchtap='goCartsPage'>
+  <image class='icon' mode="widthFix" src="../../images/goods-goCarts.png"/>
+  <text>购物车</text>
+</view>

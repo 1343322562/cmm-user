@@ -1,0 +1,35 @@
+<view class='mask'  wx:if="{{show}}" >
+  <view class='box'>
+    <view class='title'>选择赠品组</view>
+    <view class='msg'>每个套餐组可各选一个套餐</view>
+    <scroll-view  scroll-y class='list'>
+
+      <view class='li' wx:for="{{list}}" wx:key="index">
+        <view class='title'>满赠套餐{{numStr[index]}}</view>
+        <view class='li2'>
+
+          <view class="item{{now[item.promotionSheetNo] === zIndex?' act':''}}" wx:for="{{item.items}}" wx:key="zIndex" wx:for-item="zItem" wx:for-index="zIndex" data-index="{{zIndex}}" data-no="{{item.promotionSheetNo}}" bindtap='selected' >
+           <view class='name'>满￥{{zItem.reachVal}}</view>
+           <view class='msg'>赠送赠品{{zItem.items.length}}样</view>
+           <image class="use" wx:if="{{now[item.promotionSheetNo] === zIndex}}" src="../../images/liquidation_page_icon_gift_hook.png" />
+           <view class="indicator" wx:if="{{now[item.promotionSheetNo] === zIndex}}"></view>
+          </view>
+
+        </view>
+        <view class='content' wx:if="{{now[item.promotionSheetNo]||now[item.promotionSheetNo]===0}}">
+          <view class='li2' wx:for="{{item.items[now[item.promotionSheetNo]].items}}" wx:key="zIndex" wx:for-item="zItem" wx:for-index="zIndex">
+            <view class='name'><image class="icon" src="../../images/liquidation_page_icon_gift.png" /><text>{{zItem.itemName}}</text></view>
+            <view class='num'>
+              <text class='l'>x{{zItem.qty}}</text>
+              <text class="r">No:{{zItem.itemNo}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+    <view class='btn'>
+      <view class='item' bindtap="cancel">不要赠品</view>
+      <view class='item' bindtap="confirm">确认</view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,184 @@
+import * as types from '../../store/types.js'
+import API from '../../api/index.js'
+import dispatch from '../../store/actions.js'
+import commit from '../../store/mutations.js'
+import { showLoading, hideLoading, goPage, toast, alert, getGoodsImgSize } from '../../tool/index.js'
+Page({
+  data: {
+    pageLoading: false,
+    pageObj: [],
+    pageObjKey: [],
+    indexImgUrl: '',
+    goodsUrl: '',
+    promotionObj: {},
+    categoryList: [],
+    nowSelectedCls:'',
+    partnerCode: getApp().data.partnerCode
+  },
+  changeCls (e) {
+    const no = e.currentTarget.dataset.no
+    this.setData({ nowSelectedCls: no})
+    // const query = wx.createSelectorQuery().select('#' + no).boundingClientRect(ret => {
+    //   console.log(ret)
+    //   wx.pageScrollTo({ scrollTop: ret.top, duration: 100 })
+    // }).exec()
+    // wx.createSelectorQuery().selectViewport('#' + no).scrollOffset(ret => {
+    //   console.log(ret)
+    // }).exec()
+
+  },
+  getPageData () {
+    showLoading('请稍后...')
+    const { branchNo, dbBranchNo: dbranchNo, token, platform, username } = this.userObj
+    API.Index.getIndexSetting({
+      data: { branchNo, token, username, platform, dbranchNo },
+      success: (res) => {
+        console.log(res)
+        if (res.code == 0) {
+          let list = res.data,
+          keyList = new Array(),
+            nowDate = new Date().getDate(),
+            categoryList = [];
+          for (let i = 0; i < list.length; i++) {
+            let type = list[i].templetType;
+            let moduleName = list[i].anchorText;
+            if (moduleName) {
+              const no = 'moduleId' + categoryList.length
+              categoryList.push({ name: moduleName, no: no })
+              list[i].moduleId = no
+            }
+            if (type == '5') {
+              let num = list[i].templetStyle == '1' ? 2 : 3,
+                nowArr = list[i].details,
+                newArr = new Array();
+              nowArr.map((a, b) => {
+                a.picUrl = this.goodsUrl + a.connectionNo + '/' + getGoodsImgSize(a.picUrl,1) + '?num=' + nowDate
+              })
+              while (nowArr.length > num) {
+                newArr.push(nowArr.splice(0, num));
+              }
+              nowArr.length && newArr.push(nowArr);
+              list[i].details = newArr;
+              keyList.push({ current: 0, num: list[i].details.length });
+            } else {
+              if (type == '6') {
+                list[i].details.forEach(a => {
+                  a.picUrl = getGoodsImgSize(a.picUrl, 1)
+                })
+              }
+              keyList.push(false);
+            }
+          }
+          this.setData({ pageObjKey: keyList, pageObj: list, random: +new Date(), categoryList});
+        } else {
+          alert(res.msg)
+        }
+      },
+      complete: () => {
+        hideLoading()
+        this.setData({ pageLoading: true})
+        wx.stopPullDownRefresh()
+      }
+    })
+  },
+  imgLoad (e) {
+    let i = e.target.dataset.i, pageObjKey = this.data.pageObjKey;
+    if (pageObjKey[i]) return;
+    let imgwidth = e.detail.width,
+      imgheight = e.detail.height,
+      ratio = imgwidth / imgheight,
+      viewHeight = 750 / ratio;
+    pageObjKey[i] = (viewHeight + 'rpx');
+    this.setData({ pageObjKey: pageObjKey })
+  },
+  goodsSwiperFun (e) {
+    let t = this, i = e.detail.current, obj = t.data.pageObjKey;
+    obj[e.target.dataset.index].current = i;
+    t.setData({ pageObjKey: obj })
+  },
+  signIn () {
+    const { branchNo, dbBranchNo: dbranchNo, token, platform, username } = this.userObj
+    API.Index.signIn({
+      data: { branchNo, token, username, platform, dbranchNo },
+      success: (res) => {
+        if (res.code == 0) {
+          alert(res.msg)
+        }
+      }
+    })
+  },
+  changeSeiper (e) {
+    let t = e.currentTarget.dataset.type, i = e.currentTarget.dataset.index, obj = this.data.pageObjKey;
+    if ((t == '0' && obj[i].current == 0) || (t == '1' && obj[i].current == (obj[i].num - 1))) return;
+    if (t == '0') {
+      obj[i].current--;
+    } else {
+      obj[i].current++;
+    }
+    this.setData({ pageObjKey: obj });
+  },
+  goPage (e) {
+    let { type, val, title,supplier} = e.currentTarget.dataset
+    val = val?val.replace(/\s+/g, ""):''
+    if (type == '1' && val == '1') { // 优惠券领取
+      goPage('getCoupons')
+    } else if (type == '1' && val == '2') { // 积分兑换
+      goPage('integralExchange')
+    } else if (type == '1' && val == '3') { // 首单特价
+      goPage('activity', { title, type, value: val })
+    } else if (type == '1' && val == '4') { // 海报
+      goPage('H5')
+    } else if (type == '2') { // 商品详情
+      val && goPage('goodsDetails', { itemNo: val })
+    } else if (type == '3') { // 活动页
+      goPage('activity', { title, type, value: val})
+    } else if (type == '8') { // 组合促销
+      goPage('activity', { title, type, value: val })
+    } else if (type == '9') { // 秒杀
+      goPage('seckill')
+    } else if (type == '10') { // 入驻商商品列表
+      goPage('activity', { title, type, value: val, supplierNo:supplier||'' })
+    } else if (type == '11') { // 跳转到入驻商
+      goPage('supplierGoods', { supplierNo: val })
+    } else if (type == '12' ) { // 海报
+      goPage('H5', { connectionNo: val})
+    }
+    
+  },
+  getCartsData () {
+    dispatch[types.GET_CHANGE_CARTS]({
+      format: true,
+      success: () => {}
+    })
+  },
+  getAllPromotion () {
+    dispatch[types.GET_ALL_PROMOTION]({
+      success: (res) => {
+        this.setData({ promotionObj: res })
+      }
+    })
+  },
+  onShow () {
+    const userObj = wx.getStorageSync('userObj')
+    if (userObj) this.userObj = userObj
+    this.getCartsData()
+    this.getAllPromotion()
+  },
+  onShareAppMessage() {
+    return {
+      path: '/pages/login/login'
+    }
+  },
+  onLoad (opt) {
+    this.userObj = wx.getStorageSync('userObj')
+    getApp().data.goodsUrl || (commit[types.SET_ALL_GOODS_IMG_URL]())
+    const { goodsUrl, indexImgUrl } = getApp().data
+    this.goodsUrl = goodsUrl
+    this.setData({ indexImgUrl, goodsUrl })
+    this.getPageData()
+    this.signIn()
+  },
+  onPullDownRefresh () {
+    this.getPageData()
+  }
+})

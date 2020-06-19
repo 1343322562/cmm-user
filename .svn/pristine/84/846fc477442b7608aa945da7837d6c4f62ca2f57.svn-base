@@ -1,0 +1,15 @@
+.page-ordersList{padding-top:100rpx;}
+.orders-title{background-color:#fff;overflow:hidden;position:fixed;left:0;top:0;width:100%;z-index:10}
+.orders-title>view{float:left;width:25%;text-align:center;height:80rpx;line-height:80rpx;position:relative;font-size:26rpx;border-bottom:1px solid #dcdcdc;}
+.orders-title>.act{color:#fa6418;}
+.orders-title>.act::before{content:"";position:absolute;width:80%;left:10%;bottom:0;height:6rpx;background-color:#fa6418;}
+.list-ul{font-size:24rpx;}
+.list-ul .t-gry{color:#666;}
+.list-ul .r{position:absolute;right:20rpx;}
+.list-ul>.li{background-color:#fff;margin-bottom:20rpx;}
+.list-ul .li>view{padding:10rpx 20rpx;}
+.top{position:relative;}
+.top>.r{color:red;top:30rpx;}
+.center{position:relative;background-color:#fff0e9;}
+.center>.r{top:20rpx;text-align:right;}
+.rod-btn{overflow:hidden;}.rod-btn>view{color:#fff;background-color:#fd3a3a;border-radius:4rpx;padding:16rpx 30rpx;float:right;}

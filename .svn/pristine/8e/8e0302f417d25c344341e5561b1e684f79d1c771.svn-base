@@ -1,0 +1,16 @@
+<view class='mask'  wx:if="{{show}}">
+  <view class='box'>
+    <view class='title'>选择优惠券</view>
+    <view class='msg'>点击优惠券就可使用</view>
+    <view class='noUse' bindtap='selected' data-index="no">不使用</view>
+    <scroll-view  scroll-y class='list'>
+      <view class='li' wx:for="{{list}}" wx:key="index" bindtap='selected' data-index="{{index}}">
+        <view class='tag'>券</view>
+        <view class='money'>￥{{item.subAmt}}</view>
+        <view class='info'>满￥{{item.limitAmt}}元可使用优惠券</view>
+        <view class='time'>使用时间: {{item.startDate}} 至 {{item.endDate}}</view>
+        <view class='nowUse' wx:if="{{now&&(now.couponsNo == item.couponsNo)}}">当前使用</view>
+      </view>
+    </scroll-view>
+  </view>
+</view>

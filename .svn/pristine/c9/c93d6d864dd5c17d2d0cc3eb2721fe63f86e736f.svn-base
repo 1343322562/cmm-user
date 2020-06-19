@@ -1,0 +1,51 @@
+<view class='goodsList'>
+  <view class='li'  wx:for="{{goodsList}}" wx:for-item="goods" wx:key="index" data-no="{{goods.itemNo}}" bindtap='goGoodsDetails'>
+    <view class='img'>
+      <image class='icon' src="{{goods.goodsImgUrl}}" />
+      <view class='c-stock_null' wx:if="{{!goods.isStock}}">补货中</view>
+      <image class='noReturnAllowed' wx:if="{{goods.enReturnGoods=='0'||goods.isProhibit=='1'}}" src="../../images/noReturnAllowed.png" />
+      <!-- <view class="yesReturn">{{(goods.enReturnGoods=='0'||goods.isProhibit=='1')?'不可退':'可退'}}</view> -->
+    </view>
+    <view class='info'>
+      <view class='name'>{{goods.itemName}}</view>
+      <view class='productionTime' wx:if="{{goods.productionTime}}">生产日期:{{goods.productionTime}}</view>
+      <view class='size'>{{goods.itemSize}}</view>
+      <view class='price' wx:if="{{partnerCode!='1039'}}">
+        <text class='now'>￥{{goods.price}}/{{goods.unit}}</text>
+        <text class='before' wx:if="{{goods.orgiPrice&&goods.price!=goods.orgiPrice}}">￥{{goods.orgiPrice}}</text>
+      </view>
+      <view class='tag'>
+        <text wx:if="{{goods.BF}}">买满赠</text> 
+        <text wx:if="{{goods.FS}}">首单特价</text>
+        <text wx:if="{{goods.BG}}">买赠</text>
+        <text wx:if="{{goods.SD}}">单日限购</text>
+        <text wx:if="{{goods.MJ}}">满减</text>
+        <text wx:if="{{goods.MS}}">秒杀</text>
+        <text wx:if="{{goods.ZK}}">{{goods.discount}}</text>
+        <text wx:if="{{goods.rewardPoint>0}}">积分</text>
+      </view>
+    </view>
+    <view wx:if="{{!cartsObj[goods.itemNo].realQty&&goods.minSupplyQty>1}}" class='minSupplyQty'>起订数量{{goods.minSupplyQty}}</view>
+    <view class='goCarts'>
+      <view wx:if="{{goods.stockType!='0'}}" class="type {{goods.stockType=='0'?'cw':'dw'}}">{{goods.stockType=='0'?'常温':'低温'}}</view>
+      <view class='btn'>
+        <block wx:if="{{cartsObj[goods.itemNo].realQty}}">
+        <view class='minus item' catchtap='changeCarts' data-index="{{index}}" data-type="minus"><image class='icon' src="../../images/goodsList_minus_carts.png" /></view>
+        <text class='num'>{{cartsObj[goods.itemNo].realQty}}</text>
+        </block>
+        <view class='add item' catchtap='changeCarts' data-index="{{index}}" data-type="add"><image class='icon' src="../../images/goodsList_add_carts{{goods.isStock?'':'Null'}}.png" /></view>
+      </view>
+    </view>
+  </view>
+
+  <view class='goodsList_null' wx:if="{{goodsList.length&&isLoading}}">
+   <image class='icon' src="../../images/goodsList_bottom_null.png" />
+  </view>
+
+</view>
+<view style="line-height:120rpx"></view>
+<view class='confirm' bindtap='backPage'>确定</view>
+<view class="pageData_null" wx:if="{{!goodsList.length && isLoading}}">
+  <image mode="widthFix" src="../../images/pageData-null.png" />
+  <view class="page_text">没有商品~</view>
+</view>

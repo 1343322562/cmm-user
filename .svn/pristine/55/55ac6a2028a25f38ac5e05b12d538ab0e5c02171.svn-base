@@ -1,0 +1,11 @@
+<view  class='list'>
+  <view  class='li' wx:for="{{userList}}" wx:key="index" data-index="{{index}}" catchtap='changeUserLogin'>
+    <image src="../../images/my_page_icon_user.png" class='icon' />
+    <view class='info'>
+      <view class='user'>{{item.user}}</view>
+      <view class='name'>{{item.name}}</view>
+    </view>
+    <view class='right' wx:if="{{nowUser==item.user}}">当前账户</view>
+  </view>
+</view>
+<view class='button' catchtap='quit'>退出当前账号</view>

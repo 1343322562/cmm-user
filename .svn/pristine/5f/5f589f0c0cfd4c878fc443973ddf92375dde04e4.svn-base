@@ -1,0 +1,33 @@
+/*商品列表*/
+Page{background-color: #fff}
+.goodsList{background-color: #fff;padding-left: 20rpx;}
+.goodsList>.li{padding: 20rpx 20rpx 20rpx 0;position: relative;border-bottom: 1px solid #e8e8e8;}
+.goodsList>.li .img{position: absolute;top: 20rpx;left:0;overflow: hidden;border-radius: 15rpx;width: 170rpx;height: 170rpx;background-color: #f2f2f2}
+.goodsList>.li .img>.goodsType{color: #fff;background-color: #dd4242;position: absolute;top: 0;left: 20%;width: 60%;text-align: center;line-height:40rpx;font-size: 23rpx;border-radius: 0 0 10rpx 10rpx;}
+.goodsList>.li .img>.icon{width: 100%;height: 100%}
+.goodsList>.li .img>.noReturnAllowed{width: 50rpx;height: 50rpx;position: absolute;bottom: 5rpx;right: 5rpx;}
+.goodsList>.li .info{min-height: 170rpx;margin-left: 190rpx}
+.goodsList>.li .info>.name{display: -webkit-box; word-break: break-all; -webkit-box-orient: vertical; -webkit-line-clamp:2; overflow: hidden; text-overflow:ellipsis;font-weight: 500;}
+.goodsList>.li .info>.size{font-size: 26rpx;color: #888}
+.goodsList>.li .info>.price{color: red;font-size: 32rpx}
+.goodsList>.li .info>.price .before{margin-left: 10rpx;text-decoration:line-through;font-size: .8em;color: #999}
+.goodsList>.li .info>.tag text{display: inline-block;line-height: 30rpx;font-size: 22rpx;border: 1px solid red;color: red;margin-left: 10rpx;border-radius: 10rpx;padding: 0 6rpx;}
+.goodsList>.li .info>.productionTime{font-size: 22rpx;color: #666;}
+.goodsList>.li .goCarts{position: absolute;right: 0;bottom: 20rpx;width: 190rpx}
+.goodsList>.li .goCarts>.type{text-align: right;font-size: 24rpx;padding-right: 18rpx}
+.goodsList>.li .goCarts>.type.cw{color: #ffb400}
+.goodsList>.li .goCarts>.type.dw{color:#04a1ff;}
+.goodsList>.li .goCarts>.btn{position: relative;height: 80rpx;text-align: center}
+.goodsList>.li .goCarts>.btn .item{height: 100%;width: 80rpx;position: absolute;top: 0}
+.goodsList>.li .goCarts>.btn .item>.icon{width: 50rpx;height: 50rpx;margin-top: 15rpx;background-color:#fff;}
+.goodsList>.li .goCarts>.btn .minus{left: 0}
+.goodsList>.li .goCarts>.btn .num{display: inline-block;line-height:80rpx}
+.goodsList>.li .goCarts>.btn .add{right: 0}
+
+.goodsList_null{padding:40rpx 0 80rpx 0;position: relative;text-align: center}
+.goodsList_null::after{content:"";position:absolute;right:0px;top:150rpx;width:96%;height:1px;background-color:#dcdcdc;z-index:1;}
+.goodsList_null::before{content:"这已经是我的底线了~";position:absolute;left:28%;top:130rpx;width:54%;height:40rpx;background:#fff;z-index:2;font-size:28rpx;color:#cfcfcf;text-align:center;}
+.goodsList_null>.icon{width: 80rpx;height: 80rpx}
+.confirm{position: fixed;left: 0;bottom: 0;width: 100%;line-height: 100rpx;background-color: #dd4242;color: #fff;text-align: center;font-size: 34rpx;z-index: 10}
+
+.minSupplyQty{position: absolute;bottom: 47rpx;right: 81rpx;font-size: 24rpx;background-color: #fff;color:#04a1ff }

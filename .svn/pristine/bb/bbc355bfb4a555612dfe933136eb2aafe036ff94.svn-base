@@ -1,0 +1,24 @@
+ <view class="search">
+  <view class="inpt">
+    <image class="left" src="../../images/search-icon.png" mode="widthFix"/>
+    <input class="center" bindconfirm='confirmSearch' bindblur='searchInputBlur'  confirm-type="search" placeholder="请输入搜索关键词" />
+  </view>
+</view> 
+<view class="searchGoodList">
+  <view class="li" wx:for="{{list}}" wx:key="index"  catchtap="goDetails"  data-no="{{item.sheetNo}}" >
+    <view class="no">
+      <text>订单号: {{item.sheetNo}}</text>
+      <view class="date">{{item.createDate}}</view>
+    </view>
+    <view class="info">
+      <text class="t-red">{{item.statusStr}}{{item.sheetSourceStr}}</text>
+      <view><text>共{{item.sheetQty}}件商品</text> 合计:<text class="t-red">￥{{item.realPayAmt}}</text></view>      
+    </view>
+  </view>
+  
+</view>
+<text  class="page-bottom-null" wx:if="{{list.length === maxLength&&list.length}}"></text>
+<view class="pageData_null" wx:if="{{pageLoading&&!list.length}}">
+  <image mode="widthFix" src="../../images/pageData-null.png"/>
+  <view class="page_text">暂时没有订单哦~~</view>
+</view>

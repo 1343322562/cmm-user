@@ -1,0 +1,6 @@
+Page{background-color: #fff;}
+.icon{width: 300rpx;display: block;margin: 0 auto;}
+.result{text-align: center;font-size: 35rpx;}
+.button{width: 80%;margin-top: 50rpx;}
+.info{text-align: center;font-size: 34rpx;padding-bottom: 40rpx;}
+.info .red{color: red;}

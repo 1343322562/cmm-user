@@ -1,0 +1,14 @@
+.head{background: #d40000;color: #f2f2f2;position: fixed;top: 0;left: 0;width: 100%;text-align:left;line-height: 80rpx;padding: 0 20rpx;}
+.head>.money{color: #fff;font-weight: bold;font-size: 70rpx;margin-top: 10rpx;}
+.head>.btn{display: flex;padding: 15rpx 0;background-color: rgba(255, 255, 255, .25)}
+.head>.btn .item{width: 0;flex-grow: 1;line-height: 55rpx;font-size: 26rpx;opacity: .6;color: #fff;position: relative}
+.head>.btn .item:first-child{border-right: 1px solid #f2f2f2;}
+.head>.btn .item>.icon{width: 40rpx;height: 40rpx;vertical-align: middle;margin-right: 10rpx;}
+.head>.btn .item.act{opacity: 1;}
+.head>.btn .item.act::before{content: "";position: absolute;left: 45%;bottom: 0rpx;width: 25%;background: #fff;height: 4rpx;border-radius: 10rpx;}
+.list{padding-top: 80rpx;background-color: #fff;}
+.list>.li{padding: 20rpx 20rpx 15rpx 20rpx;font-size: 22rpx;color: #777;border-bottom: 2rpx solid #e4e4e4;}
+.list>.li .item{overflow: hidden;line-height: 40rpx;}
+.list>.li .item>.right{float: right;}
+.list>.li .type{color: #000;font-size: 32rpx;}
+.list>.li .money{font-size: 34rpx;color: #000;}

@@ -1,0 +1,53 @@
+<view class="page-orderDetail" wx:if="{{orderObj.sheetNo}}">
+  <view class="od-top Dli">
+    <view class="od-no">
+      <view>订单号: {{orderObj.sheetNo}}</view>
+      <view class="r"><text>{{orderObj.createDate[0]}}</text><text>{{orderObj.createDate[1]}}</text></view>
+    </view>
+    <view class="od-actTime">
+      <text>活动时间 : {{orderObj.detailOutVos[0].startDate}} ~ {{orderObj.detailOutVos[0].endDate}}</text>
+      <!-- <text class="r t-red">{{orderObj.status=='1'?'团购成功':(orderObj.status=='2'?'团购失败':'')}}</text> -->
+    </view>
+  </view>
+  
+  <view class="od-center Dli">
+    <view class="od-title">付款信息</view>
+    <view>
+      <text>付款方式</text>
+      <text class="r">付款金额</text>
+    </view>
+    <view>
+      <text>微信支付</text>
+      <text class="r">￥{{orderObj.payAmt}}</text>
+    </view>
+  </view>
+
+  <view class="od-goodsInfo">
+    <view class="listTitel">商品信息</view>
+    <view class="title">
+      <text class="l1">品名/规格</text>
+      <text class="l2">要货数量</text>
+      <text class="l3">金额小计</text>
+    </view>
+    <view class="od-itemList">
+      <view class="li" wx:for="{{orderObj.detailOutVos}}" wx:key="{{index}}">
+        <view class="l1">
+          <view class="name"><text class="t-red">[{{orderObj.sendFlag=='0'?'未发放':'已发放'}}]</text>[{{item.teamType=='0'?'特价':'买赠'}}]{{item.itemName}}</view>
+          <view class="t-gry">{{item.itemNo}}</view>
+          <view class="t-red">￥{{orderObj.payAmt}}</view>
+          <view class="t-gry">{{item.itemSize}}</view>
+        </view>
+        <view class="l2">{{item.buyQty+item.sendQty}}</view>
+        <view class="l3">￥{{orderObj.payAmt}}</view>
+      </view>
+    </view>
+  </view>
+  
+  <view class="od-itemMoney Dli">
+    <text>商品总价</text>
+    <text class="r">￥{{orderObj.payAmt}}</text>
+  </view>
+</view>
+<view class="btn" wx:if="{{orderObj.status=='0'}}" bindtap="cancelOrder" >取消订单</view>
+
+<view class="btn" wx:if="{{orderObj.status=='0'}}" bindtap="goPay" >再次支付</view>

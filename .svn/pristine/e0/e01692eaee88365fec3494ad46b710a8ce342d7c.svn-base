@@ -1,0 +1,59 @@
+.tapList{margin-top: 20rpx;background-color: #fff;display: flex;padding: 10rpx 0;border-bottom: 1px solid #e4e4e4;}
+.tapList>.item{flex-grow: 1;width: 0;line-height: 80rpx;text-align: center;font-size: 36rpx}
+.tapList>.item.act{color:#d40000;}
+.tapList>.item:first-child{border-right: 1px solid #e4e4e4;}
+.box{background-color: #fff;padding: 0 20rpx;}
+.form{background-color: #fff;display:flex;position: relative}
+.form:first-child{border-bottom: 1px solid #e4e4e4;}
+.form>view{width: 0;}
+.form>.lookUserList{width: 100rpx;height: 100rpx;position: absolute;top: 0;right: -10rpx;text-align: center;}
+.form>.lookUserList .icon{width: 40rpx;height: 40rpx;margin-top: 35rpx;}
+.form>.lookUserList .icon.down{animation: downAnimation .4s ease; transform: rotate(0deg)}
+.form>.lookUserList .icon.up{animation: upAnimation .4s ease; transform: rotate(180deg)}
+.form>.name{line-height: 100rpx;flex-grow: 1;font-size: 36rpx;text-align:center}
+.form>.input{flex-grow: 3}
+.form>.input input{width: 80%;height: 100rpx;font-size: 34rpx}
+.form>.input.code input{width: 50%;float: left}
+@-webkit-keyframes upAnimation {
+  from{transform: rotate(0deg);}
+  to{transform: rotate(180deg);}
+}
+.msg-c{vertical-align: middle;}
+.fmsg{
+  font-size: 22rpx;
+  color: #999;
+  position: absolute;
+  bottom: 30rpx;
+  transform: translateX(110%);
+}
+@-webkit-keyframes downAnimation {
+  from{transform: rotate(180deg);}
+  to{transform: rotate(0deg);}
+}
+.getCode{margin-top:10rpx;width: 45%;text-align: center;font-size: #707070;line-height: 80rpx;border-left: 1px solid #e4e4e4;float: right}
+.login{background-color:#d40000;text-align:center;color:#fff;margin:40rpx auto;width:80%;border-radius:10rpx;line-height: 100rpx;font-size: 36rpx}
+.login.null{background-color: #999;}
+.action{overflow: hidden;color: #666;font-size: 30rpx;width:80%;margin: 0 auto }
+.action>.l{float: left}
+.action>.r{float:right}
+.hide{width: 0;height: 0;opacity: 0}
+.loadingImg{position:fixed;top:0;left:0;bottom:0;width:100%;height:100%;background:no-repeat center center;background-size:100%;background-color:#fff;z-index: 100;}
+.userList{position: absolute;top: 218rpx;left: 18rpx;background-color:#fff;border: 1px solid #e4e4e4;border-top: none;width: 95%;z-index: 10;overflow: hidden;border-bottom: none;height:0;}
+.userList.act{border-bottom: 1px solid #e4e4e4;}
+.userList>.li{position: relative;margin-left:180rpx;line-height: 80rpx;}
+.userList>.li .quit{position: absolute;top: 0;right: 0;height:80rpx;width: 80rpx;text-align: center;}
+.userList>.li .info{width: 82%;overflow: hidden;text-overflow: ellipsis;white-space: nowrap}
+.userList>.li .info>.acc{color: #444;font-size: 30rpx}
+.userList>.li .info>.name{margin-left: 20rpx;font-size: 24rpx;color: #777;}
+.userList>.li .quit>.icon{width: 30rpx;height: 30rpx;margin-top: 25rpx;}
+.userList>.li .img{width: 50rpx;height: 50rpx;border-radius: 100%;overflow: hidden;border: 1px solid #e4e4e4;position: absolute;top: 15rpx;left: -120rpx;}
+
+.setRequestUrl{position: absolute;bottom: 20rpx;right: 20rpx;width: 60rpx;height: 60rpx;}
+.seRequestBox{position: absolute;background-color: #fff;border: 1px solid #e4e4e4;border-radius: 10rpx;bottom:0;left: 0;width: 100%;overflow: hidden;}
+.seRequestBox>.btn{border-top: 1px solid #e8e8e8;display: flex;text-align: center;}
+.seRequestBox>.btn .item{display: block;width: 0;flex-grow: 1;line-height: 90rpx;}
+.seRequestBox>.input{width: 100%;height: 90rpx;}
+.seRequestBox>.btn .item:last-child{border-left: 1px solid #e8e8e8;}
+
+.agreement{text-align: center;padding-top: 20rpx;}
+.agreement .msg{color: #0850f3;vertical-align: middle;}

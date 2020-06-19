@@ -1,0 +1,19 @@
+
+  <view class="dh_list">
+    <view class="li" wx:for="{{list}}" wx:key="{{index}}">
+      <view class="l" bindtap="openCarts">点击兑换</view>
+      <view class="r">
+        <view class="name">{{item.itemName}}</view>
+        <view class="time">
+          <text>有效期：{{item.validStartDate}}至{{item.validEndDate}}</text>
+          <text>可兑换: {{item.couponsQnty}} 已兑换:{{item.alreadyQnty}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <text  class="page-bottom-null" wx:if="{{list.length}}"></text>
+
+<view class="pageData_null" wx:if="{{!list.length&&pageLoading}}">
+  <image mode="widthFix" src="../../images/pageData-null.png"/>
+  <view class="page_text">暂时还没有兑换券哦~~</view>
+</view>

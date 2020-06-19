@@ -1,0 +1,55 @@
+<block wx:if="{{pageLoading}}">
+
+<view  class='title'>注册信息填写</view>
+<view class='form'>
+  <view class='name'>{{partnerCode=='1029'?'用户名称':'店铺名'}}</view>
+  <input bindinput='getValue' data-type="branchName"  class='input'  maxlength='20' placeholder="请输入{{partnerCode=='1029'?'用户名称':'店铺名'}}" />
+</view>
+<view class='form'>
+  <view class='name'>{{partnerCode=='1029'?'联系人':'店主姓名'}}</view>
+  <input bindinput='getValue' data-type="bossName" class='input' maxlength='20' placeholder="请输入{{partnerCode=='1029'?'联系人':'店主姓名'}}" />
+</view>
+<view class='form' wx:if="{{partnerCode!='1035'}}">
+  <view class='name'>区域</view>
+  <picker bindchange="selectArea" class="input"  range="{{areaList}}" range-key="branchClsname">
+    <view class='content' wx:if="{{!areaName}}">点击选择</view>
+    <text class='text' wx:else >{{areaName}}</text>
+  </picker>
+</view>
+<view class='form'>
+  <view class='name'>省市区</view>
+  <picker mode="region" bindchange="selectCity" value="{{selectedCity}}" class="input">
+    <text class='text' wx:if="{{selectedCity.length}}" >{{selectedCity[0]}} {{selectedCity[1]}} {{selectedCity[2]}}</text>
+    <text class="content" wx:else >点击选择</text>
+	</picker>
+</view>
+<view class='form'>
+  <view class='name'>详细地址</view>
+  <input bindinput='getValue' data-type="shopAddrass" class='input' maxlength='20' placeholder='请输入详细地址' />
+</view>
+
+<!-- 门头照 -->
+<block wx:if="{{onOffTakePhoto}}">
+  <view class="photo-main">
+    <view class="photo-title">上传营业执照</view>
+    <image class="photo-img" mode="aspectFit" src="{{saleImageURL}}" bindtap="onTakePhotoSaleImage"/>
+  </view>
+
+  <view class="photo-main">
+    <view class="photo-title">拍摄门头照</view>
+    <image class="photo-img" mode="aspectFit"src="{{headerImageURL}}" bindtap="onTakePhotoHeaderImage"/>
+  </view>
+</block>
+
+<view class="submit{{read?' act':''}}" catchtap="submit">注册</view>
+
+<checkbox-group bindchange="isRead" class="bottom-copyright">
+  <label class="checkbox">
+    <checkbox value="read" />
+    <text>我已阅读并同意</text>
+  </label>
+  <text class='agreement'  catchtap='lookAgreement'>《用户协议》</text>
+</checkbox-group>
+
+</block>
+

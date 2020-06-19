@@ -1,0 +1,9 @@
+Page{background-color: #fff;}
+.item{padding: 20rpx 40rpx;}
+.item>.name{line-height: 80rpx;font-weight: 400;color: #000;}
+.item>.input{background-color: #f2f2f2;border-radius: 10rpx;height: 80rpx;padding: 0 10rpx;color: #333}
+.item>.typeList .text{color: #333;border: 1px solid #333; opacity: 0.4;display: inline-block;margin-right: 20rpx;padding: 20rpx 30rpx;font-size: 26rpx;}
+.item>.typeList .text.act{opacity: 1;position: relative}
+.item>.typeList .text.act::after{content:"";position: absolute;right: 0;bottom: 0;width: 0;height: 0;border-width: 20rpx;border-color: transparent;border-style: solid;border-right-color: #333;border-bottom-color: #333;z-index: 1}
+.item>.typeList .text.act::before{content: "";position: absolute;bottom: 4rpx;right: 6rpx;width: 8rpx;height: 18rpx;border: 4rpx solid #fff; border-left: none;border-top: none;z-index: 2;border-radius: 5rpx;transform: rotate(20deg)}
+.save{width: 90%;text-align: center;line-height: 80rpx;color: #fff;background-color: #d40000;border-radius: 10rpx;margin: 40rpx auto;}

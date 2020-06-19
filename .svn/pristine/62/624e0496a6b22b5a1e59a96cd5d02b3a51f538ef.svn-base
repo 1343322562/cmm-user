@@ -1,0 +1,12 @@
+<block wx:if="{{pageLoading}}">
+  <block wx:for="{{cartsList}}" wx:key="index">
+    <carts-item  isReplenish="{{replenish[item]}}" type="{{cartsObj[item].cartsType}}" binddeleteCarts="deleteCarts" goods="{{cartsObj[item]}}"  bindrefreshCarts="refreshCarts" />
+  </block>
+  <view class="cartsNull" wx:if="{{!cartsList.length}}">
+    <image mode="widthFix" src="../../images/carts-null.png"/>
+    <view class="title">购物车竟然是空的</view>
+    <view class="cnt">“ 再忙也要记得买点东西犒劳自己~ ”</view>
+    <view class="btn" bindtap="goAllGoodsPage">去逛逛</view>
+  </view>
+  <recommend-goods bindgetCartsData="getCartsData" />
+</block>

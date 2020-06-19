@@ -1,0 +1,8 @@
+<block wx:if="{{payType}}">
+  <image class="bgImg" mode="widthFix" src="../../images/pay_{{payType}}_icon.png"/>
+  <view class="payOkText">{{payType=='ok'?'下单成功':'支付失败'}}</view>
+  <view class="goIndex" >
+    <text bindtap="goIndex" >返回首页</text>
+    <text bindtap="goDetails" wx:if="{{payType=='fail'}}">去支付</text>
+  </view>
+</block>

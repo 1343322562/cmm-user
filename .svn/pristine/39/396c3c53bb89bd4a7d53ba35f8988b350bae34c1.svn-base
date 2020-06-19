@@ -1,0 +1,8 @@
+<view  class='title'>手机号码验证码</view>
+<view class='form'><input bindinput='getValue' data-type="phone"  class='input' type='number' maxlength='11' placeholder='请输入您的手机号' /></view>
+<view class='form'>
+  <input bindinput='getValue' data-type="code" class='input' type='number' maxlength='10' placeholder='输入验证码' />
+  <view class='getCode' catchtap='getCode'>{{count?(count+"s"):"获取验证码"}}</view>
+</view>
+<view class='submit' catchtap='nextStep'>下一步</view>
+

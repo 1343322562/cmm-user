@@ -1,0 +1,27 @@
+<view class='mask'  wx:if="{{show}}" >
+  <view class='box'>
+    <view class='title'>选择兑换券</view>
+    <view class='msg'>选择兑换商品数量</view>
+    <scroll-view  scroll-y class='list'>
+      <view class='li' wx:for="{{list}}" wx:key="index">
+        <view class='info'>
+          <view class='name'>{{item.itemName}}</view>
+          <view class='size'>规格: {{item.itemSize}}</view>
+          <view class='useNum'>可兑换: {{item.couponsQnty}} 已兑换:{{item.alreadyQnty}}</view>
+          <view class='time'>有效期：{{item.validStartDate}} 至 {{item.validEndDate}}</view>
+        </view>
+        
+        <view class='goCarts' wx:if="{{selectObj[item.itemNo]}}">
+          <view class='minus item' catchtap='changeNum'  data-type="minus" data-info="{{index+','+item.itemNo}}"><image class='icon' src="../../images/goodsList_minus_carts.png" /></view>
+          <text class='num'>{{selectObj[item.itemNo].num}}</text>
+          <view class='add item' catchtap='changeNum' data-type="add" data-info="{{index+','+item.itemNo}}"><image class='icon' src="../../images/goodsList_add_carts.png" /></view>
+        </view>
+        <view class='use' wx:else catchtap='changeNum' data-type="add" data-info="{{index+','+item.itemNo}}" >兑换</view>
+      </view>
+    </scroll-view>
+    <view class='btn'>
+      <view class='item' bindtap="cancel">不使用</view>
+      <view class='item' bindtap="confirm">确定</view>
+    </view>
+  </view>
+</view>

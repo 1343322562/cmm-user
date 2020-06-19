@@ -1,0 +1,68 @@
+.pageBox{display: none;padding-bottom: 110rpx}
+.pageBox.show{display: block}
+.bottomBtn{position: fixed;width: 100%;left: 0;bottom: 0;background-color: #fff;overflow: hidden;border-top: 1px solid #e4e4e4;z-index: 101}
+/* .bottomBtn>.goCarts{position: absolute;right: 55rpx;bottom: 0rpx;width: 300rpx;height: 100rpx;text-align: center} */
+.bottomBtn>.goCarts{position: absolute;right: 20rpx;bottom: 0rpx;width: 360rpx;height: 100rpx;text-align: center}
+.bottomBtn>.goCarts .item{height: 100%;width: 120rpx;position: absolute;top: 0}
+.bottomBtn>.goCarts .item>.icon{width: 50rpx;height: 50rpx;margin-top: 25rpx;background-color:#fff;}
+.bottomBtn>.goCarts .minus{left: 0}
+/* .bottomBtn>.goCarts .num{display: inline-block;line-height:100rpx} */
+.bottomBtn>.goCarts .num{height:65rpx;width: 40%;display: block;margin: 20rpx auto 0 auto;border-bottom: 1px solid red}
+.bottomBtn>.goCarts .add{right: 0}
+.bottomBtn>.page{float: left;width: 160rpx;height: 100rpx;text-align: center;border-right: 1px solid #e4e4e4;}
+.bottomBtn>.page .icon{width: 40rpx;height: 40rpx;margin-top: 10rpx}
+.bottomBtn>.page .text{display: block;font-size: 24rpx;color: #666;}
+
+.imgList{background-color: #fff;height:750rpx;overflow: hidden;text-align: center}
+.imgList .icon{width:100%;height:100%;}
+.block{background-color: #fff;padding: 0 20rpx;margin-bottom: 15rpx;position: relative}
+.contentTitle{height:100rpx;line-height:100rpx;border-bottom:1px solid #e8e8e8;position:relative}
+.contentTitle::before{content:"";position:absolute;left:-20rpx;top:20%;width:3px;height:60%;background-color:#d40000}
+.goodsSize{overflow:hidden;font-size: 26rpx;padding: 20rpx 0;color:#666;}
+.goodsSize>.item{width: 50%;float: left;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;line-height: 50rpx;}
+.goodsSize>.item .name{display: inline-block;}
+.goodsSize>.item .text{color: #000;}
+.goodsName{font-size: 33rpx;font-weight: 550;border-top: 1px solid #e4e4e4;padding: 15rpx 0;color: #444}
+.goodsName>.goodsType{margin-right: 20rpx;display:inline-block;color: #fff;padding: 0 10rpx;background-color:#d40000;font-size: 24rpx;line-height: 40rpx;}
+.goodsMsg{padding-bottom: 20rpx;}
+.price{color: red;font-size: 45rpx;padding-bottom: 10rpx}
+.price>.before{color: #999;text-decoration: line-through;font-size: .7em;margin-left: 10rpx}
+.price>.discountMoney{display: inline-block;border: 1px solid red;border-radius: 10rpx;padding:5rpx 10rpx;color: red;font-size: 24rpx;margin-left: 20rpx;}
+.recommend{overflow: hidden;padding: 20rpx 0 20rpx 0;font-size: 28rpx;color: #666;}
+.barcode{position: absolute;right: 20rpx;bottom: 20rpx;font-size: 24rpx;color: #666;}
+.recommend>.price2{float: left}
+.recommend>.price2 text{color: #000;}
+.promotionList{padding: 6rpx 0;}
+.promotionList>.item{overflow: hidden;padding: 16rpx 0;}
+.promotionList>.item .type{line-height: 30rpx;font-size: 22rpx;border: 1px solid red;color: red;margin-left: 10rpx;border-radius: 10rpx;padding: 0 6rpx;float: left}
+.promotionList>.item .msg{float: left;width: 75%;margin-left: 10rpx;font-size: 26rpx;color: #383838;}
+.promotionList>.item .msg>.li{position: relative;}
+.promotionList .lookDetails{position: absolute;top: 0;right: -70rpx ;display: block;width: 60rpx;line-height: 40rpx;text-align: center;font-size:54rpx;font-family:'Gill Sans'}
+
+.goodsList>.li{padding: 20rpx 20rpx 20rpx 0;position: relative;border-bottom: 1px solid #e8e8e8;}
+.goodsList>.li .img{position: absolute;top: 20rpx;left:0;overflow: hidden;border-radius: 15rpx;width: 170rpx;height: 170rpx;background-color: #f2f2f2}
+.goodsList>.li .img>.icon{width: 100%;height: 100%}
+.goodsList>.li .info{min-height: 170rpx;margin-left: 190rpx}
+.goodsList>.li .info>.name{display: -webkit-box; word-break: break-all; -webkit-box-orient: vertical; -webkit-line-clamp:2; overflow: hidden; text-overflow:ellipsis;font-weight: 500;}
+.goodsList>.li .info>.size{font-size: 26rpx;color: #888}
+.goodsList>.li .info>.price{color: red;font-size: 32rpx}
+.goodsList>.li .info>.price .before{margin-left: 10rpx;text-decoration:line-through;font-size: .8em;color: #999}
+.goodsList>.li .num{position: absolute;bottom: 60rpx;right: 0;width: 150rpx;color: #666;font-size: 32rpx}
+.goodsList>.li .num>text{color: #000;padding-left: 10rpx}
+.goodsImgDetails{overflow: hidden}
+.goodsImgDetails .img{float: left;width: 100%;}
+.collectGoods{border-radius: 100%;background-color: rgba(0,0,0,.5);text-align: center;height: 60rpx;width: 60rpx;position: absolute;top:20rpx;right: 20rpx;z-index: 50}
+.collectGoods>.icon{width: 35rpx;height: 35rpx;margin-top: 12rpx;}
+.noReturnAllowed{position: absolute;top: 20rpx;left: 20rpx;width: 80rpx;height: 80rpx;z-index: 50}
+.giftContent{background-color: #fff;position: fixed;left: 0;width: 100%;transition: bottom .2s ease-in-out;}
+.giftContent>.title{padding: 0 20rpx;line-height: 90rpx;font-size: 32rpx;}
+.giftContent>.hideMask{width: 50rpx;height: 50rpx;position: absolute;top: 22rpx;right: 26rpx;}
+.giftContent>.giftList{border-top: 1px solid #e8e8e8;height: 600rpx;}
+.giftContent>.giftList .li{border-bottom: 1px solid #e8e8e8;position: relative;padding: 20rpx 0;margin:  0 20rpx;color: #666}
+.giftContent>.giftList .name{color: #444;font-size: 26rpx;width: 78%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis}
+.giftContent>.giftList .num{padding-left: 45rpx;}
+.giftContent>.giftList .icon{width: 38rpx;height: 38rpx;vertical-align: middle;margin-right: 10rpx;}
+.giftContent>.giftList .right{position: absolute;top: 20rpx;right: 20rpx;text-align: right;font-size: 25rpx;}
+.giftContent>.giftList .unit{margin-bottom: 10rpx;}
+
+.yesRetrns{background: red;color: #fff;display: inline-block;padding: 0 10rpx;border-radius: 10rpx;font-size: 24rpx;}

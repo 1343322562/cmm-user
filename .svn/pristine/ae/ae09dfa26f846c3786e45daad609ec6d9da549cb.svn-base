@@ -1,0 +1,31 @@
+.page-detail{font-size:28rpx;background-color:#fff;padding-bottom:120rpx;}
+.page-detail>view{padding:0 20rpx;}
+.topImg{width:100%;}
+.det-name{height:70rpx;line-height:70rpx;}
+.det-price>.s{color:#ff3a3a;font-size:40rpx;font-weight:bold;margin-right:20rpx;}.det-price>.y{color:#a0a0a0;text-decoration:line-through;}
+.page-detail>.det-goodsSize{border-top:1px solid #d1d1d1;border-bottom:1px solid #d1d1d1;padding:20rpx;position: relative;}
+.det-goodsSize>view{overflow:hidden;}.det-goodsSize>view view{float:left;width:50%}.det-goodsSize>view text{color:#666;}
+.page-detail>.det-time{overflow:hidden;padding:20rpx;}.det-time>text:last-child{float:right;}.det-time text,.det-bottomBtn text,.det-addBtn>view text{color:#ec283a;}
+.det-msg{height:80rpx;line-height:80rpx;text-align:center;background-color:#a0a0a0;color:#fff;position:relative;}
+.det-time>view:first-child{float:left}.det-time>view:last-child{float:right}
+.det-time>view:first-child text{color:#fff;background-color:#000;width:50rpx;display:inline-block;text-align:center;border-radius:6rpx;margin:0 4rpx;}
+.det-msg:before{content:"";position:absolute;left:50%;margin-left:-6rpx;top:-10rpx;width:0;height:0;border-bottom:12rpx solid #a0a0a0;border-left:12rpx solid transparent;border-right:12rpx solid transparent;}
+.page-detail>.det-addBtn{overflow:hidden;height:60rpx;line-height:60rpx;margin:40rpx 0;}
+.det-addBtn>view:first-child{float:left}
+.det-addBtn>.det-btn{float:right; overflow:hidden;width:200rpx;height:60rpx;text-align:center;position:relative}
+.det-btn>text{height:60rpx;width:60rpx;background:url('http://zksrimg.oss-cn-beijing.aliyuncs.com/images/wxmini/group-addAndMinus.png')no-repeat;background-size:100%;position:absolute;top:0}
+.det-btn>text:first-child{left:0}.det-btn>text:last-child{right:0;background-position-y:bottom;}
+
+.page-detail>.det-mzList{padding:0;}
+.det-mzList>.title{padding:20rpx 0 20rpx 20rpx;}
+.det-mzList>.list{overflow:hidden;}
+
+.det-mzList>.list .li{width:30%;text-align:center;border:1px dashed #ec283a;border-radius:10rpx;font-size:24rpx;padding:4rpx 0;float:left;margin-left:2%;margin-bottom:20rpx;}
+.det-mzList>.list .act{color:#fff;background-color:#ec283a;}
+.det-mzList .price{font-size:1.5em;font-weight:bold;}
+
+.det-bottomBtn{position:fixed;bottom:0;left:0;height:100rpx;background-color:#fff;line-height:100rpx;width:100%;border-top:1px solid #d1d1d1;}
+.det-bottomBtn>view:first-child{margin-left:20rpx;float:left;}
+.det-bottomBtn>view:last-child{float:right;height:100%;text-align:center;width:200rpx;color:#fff;background-color:#a0a0a0;}
+.det-bottomBtn>view.act{background-color:#ec283a;}
+.sellNum{position: absolute;top: 50%;right: 40rpx;margin-top:-15rpx}

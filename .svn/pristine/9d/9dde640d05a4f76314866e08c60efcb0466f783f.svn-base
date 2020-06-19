@@ -1,0 +1,13 @@
+.box{padding-top: 40rpx;}
+.title{text-align: center;color: #d40000;font-size: 35rpx;position:relative;margin-bottom: 20rpx;}
+.title::after,.title::before{content: "";position: absolute;width: 100rpx;height:3rpx;background-color: #d40000;top: 24rpx;border-radius: 5rpx;}
+.title::after{right: 75%;}
+.title::before{left: 75%;}
+.title>.icon{width: 45rpx;height: 45rpx;margin-right: 15rpx;vertical-align: middle;}
+.list{display: flex;flex-wrap: wrap;padding-top: 30rpx}
+.list>.li{background: #fff;width: 330rpx;border-radius: 20rpx;overflow: hidden;margin-left: 30rpx; margin-bottom: 30rpx;position: relative;height: 360rpx;}
+.list .img{width: 100%;height: 200rpx;margin-bottom: 5rpx;}
+.list .name{display: -webkit-box; word-break: break-all; -webkit-box-orient: vertical; -webkit-line-clamp:2; overflow: hidden; text-overflow:ellipsis;padding: 0 20rpx;font-size: 28rpx}
+.list .price{color: #d40000;position: absolute;left: 20rpx;bottom: 20rpx;font-size: 30rpx}
+.list .carts{position: absolute;bottom: 20rpx;right: 25rpx;overflow: hidden;border-radius: 100%;width: 50rpx;height: 50rpx;background-color: #d40000;text-align: center;}
+.list .icon{width: 35rpx;height: 35rpx;margin-top: 10rpx;}

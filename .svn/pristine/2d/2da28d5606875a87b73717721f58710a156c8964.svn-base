@@ -1,0 +1,19 @@
+Page{background-color: #f2f2f2;font-size:28rpx;}
+.mask{position:fixed;top:0;left:0;width:100%;bottom:0;background-color:rgba(0,0,0,.4);z-index:100}
+/*数据为空*/
+.pageData_null{text-align:center;padding-top:40%;width:100%}
+.pageData_null>image{width:236rpx;height:160rpx;}
+.pageData_null>.page_text{color:#999;margin-top:20rpx;}
+/*列表到底部 1*/
+.goodsList_null{padding:40rpx 0 80rpx 0;position: relative;text-align: center}
+.goodsList_null::after{content:"";position:absolute;right:0px;top:150rpx;width:96%;height:1px;background-color:#dcdcdc;z-index:1;}
+.goodsList_null::before{content:"这已经是我的底线了~";position:absolute;left:28%;top:130rpx;width:54%;height:40rpx;background:#fff;z-index:2;font-size:28rpx;color:#cfcfcf;text-align:center;}
+.goodsList_null>.icon{width: 80rpx;height: 80rpx}
+/*列表到底部 2*/
+.page-bottom-null{display:block;width:80%;margin:40rpx auto 0 auto;position:relative;border-top:1px solid #e0e0e0;padding-top:40rpx;font-size: 28rpx;}
+.page-bottom-null::before{content:"已经到底了~";position:absolute;background-color:#f2f2f2;width:180rpx;text-align:center;top:-15rpx;left:50%;margin-left:-90rpx;height:30rpx;line-height:30rpx;color:#999}
+.c-stock_null{position: absolute;top: 0;left: 0;display: flex;justify-content: center;align-items: center;text-align: center;background-color: rgba(0,0,0,.6);color: #fff;font-size: 35rpx;z-index: 10;width: 100%;height: 100%;}
+/*商品不可退标签*/
+.noReturnAllowed{width: 50rpx;height: 50rpx;position: absolute;bottom: 5rpx;right: 5rpx;}
+/*商品可退*/
+.yesReturn{position: absolute;top: 10rpx;right: 10rpx;color: #fff;font-size: 24rpx;background-color: red;padding: 0 10rpx;border-radius: 10rpx;}

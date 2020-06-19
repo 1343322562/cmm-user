@@ -1,0 +1,39 @@
+<view class="orders-title">
+    <view data-type="" bindtap="selectStatus" class="{{!status?'act':''}}">全部</view>
+    <view data-type="0" bindtap="selectStatus" class="{{status=='0'?'act':''}}">待付款</view>
+    <view data-type="1" bindtap="selectStatus" class="{{status=='1'?'act':''}}">团购成功</view>
+    <view data-type="2" bindtap="selectStatus" class="{{status=='2'?'act':''}}">团购失败</view>
+  </view>
+<view class="page-ordersList">
+  
+  <view class="orders-content">
+    <view class="list-ul">
+      <block wx:for="{{orderList}}" wx:key="{{index}}">
+        <view class="li" data-no="{{item.sheetNo}}" bindtap="openDetails">
+
+          <view class="top">
+            <view>订单号: {{item.sheetNo}}</view>
+            <view class="t-gry">{{item.createDate}}</view>
+            <view class="r">{{item.status=='0'?'未付款':(item.status=='1'?'团购成功':(item.status=='2'?'团购失败':'订单状态错误'))}}</view>
+          </view>
+          <view class="center" wx:for="{{item.detailOutVos}}" wx:for-item="zItem" wx:key="{{zItem.itemNo}}">
+            <view>[{{zItem.teamType=='0'?'特价':'买赠'}}]{{zItem.itemName}}</view>
+            <view class="t-gry">产品规格: {{zItem.itemSize}}</view>
+            <view>活动时间:{{zItem.startDate}} ~ {{zItem.endDate}}</view>
+            <view class="r">
+              <view>￥{{item.payAmt}}</view>
+              <view>x{{zItem.buyQty+zItem.sendQty}}</view>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+
+  </view>
+
+</view>
+<text  class="page-bottom-null" wx:if="{{orderList.length}}"></text>
+<view class="pageData_null" wx:if="{{pageLoading&&!orderList.length}}">
+  <image mode="widthFix" src="../../../images/pageData-null.png" />
+  <view class="page_text">没有更多数据了~</view>
+</view>
