@@ -102,9 +102,8 @@ Page({
     if (typeof type == 'string' && type =='hide') {
       showUserList = true
     }
-    console.log(this.userListAnimation)
-    'userListAnimation' in this &&  this.userListAnimation.height(showUserList ? 0 : ((userList.length * 80)+'rpx')).step()
-    'userListAnimation' in this && this.setData({ showUserList: !showUserList, userListAnimation: this.userListAnimation.export()})
+    this.userListAnimation.height(showUserList ? 0 : ((userList.length * 80)+'rpx')).step()
+    this.setData({ showUserList: !showUserList, userListAnimation: this.userListAnimation.export()})
   },
   imgError () {
     this.setData({ showLoadingImg: false})
@@ -169,9 +168,8 @@ Page({
       if (fun) {
         fun()
       } else {
-        console.log(this)
-        'animation' in this &&  this.animation.opacity(0).scale(1.5).step()
-        'animation' in this && this.setData({ animation: this.animation.export() })
+        this.animation.opacity(0).scale(1.5).step()
+        this.setData({ animation: this.animation.export() })
         setTimeout(() => { this.setData({ showLoadingImg: false }) }, 1800)
       }      
     },type || 2000)
@@ -351,11 +349,9 @@ Page({
     }
   },
   goPage (e) {
-    console.log('go')
     const openType = e.currentTarget.dataset.type
     this.changeShowUserList('hide')
     goPage('verificationPhone', { openType })
-    console.log(e)
   },
   onLoad (opt) {
 

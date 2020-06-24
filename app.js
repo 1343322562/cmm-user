@@ -1,7 +1,7 @@
 App({
   data: { 
-    // partnerCode: '1036',
-    // baseImgUrl:'http://erp.yhfws.cn',
+    partnerCode: '1036',
+    baseImgUrl:'http://erp.yhfws.cn',
     // partnerCode: '1041',
     // baseImgUrl:'http://27.221.51.122:1180/',
     // partnerCode: '1000', 
@@ -9,8 +9,8 @@ App({
     // 15576615400 
     // partnerCode: '1037',
     // baseImgUrl:'http://erp.gapin24.cn/',
-    partnerCode: '1029',
-    baseImgUrl:'https://39.98.164.194:8081/',
+    // partnerCode: '1029',
+    // baseImgUrl:'https://39.98.164.194:8081/',
     ww:'', // 屏幕宽度
     hh:'', // 屏幕高
     imgUrl: '', // erp图片域名
