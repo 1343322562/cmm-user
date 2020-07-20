@@ -15,6 +15,7 @@ Page({
     })
   },
   goPage (e) {
+    console.log(e)
     if (this.data.userObj.isLogin) {
       this.goLogin()
       return
@@ -24,6 +25,7 @@ Page({
       toast('功能暂未开放')
       return
     }
+    console.log(page)
     goPage(page, { openType: type||''})
   },
   goCollectList  () {

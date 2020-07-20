@@ -3,13 +3,6 @@ Component({
     multipleSlots: true // 启用多插槽
   },
   properties: {
-    formTitle: {
-      type: String,
-      value: "默认标题"
-      // observer: function(newValue, oldValue){
-      //   console.log(newValue, oldValue)
-      // }
-    },
     inputTitle1: {
       type: String,
       value: "默认标题"
@@ -23,6 +16,10 @@ Component({
       value: "默认标题"
     },
     isShowInput1: {
+      type: Boolean,
+      value: true
+    },
+    isShowInput2: {
       type: Boolean,
       value: true
     },

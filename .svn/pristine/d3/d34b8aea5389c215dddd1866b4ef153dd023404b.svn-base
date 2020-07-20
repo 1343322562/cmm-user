@@ -1,0 +1,10 @@
+{
+  "backgroundTextStyle": "light",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTitleText": "注册信息填写",
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+    "register": "../components/register-input/register-input",
+    "map-route": "plugin://myPlugin/mapRoute"
+  }
+}

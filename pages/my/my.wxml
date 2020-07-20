@@ -96,6 +96,10 @@
     <text>系统服务</text>
   </view>
   <view class='info'>
+    <!-- <view class='item' catchtap='goPage' data-page="myList">
+      <image class="icon" src="../../images/start.png" />
+      <text class='text'>我的陈列</text>
+    </view> -->
     <view class='item' catchtap='goPage' data-page="editPwd">
       <image class="icon" src="../../images/my_page_icon_editPwd.png" />
       <text class='text'>修改密码</text>

@@ -38,7 +38,8 @@
     "pages/salesReturn/ordersDetails/ordersDetails",
     "pages/salesReturn/ordersList/ordersList",
     "pages/H5/H5",
-    "pages/boxGoodSeach/boxGoodSeach"
+    "pages/boxGoodSeach/boxGoodSeach",
+    "pages/myList/myList"
   ],
   "window": {
     "backgroundTextStyle": "light",
