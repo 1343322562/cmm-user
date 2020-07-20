@@ -1,5 +1,4 @@
-// pages/myList/myList.js
-import { showLoading, hideLoading, goPage, toast, alert, setUrl} from '../../tool/index.js'
+import API from '../../api/index.js'
 Page({
 
   /**
@@ -16,6 +15,30 @@ Page({
 
   },
 
+  // 拍照上传陈列图片
+  uploadImgClick () {
+    wx.chooseImage({
+      sizeType: ['compressed'],
+      sourceType: ['album', 'camera'],
+      success (res) {
+        console.log(res)
+        // const tempFilePaths = res.tempFilePaths
+        // wx.uploadFile({
+        //   url: 'https://example.weixin.qq.com/upload', //仅为示例，非真实的接口地址
+        //   filePath: tempFilePaths[0],
+        //   name: 'file',
+        //   formData: {
+        //     'user': 'test'
+        //   },
+        //   success (res){
+        //     const data = res.data
+        //     //do something
+        //   }
+        // })
+      }
+    })
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -28,11 +51,6 @@ Page({
    */
   onShow: function () {
 
-  },
-  // 跳转详情页面
-  toDetailClick (e) {
-    console.log(e)
-    goPage('myListDetail')
   },
 
   /**

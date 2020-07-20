@@ -1,2 +1,33 @@
 <!--pages/myList/myList.wxml-->
-<text>pages/myList/myList.wxml</text>
+
+<view bindtap="toDetailClick">
+  <view class="list-item-box" data-index="0">
+    <view class="detail-top">
+      <view class="name">陈列名</view>
+      <view class="statu">已审核</view>
+    </view>
+    <view class="detail-bottom">
+      <view class="price">陈列费用：<text class="span">￥500.0</text></view>
+      <view class="time">陈列时间：2020-01-07 至 2022-01-22</view>
+      <view class="temp">
+        陈列模板：
+        <image src=""/>  
+      </view>
+    </view>
+  </view>
+
+  <view class="list-item-box" data-index="1">
+    <view class="detail-top">
+      <view class="name">陈列名</view>
+      <view class="statu">已审核</view>
+    </view>
+    <view class="detail-bottom">
+      <view class="price">陈列费用：<text class="span">￥500.0</text></view>
+      <view class="time">陈列时间：2020-01-07 至 2022-01-22</view>
+      <view class="temp">
+        陈列模板：
+        <image src=""/>  
+      </view>
+    </view>
+  </view>
+</view>

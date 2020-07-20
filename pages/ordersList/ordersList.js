@@ -81,7 +81,6 @@ Page({
     const openType = 'list'
     goPage('ordersDetails', { openType, sheetNo})
   },
-  // asd
   onLoad (opt) {
     const  type = opt.openType
     wx.setNavigationBarTitle({ title: (type == '1' ? '待付款' : (type == '2' ? '待收货' : (type == '3' ? '已完成' : (type == '4' ? '已取消' : '全部订单')))) })
