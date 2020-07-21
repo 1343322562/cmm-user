@@ -16,7 +16,7 @@ Page{background-color: #fff;}
 /*商品列表*/
 .goodsList{margin-left: 20rpx;background-color: #fff;padding-left: 20rpx;padding-top: 100rpx;}
 .goodsList>.li{padding: 20rpx 20rpx 20rpx 0;position: relative;border-bottom: 1px solid #e8e8e8;}
-.goodsList>.li .img{position: absolute;top: 20rpx;left:0;overflow: hidden;border-radius: 15rpx;width: 170rpx;height: 170rpx;background-color: #f2f2f2}
+.goodsList>.li .img{position: absolute;top: 20rpx;left:0;overflow: hidden;width: 170rpx;height: 170rpx;background-color: #f2f2f2}
 .goodsList>.li .img>.goodsType{color: #fff;background-color: #dd4242;position: absolute;top: 0;left: 20%;width: 60%;text-align: center;line-height:40rpx;font-size: 23rpx;border-radius: 0 0 10rpx 10rpx;}
 .goodsList>.li .img>.icon{width: 100%;height: 100%}
 .goodsList>.li .info{min-height: 170rpx;margin-left: 190rpx}
@@ -41,6 +41,18 @@ Page{background-color: #fff;}
 .goCartsPage>text{display: block;margin-top: -5rpx;}
 
 .minSupplyQty{position: absolute;bottom: 47rpx;right: 81rpx;font-size: 24rpx;background-color: #fff;color:#04a1ff }
+
+.noReturn {
+  position: absolute;
+  right: 0rpx;
+  bottom: 0rpx;
+  background-color: #333333;
+  white-space: nowrap;
+  color: rgb(230, 187, 49);
+  font-size: 19rpx;
+  letter-spacing: 2rpx;
+  padding: 8rpx 10rpx;
+}
 
 /* 直配商品列表*/
 .z_goodsList{padding-top: 100rpx;}

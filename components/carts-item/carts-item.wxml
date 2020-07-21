@@ -20,6 +20,7 @@
       <view class="img" data-index="{{index}}" bindtap="goGoodsDetails">
         <image class="icon" src="{{goods.goodsImgUrl}}" />
         <image wx:if="{{goods.RSD}}" class="timeLimitSales" src="../../images/goodsClsTopIcon.png"></image> 
+        <view wx:if="{{goods.enReturnGoods=='0'||goods.isProhibit=='1'}}" class="noReturn">不可退</view>
       </view>
       <view class="info">
         <text class="name">{{goods.itemName}}</text>

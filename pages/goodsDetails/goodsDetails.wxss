@@ -66,3 +66,15 @@
 .giftContent>.giftList .unit{margin-bottom: 10rpx;}
 
 .yesRetrns{background: red;color: #fff;display: inline-block;padding: 0 10rpx;border-radius: 10rpx;font-size: 24rpx;}
+
+.noReturn {
+  right: 0rpx;
+  bottom: 0rpx;
+  background-color: #333333;
+  white-space: nowrap;
+  color: rgb(230, 187, 49);
+  font-size: 19rpx;
+  letter-spacing: 2rpx;
+  padding: 8rpx 10rpx;
+  margin-left: 15rpx;
+}
