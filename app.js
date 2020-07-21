@@ -18,8 +18,8 @@ App({
 
     // partnerCode: '1039',
 
-    // partnerCode: '1041',
-    // baseImgUrl:'https://27.221.51.122:1180/',
+    // partnerCode: '1043',
+    // baseImgUrl:'https://erp.jhdd.cn/',
     ww:'', // 屏幕宽度
     hh:'', // 屏幕高
     imgUrl: '', // erp图片域名
