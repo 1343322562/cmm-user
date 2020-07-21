@@ -1,19 +1,22 @@
 <!--pages/myListDetail/myListDetail.wxml-->
-<view class="list-item-box" data-index="0">
-	<view class="detail-top">
-		<view class="name">陈列名</view>
-		<view class="statu">已审核</view>
-	</view>
-	<view class="detail-bottom">
-		<view class="price">陈列费用：<text class="span">￥500.0</text></view>
-		<view class="time">陈列时间：2020-01-07 至 2022-01-22</view>
-		<view class="temp">
-			陈列模板：
-			<image src="../../images/register_add_header.png" />
-		</view>
-	</view>
-</view>
+<view class="list-item-box">
+    <view class="detail-top">
+      <view class="name">{{data.exhibitName}}</view>
+      <view class="statu">已审核</view>
+    </view>
+    <view class="detail-bottom">
+      <view class="price">陈列费用：<text class="span">￥{{data.exhibitMoney}}</text></view>
+      <view class="time">陈列时间：{{data.startDate}} 至 {{data.endDate}}</view>
+			<view class="time">业 务 员：{{data.salesmanName}}</view>
+      <view class="temp">
+        陈列模板：
+        <image wx:for="{{data.picUrls}}" wx:key="index" wx:for-item="imgItem" src="{{baseImgUrl + imgItem}}"/>  
+      </view>
+			<view class="time">备   注：{{data.memo}}</view>
+    </view>
+  </view>
+<image wx:for="{{submitImg}}" wx:key="index" class="upload-img" src="{{baseImgUrl + item}}" />
 
 <image bindtap="uploadImgClick" class="upload-img" src="../../images/pic.png" />
 
-<button style="background: rgb(2,144,252);" class="btn" type="primary">提交</button>
+<button bindtap="submit" style="background: rgb(2,144,252);" class="btn" type="primary">提交</button>

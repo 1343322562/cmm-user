@@ -43,7 +43,26 @@
   justify-content: flex-start;
 }
 .list-item-box .temp image{
-  height: 50rpx;
-  width: 50rpx;
+  height: 65rpx;
+  width: 65rpx;
   background-color: #eee;
+  margin-left: 15rpx;
+}
+
+
+.not-info-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 33rpx;
+  color: #555555;
+  margin-top: 200rpx;
+}
+.not-info-box image {
+  height: 200rpx;
+  width: 300rpx;
+}
+.not-info-box text {
+  margin-top: 20rpx;
 }

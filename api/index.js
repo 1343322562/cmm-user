@@ -55,6 +55,8 @@ export default {
     findSalesManInfo: (param) => ajax.post(`supplymini/findSalesManInfo.do`, param), // 获取业务员信息
     searchOrderCount: (param) => ajax.post(`supplymini/searchOrderCount.do`, param), // 获取待收货订单数量
     getUnusedCouponsSum: (param) => ajax.post(`supplymini/getUnusedCouponsSum.do`, param), // 获取最新优惠券数量
+    getBranchExhibit: (param) => ajax.post(`supplymini/getBranchExhibit.do`, param), // 获取门店陈列列表
+    submitExhibitFlow: (param) => ajax.post(`salesmanandroid/submitExhibitFlow.do`, param), // 门店信息提交
   },
   Liquidation: {
     saveOrder: (param) => ajax.post(`supplymini/saveOrder.do`, param), // 保存订单

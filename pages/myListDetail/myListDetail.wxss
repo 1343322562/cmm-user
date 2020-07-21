@@ -44,9 +44,10 @@
 }
 
 .list-item-box .temp image {
-  height: 50rpx;
-  width: 50rpx;
+  height: 65rpx;
+  width: 65rpx;
   background-color: #eee;
+  margin-left: 15rpx;
 }
 
 .upload-img {
