@@ -81,7 +81,9 @@
   <view class='goodsList' wx:if="{{selectedDhCoupons.keyArr.length}}">
   
     <view class='li' wx:for="{{selectedDhCoupons.keyArr}}" wx:for-item="itemNo" wx:key="index">
-      <view class='img'><image class="icon" src="" /></view>
+      <view class='img'>
+        <image class="icon" src="" />
+      </view>
       <view class='info'>
         <view class='name'><text class='red'>[兑换券]</text>{{dhCouponsList[selectedDhCoupons[itemNo].index].itemName}}</view>
         <view class='size'>规格:{{dhCouponsList[selectedDhCoupons[itemNo].index].itemSize}}</view>
@@ -101,7 +103,10 @@
   <view class='goodsList'>
   
     <view class='li' wx:for="{{goodsList}}" wx:for-item="goods" wx:key="index">
-      <view class='img'><image class="icon" src="{{goods.goodsImgUrl}}" /></view>
+      <view class='img'>
+        <image class="icon" src="{{goods.goodsImgUrl}}" />
+        <view wx:if="{{goods.enReturnGoods=='0'||goods.isProhibit=='1'}}" class="noReturn">不可退</view>  
+      </view>
       <view class='info'>
         <view class='name'>
           <text class='red' wx:if="{{goods.isGift}}">[赠品]</text>
