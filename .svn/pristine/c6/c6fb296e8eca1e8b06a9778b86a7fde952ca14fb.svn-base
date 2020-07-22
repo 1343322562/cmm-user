@@ -95,7 +95,6 @@ Page({
     }
   },
   onReachBottom () {
-    console.log(this.data.list)
     if (!this.isLoading && this.baseList.length) {
       this.isLoading = true
       let newArr = this.data.list
