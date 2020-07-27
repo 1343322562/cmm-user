@@ -1,23 +1,33 @@
 <view class="headImg"></view>
 <view class="title">优惠券任选</view>
 <view class="list">
-  <block wx:for="{{list}}" wx:key="index">
+  <!-- <block wx:for="{{list}}" wx:key="index">
 
     <view class="{{'li'+((item.isGet||item.couldReceive=='1')?' act':'')}}" data-index="{{index}}"  bindtap="getCoupons">
-       <view class="cnt">
+      <view class="cnt">
         <view class="money">{{item.subAmt}}元</view>
-         <view>满{{item.limitAmt}}元减{{item.subAmt}}元</view>
-       </view>
-     </view>
-  </block>
+        <view>满{{item.limitAmt}}元减{{item.subAmt}}元</view>
+      </view>
+    </view>
+  </block> -->
 
   <view wx:if="{{pageLoading&&!list.length}}"  class="data-null">没有优惠券</view>
 
 </view>
 
 <view class="bottom">
-  <view class="topTitle">活动规则</view>
-  <view class="cnt" wx:for="{{cupInfo}}" wx:key="index">{{item}}</view>
+  <view class="topTitle">领取优惠券</view>
+  <view class="couponBox" wx:for="{{list}}" wx:key="index">
+    <view class="infoBox">
+      <view class="cnt" wx:for="{{cupInfo}}" wx:key="index">{{item}}</view>
+    </view>
+    <view class="{{'li'+((item.isGet||item.couldReceive=='1')?' act':'')}}" data-index="{{index}}"  bindtap="getCoupons">
+      <view class="cnt">
+        <view class="money">{{item.subAmt}}元</view>
+        <view>满{{item.limitAmt}}元减{{item.subAmt}}元</view>
+      </view>
+    </view>
+  </view>
 </view>
 
 <view class="shareGoIndexPage" wx:if="{{isSharePage}}" bindtap="goPageIndex">
