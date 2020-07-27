@@ -1,2 +1,23 @@
 <!--pages/myList/myList.wxml-->
-<text>pages/myList/myList.wxml</text>
+
+<view bindtap="toDetailClick" wx:for="{{listData}}" wx:key="index" data-index="{{index}}">
+  <view class="list-item-box">
+    <view class="detail-top">
+      <view class="name">{{item.exhibitName}}</view>
+      <view class="statu">已审核</view>
+    </view>
+    <view class="detail-bottom">
+      <view class="price">陈列费用：<text class="span">￥{{item.exhibitMoney}}</text></view>
+      <view class="time">陈列时间：{{item.startDate}} 至 {{item.endDate}}</view>
+      <view class="temp">
+        陈列模板：
+        <image wx:for="{{item.picUrls}}" wx:key="index" wx:for-item="imgItem" src="{{baseImgUrl + imgItem}}"/>  
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="not-info-box" wx:if="{{listData.length == 0}}">
+  <image src="../../images/notInfo.png" />
+  <text>暂无陈列信息~~~</text>
+</view>

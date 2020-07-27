@@ -11,6 +11,7 @@ Page({
     API.GetCoupons.getCouponsBatchNo({
       data: this.reuqestData,
       success: res => {
+        console.log(res)
         if (res.code == 0) {
           const list = res.data || []
           this.setData({ list})
@@ -26,6 +27,7 @@ Page({
     API.GetCoupons.getCouponsExplain({
       data: this.reuqestData,
       success: res => {
+        console.log(res)
         if (res.code == 0&& res.data) {
           const cupInfo = res.data.split('<br/>')
           this.setData({ cupInfo})
@@ -44,6 +46,7 @@ Page({
     API.GetCoupons.getCouponsByBatchNo({
       data: data,
       success: res => {
+        console.log(res)
         alert(res.msg)
         if (res.code!=0) {
           list[index].isGet = true

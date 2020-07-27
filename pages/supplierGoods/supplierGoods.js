@@ -22,6 +22,8 @@ Page({
     const { type, no } = e.currentTarget.dataset
     const sourceNo = this.supplierNo
     const goods = this.data.goodsObj[no]
+    console.log(goods)
+    if (goods.stockQty == 0) return toast('库存不足')
     const {  branchNo } = this.userObj
     const config = {
       sourceType: '1',

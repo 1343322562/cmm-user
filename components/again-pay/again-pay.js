@@ -96,6 +96,7 @@ Component({
     },
     confirmPay () {
       const { payWay, realPayAmt, storedValue} = this.data
+      
       if (!payWay) { toast('请选择支付方式'); return }
       if (payWay == '2' && storedValue < realPayAmt) { toast('余额不足'); return }
       showLoading('支付中...')
@@ -128,6 +129,7 @@ Component({
       API.Orders.orderpay({
         data: request,
         success: res => {
+          console.log(res)
           if (res.code == 0) {
             if (payWay == '1') { // 微信支付
               this.wxPay()
@@ -149,20 +151,23 @@ Component({
       const sheetNo = this.baseOrderObj.sheetNo
       wx.login({
         success: (codeData)=> {
+          console.log({ code: codeData.code, out_trade_no: sheetNo, body: '具体信息请查看小程序订单中心', openId: openId, platform, username })
           API.Liquidation.getMiniPayParameters({
             data: { code: codeData.code, out_trade_no: sheetNo, body: '具体信息请查看小程序订单中心', openId: openId, platform, username },
             success: res => {
+              console.log('成功',res)
               if (res.code == 0 && res.data) {
                 wx.requestPayment({
-                  'timeStamp': res.data.timeStamp,
+                  'timeStamp': res.data.timeStamp, // 时间戳
                   'nonceStr': res.data.nonceStr,
-                  'package': res.data.package,
+                  'package': res.data.package,   // prepay_id 参数值
                   'signType': res.data.signType,
                   'paySign': res.data.sign,
                   success: ret => {
                     this.paySuccess()
                   },
-                  fail: () => {
+                  fail: (res) => {
+                    console.log('失败',res)
                     this.payError('支付已取消')
                   }
                 })
