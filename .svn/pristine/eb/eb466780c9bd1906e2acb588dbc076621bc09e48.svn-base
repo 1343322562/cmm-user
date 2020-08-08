@@ -1,0 +1,161 @@
+{
+	"description": "项目配置文件。",
+	"packOptions": {
+		"ignore": [
+			{
+				"type": "folder",
+				"value": "txt"
+			}
+		]
+	},
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"enhance": false,
+		"postcss": true,
+		"preloadBackgroundData": false,
+		"minified": false,
+		"newFeature": true,
+		"coverView": true,
+		"autoAudits": false,
+		"showShadowRootInWxmlPanel": false,
+		"scopeDataCheck": false,
+		"uglifyFileName": false,
+		"checkInvalidKey": true,
+		"checkSiteMap": true,
+		"uploadWithSourceMap": true,
+		"compileHotReLoad": false,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		},
+		"useIsolateContext": true,
+		"useCompilerModule": false,
+		"userConfirmedUseCompilerModuleSwitch": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.11.2",
+	"appid": "wxda60176fb02e3bf6",
+	"projectname": "%E5%AE%9C%E6%98%8C%E9%87%91%E8%B4%9D%E6%BA%90n",
+	"scripts": {},
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"list": []
+		},
+		"gamePlugin": {
+			"current": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": -1,
+			"list": [
+				{
+					"id": 0,
+					"name": "商品分享",
+					"pathName": "pages/login/login",
+					"query": "openType=share&page=goodsDetails&data={\"itemNo\":\"030061\"}",
+					"scene": "1008"
+				},
+				{
+					"id": -1,
+					"name": "订单分享",
+					"pathName": "pages/ordersDetails/ordersDetails",
+					"query": "openType=share&sheetNo=YH1904080859937027",
+					"scene": "1007"
+				},
+				{
+					"id": -1,
+					"name": "结算页",
+					"pathName": "pages/liquidation/liquidation",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "箱码查询",
+					"pathName": "pages/boxGoodSeach/boxGoodSeach",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/ordersList/ordersList",
+					"pathName": "pages/ordersList/ordersList",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/register/register",
+					"pathName": "pages/register/register",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/liquidation/liquidation",
+					"pathName": "pages/liquidation/liquidation",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/searchGoods/searchGoods",
+					"pathName": "pages/searchGoods/searchGoods",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 8,
+					"name": "pages/verificationPhone/verificationPhone",
+					"pathName": "pages/editPwd/editPwd",
+					"query": "openType=login&phone=13788888888",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/myList/myList",
+					"pathName": "pages/myList/myList",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/liquidation/liquidation",
+					"pathName": "pages/liquidation/liquidation",
+					"query": "platform=1&username=18569429872&orderNo=YH2007241421044262&payAmt=31.5",
+					"scene": null
+				},
+				{
+					"id": 11,
+					"name": "pages/wxMiniPay/wxMiniPay?",
+					"pathName": "pages/wxMiniPay/wxMiniPay",
+					"query": "platform=1&username=18569429872&orderNo=YH2007241537392915&payAmt=11.7",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/searchGoods/searchGoods",
+					"pathName": "pages/searchGoods/searchGoods",
+					"query": "",
+					"scene": null
+				}
+			]
+		}
+	}
+}
