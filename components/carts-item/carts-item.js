@@ -47,6 +47,7 @@ Component({
         data: { platform, username, branchNo, token },
         success(res) {
           console.log(res)
+          if (!('orderEndDate' in res.data && 'orderStartDate' in res.data)) return 
           let {orderEndDate, orderStartDate} = res.data, // 开始 / 结束时间
           nowDate = tim()      // 当前时间
 
