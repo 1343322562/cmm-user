@@ -2,8 +2,8 @@ App({
   data: { 
     // partnerCode: '1013',
     // baseImgUrl:'http://erp.365wdyp.com',
-    // partnerCode: '1043',
-    //    baseImgUrl:'http://erp.jhdd.cn/',
+    partnerCode: '1043',
+       baseImgUrl:'http://erp.jhdd.cn/',
     //  partnerCode: '1029',
     //  baseImgUrl:'http://39.98.164.194:8081/',
     //  partnerCode: '1000', 
@@ -12,8 +12,8 @@ App({
     // partnerCode: '1036',
     // baseImgUrl: 'http://erp.yhfws.cn/',
     // lttest001
-    partnerCode: '1034',
-    baseImgUrl:'https://39.100.103.135:8080/',
+    // partnerCode: '1034',
+    // baseImgUrl:'https://39.100.103.135:8080/',
 
     // partnerCode: '1052',
 
