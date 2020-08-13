@@ -1,0 +1,123 @@
+<view class="head head-col">
+  <view class='img' catchtap='goPage' data-page="accountManage"><image class="icon" src="../../images/my_page_icon_user.png" /> </view>
+  <view class='info'>
+    <view class='name' style="padding-top:30rpx;" catchtap='goLogin' wx:if="{{userObj.isLogin}}">点击登录</view>
+    <block wx:else>
+    <view class='name'>{{userObj.branchName}}</view>
+    <view class='tel' wx:if="{{userObj.branchTel}}">电话: {{userObj.branchTel}}</view>
+    <view class="address">地址: {{userObj.address}}</view>
+    <view class="address">编号: {{userObj.dbBranchNo}}-{{userObj.branchNo}}</view>
+    </block>
+  </view>
+  <view class='btn'>
+    <view class='item' catchtap='goPage' data-page="bankBalance">
+      <image class="icon" src="../../images/my_page_icon_ye.png" />
+      <text class='text'>余额</text>
+    </view>
+    <view class='item' catchtap='goCollectList'>
+      <image class="icon" src="../../images/my_page_icon_sc.png" />
+      <text class='text'>收藏</text>
+    </view>
+    <view class='item' catchtap='toSeach' wx:if="{{partnerCode == '1024'}}">
+      <image mode="aspectFit" class="icon" src="../../images/box.png" />
+      <text class='text'>箱货</text>
+    </view>
+  </view>
+</view>
+
+<view class='salesman' wx:if="{{salesmanObj&&!userObj.isLogin}}" >
+  <image class="icon" src="../../images/my_page_icon_service.png" />
+  <view class='info'>
+    <view class='name'>业务员: {{salesmanObj.name}}</view>
+    <view class='tel'>电<text></text>话: {{salesmanObj.phone}}</view>
+  </view>
+  <view class='callPhone' bindtap='callPhone' data-phone="{{salesmanObj.phone}}">拨打电话</view>
+</view>
+
+<view class='btnList'>
+  <view class='title'>
+    <text>我的订单</text>
+    <text class='right' catchtap='goPage' data-page="ordersList" data-type="0">查看全部 ></text>
+  </view>
+  <view class='info'>
+    <view class='item' catchtap='goPage' data-page="ordersList" data-type="1">
+      <image class="icon" src="../../images/my_page_icon_dfk.png" />
+      <text class='text'>待付款</text>
+      <text class='orderNum' wx:if="{{orderNum.unpay}}">{{orderNum.unpay}}</text>
+    </view>
+    <view class='item' catchtap='goPage' data-page="ordersList" data-type="2">
+      <image class="icon" src="../../images/my_page_icon_dsh.png" />
+      <text class='text'>待收货</text>
+      <text class='orderNum' wx:if="{{orderNum.unreceive}}">{{orderNum.unreceive}}</text>
+    </view>
+    <view class='item' catchtap='goPage' data-page="ordersList" data-type="3">
+      <image class="icon" src="../../images/my_page_icon_ywc.png" />
+      <text class='text'>已完成</text>
+    </view>
+    <view class='item' catchtap='goPage' data-page="ordersList" data-type="4">
+      <image class="icon" src="../../images/my_page_icon_yqx.png" />
+      <text class='text'>已取消</text>
+    </view>
+    <view class='item' catchtap='goPage' data-page="{{['salesReturn','ordersList']}}">
+      <image class="icon" src="../../images/my_page_icon_th.png" />
+      <text class='text'>退货</text>
+    </view>
+  </view>
+</view>
+
+<view class='btnList'>
+  <view class='title'>
+    <text>团购/票券</text>
+    <text class='right' wx:if="{{isInvoice=='1'}}" catchtap='goPage' data-page="invoice">发票信息 ></text>
+  </view>
+  <view class='info'>
+    <view class='item' catchtap='goPage' data-page="{{['groupBuying','GB_index']}}">
+      <image class="icon" src="../../images/my_page_icon_tuangou.png" />
+      <text class='text'>团购</text>
+    </view>
+    <view class='item' catchtap='goPage' data-page="coupons">
+      <image class="icon" src="../../images/my_page_icon_youhuiquan.png" />
+      <text class='text'>优惠券</text>
+      <text class='orderNum' wx:if="{{couponsNum}}">{{couponsNum}}</text>
+    </view>
+    <view class='item' catchtap='goPage' data-page="dhCoupons">
+      <image class="icon" src="../../images/my_page_icon_duihuiquan.png" />
+      <text class='text'>兑换券</text>
+    </view>
+    <view class='item' catchtap='goPage' data-page="integral">
+      <image class="icon" src="../../images/my_page_icon_jifen.png" />
+      <text class='text'>积分</text>
+    </view>
+  </view>
+</view>
+
+<view class='btnList' wx:if="{{!userObj.isLogin}}">
+  <view class='title'>
+    <text>系统服务</text>
+  </view>
+  <view class='info'>
+    <view class='item' catchtap='goPage' data-page="myList" wx:if="{{partnerCode == 1036}}">
+      <image class="icon" src="../../images/start.png" />
+      <text class='text'>我的陈列</text>
+    </view>
+    <view class='item' catchtap='goPage' data-page="editPwd">
+      <image class="icon" src="../../images/my_page_icon_editPwd.png" />
+      <text class='text'>修改密码</text>
+    </view>
+    <view class='item' bindtap='callPhone' data-phone="{{userObj.customerTel}}">
+      <image class="icon" src="../../images/my_page_icon_callPhone.png" />
+      <text class='text'>联系客服</text>
+    </view>
+    <!-- <view class='item'>
+      <image class="icon" src="../../images/my_page_icon_idea.png" />
+      <text class='text'>意见反馈</text>
+    </view> -->
+    <view class='item' catchtap='quit'>
+      <image class="icon" src="../../images/my_page_icon_quit.png" />
+      <text class='text'>退出登录</text>
+    </view>
+  </view>
+</view>
+<view style='height:20rpx'></view>
+<recommend-goods />
+
