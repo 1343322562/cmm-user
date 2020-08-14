@@ -58,6 +58,9 @@ export default {
   '1050': 'https://xcx.wgjnh.com/zksrb2b-web/', // 重庆旺购  图片 erp.wgjnh.com    wxb1a96fdeb3dae970  (1. 隐藏直配 2. 统配改自营分类)
   '10522': 'http://192.168.2.10:8080/zksrb2b-web/', // 唐娟
   '1051': 'http://192.168.2.96:8080/zksrb2b-web/', // 文艺
-  '1052': 'https://zjj.tqls.cn/' // 绵阳鸭子  zksr   1234   (隐藏直配，隐藏购物车配送中心type/常温/低温) 
+  '10511': 'http://192.168.2.223:8080/zksrb2b-web/', // 肖硕凯
+  // 
+  '1052': 'https://zjj.tqls.cn/', // 绵阳鸭子  zksr   1234   (隐藏直配，隐藏购物车配送中心type/常温/低温) 
   // 样式配置：1. app.wxss配置 2. app.js配置tabbar 3. 结算页 json 配置 导航栏颜色
+  '1053': 'https://xcx.lelsc.com/'  // 乐尔乐 wx78d2ac1098a5c9d4  18932487553 12345678
 }

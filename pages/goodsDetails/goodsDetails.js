@@ -337,7 +337,7 @@ Page({
             const arr = res.BG[tag.BG][tag.BG == 'cls' ? itemClsno : (tag.BG == 'brand' ? brandNo : itemNo)]
             for (let i in arr) {
               const giftInfo = res.BG.giftGoods[arr[i]][i]
-              msg.msg.push(giftInfo.explain ||  '满 ' + giftInfo.buyQty + nowGoods.unit + '送' + giftInfo.giftQty + nowGoods.unit + ' [' + giftInfo.giftName +']')
+              msg.msg.push(giftInfo.explain ||  '满' + giftInfo.buyQty + nowGoods.unit + '送' + giftInfo.giftQty + nowGoods.unit + '\n[' + giftInfo.giftName +']')
             }
             promotionList.push(msg)
           }

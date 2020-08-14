@@ -637,23 +637,25 @@ Page({
     const { token, username, platform } = this.userObj
     wx.login({
       success:  (codeData) => {
-        console.log('code', codeData)
+        console.log('code', codeData, 'openid', openId)
         API.Liquidation.getMiniPayParameters({
           data: { code: codeData.code, out_trade_no: this.orderNo, body: '具体信息请查看小程序订单中心', openId: openId, platform, username },
           success: res => {
-            console.log(res)
+            let data = JSON.parse(res.data) // 银盛支付数据处理
+            console.log(res, data)
             if (res.code == 0 && res.data) {
               wx.requestPayment({
-                'timeStamp': res.data.timeStamp,
-                'nonceStr': res.data.nonceStr,
-                'package': res.data.package,
-                'signType': res.data.signType,
-                'paySign': res.data.sign,
+                'timeStamp': res.data.timeStamp || data.timeStamp,
+                'nonceStr': res.data.nonceStr || data.nonceStr,
+                'package': res.data.package || data.package,
+                'signType': res.data.signType || data.signType,
+                'paySign': res.data.sign || data.paySign,
                 success: ret => {
                   this.goSuccessPage(true)
                 },
-                fail: (res) => {
-                  console.log(res, { code: codeData.code, out_trade_no: this.orderNo, body: '具体信息请查看小程序订单中心', openId: openId, platform, username})
+                fail: (ret) => {
+                  console.log(res.data.timeStamp || data.timeStamp)
+                  console.log(ret, { code: codeData.code, out_trade_no: this.orderNo, body: '具体信息请查看小程序订单中心', openId: openId, platform, username})
                   this.errorMsg('支付已取消')
                 }
               })

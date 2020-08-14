@@ -37,7 +37,7 @@
       <view class='item' wx:for="{{promotionList}}" wx:key="index">
         <view class='type'>{{item.name}}</view>
         <view class='msg'>
-          <view class='li' wx:for="{{item.msg}}" wx:for-item="zItem" wx:for-index="zIndex" wx:key="zIndex">{{zItem}}</view>
+          <text class='li' wx:for="{{item.msg}}" wx:for-item="zItem" wx:for-index="zIndex" wx:key="zIndex">{{zItem}}</text>
         </view>
       </view>
 

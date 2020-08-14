@@ -51,7 +51,7 @@ Component({
           let {orderEndDate, orderStartDate} = res.data, // 开始 / 结束时间
           nowDate = tim()      // 当前时间
 
-          if (orderEndDate == '0:00:00' && orderStartDate == '0:00:00') return 
+          if (orderEndDate == '0:00:00' || orderEndDate == '00:00:00' && orderStartDate == '0:00:00' || orderStartDate == '00:00:00') return 
           if (nowDate == '00:00:00') nowDate = '0:00:00' 
 
           const { nowH, nowM, startH, startM, endH, endM } = _this.timer(nowDate, orderStartDate, orderEndDate) // 处理时间
