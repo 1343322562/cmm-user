@@ -641,15 +641,15 @@ Page({
         API.Liquidation.getMiniPayParameters({
           data: { code: codeData.code, out_trade_no: this.orderNo, body: '具体信息请查看小程序订单中心', openId: openId, platform, username },
           success: res => {
-            let data = JSON.parse(res.data) // 银盛支付数据处理
-            console.log(res, data)
+            // let data = JSON.parse(res.data) // 银盛支付数据处理
+            // console.log(res, data)
             if (res.code == 0 && res.data) {
               wx.requestPayment({
-                'timeStamp': res.data.timeStamp || data.timeStamp,
-                'nonceStr': res.data.nonceStr || data.nonceStr,
-                'package': res.data.package || data.package,
-                'signType': res.data.signType || data.signType,
-                'paySign': res.data.sign || data.paySign,
+                'timeStamp': res.data.timeStamp || JSON.parse(res.data).timeStamp,
+                'nonceStr': res.data.nonceStr || JSON.parse(res.data).nonceStr,
+                'package': res.data.package || JSON.parse(res.data).package,
+                'signType': res.data.signType || JSON.parse(res.data).signType,
+                'paySign': res.data.sign || JSON.parse(res.data).paySign,
                 success: ret => {
                   this.goSuccessPage(true)
                 },

@@ -6,8 +6,9 @@ Component({
     order: {
       type: Object,
       observer(newVal, oldVal) {
-        if (typeof newVal == 'number') return
-        newVal.czPayAmt = Number(newVal.czPayAmt || newVal)
+        console.log('newVal', newVal)
+        // if (typeof newVal == 'number') return
+        newVal.czPayAmt = Number(String(newVal.czPayAmt) || newVal)
         newVal.sheetAmt = Number((newVal.sheetAmt - newVal.czPayAmt).toFixed(2))
         this.setData({ order: newVal})
         this.init(newVal.payWay=='4')
@@ -138,6 +139,7 @@ Component({
       if (payWay == '2' && storedValue < realPayAmt) { toast('余额不足'); return }
       showLoading('支付中...')
       const { memo, itemNos, sheetNo, transNo, ticketType, couponsAmt, payWay: orderPayWay, czPayAmt} = this.baseOrderObj
+      console.log(czPayAmt)
       const { username, platform, token, branchNo, dbBranchNo } = this.userObj
       let request = {
         token,
@@ -182,6 +184,7 @@ Component({
         console.log("request['payWay']",  request['payWay'])
         console.log("request['onlinePayway']",  request['onlinePayway'])
       } else {
+        console.log(czPayAmt)
         request.czPayAmtString = String(czPayAmt)
         request[payWay == '0' ? 'codPayAmtString' : 'onlinePayAmtString'] = realPayAmt.toFixed(2)
         console.log('czPayAmtString', request.czPayAmtString)
@@ -190,7 +193,7 @@ Component({
       API.Orders.orderpay({
         data: request,
         success: res => {
-          console.log(res)
+          console.log(res, request)
           if (res.msg == '第一次使用混合支付第二次必须也为混合支付') return toast('请选择储蓄混合支付')
           if (res.code == 0) {
             if (payWay == '1') { // 微信支付
