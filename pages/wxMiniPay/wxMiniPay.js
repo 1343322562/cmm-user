@@ -1,4 +1,4 @@
-import { showLoading, hideLoading, getGoodsImgSize, deepCopy, getGoodsTag, toast, alert, getTime, goPage } from '../../tool/index.js'
+import { showLoading, hideLoading, getGoodsImgSize, deepCopy, getGoodsTag, toast, alert, getTime, goPage, getIp } from '../../tool/index.js'
 import API from '../../api/index.js'
 import dispatch from '../../store/actions.js'
 import * as types from '../../store/types.js'
@@ -9,6 +9,7 @@ Page({
     orderNo:'',
     payMoney:'',
     payType:'',
+    userIp: ''  // 用户当前 IP 地址
   },
   launchAppError (e) {
     if (e.detail.errMsg =='invalid scene') {
@@ -16,12 +17,14 @@ Page({
     }
   },
   wxPay(openId, { platform, username, orderNo, payType, dc_branch_no, branch_no, payAmt, recharge_id}) {
+    const { userIp } = this.data
     wx.login({
       success: (codeData) => {
         let request = {
           code: codeData.code,
           out_trade_no: orderNo,
           body: '具体信息请查看小程序订单中心',
+          userIp,
           openId,
           platform,
           username
@@ -77,6 +80,7 @@ Page({
     })
   },
   onLoad (opt) {
+    const _this = this
     console.log(80, opt)
     if (!opt.payType&&!opt.orderNo) {
       this.result('获取订单失败', 3)
@@ -86,7 +90,12 @@ Page({
     this.setData({ orderNo: opt.orderNo || '', payMoney: opt.payAmt, payType: opt.payType})
     dispatch[types.GET_OPEN_ID]((openId)=>{
       if (openId) {
-        this.wxPay(openId, opt)
+        getIp({
+          complete(userIp) {
+            _this.data.userIp = userIp
+            _this.wxPay(openId, opt)
+          }
+        })
       }else {
         this.result('获取微信支付配置失败:openId',2)
       }

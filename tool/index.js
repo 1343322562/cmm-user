@@ -304,3 +304,19 @@ export const pxToRpx = (rex) => {
   const { ww } = getApp().data
   return rex * 750 / ww
 }
+
+// 获取用户的 IP 地址
+export const getIP = (param) => {
+  wx.request({
+    url: 'https://open.onebox.so.com/dataApi?type=ip&src=onebox&tpl=0&num=1&query=ip&url=ip',
+    data: {
+    },
+    method: 'POST',
+    header: {
+      'content-type': 'application/x-www-form-urlencoded'
+    },
+    success: function (res) {
+      param.complete(res.data.ip)
+    }
+  });
+} 
