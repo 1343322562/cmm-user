@@ -320,6 +320,63 @@ export function tim(currentDay) {
   return tragetTime;
 }
 
+// 盆友圈分享进入的默认数据(从朋友圈分享进入时请求不到数据)
+export const defaultData = {
+  // 首页导航
+  categoryList: [
+    {clsName: "生鲜食品", imgName: "http://cmm.admin.kekejingxuan.com/kaptcha/87683ef982814ed6aadb9c02563ad0dd.png"},
+    {clsName: "粮油调料", imgName: "http://cmm.admin.kekejingxuan.com/kaptcha/a2eef1863ae84cb8a3be2981565e7113.png"},
+    {clsName: "速冻餐食", imgName: "http://cmm.admin.kekejingxuan.com/kaptcha/8cc64bfed7c349cebde4bba611cf0ea3.png"},
+    {clsName: "速食冲调", imgName: "http://cmm.admin.kekejingxuan.com/kaptcha/3b4e31cc424b4bdebfe87d5e08601d8f.png"},
+    {clsName: "牛奶乳品", imgName: "http://cmm.admin.kekejingxuan.com/kaptcha/731ef3b8cb4b45be8a89df35fc704619.png"},
+    {clsName: "酒水饮料", imgName: "http://cmm.admin.kekejingxuan.com/kaptcha/7d723f34ee4d4a039e794b2ba38d137a.png"},
+    {clsName: "休闲食品", imgName: "http://cmm.admin.kekejingxuan.com/kaptcha/1ef2011768bd46e39eb4eced274f8771.png"},
+    {clsName: "家庭清洁", imgName: "http://cmm.admin.kekejingxuan.com/kaptcha/1a6320610d384c74acec4e1a12d97d7e.png"},
+    {clsName: "个护健康", imgName: "http://cmm.admin.kekejingxuan.com/kaptcha/e9fcb45b93304c33b3b4f21f75c41503.png"},
+    {clsName: "家居百货", imgName: "http://cmm.admin.kekejingxuan.com/kaptcha/27cb36a3a62247e5a14523637fb8c467.png"},
+    {clsName: "纸品针棉", imgName: "http://cmm.admin.kekejingxuan.com/kaptcha/fa1f9c290a4c4ae0a94e0bdc0ed51549.png"},
+    {clsName: "文体娱乐", imgName: "http://cmm.admin.kekejingxuan.com/kaptcha/87e112df2d5b44139ec3f04a876105ce.png"},
+  ],
+  // 首页主推商品
+  ZZZTGoodsList: [
+    {itemDisPrice: 9,itemId: 195478,itemName: "怡宝桶装饮用纯净水6L",itemNowPrice: 4.98,      itemPrePrice: 9,itemSizeDes: "1*50",itemThumbPic: "http://erp.yygyt.cn//upload/images/bdItemInfo/02010122/1-0.jpg",itemUnit: "副",maxSupplyQty: 10},
+    {itemDisPrice: 9,itemId: 195478,itemName: "太傅园茶油腐乳260g香辣型",itemNowPrice: 4.98,      itemPrePrice: 9,itemSizeDes: "1*50",itemThumbPic: "http://erp.yygyt.cn//upload/images/bdItemInfo/13060041/1-0.jpg",itemUnit: "副",maxSupplyQty: 10},
+    {itemDisPrice: 9,itemId: 195478,itemName: "奥狮龙领牌-916中考达标跳绳",itemNowPrice: 4.98,      itemPrePrice: 9,itemSizeDes: "1*50",itemThumbPic: "http://erp.yygyt.cn//upload/images/bdItemInfo/21030023/2-0.jpg",itemUnit: "副",maxSupplyQty: 10}
+  ],
+  // 商品页面cls数据
+  categoryList2: [
+    {clsName: "生鲜食品", sysCode: 78, clsNo: "11", fatherClsNo: "0", imgName: "http://cmm.admin.kekejingxuan.com/kaptcha/87683ef982814ed6aadb9c02563ad0dd.png"},
+    {clsName: "速冻餐食", sysCode: 78, clsNo: "12", fatherClsNo: "0", imgName: "http://cmm.admin.kekejingxuan.com/kaptcha/8cc64bfed7c349cebde4bba611cf0ea3.png"},
+    {clsName: "粮油调料", sysCode: 78, clsNo: "33", fatherClsNo: "0", imgName: "http://cmm.admin.kekejingxuan.com/kaptcha/a2eef1863ae84cb8a3be2981565e7113.png"},
+    {clsName: "速食冲调", sysCode: 78, clsNo: "32", fatherClsNo: "0", imgName: "http://cmm.admin.kekejingxuan.com/kaptcha/3b4e31cc424b4bdebfe87d5e08601d8f.png"},
+    {clsName: "牛奶乳品", sysCode: 78, clsNo: "21", fatherClsNo: "0", imgName: "http://cmm.admin.kekejingxuan.com/kaptcha/731ef3b8cb4b45be8a89df35fc704619.png"},
+    {clsName: "酒水饮料", sysCode: 78, clsNo: "22", fatherClsNo: "0", imgName: "http://cmm.admin.kekejingxuan.com/kaptcha/7d723f34ee4d4a039e794b2ba38d137a.png"},
+    {clsName: "休闲食品", sysCode: 78, clsNo: "31", fatherClsNo: "0", imgName: "http://cmm.admin.kekejingxuan.com/kaptcha/1ef2011768bd46e39eb4eced274f8771.png"},
+    {clsName: "家庭清洁", sysCode: 78, clsNo: "42", fatherClsNo: "0", imgName: "http://cmm.admin.kekejingxuan.com/kaptcha/1a6320610d384c74acec4e1a12d97d7e.png"},
+    {clsName: "个护健康", sysCode: 78, clsNo: "41", fatherClsNo: "0", imgName: "http://cmm.admin.kekejingxuan.com/kaptcha/e9fcb45b93304c33b3b4f21f75c41503.png"},
+    {clsName: "家居百货", sysCode: 78, clsNo: "52", fatherClsNo: "0", imgName: "http://cmm.admin.kekejingxuan.com/kaptcha/27cb36a3a62247e5a14523637fb8c467.png"},
+    {clsName: "纸品针棉", sysCode: 78, clsNo: "51", fatherClsNo: "0", imgName: "http://cmm.admin.kekejingxuan.com/kaptcha/fa1f9c290a4c4ae0a94e0bdc0ed51549.png"},
+    {clsName: "文体娱乐", sysCode: 78, clsNo: "53", fatherClsNo: "0", imgName: "http://cmm.admin.kekejingxuan.com/kaptcha/87e112df2d5b44139ec3f04a876105ce.png"}
+  ],
+  // 商品页商品
+  goodsList: [
+    {id: "193676", itemId: "193676", itemNo: "80090297", itemName: "【WL】切块冬瓜*2斤±0.1斤/份", itemIndexPic: "http://erp.yygyt.cn//upload/images/bdItemInfo/80090297/2-2.png",itemNowPrice: 8.8, itemPrePrice: 7.54,itemDisPrice: 12.98 },
+    {id: "193605", itemId: "193605", itemNo: "80090226", itemName: "【WL】本地辣椒 *1斤±0.1斤/份", itemIndexPic: "http://erp.yygyt.cn//upload/images/bdItemInfo/80090226/1-2.png", itemNowPrice: 8.8, itemPrePrice: 7.54,itemDisPrice: 12.98},
+    {id: "193606", itemId: "193606", itemNo: "80090227", itemName: "【WL】上海青*1斤±0.1斤/份", itemIndexPic: "http://erp.yygyt.cn//upload/images/bdItemInfo/80090227/1-2.png", itemNowPrice: 8.8, itemPrePrice: 7.54,itemDisPrice: 12.98},
+    {id: "193601", itemId: "193601", itemNo: "80090222", itemName: "【WL】 袋装大蒜籽*2.8斤±0.2斤/份", itemIndexPic: "http://erp.yygyt.cn//upload/images/bdItemInfo/80090222/4-2.jpg", itemNowPrice: 8.8, itemPrePrice: 7.54,itemDisPrice: 12.98},
+    {id: "193596", itemId: "193596", itemNo: "80090217", itemName: "【WL】铁棍淮山 1.5斤±0.2/份", itemIndexPic: "http://erp.yygyt.cn//upload/images/bdItemInfo/80090217/1-2.jpg", itemNowPrice: 8.8, itemPrePrice: 7.54,itemDisPrice: 12.98},
+    {id: "195083", itemId: "195083", itemNo: "80090415", itemName: "【WL】整张百叶*300g±10g/份", itemIndexPic: "http://erp.yygyt.cn//upload/images/bdItemInfo/80090415/1-2.jpg", itemNowPrice: 8.8, itemPrePrice: 7.54,itemDisPrice: 12.98},
+    {id: "193703", itemId: "193703", itemNo: "80090324", itemName: "【WL】洋葱3斤±0.3斤/份", itemIndexPic: "http://erp.yygyt.cn//upload/images/bdItemInfo/80090324/3-2.png", itemNowPrice: 8.8, itemPrePrice: 7.54,itemDisPrice: 12.98},
+    {id: "194875", itemId: "194875", itemNo: "80090356", itemName: "【WL】外婆家的多味雪菜*1斤±10g", itemIndexPic: "http://erp.yygyt.cn//upload/images/bdItemInfo/80090356/1-2.jpg", itemNowPrice: 8.8, itemPrePrice: 7.54,itemDisPrice: 12.98},
+    {id: "194876", itemId: "194876", itemNo: "80090411", itemName: "【WL】自制酸豆角*1斤±0.1斤/盒", itemIndexPic: "http://erp.yygyt.cn//upload/images/bdItemInfo/80090411/1-2.jpg", itemNowPrice: 8.8, itemPrePrice: 7.54,itemDisPrice: 12.98},
+    {id: "193691", itemId: "193691", itemNo: "80090312", itemName: "【WL】香菜*200g±10g/份", itemIndexPic: "http://erp.yygyt.cn//upload/images/bdItemInfo/80090312/1-2.jpg",itemNowPrice: 8.8, itemPrePrice: 7.54,itemDisPrice: 12.98}
+  ],
+  // 商品类别
+  cls: [
+    {clsName: "新鲜水果", sysCode: 78, clsNo: "1101", fatherClsNo: "11", imgName: "http://cmm.admin.kekejingxuan.com/kaptcha/273d3b3f26384d3b92010f9f279334ab.png"}
+  ]
+}
+
 //去除字符串尾部空格或指定字符  
 String.prototype.TrimEnd = function (c) {
   if (c == null || c == "") {

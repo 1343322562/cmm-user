@@ -1,5 +1,5 @@
 import API from '../../api/index.js'
-import { getTime, deepCopy, getRemainTime, showLoading, hideLoading, goPage, alert, toast, downRefreshVerify, pxToRpx } from '../../tool/index.js'
+import { getTime, deepCopy, getRemainTime, showLoading, hideLoading, goPage, alert, toast, downRefreshVerify, pxToRpx, defaultData } from '../../tool/index.js'
 import {
   ShoppingCartGoods
 } from '../../tool/shoppingCart.js'
@@ -19,8 +19,8 @@ Component({
     windowHeight: getApp().globalData.windowHeight,
     selectFatherClsNo: "F",
     selectFatherClsNo2: null,
-    categoryList: [],
-    categoryList2: [],
+    categoryList: [],  // scroll-view 类别
+    categoryList2: [], // 侧边栏类别
     orderByField: 'shelf.updated',
     orderBy: 'desc',
     indexNum: 0,
@@ -58,6 +58,7 @@ Component({
       this.dcId = dcId
       shoppingCart.setCartCount()
       var cartGoods = shoppingCart.getGoodsList();
+      console.log(61, cartGoods)
       this.setData({ imgBaseUrl, cartGoods })
       const pageLoadingTime = this.pageLoadingTime
       if (pageLoadingTime || !goodsList.length) {
@@ -78,7 +79,13 @@ Component({
       })
     },
     onShow () {
-      const {openId} = getApp().data
+      const {openId, scene} = getApp().data
+      if (scene == 1154) {
+        const goodsList = defaultData.goodsList
+        const categoryList = defaultData.categoryList2
+        const categoryList2 = defaultData.cls
+        this.setData({ goodsList, categoryList, categoryList2 })
+      }
       if (openId) {
         this.getPageData()
       } else {
@@ -256,6 +263,7 @@ Component({
           queryChild: '0'
         },
         success: (obj) => {
+          console.log('onClickLeftCls2', obj)
           let goodsList = obj.data || []
           if (obj.status === 200) {
 
@@ -330,6 +338,7 @@ Component({
           dcId: this.dcId
         },
         success: (obj) => {
+          console.log(334, 'clsList', obj)
           let categoryList = obj.data || []
           if (obj.status === 200) {
             if (selectFatherClsNo == "F") {

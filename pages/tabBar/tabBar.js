@@ -121,5 +121,12 @@ Page({
       imageUrl: 'https://zksrimg.oss-cn-beijing.aliyuncs.com/images/cmm/hom_share_img.png'
 
     })
+  },
+  onShareTimeline() {
+    return {
+      title: '生活家 线上批发市场',
+      path: '/pages/startupPage/startupPage?openType=share&colonelId=' + getApp().data.colonelId,
+      imageUrl: 'https://zksrimg.oss-cn-beijing.aliyuncs.com/images/cmm/hom_share_img.png'
+    }
   }
 })

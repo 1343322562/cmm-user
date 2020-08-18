@@ -1,6 +1,6 @@
 import API from '../../api/index.js'
 import { ShoppingCartGoods } from '../../tool/shoppingCart.js'
-import { getTime, deepCopy, getRemainTime, showLoading, hideLoading, goPage, alert, toast, setUrl, pxToRpx, rpxToPx, downRefreshVerify, setCheckText, formatTime, setShareAppMessage } from '../../tool/index.js'
+import { getTime, deepCopy, getRemainTime, showLoading, hideLoading, goPage, alert, toast, setUrl, pxToRpx, rpxToPx, downRefreshVerify, setCheckText, formatTime, setShareAppMessage, defaultData } from '../../tool/index.js'
 import UserBusiness from '../../tool/userBusiness.js'
 let shoppingCart = new ShoppingCartGoods();//实例化类
 import * as types from '../../store/types.js'
@@ -10,6 +10,8 @@ Component({
   properties: {
   },
   data: {
+    // 导航
+    categoryList: [],
     someData: {
       statusBarHeight: app.globalData.statusBarHeight,
       titleBarHeight: app.globalData.titleBarHeight
@@ -17,7 +19,8 @@ Component({
     chwlList: [], // 吃喝玩乐商家列表
     height0: 50,
     cartGoods: [], //购物所有商品
-    ZZZTGoodsList: [],
+    ZZZTGoodsList: [ // 默认商品(分享小程序朋友圈进入时)
+    ],
     LBZTGoodsList: [],
     goodsAll: [], //所有商品
     indicatorDots: true,
@@ -47,8 +50,15 @@ Component({
     switchTransWay: 0
   },
   attached (op) {
-    console.log('index的att', op)
-    this.setData({ height0: pxToRpx(this.data.someData.statusBarHeight) || 50})
+    console.log('index的att', op, app.data.scene)
+    if (app.data.scene == 1154) { // 由朋友圈分享进入小程序(默认数据)
+      const categoryList = defaultData.categoryList
+      const ZZZTGoodsList =  defaultData.ZZZTGoodsList
+      this.setData({ height0: pxToRpx(this.data.someData.statusBarHeight) || 50 , categoryList, ZZZTGoodsList })
+    } else {
+      this.setData({ height0: pxToRpx(this.data.someData.statusBarHeight) || 50})
+    }
+    
   },
   ready () {
   },

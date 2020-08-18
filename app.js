@@ -6,6 +6,7 @@ const source = '0' // 来源
 import config from 'tool/config.js'
 App({
   data:{
+    scene: '',
     imgBaseUrl: 'https://zksrimg.oss-cn-beijing.aliyuncs.com/kaptcha/',
     version: '1.0', // 版本号
     userWxInfo: null, // 用户微信信息
@@ -35,6 +36,7 @@ App({
   onShow(options) {
     console.log('onShowonLaunch', options)
     console.log(this)
+    this.data.scene = options.scene
     // 判断是否由分享进入小程序
     if ((options.scene == 1007 || options.scene == 1008) && options.query.openType == 'share') {
 
@@ -95,7 +97,7 @@ App({
     }
     
     
-    if (wx.getUpdateManager) {
+    if (wx.getUpdateManager && options.scene != 1154) {
       const updateManager = wx.getUpdateManager()
       updateManager.onUpdateReady(() => {
         wx.showModal({
