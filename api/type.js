@@ -18,6 +18,7 @@ export default {
   '1010': 'https://mp.guoanmall.com/zksrb2b-web/', // 国安e购  图片 erp.guoanmall.com (独立评价功能,隐藏直配)
   '1011': 'https://b2bapp.goyounglife.com/zksrb2b-web/', // 够样优采  图片 b2berp.goyounglife.com
   '10111': 'https://b2btestapp.goyounglife.com/', // 够样优采测试服
+  '10112': 'https://b2bapp.goyounglife.com/', // 够样优采测试服
   '1012': 'https://wx.hnhlgyl.net/zksrb2b-web/', // 长沙正和盛  图片 erp.hnhlgyl.net
   '1013': 'https://app.365wdyp.com/zksrb2b-web/', // 清海万店优配  图片 erp.365wdyp.com
   '1014': 'https://mini.bangbianli.com/zksrb2b-web/', // 帮便利  图片 bbladmin.bangbianli.com  (隐藏取消订单，关闭补货功能)
