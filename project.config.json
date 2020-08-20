@@ -12,7 +12,7 @@
 		"urlCheck": false,
 		"es6": true,
 		"enhance": false,
-		"postcss": false,
+		"postcss": true,
 		"preloadBackgroundData": false,
 		"minified": false,
 		"newFeature": true,
@@ -36,7 +36,7 @@
 		"userConfirmedUseCompilerModuleSwitch": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.11.2",
+	"libVersion": "2.10.4",
 	"appid": "wx78d2ac1098a5c9d4",
 	"projectname": "%E5%AE%9C%E6%98%8C%E9%87%91%E8%B4%9D%E6%BA%90n",
 	"scripts": {},

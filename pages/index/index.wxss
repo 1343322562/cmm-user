@@ -1,7 +1,8 @@
-Page{background-color:#fff;padding-bottom: 1000rpx;height: 300vh;}
+Page{background-color:#fff;padding-bottom: 1000rpx;}
 
+view{-webkit-overflow-scrolling: touch}
 .pageScroll{bottom:0px}
-.tdBox{width:100%;position: absolute;top: 0;z-index: 999;}
+.tdBox{position: absolute;z-index: 9999;-webkit-overflow-scrolling: touch;height: 100%;}
 .tdBox.act{top: 90rpx;}
 .oftenBuy{z-index:100;width:150rpx;height:150rpx;line-height:150rpx;background:rgba(229,110, 110,.8);color:#fff;text-align:center;font-size:28rpx;border-radius:100%;position:fixed;}
 swiper{overflow:hidden;}
