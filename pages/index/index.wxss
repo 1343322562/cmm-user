@@ -174,3 +174,27 @@ swiper{overflow:hidden;}
     padding: 2px 15px 0;
     margin-top: 3px;
   }
+
+  /* 导航栏 */
+  .nav-seach-bar-box {
+    position: absolute;
+    top: 5rpx;
+    left: 165rpx;
+    background: #fff;
+    height: 56rpx;
+    width: 360rpx;
+    border-radius: 50rpx;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    color: #181716;
+    font-size: 28rpx;
+  }
+  .nav-seach-bar-box image {
+    height: 28rpx;
+    width: 28rpx;
+    margin: 0 5rpx 0 20rpx;
+  }
+  .nav-seach-bar {
+    width: 280rpx;
+  }

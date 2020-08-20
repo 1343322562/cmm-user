@@ -305,6 +305,8 @@ Page({
     goPage('goodsDetails', { itemNo })
   },
   onLoad (opt) {
+    console.log(opt)
+    if (opt.type == 'opencode') this.openCode()
     const openType = opt.openType // 统配: tongpei  直配: zhipei
     const config = wx.getStorageSync('configObj')
     const historyList = wx.getStorageSync('historyList') || []

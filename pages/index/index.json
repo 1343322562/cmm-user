@@ -1,4 +1,8 @@
 {
   "navigationBarTitleText": "首页",
-  "backgroundTextStyle": "dark"
+  "backgroundTextStyle": "dark",
+  "usingComponents": {
+    "Navbar": "../../components/Navbar/Navbar"
+  },
+  "navigationStyle": "custom"
 }

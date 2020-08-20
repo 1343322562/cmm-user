@@ -4,6 +4,7 @@ import dispatch from '../../store/actions.js'
 import { showLoading, hideLoading, goPage, toast, alert, getGoodsImgSize, getGoodsDataSize, getGoodsTag, deepCopy, setParentGoodsCartsObj, MsAndDrCount} from '../../tool/index.js'
 const maxNum = 15
 let baseGoodsList
+const app = getApp()
 Page({
   data: {
     pageLoading: false,
@@ -24,7 +25,8 @@ Page({
     screenShow: false,
     brandList:[],
     brandObj: {},
-    itemBrandnos:{}
+    itemBrandnos:{},
+    bounding: app.data.bounding
   },
   showScreen (e) {
     this.setData({ screenShow:e?true:false})
@@ -294,7 +296,12 @@ Page({
       }
     })
   },
+  getNavHeight () {
+   console.log(this.data.bounding)
+    setTimeout(() => console.log(this.data.bounding), 10000)
+  },
   onLoad (opt) {
+    this.getNavHeight() // 获取导航栏高度并设置 top 距离
     console.log(getApp().data.partnerCode)
     this.createAnimation()
     this.userObj = wx.getStorageSync('userObj')

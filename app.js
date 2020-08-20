@@ -20,7 +20,9 @@ App({
     // partnerCode: '10511',
     // partnerCode: '1034',
     // baseImgUrl:'https://39.100.103.135:8080/',
-
+    
+    // partnerCode: '10111',
+    // baseImgUrl:'http://b2berp.goyounglife.com/',
     partnerCode: '1053',
 
     // partnerCode: '1039',
@@ -38,6 +40,7 @@ App({
     zhGoodsUrl: '', // 组合商品图片 
     indexImgUrl: '', // 首页活动图
     userObj: '',
+    bounding: {}, // 右上角胶囊信息
     phoneType:'',// 手机系统
   },
   editData (key ,val) {
@@ -67,9 +70,8 @@ App({
     }
   },
   onShow(opt) { 
-    
-    
-
+    let bounding = wx.getMenuButtonBoundingClientRect()
+    this.data.bounding = bounding
     if (wx.getUpdateManager) {
       const updateManager = wx.getUpdateManager()
       updateManager.onUpdateReady( () =>{

@@ -20,6 +20,7 @@ Page({
       coupons: [] 		// 优惠卷或通知
     }
   },
+  toSearchPageClick() { goPage('searchGoods') }, // 跳转搜索页
   // 关闭弹窗
 	closePopup () {
 		const _this = this

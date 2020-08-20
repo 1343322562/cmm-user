@@ -1,5 +1,9 @@
 {
   "navigationBarTitleText": "分类",
   "backgroundColorBottom":"f2f2f2",
-  "onReachBottomDistance": 300
+  "onReachBottomDistance": 300,
+  "usingComponents": {
+    "Navbar": "../../components/Navbar/Navbar"
+  },
+  "navigationStyle": "custom"
 }

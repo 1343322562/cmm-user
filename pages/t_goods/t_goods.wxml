@@ -1,9 +1,17 @@
+<!-- 导航栏 -->
+<Navbar id="navbar" background='#d40000' leftIconText='分类' color='#ffffff' isShowLeftIcon='{{false}}'>
+	<view class="nav-seach-bar-box">
+		<image src='../../images/search.png' bindtap="searchOrder" />
+		<input type="text" disabled class="nav-seach-bar" placeholder='搜索您想要的商品' placeholder-style='font-size: 26rpx;' bindtap='goSearchPage'/>
+	</view>
+</Navbar>
+
 <block wx:if="{{pageLoading}}">
-<view class='pageLeft' wx:if="{{classifyList.length}}">
-  <view class='search' bindtap='goSearchPage'>
+<view class='pageLeft' wx:if="{{classifyList.length}}" style="top: {{bounding.top + bounding.height + 7}}px;">
+  <!-- <view class='search' bindtap='goSearchPage'>
     <image class='icon' src='../../images/goodsList_page_search.png' />
     <text class='text'>搜索</text>
-  </view>
+  </view> -->
   <scroll-view scroll-y class="category">
     <block wx:for="{{classifyList}}" wx:for-index="oneIndex" wx:for-item="clsOne" wx:key="clsOne">
       <view class="oneCls{{nowSelectOneCls==clsOne?' act':''}}" animation="{{ nowSelectOneCls==clsOne?animtionObjShow:(beforeOneCls==clsOne?animtionObjHide:null)}}">
@@ -18,7 +26,7 @@
   </scroll-view>
 </view>
 <view class='goodsList'>
-  <view class='screen'>
+  <view class='screen' style="top: {{bounding.top + bounding.height + 7}}px;">
     <view catchtap='selectScreen' data-type="0" class="item{{screenSelect=='0'?' act':''}}">综合</view>
     <view catchtap='selectScreen' data-type="1" class="item{{(screenSelect=='1'||screenSelect=='2')?' act':''}}">
       <text>价格</text>
@@ -26,7 +34,7 @@
     </view>
     <view class='item' catchtap='showScreen'>筛选</view>
   </view>
-  <view class='li'  wx:for="{{goodsList}}" wx:for-item="itemNo" wx:key="index" data-no="{{itemNo}}" bindtap='goGoodsDetails'>
+  <view class='li' wx:for="{{goodsList}}" wx:for-item="itemNo" wx:key="index" data-no="{{itemNo}}" bindtap='goGoodsDetails'>
     <view class='img'>
       <image class='icon' src="{{goodsObj[itemNo].goodsImgUrl}}" />
       <view class='goodsType' wx:if="{{goodsObj[itemNo].specType=='2'}}">多规格</view>

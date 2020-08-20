@@ -1,3 +1,12 @@
+<!-- 导航栏 -->
+<Navbar background='#d40000' color='#ffffff' isShowLeftIcon='true'>
+	<view class="nav-seach-bar-box">
+		<image src='../../images/search.png' bindtap="searchOrder" />
+		<input type="text" disabled class="nav-seach-bar" placeholder='搜索您想要的商品' placeholder-style='font-size: 26rpx;' bindtap="toSearchPageClick" />
+	</view>
+</Navbar>
+
+
 <scroll-view class="categoryList" scroll-x wx:if="{{categoryList.length}}">
 	<view wx:for="{{categoryList}}" wx:key="index" class="item" data-no="{{item.no}}" bindtap="changeCls">{{item.name}}</view>
 </scroll-view>
