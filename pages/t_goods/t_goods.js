@@ -28,6 +28,11 @@ Page({
     itemBrandnos:{},
     bounding: app.data.bounding
   },
+  onPullDownRefresh () {
+    const { nowSelectOneCls, nowSelectTwoCls } = this.data
+    this.getGoodsList()
+    console.log(nowSelectOneCls, nowSelectTwoCls)
+  },
   showScreen (e) {
     this.setData({ screenShow:e?true:false})
   },
