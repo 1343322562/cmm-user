@@ -1,37 +1,7 @@
 import { showLoading, hideLoading, getGoodsImgSize, deepCopy, getGoodsTag, toast, alert, getTime,goPage } from '../../tool/index.js'
 import API from '../../api/index.js'
+import { tim, timCurrentDay } from '../../tool/date-format.js'
 
-const date = new Date()
-const years = []
-const months = []
-const days = []
-const hours = []
-
-// 从 2020 年开始
-for (let i = 2020; i <= date.getFullYear(); i++) {
-  years.push(i)
-}
-
-for (let i = 1; i <= 12; i++) {
-  if (i < 10) {
-    i = '0' + i
-  } 
-  months.push(i)
-}
-
-for (let i = 1; i <= 31; i++) {
-  if (i < 10) {
-    i = '0' + i
-  } 
-  days.push(i)
-}
-
-for (let i = 1; i <= 24; i++) {
-  if (i < 10) {
-    i = '0' + i
-  } 
-  hours.push(i)
-}
 Page({
   data: {
     goodsList: [], // 商品列表
@@ -66,33 +36,11 @@ Page({
     isUseBlendWay: false, // 是否使用混合支付
     payWay: '', // 支付方式 0货到付款 1在线支付 2储值支付 4混合支付
     isPickDate: 0, // 自提点时间选择 0: 关闭 ，开启时默认当前时间
-    years,
-    year: date.getFullYear(),
-    months,
-    month: 2,
-    days,
-    day: 2,
-    hours,
-    value: [0, 2, 2, 0],
-    selected: false,
+    selectedStoreTime: false, // 是否显示 自提时间 picker
+    storeTime: '2020-01-02 20' // 自提时间
   },
   showStoreTime() {
-    this.setData({ selected: true })
-  },
-  // 关闭时间选择框
-  close () {
-    this.setData({
-      selected: !this.data.selected
-    })
-  },
-  // 绑定级联框
-  bindChange(e) {
-    let value = e.detail.value
-    this.setData({ value })
-  },
-  // 自提点时间日期处理
-  storeTime() {
-
+    this.setData({ selectedStoreTime: true })
   },
 
   // 设置备注
@@ -656,6 +604,7 @@ Page({
     }
     request.itemNos = itemNos.join(',')
     request.data = JSON.stringify(goodsData)
+    request.pickDate = this.data.storeTime + ':00:00'
     console.log('支付参数:', request)
     API.Liquidation.saveOrder({
       data: request,
@@ -742,12 +691,21 @@ Page({
       }
     })
   },
+  // 获取默认的当前时间（自提模式）
+  getStoreDefaultTime() {
+    const ymd = timCurrentDay(0) // 年 月 日 
+    const hours = tim().slice(0, 2)
+    return `${ymd} ${hours}`
+  },
   onLoad (opt) {
     console.log(opt)
     const partnerCode = getApp().data.partnerCode
     if (partnerCode == 1052) wx.setNavigationBarColor({ backgroundColor: '#e6c210', frontColor: '#ffffff' })
+
     const { isPickDate } = opt
-    if(isPickDate == 1) this.setData({ isPickDate }) // 开启自提点
+    if(isPickDate == 1) {
+      this.setData({ isPickDate, storeTime: this.getStoreDefaultTime()})  //开启自提点 piker 并 获取默认时间（当前时间）
+    }
     const obj = wx.getStorageSync('liquidationObj')
     this.promotionObj = wx.getStorageSync('allPromotion')
     this.userObj = wx.getStorageSync('userObj')

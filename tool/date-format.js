@@ -113,13 +113,23 @@ export function FetchDateLastMonth(date,monthCount){
   return d;
 }
 
-// 将日期往前退 currentDay 天
+// 获取当前时分秒
 export function tim() {
   var myDate = new Date();
   const h = myDate.getHours(); //获取当前小时数(0-23)
   const m = myDate.getMinutes(); //获取当前分钟数(0-59)
   const s = myDate.getSeconds(); //获取当前秒数(0-59)
   return `${h}:${m}:${s}`
+}
+
+// 将日期往前退 currentDay 天
+export function timCurrentDay(currentDay) {
+  var time = (new Date).getTime() - currentDay * 24 * 60 * 60 * 1000;
+  var tragetTime = new Date(time);
+  var month = tragetTime.getMonth();
+  var day = tragetTime.getDate();
+  tragetTime = tragetTime.getFullYear() + "-" + (tragetTime.getMonth() > 9 ? (tragetTime.getMonth() + 1) : "0" + (tragetTime.getMonth() + 1)) + "-" + (tragetTime.getDate() > 9 ? (tragetTime.getDate()) : "0" + (tragetTime.getDate()));
+  return tragetTime;
 }
 
 // 字符串检索

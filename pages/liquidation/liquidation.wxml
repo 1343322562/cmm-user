@@ -66,11 +66,11 @@
     </view>
   </view>
   <!-- 自提点时间选择区域 (需要erp开启自提点取货)-->
-  <view class='contentBlock' wx:if="{{giftList.length}}" catchtap='showStoreTime'>
+  <view class='contentBlock' catchtap='showStoreTime' wx:if="{{isPickDate}}">
     <image class="icon" src="../../images/store.png" style="width: 49rpx;height: 49rpx;margin:0 6rpx;"/>
     <text class='text'>自提时间</text>
-    <view class="right{{selectedGiftNum?' act':''}}">
-      <text style="font-size: 27rpx;">{{years[value[0]]}}-{{months[value[1]]}}-{{days[value[2]]}} {{hours[value[3]]}}时</text>
+    <view class="right act">
+      <text style="font-size: 27rpx;">{{storeTime}}时</text>
       <image class="icon" src="../../images/goRight_icon.png" />
     </view>
   </view>
@@ -178,8 +178,9 @@
 <select-coupons show="{{showSelectCoupons}}" now="{{selectedCoupons}}" list="{{couponsList}}" bindselectCoupons="selectCoupons" />
 <select-mzgoods show="{{showSelectMzgoods}}" now="{{selectedGift}}" list="{{giftList}}" bindselectGift="selectGift"  /> 
 <select-dhCoupons show="{{showSelectDhCoupons}}" now="{{selectedDhCoupons}}" list="{{dhCouponsList}}" bindselectDhCoupons="selectDhCoupons" />
+<select-storeTime show="{{selectedStoreTime}}" />
 
-<view class="selecter-time-conainer" wx:if="{{selected}}" catchtouchmove>
+<!-- <view class="selecter-time-conainer" wx:if="{{selected}}" catchtouchmove>
   <view class="selecter-time-box">
     <view class="btn-box">
       <text bindtap='close'>取消</text>
@@ -203,4 +204,4 @@
 </picker-view>
   </view>
   
-</view>
+</view> -->
