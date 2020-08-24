@@ -38,6 +38,7 @@
     <view class='info'><text class='l'>兑换商品</text><text class='c'>x{{selectedDhCoupons.num}}</text><text class='r'>￥0</text></view>
     <view class='info'><text class='l'>优惠金额</text><text class='r'>￥{{discountsMoney}}</text></view>
   </view>
+  <!-- 优惠卷区域 -->
   <view class='contentBlock' wx:if="{{sourceType == '0'}}" catchtap='showCoupons'>
     <image class="icon" src="../../images/my_page_icon_youhuiquan.png" />
     <text class='text'>优惠券</text>
@@ -61,6 +62,15 @@
     <text class='text'>满赠</text>
     <view class="right{{selectedGiftNum?' act':''}}">
       <text>{{selectedGiftNum?('已选择'+selectedGiftNum+'组赠品'):'未选择赠品'}}</text>
+      <image class="icon" src="../../images/goRight_icon.png" />
+    </view>
+  </view>
+  <!-- 自提点时间选择区域 (需要erp开启自提点取货)-->
+  <view class='contentBlock' wx:if="{{giftList.length}}" catchtap='showStoreTime'>
+    <image class="icon" src="../../images/store.png" style="width: 49rpx;height: 49rpx;margin:0 6rpx;"/>
+    <text class='text'>自提时间</text>
+    <view class="right{{selectedGiftNum?' act':''}}">
+      <text style="font-size: 27rpx;">{{years[value[0]]}}-{{months[value[1]]}}-{{days[value[2]]}} {{hours[value[3]]}}时</text>
       <image class="icon" src="../../images/goRight_icon.png" />
     </view>
   </view>
@@ -168,3 +178,29 @@
 <select-coupons show="{{showSelectCoupons}}" now="{{selectedCoupons}}" list="{{couponsList}}" bindselectCoupons="selectCoupons" />
 <select-mzgoods show="{{showSelectMzgoods}}" now="{{selectedGift}}" list="{{giftList}}" bindselectGift="selectGift"  /> 
 <select-dhCoupons show="{{showSelectDhCoupons}}" now="{{selectedDhCoupons}}" list="{{dhCouponsList}}" bindselectDhCoupons="selectDhCoupons" />
+
+<view class="selecter-time-conainer" wx:if="{{selected}}" catchtouchmove>
+  <view class="selecter-time-box">
+    <view class="btn-box">
+      <text bindtap='close'>取消</text>
+      <text bindtap='come'>确定</text>
+    </view>
+    <picker-view indicator-style="height: 50px;" style="margin: 0 8%; width: 84%; height: 300px;" value="{{value}}" bindchange="bindChange">
+  <picker-view-column>
+    <view wx:for="{{years}}" wx:key="{{years}}" style="line-height: 50px; text-align: center;">{{item}}</view>
+  </picker-view-column>
+  <picker-view-column>
+    <view wx:for="{{months}}" wx:key="{{months}}" style="line-height: 50px; text-align: center;">{{item}}</view>
+  </picker-view-column>
+  <picker-view-column>
+    <view wx:for="{{days}}" wx:key="{{days}}" style="line-height: 50px; text-align: center;">{{item}}</view>
+  </picker-view-column>
+  <view style="padding-right: 10rpx;display: flex;justify-content: center;align-items: center;font-size: 12px;font-weight: 100;">—</view>
+  <picker-view-column>
+    <view wx:for="{{hours}}" wx:key="{{hours}}" style="line-height: 50px; text-align: center;">{{item}}</view>
+  </picker-view-column>
+  <view style="padding-right: 10rpx;display: flex;justify-content: center;align-items: center;font-size: 14px;font-weight: 100;position:relative;left: -45rpx;">时</view>
+</picker-view>
+  </view>
+  
+</view>
