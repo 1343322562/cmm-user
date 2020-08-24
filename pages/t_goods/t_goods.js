@@ -56,6 +56,7 @@ Page({
   getAllPromotion(type) {
     dispatch[types.GET_ALL_PROMOTION]({
       success: (res) => {
+        console.log(res, 'getAllPromotion\'')
         this.promotionObj = res
         type ? this.getGoodsList(type) : this.getItemCls()
       }

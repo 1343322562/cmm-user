@@ -250,7 +250,7 @@ Page({
     API.Liquidation.getSettlementPromotion({
       data: { branchNo, token, platform, username, dbranchNo, data: itemList },
       success: res => {
-        console.log(res)
+        console.log(res, 253253253253)
         if (res.code == 0 && res.data) {
           let obj = {}
           let giftList = []
@@ -279,8 +279,8 @@ Page({
               const BG = this.promotionObj.BG.giftGoods
               let goodsList = this.data.goodsList
               let BGnum = 0
-              item.items.forEach(item2 => {
-                item2.items.forEach(no => {
+              item.items.forEach((item2, index) => {
+                item2.items.forEach((no, i) => {
                   let goods = BG[no.itemNo][no.id]
                   BGnum += no.qty
                   goodsList.push({
@@ -309,8 +309,8 @@ Page({
             
           })
           this.baseMj = mjList // 挂载满减信息对象
-          console.log(mjList,obj)
           obj.giftList = giftList
+          console.log(mjList,obj)
           this.setData(obj)
         }
       },
@@ -707,14 +707,17 @@ Page({
     this.autoCoupons = autoCoupons
     this.replenishSheet = replenishSheet
     this.codPayMzFlag = codPayMzFlag
-    const { goodsUrl} = getApp().data
+    const { goodsUrl } = getApp().data
     this.goodsUrl = goodsUrl
     let payWayList = this.data.payWayList
+    console.log(deepCopy(payWayList))
     payWayList[0].show = czPay == '1' //&& obj.items[0].sourceType == '0'
     payWayList[1].show = wxPay == '1' //&& obj.items[0].sourceType == '0'
     payWayList[2].show = codPay == '1'
     let goodsList = obj.items[0].datas
     const sourceType = obj.items[0].sourceType
+    console.log(sourceType)
+    console.log('obj', obj)
     this.supcustNo = obj.items[0].sourceNo
     let requestItemList = []
     let itemNos = []
@@ -766,7 +769,7 @@ Page({
     this.wxPayRate =Number(wxPayRate) || 0
     this.wxPayRateOpen =  wxPayRateOpen || '0'
     
-    if (sourceType == '0') { // 统配
+    if (sourceType != '1') { // 统配
       requestItemList = JSON.stringify(requestItemList)
       showLoading('加载促销...')
       this.getMjMz(requestItemList)

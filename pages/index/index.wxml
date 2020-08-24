@@ -1,6 +1,6 @@
 <!-- 导航栏 -->
 <Navbar background='#d40000' color='#ffffff' isShowLeftIcon='true'>
-	<view class="nav-seach-bar-box">
+	<view class="nav-seach-bar-box" >
 		<image src='../../images/search.png' bindtap="searchOrder" />
 		<input type="text" disabled class="nav-seach-bar" placeholder='搜索您想要的商品' placeholder-style='font-size: 26rpx;' bindtap="toSearchPageClick" />
 	</view>
@@ -118,7 +118,7 @@
 		</view>
 		<view id="{{list.moduleId}}" wx:if="{{list.templetType=='4'}}" class="v5-d1" style="{{'margin:'+list.marginTop+'px 0 '+list.marginBottom+'px 0;'}}">
 			<view class="title" wx:if="{{list.showName=='0'}}">{{list.templetName}}</view>
-			<view class="d1-list" style="margin-top: 15rpx;">
+			<view class="d1-list">
 				<view class="li" wx:for="{{list.details}}" wx:for-index="annIndex" wx:for-item="zItem" wx:key="annIndex">
 					<image bindtap="goPage" data-supplier="{{zItem.supplierNo}}" data-type="{{zItem.connectionType}}" data-title="{{zItem.btnName}}" data-val="{{zItem.connectionNo}}" mode="widthFix" src="{{indexImgUrl+zItem.picUrl}}" />
 				</view>

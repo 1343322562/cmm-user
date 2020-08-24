@@ -359,10 +359,9 @@ Component({
             let supplierPromotion = data[promKey]
             goodsData.data.forEach(item => {
               console.log(item)
-              console.log(goods)
-              if ('promotionCollections' in goods && item.promotionCollections.includes('RMJ')) item['RMJ'] = '满减商品'
-              if ('promotionCollections' in goods && item.promotionCollections.includes('RBF')) item['RBF'] = '满赠商品'
-              if ('promotionCollections' in goods && item.promotionCollections.includes('RSD')) item['RSD'] = '限时抢购'
+              if ('promotionCollections' in item && item.promotionCollections.includes('RMJ')) item['RMJ'] = '满减商品'
+              if ('promotionCollections' in item && item.promotionCollections.includes('RBF')) item['RBF'] = '满赠商品'
+              if ('promotionCollections' in item && item.promotionCollections.includes('RSD')) item['RSD'] = '限时抢购'
               // 直配限时购买信息
               for (let key in supplierPromotion) {
                 if (item['itemNo'] == key) {

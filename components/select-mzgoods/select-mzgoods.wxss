@@ -6,6 +6,7 @@
 .box>.btn .item{width: 220rpx;line-height: 70rpx;display: inline-block;margin: 0 30rpx;border-radius: 10rpx;border: 1px solid #000;color: #000}
 .box>.btn .item:last-child{background-color: #000;color: #fff;}
 .box>.list{border-top: 1px solid #e4e4e4;border-bottom: 1px solid #e4e4e4;height: 690rpx;width: 90%;margin: 0 auto;margin-top: 40rpx;padding: 20rpx 0;}
+.o-msg{padding: 5rpx; font-size: 25rpx !important;}
 .box>.list .li{padding-bottom: 20rpx}
 .box>.list .li>.title{font-size: 34rpx;}
 .box>.list .li>.li2{display: flex;margin-top: 20rpx;flex-wrap: wrap;}
@@ -21,4 +22,4 @@
 .box>.list .li>.content .li2>.num .l{float: left;margin-left: 20rpx;}
 .box>.list .li>.content .li2>.num .r{float: right}
 /* .box>.list .li>.content::before{content: "";position: absolute;top: -40rpx;left: 50%;width: 0;height: 0;border-width: 25rpx;border-style: solid;border-color: transparent;border-bottom-color: #e4e4e4;margin-left: -25rpx} */
-.indicator{position: absolute;border: 40rpx solid transparent;content: "";height: 0;width: 0;border-bottom-color: #e6e6e6;top: 50rpx;left: 50rpx;}
+.indicator{display: none;position: absolute;border: 40rpx solid transparent;content: "";height: 0;width: 0;border-bottom-color: #e6e6e6;top: 50rpx;left: 50rpx;}
