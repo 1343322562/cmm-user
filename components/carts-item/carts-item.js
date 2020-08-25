@@ -48,7 +48,7 @@ Component({
         data: { platform, username, branchNo, token },
         success(res) {
           console.log(res)
-          const { isPickDate } = res.data; this.data.isPickDate = isPickDate   // 是否开启自提点 1: 开启 0: 未开
+          const { isPickDate } = res.data; _this.data.isPickDate = isPickDate   // 是否开启自提点 1: 开启 0: 未开
           if (!('orderEndDate' in res.data && 'orderStartDate' in res.data)) return 
           let {orderEndDate, orderStartDate} = res.data, // 开始 / 结束时间
           nowDate = tim()      // 当前时间

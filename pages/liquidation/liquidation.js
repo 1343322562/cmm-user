@@ -604,7 +604,8 @@ Page({
     }
     request.itemNos = itemNos.join(',')
     request.data = JSON.stringify(goodsData)
-    request.pickDate = this.data.storeTime + ':00:00'
+    const { isPickDate } = this.data
+    if (isPickDate == 1) request.pickDate = this.data.storeTime + ':00:00'
     console.log('支付参数:', request)
     API.Liquidation.saveOrder({
       data: request,
@@ -693,7 +694,7 @@ Page({
   },
   // 获取默认的当前时间（自提模式）
   getStoreDefaultTime() {
-    const ymd = timCurrentDay(0) // 年 月 日 
+    const ymd = timCurrentDay(0) // 年 月 日
     const hours = tim().slice(0, 2)
     return `${ymd} ${hours}`
   },

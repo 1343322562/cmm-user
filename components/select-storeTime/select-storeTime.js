@@ -75,7 +75,7 @@ Component({
             day = Number(days[value[2]]),
             hour = Number(hours[value[3]])
 
-      const storeTime = `${year}-${month}-${day} ${hour}`, // 当前时间
+      const storeTime = `${year}-${months[value[1]]}-${days[value[2]]} ${hours[value[3]]}`, // 当前时间
             currentYear = currentDate.slice(0, 4),
             currentMouth = Number(currentDate.slice(5, 7)),
             currentDay = Number(currentDate.slice(8, 10)),
@@ -102,6 +102,7 @@ Component({
           isReturn = true
         }
       }
+      console.log(storeTime)
       if(isReturn) return toast('请选择有效日期')
       console.log(currentYear, currentMouth, currentDay, currentHour)
       let page = getCurrentPages().reverse()[0]
