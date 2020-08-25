@@ -17,6 +17,7 @@ const actions = {
               platform: '3'
             },
             success: (res) => {
+              console.log(res)
               let id = ''
               if (res.code == 0) {
                 id = res.data
