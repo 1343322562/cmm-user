@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "结算页",
+  "navigationBarBackgroundColor": "#d40000",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "select-coupons": "../../components/select-coupons/select-coupons",
+    "select-mzgoods": "../../components/select-mzgoods/select-mzgoods",
+    "select-storeTime": "../../components/select-storeTime/select-storeTime",
+    "select-dhCoupons": "../../components/select-dhCoupons/select-dhCoupons"
+  }
+}

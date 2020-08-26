@@ -1,0 +1,39 @@
+.navbar-box {
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    font-size: 32rpx;
+    margin: 0 auto;
+    text-align: center;
+    letter-spacing: 3rpx;
+    z-index: 10000;
+}
+.title {
+    position: relative;
+}
+.code {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 10rpx;
+}
+.code .content {
+  font-size: 27rpx;
+  margin-left: 5rpx;
+}
+
+.back {
+  display: inline-block;
+  height: 45rpx;
+  width: 45rpx;
+}
+
+.back-text {
+  left: 50rpx;
+  height: auto;
+  width: auto;
+  top: -1rpx;
+  position: absolute;
+  font-size: 32rpx;
+}

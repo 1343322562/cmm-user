@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "分类",
+  "backgroundColorBottom":"f2f2f2",
+  "enablePullDownRefresh":true,
+  "onReachBottomDistance": 300,
+  "usingComponents": {
+    "Navbar": "../../components/Navbar/Navbar"
+  },
+  "navigationStyle": "custom"
+}

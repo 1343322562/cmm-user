@@ -1,0 +1,72 @@
+/* pages/myListDetail/myListDetail.wxss */
+/* pages/myList/myList.wxss */
+
+/* 列表 item 项 */
+.list-item-box {
+  padding: 15rpx 3%;
+  width: 94%;
+  background-color: #fff;
+  margin-top: 8rpx;
+}
+
+.list-item-box .detail-top {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 32rpx;
+}
+
+.list-item-box .name {}
+
+.list-item-box .statu {
+  color: rgb(2, 144, 252);
+}
+
+.list-item-box .detail-bottom {
+  width: 100%;
+  color: #666666;
+  line-height: 45rpx;
+  padding-top: 10rpx;
+  font-size: 30rpx;
+}
+
+.list-item-box .price .span {
+  color: rgb(247, 19, 19);
+}
+
+.list-item-box .time {}
+
+.list-item-box .temp {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.list-item-box .temp image {
+  height: 65rpx;
+  width: 65rpx;
+  background-color: #eee;
+  margin-left: 15rpx;
+}
+
+.upload-img {
+  margin: 40rpx auto;
+  height: 250rpx;
+  width: 350rpx;
+  display: block;
+  margin: 40rpx auto;
+  height: 320rpx;
+  width: 520rpx;
+  display: block;
+  padding: 15rpx 0;
+  background-color: #fff;
+}
+
+.btn {
+  margin: 40rpx auto;
+  width: 600rpx;
+  max-width: 100%;
+  line-height: 2.5;
+  font-size: 36rpx;
+}
