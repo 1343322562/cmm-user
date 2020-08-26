@@ -30,7 +30,7 @@ Page({
         console.log(res)
         if (res.code == 0&& res.data) {
           const cupInfo = res.data.split('<br/>')
-          this.setData({ cupInfo})
+          this.setData({ cupInfo })
         }
       }
     })

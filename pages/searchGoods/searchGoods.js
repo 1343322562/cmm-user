@@ -20,7 +20,7 @@ Page({
     supplierData: []
   },
   clearkey () {
-    this.setData({ historyList: []})
+    this.setData({ historyList: [] })
   },
   backPage () {
     this.data.showGoodsList ? this.hideGoodsList() : wx.navigateBack()
