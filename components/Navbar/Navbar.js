@@ -1,4 +1,4 @@
-import { goPage } from "../../tool/index.js"
+import { goPage } from '../../tool/index.js'
 let app = getApp()
 Component({
 
