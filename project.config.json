@@ -36,8 +36,8 @@
 		"userConfirmedUseCompilerModuleSwitch": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.10.4",
-	"appid": "wx0918ba27d4902838",
+	"libVersion": "2.12.1",
+	"appid": "wx6101bca4c7523c80",
 	"projectname": "%E5%AE%9C%E6%98%8C%E9%87%91%E8%B4%9D%E6%BA%90n",
 	"scripts": {},
 	"simulatorType": "wechat",

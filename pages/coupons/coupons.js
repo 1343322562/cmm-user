@@ -36,7 +36,7 @@ Page({
     const ohterStartDateStr = DateFormat(FetchDateLastDay(date,-10),'yyyy-MM-dd'); 
     // 可用的查最近一年，其他的只查最近10天的 (唐山一合：都查一年)
     const partnerCode = getApp().data.partnerCode
-    const startDate = (tabIndex == 0 || partnerCode == 1036) ? ableStartDateStr:ohterStartDateStr;
+    const startDate = (tabIndex == 0 || partnerCode == 1036 || partnerCode == 1013) ? ableStartDateStr:ohterStartDateStr;
     const endDate = DateFormat(date,'yyyy-MM-dd');
     const status = this.exchangeStatusWithTabIndex(tabIndex);
 
