@@ -16,7 +16,8 @@ Page({
     partnerCode: getApp().data.partnerCode,
     isGoodsLoading: false,
     totalLength: '',
-    openType: ''
+    openType: '',
+    supplierData: []
   },
   clearkey () {
     this.setData({ historyList: []})
@@ -54,9 +55,9 @@ Page({
     this.getGoodsList()
   },
   // 直配商品搜索
-  getSupplierGoodsList (goodsList, goodsObj, totalLength) {
-    console.log(1, this, this.supplierNo)
+  getSupplierGoodsList () {
     const condition = this.searchText
+    const _this = this
     if (!condition) return 
     showLoading('请稍候...')
     const supcustNo = this.supplierNo
@@ -66,50 +67,14 @@ Page({
       success: res => {
         console.log(res)
         if(res.code == 0 && res.data) {
-          const list = res.data.itemData || []
-          console.log('list', list, goodsObj, goodsList)
-          let fineGoodsList = []
-          list.forEach(goods => {
-            goods.stockQty = 9999
-            const itemNo = goods.itemNo
-            goods.goodsImgUrl = this.goodsUrl + goods.itemNo + '/' + getGoodsImgSize(goods.picUrl)
-            goods.stockQty > 0 ? goodsList.unshift(itemNo) : fineGoodsList.push(itemNo)
-            goods.isStock = goods.stockQty > 0 ? true : false
-            goodsObj[itemNo] = goods
-          })
-          let newArr = goodsList.concat(fineGoodsList)
-          console.log('newArr:::', newArr)
-          const totalLength = newArr.length
-          console.log(goodsObj, goodsList, newArr)
-          this.getSupplierPromotionInfo(branchNo, token, platform, username, goodsObj, totalLength) // 获取并处理今日限购的促销信息(直配)
-
-          setTimeout(()=>{
-            this.setData({
-              goodsList: newArr.splice(0, maxNum),
-              goodsObj
-            })
-            baseGoodsList = newArr
-          },150)
-          wx.pageScrollTo({ scrollTop: 0, duration: 0 })
-        } else {
-          this.setData({
-            goodsList,
-            goodsObj,
-            totalLength
-          })
+          _this.data.supplierData = res.data.itemData
         }
-      },
-      error: () => {
-        alert('获取商品失败，请检查网络是否正常')
-      },
-      complete: (res)=> {
-        console.log(res)
-        hideLoading()
-        this.setData({ pageLoading: true })
       }
     })
   },
   getGoodsList() {
+    const _this = this
+    _this.getSupplierGoodsList()
     const searchText = this.searchText
     let historyList = this.data.historyList
     if (searchText) {
@@ -153,8 +118,10 @@ Page({
               }
             }
           }
-          if (res.code == 0 && res.data) {
-            const list = res.data.itemData || []
+          if (res.code == 0 && (res.data || _this.data.supplierData.length)) {
+            if (!res.data) res.data = {} // 当统配无商品，直配有商品时
+            const list = (res.data.itemData || []).concat(_this.data.supplierData)
+            console.log(list, _this.data.supplierData)
             list.forEach(goods => {
               const itemNo = goods.itemNo
               goods.goodsImgUrl = this.goodsUrl + goods.itemNo + '/' + getGoodsImgSize(goods.picUrl)
@@ -301,8 +268,14 @@ Page({
     })
   },
   goGoodsDetails(e) {
+    console.log(e)
     const itemNo = e.currentTarget.dataset.no
-    goPage('goodsDetails', { itemNo })
+    const supcustNo = e.currentTarget.dataset.supno
+    if (supcustNo) {
+      goPage('goodsDetails', { itemNo, supcustNo })
+    } else {
+      goPage('goodsDetails', { itemNo })
+    }
   },
   onLoad (opt) {
     console.log(opt)
