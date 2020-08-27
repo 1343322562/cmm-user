@@ -21,6 +21,20 @@
     </view>
   </view>
 </view>
+<view class="block" wx:if="{{(partnerCode == 1000 || partnerCode == 1053) && !replenish}}" >
+  <view class='title'>  
+    <text>配送方式</text>
+    <view class="right act">
+      <picker header-text="选择配送方式" bindchange="bindPickerChange" value="{{transWayIndex}}" range="{{transWayArray}}">
+        <view class="picker">
+          {{transWayArray[transWayIndex]}} 
+          <image class="icon" src="../../images/goRight_icon.png" />
+        </view>
+      </picker>
+      <!-- <image class="icon" src="../../images/goRight_icon.png" /> -->
+    </view>
+  </view>
+</view>
 <view class="block" wx:if="{{isInvoice == '1'}}" >
   <view class='title'>  
     <text>发票信息</text>
@@ -66,7 +80,7 @@
     </view>
   </view>
   <!-- 自提点时间选择区域 (需要erp开启自提点取货)-->
-  <view class='contentBlock' catchtap='showStoreTime' wx:if="{{isPickDate}}">
+  <view class='contentBlock' catchtap='showStoreTime' wx:if="{{transWayIndex == 1}}">
     <image class="icon" src="../../images/store.png" style="width: 49rpx;height: 49rpx;margin:0 6rpx;"/>
     <text class='text'>自提时间</text>
     <view class="right act">

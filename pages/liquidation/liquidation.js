@@ -1,9 +1,11 @@
 import { showLoading, hideLoading, getGoodsImgSize, deepCopy, getGoodsTag, toast, alert, getTime,goPage } from '../../tool/index.js'
 import API from '../../api/index.js'
 import { tim, timCurrentDay } from '../../tool/date-format.js'
-
+const app = getApp()
 Page({
   data: {
+    replenish: '', // 补货: true
+    partnerCode: app.data.partnerCode,
     goodsList: [], // 商品列表
     storedValue: 0, // 余额储值
     totalMoney: 0, // 商品总金额
@@ -37,7 +39,20 @@ Page({
     payWay: '', // 支付方式 0货到付款 1在线支付 2储值支付 4混合支付
     isPickDate: 0, // 自提点时间选择 0: 关闭 ，开启时默认当前时间
     selectedStoreTime: false, // 是否显示 自提时间 picker
-    storeTime: '2020-01-02 20' // 自提时间
+    storeTime: '2020-01-02 20', // 自提时间
+    transWayArray: ['配送到家', '自提', '第三方物流'],   // 
+    transWayIndex: 0 
+  },
+  //  picker 选择器change事件 
+  bindPickerChange (e) {
+    console.log(e)
+    const transWayIndex = e.detail.value
+    if (transWayIndex == 1) {
+      toast('请确认自提时间');
+      this.setData({ transWayIndex, storeTime: this.getStoreDefaultTime() })
+    } else {
+      this.setData({ transWayIndex })
+    }
   },
   showStoreTime() {
     this.setData({ selectedStoreTime: true })
@@ -604,8 +619,22 @@ Page({
     }
     request.itemNos = itemNos.join(',')
     request.data = JSON.stringify(goodsData)
-    const { isPickDate } = this.data
-    if (isPickDate == 1) request.pickDate = this.data.storeTime + ':00:00'
+    console.log(this.isReplenish)
+    if (!this.isReplenish) {
+      let { transWayIndex } = this.data
+      switch(Number(transWayIndex)) {
+        case 1:
+          request.pickDate = this.data.storeTime + ':00:00'
+          break;
+        case 2:
+          // deliveryType  配送方式   0 配送  1 自提  2 补货 3 第三方物流
+          transWayIndex = 3
+          break;
+      }
+      request.deliveryType = transWayIndex
+    } else {
+      request.deliveryType = 2 // 补货
+    }
     console.log('支付参数:', request)
     API.Liquidation.saveOrder({
       data: request,
@@ -703,9 +732,10 @@ Page({
     const partnerCode = getApp().data.partnerCode
     if (partnerCode == 1052) wx.setNavigationBarColor({ backgroundColor: '#e6c210', frontColor: '#ffffff' })
 
-    const { isPickDate } = opt
-    if(isPickDate == 1) {
-      this.setData({ isPickDate, storeTime: this.getStoreDefaultTime()})  //开启自提点 piker 并 获取默认时间（当前时间）
+    const { replenish } = opt
+    // 补货
+    if(replenish) {
+      this.setData({ replenish: true,  })  // 补货则不显示自提选择
     }
     const obj = wx.getStorageSync('liquidationObj')
     this.promotionObj = wx.getStorageSync('allPromotion')

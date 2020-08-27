@@ -2,7 +2,7 @@
 .pageLeft>.search{height:100rpx;background-color:#c9c9c9;font-size:26rpx;text-align:center;color:#fff;}
 .pageLeft>.search .icon{width: 35rpx;height: 35rpx;margin-top: 10rpx}
 .pageLeft>.search .text{display: block}
-.category{position: absolute;top: 0;left: 0;width: 100%;bottom: 0;}
+.category{position: absolute;top: 0;left: 0;width: 100%;bottom: 0;padding-bottom: 150rpx;}
 /*类别*/
 .oneCls,.oneClsTitle{height:100rpx;overflow:hidden;}
 .oneCls{border-bottom:1px solid #dcdcdc;}
