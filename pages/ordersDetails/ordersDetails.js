@@ -82,7 +82,6 @@ Page({
           order.orderDetails.forEach(goods => {
             goods.goodsImgUrl = (order.transNo == 'YH' ? (goods.itemType == '0' ? zhGoodsUrl : goodsUrl): zcGoodsUrl) + goods.itemNo + '/' + getGoodsImgSize(goods.imgName)
             goods.differAmt = 'shippedQty' in goods ? ((goods.yhQty - goods.shippedQty).toFixed(3) * goods.price).toFixed(2) : false
-            goods.shippedSpecAmt = 'shippedQty' in goods ? (goods.shippedQty.toFixed(3) * goods.price).toFixed(2) : false
             itemNos.push(goods.itemNo)
           })
           order.statusStr = this.getOrderStatusStr(order)

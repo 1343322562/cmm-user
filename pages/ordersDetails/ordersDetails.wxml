@@ -42,7 +42,6 @@
         <view class="out">
           <view class='num outInfo'>
             <view class='num' wx:if="{{goods.shippedSpecQty}}">
-              <!-- 配送数量:<text class="b_red">{{goods.shippedQty + '/' + goods.deliveryUnit}}</text> -->
               配送数量:<text class="b_red">{{goods.shippedSpecQty + '/' + goods.itemUnit}}</text>
             </view>
             <view>
@@ -50,7 +49,6 @@
             </view>
           </view>
             <view class=".outInfo" wx:if="{{goods.differAmt}}"> 
-             <!-- wx:if="{{goods.differAmt != 0.00 && goods.differAmt}} -->
                <text class="num">差异金额:<text class="c_red">￥{{goods.differAmt}}</text></text>
                 <text wx:if="{{goods.shippedSpecAmt}}">发货金额:<text class="b_red">￥{{ goods.shippedSpecAmt}}</text></text>
             </view>

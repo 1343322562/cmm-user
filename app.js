@@ -21,8 +21,8 @@ App({
     // partnerCode: '1034',
     // baseImgUrl:'https://39.100.103.135:8080/',
     
-    // partnerCode: '10111',
-    // baseImgUrl:'http://b2berp.goyounglife.com/',
+    // partnerCode: '1052',
+    // baseImgUrl:'http://app.tmzyz.com/',
     // partnerCode: '1053',
 
     // partnerCode: '1039',
