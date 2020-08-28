@@ -21,18 +21,47 @@
     </view>
   </view>
 </view>
-<view class="block" wx:if="{{(partnerCode == 1000 || partnerCode == 1053) && !replenish}}" >
+<view class="block" style="margin: 0;" wx:if="{{(partnerCode == 1000 || partnerCode == 1053) && !replenish}}" >
   <view class='title'>  
     <text>配送方式</text>
-    <view class="right act">
+    <!-- <view class="right act">
       <picker header-text="选择配送方式" bindchange="bindPickerChange" value="{{transWayIndex}}" range="{{transWayArray}}">
         <view class="picker">
           {{transWayArray[transWayIndex]}} 
           <image class="icon" src="../../images/goRight_icon.png" />
         </view>
       </picker>
-      <!-- <image class="icon" src="../../images/goRight_icon.png" /> -->
+    </view> -->
+  </view>
+  <view class="transWayList" >
+    <view class="transBlock" bindtap="selectTransWayClick" data-type="0">
+      <view class="content {{deliveryType == 0?'act':''}}">
+        <text class="title">配送</text>
+        <text class="info">送货到店</text>
+      </view>
     </view>
+    <view class="transBlock" bindtap="selectTransWayClick" data-type="1">
+      <view class="content {{deliveryType == 1?'act':''}}">
+        <text class="title">自提</text>
+        <text class="info">到总仓自提</text>
+      </view>
+    </view>
+    <view class="transBlock" bindtap="selectTransWayClick" data-type="3">
+      <view class="content {{deliveryType == 3?'act':''}}">
+        <text class="title">物流</text>
+        <text class="info">发物流公司</text>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 自提点时间选择区域 (需要erp开启自提点取货)-->
+<view class='contentBlock block' catchtap='showStoreTime' wx:if="{{deliveryType == 1}}">
+  <image class="icon" src="../../images/store.png" style="width: 49rpx;height: 49rpx;margin:0 6rpx;"/>
+  <text class='text'>自提时间</text>
+  <view class="right act">
+    <text style="font-size: 27rpx;">{{storeTime}}时</text>
+    <image class="icon" src="../../images/goRight_icon.png" />
   </view>
 </view>
 <view class="block" wx:if="{{isInvoice == '1'}}" >
@@ -76,15 +105,6 @@
     <text class='text'>满赠</text>
     <view class="right{{selectedGiftNum?' act':''}}">
       <text>{{selectedGiftNum?('已选择'+selectedGiftNum+'组赠品'):'未选择赠品'}}</text>
-      <image class="icon" src="../../images/goRight_icon.png" />
-    </view>
-  </view>
-  <!-- 自提点时间选择区域 (需要erp开启自提点取货)-->
-  <view class='contentBlock' catchtap='showStoreTime' wx:if="{{transWayIndex == 1}}">
-    <image class="icon" src="../../images/store.png" style="width: 49rpx;height: 49rpx;margin:0 6rpx;"/>
-    <text class='text'>自提时间</text>
-    <view class="right act">
-      <text style="font-size: 27rpx;">{{storeTime}}时</text>
       <image class="icon" src="../../images/goRight_icon.png" />
     </view>
   </view>

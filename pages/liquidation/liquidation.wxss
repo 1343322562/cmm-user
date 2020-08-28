@@ -122,3 +122,38 @@
 .btn-box text:nth-child(2){
   color: #3dae3f;
 }
+
+.transWayList {
+  width: 96%;
+  padding: 0 2%;
+  background-color: #fff;
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: center;
+}
+.transWayList .transBlock{
+  flex: 1;
+  margin: 0 10rpx;
+}
+.transWayList .content{
+  border: 1rpx solid #dddddd;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20rpx 0;
+  border-radius: 10rpx;
+
+}
+.transWayList .title{
+  font-weight: bold;
+}
+.transWayList .info{
+  font-size: 20rpx;
+  color: #aaa;
+
+}
+.transWayList .act{
+  color: #f51000;
+  border-color: #f51000;
+}

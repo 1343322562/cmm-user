@@ -39,20 +39,14 @@ Page({
     payWay: '', // 支付方式 0货到付款 1在线支付 2储值支付 4混合支付
     isPickDate: 0, // 自提点时间选择 0: 关闭 ，开启时默认当前时间
     selectedStoreTime: false, // 是否显示 自提时间 picker
-    storeTime: '2020-01-02 20', // 自提时间
-    transWayArray: ['配送到家', '自提', '第三方物流'],   // 
-    transWayIndex: 0 
+    storeTime: 'yyyy-mm-dd hh', // 自提时间
+    deliveryType: 0 // 配送方式   0 配送  1 自提  2 补货 3 第三方物流
   },
-  //  picker 选择器change事件 
-  bindPickerChange (e) {
-    console.log(e)
-    const transWayIndex = e.detail.value
-    if (transWayIndex == 1) {
-      toast('请确认自提时间');
-      this.setData({ transWayIndex, storeTime: this.getStoreDefaultTime() })
-    } else {
-      this.setData({ transWayIndex })
-    }
+  // 选择配送方式 0 配送  1 自提 3 第三方物流
+  selectTransWayClick(e) {
+    const deliveryType = e.currentTarget.dataset.type
+    if (deliveryType == 1) return this.setData({ deliveryType, selectedStoreTime: true, storeTime: this.getStoreDefaultTime() })
+    this.setData({ deliveryType })
   },
   showStoreTime() {
     this.setData({ selectedStoreTime: true })
@@ -621,20 +615,12 @@ Page({
     request.data = JSON.stringify(goodsData)
     console.log(this.isReplenish)
     if (!this.isReplenish) {
-      let { transWayIndex } = this.data
-      switch(Number(transWayIndex)) {
-        case 1:
-          request.pickDate = this.data.storeTime + ':00:00'
-          break;
-        case 2:
-          // deliveryType  配送方式   0 配送  1 自提  2 补货 3 第三方物流
-          transWayIndex = 3
-          break;
-      }
-      request.deliveryType = transWayIndex
+      request.deliveryType = this.data.deliveryType
+      if (this.data.deliveryType == 1) request.pickDate = this.data.storeTime + ':00:00'
     } else {
       request.deliveryType = 2 // 补货
     }
+    console.log(request.deliveryType)
     console.log('支付参数:', request)
     API.Liquidation.saveOrder({
       data: request,
