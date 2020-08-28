@@ -1,6 +1,7 @@
 // components/select-storeTime/select-storeTime.js
 import { tim, timCurrentDay } from '../../tool/date-format.js'
 import { toast } from '../../tool/index.js'
+
 const date = new Date()
 const years = []
 const months = []
@@ -37,7 +38,8 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    show: Boolean
+    show: Boolean,
+    time: String
   },
 
   /**
@@ -51,9 +53,25 @@ Component({
     value: [0, 2, 2, 0]
   },
 
+
   /**
    * 组件的方法列表
    */
+  lifetimes: {
+    attached: function() {
+      const ymd = timCurrentDay(0), // 年 月 日
+            hours = this.data.hours,
+            M = Number(ymd.slice(5, 7)),
+            D = Number(ymd.slice(8, 10)),
+            H = Number(tim().slice(0, 2))
+      console.log(H, ymd)
+      this.setData({value: [hours.length - 1, M-1, D-1, H-1]})
+    },
+    detached: function() {
+      // 在组件实例被从页面节点树移除时执行
+    }
+  },
+
   methods: {
     // 绑定级联框
     bindChange(e) {

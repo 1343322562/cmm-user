@@ -60,7 +60,7 @@
   <image class="icon" src="../../images/store.png" style="width: 49rpx;height: 49rpx;margin:0 6rpx;"/>
   <text class='text'>自提时间</text>
   <view class="right act">
-    <text style="font-size: 27rpx;">{{storeTime}}时</text>
+    <text style="font-size: 27rpx;">{{storeTime+':00'}}</text>
     <image class="icon" src="../../images/goRight_icon.png" />
   </view>
 </view>
@@ -212,7 +212,7 @@
 <select-coupons show="{{showSelectCoupons}}" now="{{selectedCoupons}}" list="{{couponsList}}" bindselectCoupons="selectCoupons" />
 <select-mzgoods show="{{showSelectMzgoods}}" now="{{selectedGift}}" list="{{giftList}}" bindselectGift="selectGift"  /> 
 <select-dhCoupons show="{{showSelectDhCoupons}}" now="{{selectedDhCoupons}}" list="{{dhCouponsList}}" bindselectDhCoupons="selectDhCoupons" />
-<select-storeTime show="{{selectedStoreTime}}" />
+<select-storeTime show="{{selectedStoreTime}}" time="{{storeTime}}" />
 
 <!-- <view class="selecter-time-conainer" wx:if="{{selected}}" catchtouchmove>
   <view class="selecter-time-box">
