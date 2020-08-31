@@ -52,7 +52,7 @@
       <view class='price' wx:if="{{partnerCode!='1039' && partnerCode!='1049'}}">
         <text class='now'>￥{{goodsObj[itemNo].price}}{{goodsObj[itemNo].specType=='2'?'起':('/'+(goodsObj[itemNo].unit||''))}}</text>
         <text class='before' wx:if="{{goodsObj[itemNo].orgiPrice&&goodsObj[itemNo].orgiPrice!=goodsObj[itemNo].price&&goodsObj[itemNo].specType!='2'}}">￥{{goodsObj[itemNo].orgiPrice}}</text>
-      </view>
+      </view>{{itemNo}}
       <view class='tag'>
         <text wx:if="{{goodsObj[itemNo].BF}}">买满赠</text>
         <text wx:if="{{goodsObj[itemNo].FS}}">首单特价</text>
