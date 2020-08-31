@@ -50,7 +50,7 @@ Component({
     months,
     days,
     hours,
-    value: [0, 2, 2, 0]
+    value: [0, 0, 0, 0]
   },
 
 
@@ -60,12 +60,11 @@ Component({
   lifetimes: {
     attached: function() {
       const ymd = timCurrentDay(0), // 年 月 日
-            hours = this.data.hours,
             M = Number(ymd.slice(5, 7)),
             D = Number(ymd.slice(8, 10)),
             H = Number(tim().slice(0, 2))
       console.log(H, ymd)
-      this.setData({value: [hours.length - 1, M-1, D-1, H-1]})
+      this.setData({value: [years.length - 1, M-1, D-1, H-1]})
     },
     detached: function() {
       // 在组件实例被从页面节点树移除时执行
@@ -87,12 +86,13 @@ Component({
     },
     come() {
       let currentDate = timCurrentDay(0)
+      
       const { years, months, days, hours, value } = this.data, // 选择的时间
             year = years[value[0]],
             month = Number(months[value[1]]),
             day = Number(days[value[2]]),
             hour = Number(hours[value[3]])
-
+console.log(years, value[0], years)
       const storeTime = `${year}-${months[value[1]]}-${days[value[2]]} ${hours[value[3]]}`, // 当前时间
             currentYear = currentDate.slice(0, 4),
             currentMouth = Number(currentDate.slice(5, 7)),
