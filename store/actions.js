@@ -323,7 +323,12 @@ const actions = {
         cartsObj.num += Number(count); if(String(cartsObj.num).includes('.')) cartsObj.num = Number(Number(cartsObj.num).toFixed(1))
        
       }
-      if (sourceType == '0' && param.type != 'minus' && (item.realQty > maxSupplyQty || (item.realQty > (deliveryType == '3' ? 9999 : stockQty)))) {
+      // if (sourceType == '0' && param.type != 'minus' && (item.realQty > maxSupplyQty || (item.realQty > (deliveryType == '3' ? 9999 : stockQty)))) {
+      //   toast(item.realQty > maxSupplyQty ? '已达到最大购买数量' :'库存不足')
+      //   return
+      // }
+      // 判断了直配和统配都判断了库存
+      if (param.type != 'minus' && (item.realQty > maxSupplyQty || (item.realQty > (deliveryType == '3' ? 9999 : stockQty)))) {
         toast(item.realQty > maxSupplyQty ? '已达到最大购买数量' :'库存不足')
         return
       }
