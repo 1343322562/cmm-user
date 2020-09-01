@@ -278,7 +278,9 @@ Page({
     }, 900)
   },
   onShareAppMessage() {
+    console.log('share')
     return {
+      title: '首页',
       path: '/pages/login/login'
     }
   },

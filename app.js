@@ -1,7 +1,7 @@
 App({
   data: { 
-    partnerCode: '1007',
-    baseImgUrl:'http://erp.zfyxok.com/',
+    // partnerCode: '1027',
+    // baseImgUrl:'http://39.98.78.85:8080/',
     // partnerCode: '1043',
     // baseImgUrl:'http://erp.jhdd.cn/',
     //  partnerCode: '1029',
@@ -24,7 +24,7 @@ App({
     
     // partnerCode: '1052',
     // baseImgUrl:'http://app.tmzyz.com/',
-    // partnerCode: '1053',
+    partnerCode: '1053',
 
     // partnerCode: '1039',
     

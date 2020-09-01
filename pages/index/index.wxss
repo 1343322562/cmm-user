@@ -1,6 +1,8 @@
 Page{background-color:#fff;padding-bottom: 1000rpx;}
 
 view{-webkit-overflow-scrolling: touch}
+.shareIcon{position: fixed !important;height: 90rpx !important;width: 90rpx !important;bottom: 12px !important;right: 25rpx !important;z-index: 100 !important;background-color: #dd4032 !important;border-radius: 50% !important;padding: 20rpx !important;opacity: .8 !important;display: flex !important;}
+.shareIcon image {height: 50rpx; width: 50rpx;}
 .pageScroll{bottom:0px}
 .tdBox{position: absolute;z-index: 9999;-webkit-overflow-scrolling: touch;}
 .tdBox.act{top: 90rpx;}

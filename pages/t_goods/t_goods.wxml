@@ -12,7 +12,7 @@
     <image class='icon' src='../../images/goodsList_page_search.png' />
     <text class='text'>搜索</text>
   </view> -->
-  <scroll-view scroll-y class="category">
+  <scroll-view scroll-y enhanced show-scrollbar="{{false}}" class="category">
     <block wx:for="{{classifyList}}" wx:for-index="oneIndex" wx:for-item="clsOne" wx:key="clsOne">
       <view class="oneCls{{nowSelectOneCls==clsOne?' act':''}}" animation="{{ nowSelectOneCls==clsOne?animtionObjShow:(beforeOneCls==clsOne?animtionObjHide:null)}}">
         <view class='oneClsTitle' bindtap="tapOneCls" data-no="{{clsOne}}"><text>{{classifyObj[clsOne].title}}</text></view>
@@ -52,7 +52,7 @@
       <view class='price' wx:if="{{partnerCode!='1039' && partnerCode!='1049'}}">
         <text class='now'>￥{{goodsObj[itemNo].price}}{{goodsObj[itemNo].specType=='2'?'起':('/'+(goodsObj[itemNo].unit||''))}}</text>
         <text class='before' wx:if="{{goodsObj[itemNo].orgiPrice&&goodsObj[itemNo].orgiPrice!=goodsObj[itemNo].price&&goodsObj[itemNo].specType!='2'}}">￥{{goodsObj[itemNo].orgiPrice}}</text>
-      </view>{{itemNo}}
+      </view>
       <view class='tag'>
         <text wx:if="{{goodsObj[itemNo].BF}}">买满赠</text>
         <text wx:if="{{goodsObj[itemNo].FS}}">首单特价</text>

@@ -2,18 +2,20 @@
 .pageLeft>.search{height:100rpx;background-color:#c9c9c9;font-size:26rpx;text-align:center;color:#fff;}
 .pageLeft>.search .icon{width: 35rpx;height: 35rpx;margin-top: 10rpx}
 .pageLeft>.search .text{display: block;z-index: 999;}
-.category{position: absolute;top: 0;left: 0;width: 100%;bottom: 0;padding-bottom: 160rpx;z-index: 999;}
+.category{position: absolute;top: 0;left: 0;width: 100%;bottom: 0;z-index: 999;}
 /*类别*/
+.oneCls:last-child{padding-bottom: 500rpx;}
 .oneCls,.oneClsTitle{height:100rpx;overflow:hidden;}
 .oneCls{border-bottom:1px solid #dcdcdc;}
 .oneCls.act{overflow:hidden}
-.oneCls.act>.oneClsTitle{color:#dd4242}
+.oneCls.act>.oneClsTitle{color:#dd4242;}
 .oneClsTitle{color:#707070;text-align:center;font-size:30rpx;height:100rpx;border-right:1px solid #dcdcdc;display:flex;justify-content:center;align-items: center;}
 .twoClsList{background-color:#fff}
 .twoClsTitle{border-top:1px solid #dcdcdc;height:100rpx;font-size:26rpx;text-align:center;border-right:2rpx solid #dcdcdc;position:relative;display:flex;justify-content:center;align-items:center;
 }
-.twoClsTitle.act{color:#dd4242;border-right-color:#fff;}
-.twoClsTitle.act::before{content: "";position:absolute;top:20%;left:0px;width:6rpx;height:60%;background:#dd4242;
+.twoClsTitle.act{color:#dd4242;border-right-color:#fff; font-weight: bold;}
+.twoClsTitle.act::after{width: 0; height: 0; content: "";  border: 6px solid transparent;border-left-color: #dd4242;position: absolute;right: -10rpx;top: 39rpx;  }
+.twoClsTitle.act::before{content: "";position:absolute;top:20%;left:0px;width:10rpx;height:60%;background:#dd4242;
 z-index:100}
 /*商品列表*/
 .goodsList{margin-left: 159rpx;background-color: #fff;padding-left: 20rpx;position: relative;padding-top: 80rpx;}
