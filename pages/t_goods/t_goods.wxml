@@ -23,6 +23,8 @@
         </view>
       </view>
     </block>
+    <!-- 占位盒子 -->
+    <view class="oneClsLast"></view>
   </scroll-view>
 </view>
 <view class='goodsList'>
