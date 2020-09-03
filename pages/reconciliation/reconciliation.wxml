@@ -25,7 +25,8 @@
         <text class="payStatus">{{item.payStatusStr}}</text>
       </view>
       <view class='status'>
-        <view>{{item.receiptStatusStr}}</view>
+        <view style="font-size:30rpx;">{{item.receiptStatusStr}}</view>
+        <view>欠款：￥{{item.arrearsAmt}}</view>
         <text>{{item.workDate}}</text>
       </view>
     </view>

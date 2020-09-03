@@ -280,7 +280,7 @@ Page({
   onShareAppMessage() {
     console.log('share')
     return {
-      title: '首页',
+      title: '乐尔乐特卖',
       path: '/pages/login/login'
     }
   },

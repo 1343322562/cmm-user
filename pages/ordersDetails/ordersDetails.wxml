@@ -50,7 +50,7 @@
           </view>
             <view class=".outInfo" wx:if="{{goods.differAmt}}"> 
                <text class="num">差异金额:<text class="c_red">￥{{goods.differAmt}}</text></text>
-                <text wx:if="{{goods.shippedSpecAmt}}">发货金额:<text class="b_red">￥{{ goods.shippedSpecAmt}}</text></text>
+                <text wx:if="{{goods.shippedSpecAmt}}">发货金额:<text class="b_red">￥{{goods.shippedSpecAmt}}</text></text>
             </view>
         </view>
       </view>
