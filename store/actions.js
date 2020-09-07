@@ -2,6 +2,7 @@ import API from '../api/index.js'
 import * as types from './types.js'
 import commit from './mutations.js'
 import { getGoodsImgSize, toast } from '../tool/index.js'
+import { timCurrentDay, tim } from '../tool/date-format.js'
 const actions = {
   [types.GET_OPEN_ID](param) {
     const openId = wx.getStorageSync('openId')
@@ -309,8 +310,10 @@ const actions = {
         branchNo: branchNo,
         sourceType: sourceType,
         sourceNo: sourceNo,
-        parentItemNo: parentItemNo
+        parentItemNo: parentItemNo,
+        createDate: timCurrentDay(0) + ' ' + tim() 
       }
+      console.log(timCurrentDay(0) + tim())
       if (param.type == 'input') {
         let num2 = param.value - minSupplyQty;
         item.realQty = num2 <= 0 ? minSupplyQty : (minSupplyQty + (num2 <= supplySpec ? supplySpec : supplySpec * parseInt(num2 / supplySpec)))
@@ -360,6 +363,13 @@ const actions = {
           let newCartsObj = { num: 0, keyArr:[]}
           if (res.code == 0 && res.data) {
             res.data.forEach(config => {
+              // 按加购时间排序
+              config.datas.sort((a, b) => {
+                let aDate = new Date(a.createDate).getTime()
+                let bDate = new Date(b.createDate).getTime()
+                console.log(aDate, bDate, aDate - bDate)
+                return bDate - aDate
+              })
               config.datas.forEach(goods => {
                 const itemNo = goods.itemNo
                 newCartsObj.keyArr.push(itemNo)

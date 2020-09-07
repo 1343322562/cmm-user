@@ -282,9 +282,8 @@ Page({
   },
   onShareAppMessage() {
     console.log('share')
-    const { branchName, dbBranchName } = wx.getStorageSync('userObj')
     return {
-      title: dbBranchName || branchName,
+      title: '乐尔乐特卖',
       path: '/pages/login/login'
     }
   },
