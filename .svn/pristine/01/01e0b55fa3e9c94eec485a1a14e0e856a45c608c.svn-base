@@ -226,7 +226,6 @@ Page({
   },
   goPage (e) {
     let { type, val, title,supplier} = e.currentTarget.dataset
-    console.log(type, val, title)
     val = val?val.replace(/\s+/g, ""):''
     if (type == '1' && val == '1') { // 优惠券领取
       goPage('getCoupons')
@@ -234,10 +233,8 @@ Page({
       goPage('integralExchange')
     } else if (type == '1' && val == '3') { // 首单特价
       goPage('activity', { title, type, value: val })
-    } else if (type == '1' && val == '4') { // 积分详情
-      goPage('integral')
     } else if (type == '1' && val == '4') { // 海报
-      // goPage('H5')
+      goPage('H5')
     } else if (type == '2') { // 商品详情
       val && goPage('goodsDetails', { itemNo: val })
     } else if (type == '3') { // 活动页
