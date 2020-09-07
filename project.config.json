@@ -169,6 +169,19 @@
 					"pathName": "pages/carts/carts",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/ordersDetails/ordersDetails",
+					"pathName": "pages/ordersDetails/ordersDetails",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/ordersList/ordersList",
+					"pathName": "pages/ordersList/ordersList",
+					"scene": null
 				}
 			]
 		}

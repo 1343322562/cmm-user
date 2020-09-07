@@ -19,6 +19,13 @@ Page({
     yhOrderCancelFlag: '',//  统配是否有取消订单按钮  0：不展示 1：展示
     branchApproveSwitch: '1' // 0=不允许再支付 1=允许 (新增字段,钟伟迪:2020-04-23 14:51:00)
   },
+  // 是否选择商品
+  selectGoods(e) {
+    const { index } = e.currentTarget.dataset
+    const { orderDetails } = this.data.order
+    orderDetails[index].cancelSelected = !orderDetails[index].cancelSelected
+    this.setData({ [`order.orderDetails`]: orderDetails })
+  },
   goGrade () {
     const { branchRule, shopRule, routeSendMan, sheetNo} = this.data.order
     if (!branchRule || !shopRule) {
@@ -76,12 +83,21 @@ Page({
     API.Orders[this.openType == 'share' ? 'getOrderDetailNoToken' :'getOrderDetail']({
       data: { token, platform, username, sheetNo, branchNo },
       success: res => {
-        if (res.code == 0) {
+        if (res.code == 0) {      
           const order = res.data
           let itemNos =[]
           order.orderDetails.forEach(goods => {
             goods.goodsImgUrl = (order.transNo == 'YH' ? (goods.itemType == '0' ? zhGoodsUrl : goodsUrl): zcGoodsUrl) + goods.itemNo + '/' + getGoodsImgSize(goods.imgName)
             goods.differAmt = 'shippedQty' in goods ? (goods.subAmt-goods.shippedSpecAmt).toFixed(2) : false
+  
+            console.log(87, order)
+            console.log(92, order.supplyFlag, order.sheetSourceStr, order.memo)  
+            if (order.supplyFlag == 5 || order.supplyFlag == 51) {
+              goods.cancelSelected = true
+            } else {
+              goods.cancelSelected = 'hide'
+            }
+            console.log(564564564)
             itemNos.push(goods.itemNo)
           })
           order.statusStr = this.getOrderStatusStr(order)
@@ -144,7 +160,7 @@ Page({
             this.getUserInfo()
           }
           console.log(paymentAmtStr, order.czPayAmt)
-          this.setData({ order})
+          this.setData({ order })
         }
       },
       complete: ()=> {
@@ -203,28 +219,48 @@ Page({
     this.openType == 'list' && wx.setStorage({ key: 'updateOrderList', data: true })
     this.getPageData()
   },
+  // 处理被选中的商品， 转为以 itemNo 为键值的对象
+  selectedItemHandle(orderDetails) {
+    let obj = {  }
+    orderDetails.forEach(item => {
+      if (item.cancelSelected == true) {
+        obj[item.itemNo] = item 
+      }
+    })
+    return obj
+  },
   afreshOrder () {
     const { token, platform, username, branchNo, dbBranchNo } = this.userObj
+    const { orderDetails } = this.data.order
+    const selectedItemObj = this.selectedItemHandle(orderDetails)
+    if (!Object.keys(selectedItemObj).length) return toast('请选择需要加入购物车的商品')
+    console.log(selectedItemObj)
+    const _this = this
     const yhSheetNo = this.ordersNo
     alert('是否把商品加入购物车',{
       showCancel: true,
       success: ret => {
         if (ret.confirm) {
           let cartsObj = commit[types.GET_CARTS]()
+          console.log(yhSheetNo)
           showLoading('请稍后...')
           API.Orders.againOrder({
             data: { token, platform, username, branchNo, yhSheetNo},
             success: res => {
               if (res.code == 0) {
                 const list = res.data || []
+                console.log(list, cartsObj, _this.data)
                 list.forEach(goods => {
                   const itemNo = goods.itemNo
+                  console.log(selectedItemObj[itemNo], Boolean(selectedItemObj[itemNo]))
                   if (cartsObj[itemNo]) {
+                    if (!selectedItemObj[itemNo]) return  // 没有选中商品则不加入购物车
                     if (cartsObj[itemNo].realQty < goods.itemQty) {
                       cartsObj.num = (cartsObj.num - cartsObj[itemNo].realQty) + goods.itemQty
                       cartsObj[itemNo].realQty = goods.itemQty
                     }
                   } else {
+                    if (!selectedItemObj[itemNo]) return // 没有选中商品则不加入购物车
                     cartsObj.keyArr.push(itemNo)
                     cartsObj[itemNo] = {
                       itemNo: itemNo,
