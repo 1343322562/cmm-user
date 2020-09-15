@@ -669,7 +669,7 @@ Page({
           data: { code: codeData.code, out_trade_no: this.orderNo, body: '具体信息请查看小程序订单中心', openId: openId, platform, username },
           success: res => {
             // let data = JSON.parse(res.data) // 银盛支付数据处理
-            console.log(res, data)
+            console.log(res)
             if (res.code == 0 && res.data) {
               wx.requestPayment({
                 'timeStamp': res.data.timeStamp || JSON.parse(res.data).timeStamp,
