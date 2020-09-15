@@ -1,9 +1,9 @@
 App({
   data: { 
-    partnerCode: '1027',
-    baseImgUrl:'http://39.98.78.85:8080/',
-    // partnerCode: '1043',
-    // baseImgUrl:'http://erp.jhdd.cn/',
+    // partnerCode: '1027',
+    // baseImgUrl:'http://39.98.78.85:8080/',
+    // partnerCode: '1010',
+    // baseImgUrl:'http://erp.guoanmall.com/',
     //  partnerCode: '1029',
     //  baseImgUrl:'http://39.98.164.194:8081/',
     //  partnerCode: '1000', 
@@ -17,14 +17,14 @@ App({
     // partnerCode: '1034',
     // baseImgUrl:'https://39.100.103.135:8080/',
     // partnerCode: '10522',
-    // partnerCode: '10511',
+    // partnerCode: '10111',
     // partnerCode: '1034',
     // baseImgUrl:'https://39.100.103.135:8080/',
     // partnerCode: '1026',
     
     // partnerCode: '1052',
     // baseImgUrl:'http://app.tmzyz.com/',
-    // partnerCode: '1053',
+    partnerCode: '1053',
 
     // partnerCode: '1039',
     

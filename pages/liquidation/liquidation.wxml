@@ -1,3 +1,4 @@
+<wxs module="filters" src="../../tool/filter.wxs"></wxs>  <!-- 引入 wxs module -->  
 <view class="block">
   <view class='title'>付款方式</view>
   <view class='contentBlock' wx:for="{{payWayList}}" wx:key="index" wx:if="{{item.show}}" bindtap='changePayWay' data-type="{{item.type}}">
@@ -200,9 +201,9 @@
 <view class="pageBottomBtn">
   <view class="okPay" bindtap="submit">提交订单</view>
   <view class='info'>
-    <view class="totalMoney" wx:if="{{!isUseBlendWay}}"><view class='title'>合计: </view><view class='text'>￥{{realPayAmt}}</view></view>
+    <view class="totalMoney" wx:if="{{!isUseBlendWay}}"><view class='title'>合计: </view><view class='text'>￥{{filters.toFixed(realPayAmt)}}</view></view>
     <!-- 混合支付要减去储值金额 -->
-    <view class="totalMoney" wx:else><view class='title'>合计: </view><view class='text'>￥{{realPayAmt - storedValue}}</view></view>
+    <view class="totalMoney" wx:else><view class='title'>合计: </view><view class='text'>￥{{filters.toFixed(realPayAmt - storedValue)}}</view></view>
     <view class="discountsMoney">已优惠: ￥{{discountsMoney}}</view>
   </view>
   

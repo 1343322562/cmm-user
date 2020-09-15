@@ -190,6 +190,8 @@ Component({
         console.log('czPayAmtString', request.czPayAmtString)
         console.log('onlinePayAmtString', request.onlinePayAmtString)
       }
+      console.log('支付参数', request)
+      return
       API.Orders.orderpay({
         data: request,
         success: res => {

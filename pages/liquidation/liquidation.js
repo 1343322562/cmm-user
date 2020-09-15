@@ -437,6 +437,7 @@ Page({
         let bestGift = this.chooseBestGift(giftList)  // 返回最优惠的赠品
         this.setData({ selectedGift: bestGift }) 
       } 
+      discountsMoney = discountsMoney.toFixed(2)
       this.setData({ realPayAmt, discountsMoney, selectedCoupons, mjObj, showSelectMzgoods })
     }
   },
