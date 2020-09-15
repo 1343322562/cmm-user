@@ -478,7 +478,7 @@ Page({
     }
     if (this.notAllowLoading) return
     if (!payWay) {toast('请选择支付方式'); return}
-    if (payWay == '2' && storedValue < realPayAmt && !isUseBlendWay) {toast('余额不足');return}
+    if (payWay == '2' && storedValue < realPayAmt && !isUseBlendWay) {toast('余额不足')}
     if(this.isClickLoading) return
     this.isClickLoading = true
     showLoading('提交订单...')
@@ -623,6 +623,7 @@ Page({
     }
     console.log(request.deliveryType)
     console.log('支付参数:', request)
+    return hideLoading()
     API.Liquidation.saveOrder({
       data: request,
       success: res => {
@@ -742,6 +743,7 @@ Page({
       wxPayRateOpen,  //微信手续费开关
       replenishSheet //  补单是否使用订单号 0 不使用 1 使用
     } = wx.getStorageSync('configObj')
+    console.log({ codPay, czPay, wxPay })
     this.codPayMjFlag = codPayMjFlag
     this.autoCoupons = autoCoupons
     this.replenishSheet = replenishSheet
