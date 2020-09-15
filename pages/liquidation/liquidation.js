@@ -109,8 +109,10 @@ Page({
     this.setOrderAction()
   },
   selectDhCoupons (e) {
+    console.log(e)
     const { list } = e.detail
-    const dhList = e.detail.selectObj
+    let dhList = list ? { selectObj: e.detail.selectObj } : e.detail
+      
     console.log(list)
     const obj = deepCopy(this.liquidationObj)
     let requestItemList = []
