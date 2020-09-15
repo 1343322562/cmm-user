@@ -83,13 +83,15 @@ Page({
         API.Group.getMiniTeamPayParameters({
           data: { code: codeData.code, sheetNo, body: '具体信息请查看团购订单', openId, platform, username, token },
           success: ret => {
+            console.log(86, ret)
+            hideLoading()
             const config = ret.data
             if (ret.code == 0 && config) {
               wx.requestPayment({
                 'timeStamp': config.timeStamp,
                 'nonceStr': config.nonceStr,
                 'package': config.package,
-                'signType': 'MD5',
+                'signType': config.signType,
                 'paySign': config.sign,
                 'success': () => {
                   this.goSuccessPage(true)

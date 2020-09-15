@@ -104,7 +104,7 @@ Page({
                       'timeStamp': config.timeStamp,
                       'nonceStr': config.nonceStr,
                       'package': config.package,
-                      'signType': 'MD5',
+                      'signType': config.signType,
                       'paySign': config.sign,
                       'success':  ()=> {
                         this.goSuccessPage(true)

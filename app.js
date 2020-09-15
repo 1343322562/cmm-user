@@ -24,7 +24,8 @@ App({
     
     // partnerCode: '1052',
     // baseImgUrl:'http://app.tmzyz.com/',
-    partnerCode: '1053',
+    // partnerCode: '1053',
+    partnerCode: '6666',
 
     // partnerCode: '1039',
     

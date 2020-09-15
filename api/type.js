@@ -2,7 +2,7 @@ export default {
   '1111': 'http://47.94.172.87:8088/zksrb2b-web/', // 国安e购测试
   '2222': 'http://192.168.1.96:8085/zksrb2b-web/', // 文艺
   '0000': 'http://192.168.1.223:8081/zksrb2b-web/', // 李盼
-  '6666': 'http://192.168.1.113:8091/zksrb2b-web/', // 向丽红
+  '6666': 'http://192.168.2.113:8091/zksrb2b-web/', // 向丽红
   '0001': 'http://125.76.225.59:8083/zksrb2b-web/', // 帮便利测试服 图片 bbladmin.bangbianli.com
   '0002': 'http://47.92.249.124:8084/zksrb2b-web/', // 广西测试服 图片 39.98.164.194:8081
   '1000': 'https://mmj.zksr.cn/zksrb2b-web/', // 中科商软 买卖佳  图片 mmj.zksr.cn:8888
