@@ -55,8 +55,9 @@ Component({
     },
     confirm() {
       const { selectObj, list } = this.data
+      selectObj.list = list
       
-      this.triggerEvent('selectDhCoupons', { selectObj, list })
+      this.triggerEvent('selectDhCoupons', selectObj)
     }
   }
 })

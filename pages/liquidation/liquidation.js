@@ -84,11 +84,12 @@ Page({
   },
   showDhCoupons () {
     const dhCouponsList = this.data.dhCouponsList
+    console.log(deepCopy(dhCouponsList))
     if (!dhCouponsList.length) {
       toast('暂无可用兑换券')
     } else {
       dhCouponsList.forEach(item => {
-        item.num = 0
+        item.num = item.num || 0
       })
       this.setData({ showSelectDhCoupons: true, dhCouponsList })
     }
@@ -110,11 +111,13 @@ Page({
   },
   selectDhCoupons (e) {
     console.log(e)
-    const { list } = e.detail
-    let dhList = list ? { selectObj: e.detail.selectObj } : e.detail
+    const list = e.detail.keyArr.length == 0 ? [] : e.detail.list 
+    console.log(list)
+    const dhList = e.detail
       
     console.log(list)
     const obj = deepCopy(this.liquidationObj)
+    console.log('购物车', obj)
     let requestItemList = []
     let totalMoney = 0
     let totalNum = 0
@@ -165,6 +168,7 @@ Page({
         totalMoney: Number(totalMoney.toFixed(2)),
         totalNum
       })
+      this.data.dhCouponsList = list
     }
   },
   changePayWay (e,auto) {
@@ -569,14 +573,27 @@ Page({
     if (selectedDhCoupons.keyArr.length) { // 使用了兑换券  itemNo qty price
       console.log(selectedDhCoupons)
       let list = []
-      selectedDhCoupons.keyArr.forEach(itemNo => {
+      let dhList = selectedDhCoupons.list
+      // selectedDhCoupons.keyArr.forEach(itemNo => {
+      //   list.push({
+      //     itemNo: itemNo,
+      //     qty: String(selectedDhCoupons[itemNo].num),
+      //     price: String(dhCouponsList[selectedDhCoupons[itemNo].index].price)
+      //   })
+      //   itemNos.indexOf(itemNo) == -1 && itemNos.push(itemNo)
+      // })
+      dhList.forEach((item, index) => {
+        if(item.num == 0) return
         list.push({
-          itemNo: itemNo,
-          qty: String(selectedDhCoupons[itemNo].num),
-          price: String(dhCouponsList[selectedDhCoupons[itemNo].index].price)
+          itemNo: item.itemNo,
+          qty: item.num,
+          price: item.price,
+          batchNo: item.batchNo,
+          memo: '',
+          flowNo: item.flowNo
         })
-        itemNos.indexOf(itemNo) == -1 && itemNos.push(itemNo)
       })
+      console.log(list)
       request.orderMeetingData = JSON.stringify(list)
     }
     if (mjObj.length) { // 使用了满减(数量或金额)

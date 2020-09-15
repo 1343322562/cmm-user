@@ -1,5 +1,5 @@
 import API from '../../api/index.js'
-import { showLoading, hideLoading, alert, getTime } from '../../tool/index.js'
+import { showLoading, hideLoading, alert, getTime, goPage } from '../../tool/index.js'
 Page({
   data: {
     list: [],
@@ -33,6 +33,10 @@ Page({
         this.setData({ pageLoading: true })
       }
     })
+  },
+  toDHGoodDetail(e) {
+    const itemNo = e.currentTarget.dataset.itemno
+    goPage('goodsDetails', { itemNo })
   },
   onLoad(opt) {
     this.getPageData()
