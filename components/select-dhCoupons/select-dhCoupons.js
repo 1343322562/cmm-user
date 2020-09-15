@@ -14,9 +14,12 @@ Component({
   },
   methods: {
     changeNum (e) {
+      console.log(this.data.list)
+      console.log(e)
       const { info, type } = e.currentTarget.dataset
       const [index,itemNo] = info.split(',')
       let { selectObj, list} = this.data
+      console.log(selectObj, index, itemNo)
       const num = selectObj[itemNo] ? selectObj[itemNo].num : 0
       if (type == 'add' && list[index].couponsQnty <= num) {
         wx.showToast({

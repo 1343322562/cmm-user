@@ -31,9 +31,9 @@ Page({
     wxPayRateOpen:'0',  // 微信手续费开关
     memo: '', // 备注
     payWayList: [
-      { name: '储值支付', type:'2',icon:'yue',show:true},
-      { name: '微信支付', type: '1', icon: 'wx',show:true },
-      { name: '货到付款', type: '0', icon: 'hdfk',show:true }
+      { name: '储值支付', type:'2',icon:'yue',show:false},
+      { name: '微信支付', type: '1', icon: 'wx',show:false },
+      { name: '货到付款', type: '0', icon: 'hdfk',show:false }
     ],
     isUseBlendWay: false, // 是否使用混合支付
     payWay: '', // 支付方式 0货到付款 1在线支付 2储值支付 4混合支付
@@ -623,6 +623,7 @@ Page({
     }
     console.log(request.deliveryType)
     console.log('支付参数:', request)
+    console.log(this.data)
     return hideLoading()
     API.Liquidation.saveOrder({
       data: request,

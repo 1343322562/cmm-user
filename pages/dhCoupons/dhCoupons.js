@@ -11,6 +11,7 @@ Page({
     API.Public.getOrderMeetingCoupons({
       data: { branchNo, token, platform, username, dbranchNo },
       success: res => {
+        console.log(res)
         if (res.code == 0&& res.data) {
           let list = []
           const data = res.data.coupons || []
