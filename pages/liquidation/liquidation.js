@@ -106,6 +106,7 @@ Page({
     this.setOrderAction()
   },
   selectDhCoupons (e) {
+    console.log(e)
     const dhList = e.detail
     const obj = deepCopy(this.liquidationObj)
     let requestItemList = []
