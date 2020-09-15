@@ -13,7 +13,7 @@
         
         <view class='goCarts' wx:if="{{selectObj[item.itemNo]}}">
           <view class='minus item' catchtap='changeNum'  data-type="minus" data-info="{{index+','+item.itemNo}}"><image class='icon' src="../../images/goodsList_minus_carts.png" /></view>
-          <text class='num'>{{selectObj[item.itemNo].num}}</text>
+          <text class='num'>{{list[index].num}}</text>
           <view class='add item' catchtap='changeNum' data-type="add" data-info="{{index+','+item.itemNo}}"><image class='icon' src="../../images/goodsList_add_carts.png" /></view>
         </view>
         <view class='use' wx:else catchtap='changeNum' data-type="add" data-info="{{index+','+item.itemNo}}" >兑换</view>

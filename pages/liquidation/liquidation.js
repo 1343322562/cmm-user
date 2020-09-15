@@ -87,7 +87,10 @@ Page({
     if (!dhCouponsList.length) {
       toast('暂无可用兑换券')
     } else {
-      this.setData({ showSelectDhCoupons: true })
+      dhCouponsList.forEach(item => {
+        item.num = 0
+      })
+      this.setData({ showSelectDhCoupons: true, dhCouponsList })
     }
   },
   // 点击满赠 ,支付方式为 货到付款时，不支持满赠，并提示用户
@@ -106,12 +109,16 @@ Page({
     this.setOrderAction()
   },
   selectDhCoupons (e) {
-    const dhList = e.detail
+    const { list } = e.detail
+    const dhList = e.detail.selectObj
+    console.log(list)
     const obj = deepCopy(this.liquidationObj)
     let requestItemList = []
     let totalMoney = 0
     let totalNum = 0
     let types
+
+    console.log(dhList, obj)
     if (JSON.stringify(dhList) == JSON.stringify(this.data.selectedDhCoupons)) {
       this.setData({ showSelectDhCoupons: false})
     } else {
@@ -558,6 +565,7 @@ Page({
       request.couponsNo = selectedCoupons.couponsNo
     }
     if (selectedDhCoupons.keyArr.length) { // 使用了兑换券  itemNo qty price
+      console.log(selectedDhCoupons)
       let list = []
       selectedDhCoupons.keyArr.forEach(itemNo => {
         list.push({
@@ -624,7 +632,7 @@ Page({
     console.log(request.deliveryType)
     console.log('支付参数:', request)
     console.log(this.data)
-    return hideLoading()
+    // return hideLoading()
     API.Liquidation.saveOrder({
       data: request,
       success: res => {
