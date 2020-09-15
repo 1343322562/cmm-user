@@ -31,9 +31,9 @@ Page({
     wxPayRateOpen:'0',  // 微信手续费开关
     memo: '', // 备注
     payWayList: [
-      { name: '储值支付', type:'2',icon:'yue',show:true},
-      { name: '微信支付', type: '1', icon: 'wx',show:true },
-      { name: '货到付款', type: '0', icon: 'hdfk',show:true }
+      { name: '储值支付', type:'2',icon:'yue',show:false},
+      { name: '微信支付', type: '1', icon: 'wx',show:false },
+      { name: '货到付款', type: '0', icon: 'hdfk',show:false }
     ],
     isUseBlendWay: false, // 是否使用混合支付
     payWay: '', // 支付方式 0货到付款 1在线支付 2储值支付 4混合支付
@@ -669,7 +669,7 @@ Page({
           data: { code: codeData.code, out_trade_no: this.orderNo, body: '具体信息请查看小程序订单中心', openId: openId, platform, username },
           success: res => {
             // let data = JSON.parse(res.data) // 银盛支付数据处理
-            // console.log(res, data)
+            console.log(res, data)
             if (res.code == 0 && res.data) {
               wx.requestPayment({
                 'timeStamp': res.data.timeStamp || JSON.parse(res.data).timeStamp,
