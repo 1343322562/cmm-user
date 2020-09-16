@@ -45,7 +45,7 @@ Component({
       } else {
         num || selectObj.keyArr.push(itemNo)
         selectObj[itemNo] = { num: num + (type == 'add' ? 1 : -1), index: index}
-        list[index].num += 1
+        list[index].num = list[index].num + (type == 'add' ? 1 : -1)
         selectObj.num = selectObj.num - num + selectObj[itemNo].num
       }
       this.setData({ selectObj, list })

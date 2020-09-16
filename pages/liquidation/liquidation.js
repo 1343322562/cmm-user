@@ -594,7 +594,7 @@ Page({
         list.push({
           itemNo: item.itemNo,
           qty: item.num,
-          price: item.price * item.num,
+          price: item.price,
           batchNo: item.batchNo,
           memo: '',
           flowNo: item.flowNo
