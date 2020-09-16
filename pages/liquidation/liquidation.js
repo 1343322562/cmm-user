@@ -83,11 +83,16 @@ Page({
     }
   },
   showDhCoupons () {
-    const dhCouponsList = this.data.dhCouponsList
+    let dhCouponsList = this.data.dhCouponsList
+    dhCouponsList = Array.from(dhCouponsList)
+    console.log(dhCouponsList)
     if (!dhCouponsList.length) {
       toast('暂无可用兑换券')
     } else {
-      this.setData({ showSelectDhCoupons: true })
+      dhCouponsList.forEach(item => {
+        item.num = item.num || 0
+      })
+      this.setData({ showSelectDhCoupons: true, dhCouponsList })
     }
   },
   // 点击满赠 ,支付方式为 货到付款时，不支持满赠，并提示用户
@@ -107,12 +112,19 @@ Page({
   },
   selectDhCoupons (e) {
     console.log(e)
+    let list = e.detail.keyArr.length == 0 ? [] : e.detail.list  // 兑换卷数组
+    console.log(list)
     const dhList = e.detail
+      
+    console.log(list)
     const obj = deepCopy(this.liquidationObj)
+    console.log('购物车', obj)
     let requestItemList = []
     let totalMoney = 0
     let totalNum = 0
     let types
+
+    console.log(dhList, obj)
     if (JSON.stringify(dhList) == JSON.stringify(this.data.selectedDhCoupons)) {
       this.setData({ showSelectDhCoupons: false})
     } else {
@@ -157,6 +169,13 @@ Page({
         totalMoney: Number(totalMoney.toFixed(2)),
         totalNum
       })
+      if (!list.length) {
+        list = this.data.dhCouponsList
+        list.forEach(item => {
+          item.num = 0
+        })
+      }
+      this.data.dhCouponsList = list
     }
   },
   changePayWay (e,auto) {
@@ -479,7 +498,7 @@ Page({
     }
     if (this.notAllowLoading) return
     if (!payWay) {toast('请选择支付方式'); return}
-    if (payWay == '2' && storedValue < realPayAmt && !isUseBlendWay) {toast('余额不足');return}
+    if (payWay == '2' && storedValue < realPayAmt && !isUseBlendWay) {toast('余额不足')}
     if(this.isClickLoading) return
     this.isClickLoading = true
     showLoading('提交订单...')
@@ -559,15 +578,29 @@ Page({
       request.couponsNo = selectedCoupons.couponsNo
     }
     if (selectedDhCoupons.keyArr.length) { // 使用了兑换券  itemNo qty price
+      console.log(selectedDhCoupons)
       let list = []
-      selectedDhCoupons.keyArr.forEach(itemNo => {
+      let dhList = selectedDhCoupons.list
+      // selectedDhCoupons.keyArr.forEach(itemNo => {
+      //   list.push({
+      //     itemNo: itemNo,
+      //     qty: String(selectedDhCoupons[itemNo].num),
+      //     price: String(dhCouponsList[selectedDhCoupons[itemNo].index].price)
+      //   })
+      //   itemNos.indexOf(itemNo) == -1 && itemNos.push(itemNo)
+      // })
+      dhList.forEach((item, index) => {
+        if(item.num == 0) return
         list.push({
-          itemNo: itemNo,
-          qty: String(selectedDhCoupons[itemNo].num),
-          price: String(dhCouponsList[selectedDhCoupons[itemNo].index].price)
+          itemNo: item.itemNo,
+          qty: item.num,
+          price: item.price,
+          batchNo: item.batchNo,
+          memo: '',
+          flowNo: item.flowNo
         })
-        itemNos.indexOf(itemNo) == -1 && itemNos.push(itemNo)
       })
+      console.log(list)
       request.orderMeetingData = JSON.stringify(list)
     }
     if (mjObj.length) { // 使用了满减(数量或金额)
@@ -624,6 +657,8 @@ Page({
     }
     console.log(request.deliveryType)
     console.log('支付参数:', request)
+    console.log(this.data)
+    // return hideLoading()
     API.Liquidation.saveOrder({
       data: request,
       success: res => {
@@ -743,6 +778,7 @@ Page({
       wxPayRateOpen,  //微信手续费开关
       replenishSheet //  补单是否使用订单号 0 不使用 1 使用
     } = wx.getStorageSync('configObj')
+    console.log({ codPay, czPay, wxPay })
     this.codPayMjFlag = codPayMjFlag
     this.autoCoupons = autoCoupons
     this.replenishSheet = replenishSheet
