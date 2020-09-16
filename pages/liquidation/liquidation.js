@@ -83,8 +83,9 @@ Page({
     }
   },
   showDhCoupons () {
-    const dhCouponsList = this.data.dhCouponsList
-    console.log(deepCopy(dhCouponsList))
+    let dhCouponsList = this.data.dhCouponsList
+    dhCouponsList = Array.from(dhCouponsList)
+    console.log(dhCouponsList)
     if (!dhCouponsList.length) {
       toast('暂无可用兑换券')
     } else {
@@ -111,7 +112,7 @@ Page({
   },
   selectDhCoupons (e) {
     console.log(e)
-    const list = e.detail.keyArr.length == 0 ? [] : e.detail.list 
+    let list = e.detail.keyArr.length == 0 ? [] : e.detail.list  // 兑换卷数组
     console.log(list)
     const dhList = e.detail
       
@@ -168,6 +169,12 @@ Page({
         totalMoney: Number(totalMoney.toFixed(2)),
         totalNum
       })
+      if (!list.length) {
+        list = this.data.dhCouponsList
+        list.forEach(item => {
+          item.num = 0
+        })
+      }
       this.data.dhCouponsList = list
     }
   },
@@ -587,7 +594,7 @@ Page({
         list.push({
           itemNo: item.itemNo,
           qty: item.num,
-          price: item.price,
+          price: item.price * item.num,
           batchNo: item.batchNo,
           memo: '',
           flowNo: item.flowNo
