@@ -1,0 +1,100 @@
+<view class="box">
+
+  <view class='goods block'>
+    <image mode='aspectFill' src="{{imgBaseUrl+order.chOrderDetails[0].imgUrl}}" class='icon' />
+    <view class='info'>
+      <text class='name'>{{order.chOrderDetails[0].itemName}}</text>
+      <text class='type'>免预约</text>
+      <text class='price'>￥{{order.chOrderDetails[0].itemNowPrice}}</text>
+    </view>
+  </view>
+
+  <view class='block'>
+    <view class='blockTitle'>
+      <image mode='widthFix' src="../../../images/eatDrinkPlayHappy/c-1@2x.png" class='icon' />
+      <text>商家信息</text>
+    </view>
+    <view class='blockContent'>
+      <view class='location'>
+        <text>{{shop.supplierName}}</text>
+        <view class='addr'>
+          <image mode='widthFix' src="../../../images/eatDrinkPlayHappy/c-2@2x.png" class='icon' />
+          <text>{{shop.address}}</text>
+        </view>
+        <view class='tel' catchtap='callPhone' mode='widthFix'>
+          <image mode='widthFix' src="../../../images/eatDrinkPlayHappy/c-3@2x.png" class='icon' />
+          <text>联系商家</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class='block'>
+    <view class='blockTitle'>
+      <image mode='widthFix' src="../../../images/eatDrinkPlayHappy/c-4@2x.png" class='icon' />
+      <text>券码</text>
+    </view>
+    <view class='blockContent'>
+
+      <view class='code' wx:for="{{order.chOrderDetails}}" wx:key="index">
+        <text>{{item.receiveCodeNo}}</text>
+        <text class='state'>({{ item.returnFlag =='1'?'申请退款':( item.signForStatus=='1'?'已使用':'未使用')}})</text>
+      </view>
+
+      <image wx:if="{{(order.orderState=='0'&&order.payState=='1')||order.orderState=='4'}}" catchtap='lookCode'  mode='widthFix' src="../../../images/eatDrinkPlayHappy/c-6@2x.png"  class='codeIcon' />
+    </view>
+  </view>
+
+  <view class='block' wx:if="{{order.productDetail&&order.productDetail.length}}">
+    <view class='blockTitle'>
+      <image mode='widthFix' src="../../../images/eatDrinkPlayHappy/c-5@2x.png" class='icon' />
+      <text>套餐内容</text>
+    </view>
+    <view class='blockContent'>
+
+      <view class='setMeal'>
+        <view class='item' wx:for="{{order.productDetail}}" wx:key="index">
+          <text class="name">{{item.name}}</text>
+          <text class="size">({{item.num}}份)</text>
+          <text class="num">￥{{item.price}}</text>
+        </view>
+      </view>
+
+    </view>
+  </view>
+
+  <view class='block' wx:if="{{order.useRuler}}">
+    <view class='blockTitle'>
+      <image mode='widthFix' src="../../../images/eatDrinkPlayHappy/c-7@2x.png" class='icon' />
+      <text>使用规则</text>
+    </view>
+    <view class='blockContent'>{{order.useRuler}}</view>
+  </view>
+
+  <view class='block'>
+    <view class='blockTitle'>
+      <image mode='widthFix' class='icon' />
+      <text>订单信息</text>
+    </view>
+    <view class='blockContent'>
+      <view class="shopInfo"><text>手机号:</text><text>{{order.userPhone}}</text></view>
+      <view class="shopInfo"><text>付款时间:</text><text>{{order.createdStr}}</text></view>
+      <!-- <view class="shopInfo"><text>剩余有效天数:</text><text>7天</text></view> -->
+      <view class="shopInfo"><text>数量</text><text>{{order.totalNum}}</text></view>
+      <view class="shopInfo"><text>实付</text><text>￥{{order.totalAmt}}</text></view>
+      <view class="shopInfo"><text>备注</text><text>{{order.memo}}</text></view>
+    </view>
+  </view>
+
+  <view class='btnList'>
+    <block wx:if="{{(order.orderState=='0'&&order.payState=='1')||order.orderState=='4'}}" >
+      <text class='item tk' catchtap='goRefund' wx:if="{{order.orderState=='0'}}">申请退款</text>
+      <text class='item look' catchtap='lookCode' >扫码验券</text>
+    </block>
+    <text wx:if="{{order.orderState=='0'&&order.payState=='0'}}" class='item look' catchtap='pay'>支付</text>
+    <text class='item look'wx:if="{{openType=='play'}}" catchtap='goHome'>继续购买</text>
+  </view>
+
+</view>
+
+<userCode id="userCode" show="{{showCode}}" bindhideCode="hideCode" />

@@ -1,0 +1,20 @@
+<view class="list">
+  <view class="li">
+    <view class="name">总仓自提点</view>
+    <view class="addr">广西壮族自治区</view>
+    <view class="describe">
+      <text>起配金额：20元</text>
+      <text>服务描述：营业时间为早上10点至晚上24点，请在营业时间内取货。此提货点最快次日送达，最慢72小时送达。</text>
+    </view>
+    <view class="operation">
+      <view class="checkbox"><image src="" class="icon" /></view>
+      <text>最近使用</text>
+      <view class="btn">
+        <view class="item">
+          <image src="" class="icon" />
+          <text>删除</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

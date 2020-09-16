@@ -1,0 +1,33 @@
+.box{padding: 20rpx;}
+.block{background-color: #fff;margin-bottom: 10rpx;border-radius: 10rpx;padding: 20rpx;position: relative}
+.form{display: flex;border-bottom: 1px solid #e8e8e8;height: 90rpx;}
+.form:last-child{border: none}
+.form>.name{width: 134rpx;white-space: nowrap;line-height: 90rpx;font-size: 30rpx;color: #777;position: relative}
+.form>.name::after{content:":";position: absolute;top: 0;right: 0;line-height: 90rpx;color: #777;letter-spacing: 0}
+.form>.name.n2{display: block;letter-spacing: 59rpx;}
+.form>.input{margin-left: 20rpx;height: 90rpx;width: 510rpx;}
+.region{display: inline-block;line-height: 90rpx;color:#888;}
+.region.act{color: #000}
+.title{font-weight: bold;font-size: 32rpx;padding-bottom: 20rpx;}
+.goods{display: flex;border-bottom: 1px solid #e8e8e8;padding-bottom: 15rpx;}
+.goods>.icon{background-color: #f2f2f2;width: 120rpx;height: 120rpx;overflow: hidden;border-radius: 10rpx;}
+.goods>.name{width: 500rpx;margin-left: 20rpx;font-size: 26rpx;}
+.info{border-bottom: 1px solid #e8e8e8;padding: 30rpx 0;}
+.info>.text{display: inline-block;width: 70%;}
+.info>.money{float: right;color: red;}
+.shoping{line-height: 90rpx;position: relative;}
+.shoping>.btn{position: absolute;top: 30rpx;right: 10rpx;display: flex}
+.shoping>.btn text{display: block;line-height: 45rpx;text-align: center;height: 50rpx;}
+.shoping>.btn .num{background-color: #f2f2f2;width: 90rpx;font-size: 22rpx;}
+.shoping .add,.shoping .minus{width: 70rpx;font-size: 40rpx;}
+.agree{padding: 20rpx;}
+.agree>.msg{color: #ea1543}
+.nav{position: fixed;bottom: 0;left: 0;width: 100%;line-height: 100rpx;background-color: #fff;font-size: 32rpx;}
+.nav>.money{color: red;}
+.nav>text:first-child{padding-left: 20rpx;}
+.nav>.btn{float: right;width: 230rpx;background: linear-gradient(90deg,#ea1543, 50%, #fa6e4f);color: #fff;text-align: center}
+.mask>.alert{position: absolute;left: 50%;top: 50%;width: 600rpx;height: 800rpx;margin: -400rpx 0 0 -300rpx;}
+.mask .alertTitlte{text-align: center;font-weight: bold;line-height: 80rpx;background-color: #fff;}
+.mask .content{background: red;height: 650rpx;background: #fff}
+.mask .clear{line-height: 80rpx;background-color: #43b300;text-align: center;color: #fff;}
+.memoTextarea{display: block;width: 100%;height: 120rpx;margin-top: 10rpx;}

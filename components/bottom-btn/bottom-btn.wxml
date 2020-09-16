@@ -1,0 +1,15 @@
+<view class='tabBar' wx:if="{{nowSelectedTab!=4}}">
+  <view class="item{{(item.show?' show':'')+(nowSelectedTab==index?' act c_color':'')}}" wx:for="{{tabBarList}}" wx:key="index" bindtap='changePage' data-type="{{item.type}}" data-index="{{index}}">
+    <image class="icon ff" style="height:50rpx"  src="../../images/{{item.img+(nowSelectedTab==index?'ed':'')}}.png" mode="widthFix" />
+    <view class='title'>{{item.title}}</view>
+    <view class="num" wx:if="{{index==2&&num}}">{{num}}</view>
+  </view>
+</view>
+
+<cover-view class='tabBar' wx:else>
+  <cover-view class="item{{(item.show?' show':'')+(nowSelectedTab==index?' act c_color':'')}}" wx:for="{{tabBarList}}" wx:key="index" bindtap='changePage' data-type="{{item.type}}" data-index="{{index}}">
+    <cover-image class="icon"  src="../../images/{{item.img+(nowSelectedTab==index?'ed':'')}}.png" mode="widthFix" />
+    <cover-view class='title'>{{item.title}}</cover-view>
+    <cover-view class="num" wx:if="{{index==2&&num}}">{{num}}</cover-view>
+  </cover-view>
+</cover-view>

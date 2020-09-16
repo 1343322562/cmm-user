@@ -1,0 +1,88 @@
+<view class="pageBox show">
+
+  <view class="status">
+    <image class="icon"  src="../../images/wth.png" />
+    <text class="text">{{orderStateName}}</text>
+    <view class="getNo" wx:if="{{(orderInfo[0].orderState=='1'&&orderInfo[0].payState!='0'&&orderInfo[0].deliveryNo)}}">快递单号: {{ordersInfo[0].deliveryNo}}</view>
+  </view>
+
+  <view class="userInfo">
+    <image class="border" src="../../images/border.png" />
+    <view class="view tel">
+      <block wx:if="{{orderInfo[0].storeType=='1'}}">
+	      <text class='text'>收货人：{{orderInfo[0].receiveMan}}</text>
+	      <text class="text">手机号：{{orderInfo[0].receivePhone}}</text>
+      </block>
+      <block wx:if="{{orderInfo[0].storeType=='2'}}">
+	      <text class='text'>自提点：{{orderInfo[0].storeName}}</text>
+	      <text class="text">联系号码：{{orderInfo[0].storePhone}}</text>
+      </block>
+	  </view>
+    <view class="view addr">{{orderInfo[0].storeType=='1'?'收货地点':'提货地点'}}：{{orderInfo[0].storeAddr}} </view>
+    <image class="border" src="../../images/border.png"  />
+  </view>
+  
+  <view class="goods-box">
+    <view class="contentTitle c_background_before">
+	    <text class="text">商品详情</text>
+      <view class='lookLogistics' wx:if="{{orderInfo[0].payState!='0'}}" catchtap='lookLogistics'>查看物流</view>
+	  </view>
+    <view class="list  act" >
+      <block wx:for="{{orderInfo}}" wx:for-item="ditem" wx:for-index="dindex" wx:key="dindex">
+        <block wx:for="{{ditem.itemList}}" wx:key="index">
+          <view class="li">
+              <view class="imag"><image class="icon" src="{{item.itemThumbPic}}" mode="widthFix" /></view>
+              <view class="info">
+                <view class="name">{{item.itemName}}</view>
+                <view class='size'>规格:{{item.itemSizeDes}}</view>
+                <view class="price">
+	                <text class="now">￥{{item.itemNowPrice}}</text>
+                  <text style="font-size:26rpx;color:red">/{{item.itemUnit}}</text>
+	                <text class="before">￥{{item.itemDisPrice}}</text>
+	                <text class="num  act">x{{item.saleNum}}</text>
+	              </view>
+              </view>
+          </view>
+        </block>
+      </block>
+    </view>
+  </view>
+
+
+  <view class="orderInfo">
+    <view class="item" wx:if="{{orderInfo[0].memo}}">
+	    <text>备注:</text>
+	    <view class="view">{{orderInfo[0].memo}}</view>
+	  </view>
+
+    <view class="item">
+	    <text>订单编号:{{orderInfo[0].orderNo}}</text>
+    </view>
+     <view class="item" style="margin-top:10rpx;">
+	    <text>下单时间:{{orderInfo[0].createdStr}}</text>
+    </view>
+    <view class="item couponAmt" wx:if="{{orderInfo[0].isCoupon=='1'}}">
+	    <text>优惠金额:</text>
+      <text class="money" >￥{{orderInfo[0].couponAmt||0}}</text>
+    </view>
+     <view class="item">
+      <view class="view" >
+        <text class="text" wx:if="{{orderInfo[0].postage}}" style="color:#f49b1e">运费:￥{{orderInfo[0].postage}}</text>
+	      <text class="text" decode> &nbsp;&nbsp;共{{orderInfo[0].totalNum}}件商品&nbsp;&nbsp;&nbsp;合计:</text>
+	      <text class="text" decode>￥{{orderInfo[0].payAmt}}</text>
+	    </view>
+
+    </view>
+
+
+
+  </view>
+
+  <view class="orderBtn">
+     <view class="goPay c_background" wx:if="{{orderInfo[0].payState=='0'&&orderInfo[0].orderState=='1'}}" bindtap="pay">立即付款</view>
+     <view class="goPay c_background" bindtap="goIndex" data-type="all">我要购物</view>
+     <view class="goPay c_background" wx:if="{{orderInfo[0].orderState=='3'}}" catchtap='repeatDownOrder'>重下此单</view>
+     <!-- <view class="goPay c_background" bindtap="receiving" data-type="all" wx:if="{{(orderInfo[0].payState=='1'&&orderInfo[0].orderState=='1')}}" >全部收货</view> -->
+  </view>
+
+</view>

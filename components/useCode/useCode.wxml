@@ -1,0 +1,13 @@
+<view class="mask{{show?' show':''}}" catchtouchmove="true">
+  <view class='alertBox'>
+    <text class='title'>{{name}}</text>
+    <!-- <text class='date'>剩余有限天数: 7天</text> -->
+    <radio-group bindchange="radioChange">
+      <radio class="radio" wx:for="{{codeList}}" wx:key="index" value="{{item}}" checked="{{item == checkedVlue}}">
+        <text class='code'>券码：{{item}}</text>
+      </radio>
+    </radio-group>
+    <canvas class='canvas' style="width: {{wh}}px; height: {{wh}}px;" canvas-id='canvas'></canvas>
+    <image src="../../images/btnX.png" catchtap='hideAlert' class="clear" mode="widthFix" />
+  </view>
+</view>

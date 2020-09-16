@@ -1,0 +1,136 @@
+<view class="home-hade act" style="padding-top:{{headHeight}}rpx;">
+  <view class="go-back" catchtap="goBack">
+    <image class="icon" src="../../images/go_back.png" mode="aspectFit"></image>
+  </view>
+  <view class="btnCart" catchtap="goCart">
+    <image class="icon" src="../../images/serachGoods_cart.png" mode="aspectFit"></image>
+    <text class="cartNum" wx:if="{{cartNum}}" >{{cartNum}}</text>
+  </view>
+  <view class='search' bindtap="goSearchGoods">
+    <image src="../../images/home-search-icon.png" class='icon' />
+    <view class='result' wx:if="{{pageType=='1'}}" catchtap='backPage'>
+      <text>{{itemName}}</text>
+      <image src="../../images/clear.png" class='img' />
+    </view>
+    <input wx:if="{{pageType=='0'}}" class="input" placeholder='挑选宝贝~' maxlength='20' bindconfirm='confirmSearch' bindblur='searchInputBlur' confirm-type="search"  />
+  </view>
+</view>
+
+<!-- 头部 -->
+  <view class="region-top" style="top:{{90+headHeight}}rpx" wx:if="{{pageType=='1'&&goodsList.length}}">
+    <view class="content-top">
+      <view class="content-top-title" wx:if="{{itemClsName!=''}}">
+        <text class="cls-title">{{itemClsName}}</text>
+      </view>
+      <view class="content-top-title" data-field="" bindtap="onClickOrderBy">
+        <text>综合</text>
+        <view class="asc" wx:if="{{!orderByField}}">
+          <image class="icon-asc" src="../../images/{{orderBy}}.png"></image>
+        </view>
+      </view>
+      <!-- <view class="content-top-title" data-field="sale" bindtap="onClickOrderBy">
+        <text>销量</text>
+        <view class="asc" wx:if="{{orderByField=='sale'}}">
+          <image class="icon-asc" src="../../images/{{orderBy}}.png"></image>
+        </view>
+      </view> -->
+      <view class="content-top-title" data-field="itemNowPrice" bindtap="onClickOrderBy">
+        <text>价格</text>
+        <view class="asc" wx:if="{{orderByField=='itemNowPrice'}}">
+          <image class="icon-asc" src="../../images/{{orderBy}}.png"></image>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- end头部 -->
+
+<view class="pageBox" style="padding-top:{{(pageType=='0'?90:180)+headHeight}}rpx">
+  <view wx:if="{{pageType=='0'}}">
+    <view class='keys' wx:if="{{historyKey.length}}">
+      <text class='title'>历史搜索</text>
+      <view class='list'>
+        <text class='item' catchtap='selectedKey' data-key="{{item}}"  wx:for="{{historyKey}}" wx:key="index">{{item}}</text>
+      </view>
+      <view class='operate' bindtap='clearkey'><image src="../../images/address_delete.png" class="icon" /></view>
+    </view>
+    <view class='keys' wx:if="{{hostKey.length}}">
+      <text class='title'>推荐搜索</text>
+      <view class='list'>
+        <text class='item' catchtap='selectedKey' data-key="{{item.name}}" wx:for="{{hostKey}}" wx:key="index">{{item.name}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 内容 -->
+  <view class="region-content" wx:if="{{pageType=='1'}}">
+
+    <view class="null-goods" wx:if="{{(!goodsList||goodsList.length==0 )&&pageLoading}}">
+      <image class="icon" src="../../images/member_list_null.png" mode="widthFix" />
+      <view class='title'>此专区暂无商品！</view>
+      <view class='goIndex' catchtap='goIndexPage'>去首页逛逛</view>
+    </view>
+
+    <!-- item -->
+    <view class="content-item" wx:for="{{goodsList}}" wx:key="index" catchtap="goGoodsInfo" data-itemid="{{item.itemId}}">
+
+      <view class="content-left">
+        <view class="content-left-img">
+          <image class="img" src="{{item.itemThumbPic}}{{imgV}}" mode="aspectFit"></image>
+          <text class='seckillTag' wx:if="{{allPromotionGoods[item.itemId]&&allPromotionGoods[item.itemId].type=='MS'}}">限时秒杀</text>
+          <view class='c-stock_null' wx:if="{{item.stockNull}}">已售罄</view>
+        </view>
+      </view>
+
+      <view class="content-right" catchtap="goGoodsInfo" data-itemid="{{item.itemId}}">
+        <view class="itemName">{{item.itemName}}</view>
+        <view class="itemSize">{{item.itemSizeDes}}</view>
+        <view class="itemPrice">
+          <text>￥{{allPromotionGoods[item.itemId]?allPromotionGoods[item.itemId].price:item.itemNowPrice}}/{{item.itemUnit}}</text>
+          <text class='befored'>￥{{item.itemDisPrice}}</text>
+        </view>
+        <!-- <view class="itemCount">月销量 {{item.itemMonthSale}}</view> -->
+        <text class='startQty' wx:if="{{!cartGoods[item.itemId]&&item.startQty&&item.startQty!=1}}">起订数量{{item.startQty}}</text>
+        <view catchtap="addCarts" data-itemid="{{item.itemId}}" class="itemCart{{(cartGoods[item.itemId]?' act':' null')}} show">
+          <view class="num">{{cartGoods[item.itemId]&&cartGoods[item.itemId].num}}</view>
+          <view class="carts">
+            <image class="icon" mode="widthFix" src="../../images/index_cart_{{(cartGoods[item.itemId]?'3':'1')}}.png" role="img"></image>
+          </view>
+        </view>
+
+      </view>
+
+    </view>
+
+    <!-- enditem -->
+    <view class="content-bottom">
+      <view class="loading" hidden="{{!searchLoading}}">
+        <view class="icon">
+          <image src="../../images/icon-loading.gif"></image>
+        </view>
+        <text>正在载入更多...</text>
+      </view>
+    </view>
+
+    <view class="content-bottom" wx:if="{{isLoadingAllGoods&&goodsList.length}}">
+      <text class="page-bottom-null"></text>
+      <view class="placeholder"></view>
+    </view>
+
+
+  </view>
+  <!-- end内容 -->
+
+  <view class='recommendGoods' wx:if="{{recommendGoods.length}}">
+    <view class='title'>
+      <image src="../../images/search_gooods_title.png" class='icon'  mode="widthFix" />
+      <text>推荐商品</text>
+    </view>
+    <view class='list'>
+      <view wx:for="{{recommendGoods}}" wx:key="index" class='li' catchtap="goGoodsInfo" data-itemid="{{item.id}}">
+        <text class='name'>{{index+1}}.{{item.itemName}}</text>
+        <text class="salesNum">{{item.saleQty}}</text>
+      </view>
+    </view>
+  </view>
+
+</view>

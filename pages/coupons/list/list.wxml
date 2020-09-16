@@ -1,0 +1,39 @@
+<view class="head">
+  <view class="act c_background_before" style="left:{{(selectedIndex*(100/tabTitle.length))}}%;width:{{(100/tabTitle.length)}}%"></view>
+  <view class="btn">
+    <view wx:for="{{tabTitle}}" wx:key="index" class="view{{selectedIndex==index?' act c_color':''}}"  bindtap="changeTab" data-index="{{index}}">{{item}}({{list[index].length}})</view>
+  </view>
+</view>
+<view class='list'>
+  <view class='box' wx:for="{{list[selectedIndex]}}" wx:key="index">
+
+    <view class="li{{item.state!='0'?' null':''}}" >
+      <view class="left{{item.state=='0'?' c_background c_border_before':''}}">
+        <view class='money'>￥<text class='text'>{{item.discountAmt}}</text></view>
+        <text class='msg'>{{item.explainStr}}券</text>
+      </view>
+      <view class='right'>
+        <view class='name'>{{item.useCondition?('满'+item.useCondition+'元使用'):'无门槛使用'}}</view>
+        <view class='time'>{{item.startDateStr}}-{{item.endDateStr}}</view>
+        <view class="goDetails{{selected[item.id]?' act':''}}" catchtap='open' data-id="{{item.id}}">
+          <text>使用说明</text>
+          <image src='../../../images/coupon-down.png' class='icon' />
+        </view>
+        <view wx:if="{{item.state=='0'}}" class='share' catchtap='goIndex' style="border:1px red solid;">去使用</view>
+        <!-- <view wx:if="{{item.state=='1'}}" class='share' style="border: 1px solid #d0cdcd;color:#d0cdcd">已过期</view> -->
+        <image wx:else class='status' src="../../../images/coupons_icon_status{{item.state}}.png" mode="widthFix" />
+      </view>
+    </view>
+    <view class='c' wx:if="{{selected[item.id]}}">
+      <view class='title'>{{item.explainTitle}}</view>
+      <view class='cnt'>{{ item.tempDesc || (item.explain||'所有商品都可用')}}</view>
+    </view>
+
+  </view>
+
+</view>
+<view class="couponsNull"  wx:if="{{pageLoading&&!list[selectedIndex].length}}">
+  <image class='icon' src="../../../images/coupons_null.png" mode="widthFix" />
+  <view>暂时没有数据~</view>
+</view>
+<text class='page-bottom-null'wx:if="{{list[selectedIndex].length}}"></text>

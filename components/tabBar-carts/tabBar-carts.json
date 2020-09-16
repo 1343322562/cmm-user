@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "carts-goods": "../carts-goods/carts-goods",
+    "recommend-goods": "../recommend-goods/recommend-goods"
+  }
+}

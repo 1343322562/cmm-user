@@ -1,0 +1,16 @@
+.date{background-color: #fff;padding: 20rpx;position: relative}
+.date>text{display: block;font-size: 32rpx;padding: 8rpx 20rpx;position: relative;}
+.date>text::after{content:"";position: absolute;top: 20rpx;left: -8rpx;width: 15rpx;height: 15rpx;background: red;border-radius: 100rpx;}
+.date>.status{position: absolute;top: 60rpx;right: 30rpx;color: red;font-size: 32rpx;}
+.block{background-color: #fff;padding: 0 20rpx;margin: 20rpx 0;}
+.block>.title{display: inline-block;line-height: 80rpx;}
+.goods{background-color: #fff;position: relative;padding: 20rpx;margin-bottom: 20rpx;}
+.goods>.icon{background-color: #f2f2f2;border-radius: 20rpx;overflow: hidden;width: 160rpx;height: 160rpx;position: absolute;top: 20rpx;left: 20rpx;}
+.goods>.info{margin-left: 180rpx;min-height: 160rpx;}
+.goods>.info .name{font-size: 30rpx;}
+.goods>.info .size{color: #777;font-size: 26rpx;}
+.goods>.info .money{padding-top: 20rpx;}
+.goods>.num{position: absolute;bottom: 40rpx;right: 30rpx;font-size:45rpx;color: #777;}
+.text{display: block;padding-bottom: 10rpx;}
+.text:last-child{padding-bottom: 30rpx;}
+.item{padding: 0 20rpx;background-color: #fff;border-bottom: 1px solid #e8e8e8;line-height: 80rpx;}

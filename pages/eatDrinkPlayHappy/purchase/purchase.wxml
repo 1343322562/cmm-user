@@ -1,0 +1,75 @@
+<view class="box">
+
+  
+
+
+  <view class='block'>
+    <view class="title">商家信息</view>
+    <view class='goods'>
+      <image src="{{imgBaseUrl+goods.imgUrl}}" class="icon" mode="aspectFill" />
+      <view class='name'>{{shop.supplierName}}</view>
+    </view>
+    <view class='info'>
+      <text class="text">套餐: {{goods.itemName}}</text>
+      <text class='money'>￥{{goods.itemNowPrice}}</text>
+    </view>
+    <view class='shoping'>
+      <text>购买数量:</text>
+      <view class='btn'>
+        <text class="minus" catchtap='changeNum' data-type="0">-</text>
+        <text class="num">{{totalNum}}</text>
+        <text class="add" catchtap='changeNum' data-type="1">+</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="block">
+
+    <!-- <view class='form'>
+      <text class="name n2">姓名</text>
+      <input class="input" bindinput='getInput' data-type="userName" placeholder='请输入姓名' />
+    </view>
+    <view class='form'>
+      <text class="name">手机号码</text>
+      <input class="input" bindinput='getInput' data-type="userPhone" placeholder='请输入手机号' />
+    </view>
+    <view class='form'>
+      <text class="name">所在区域</text>
+       <picker class='input' mode="region" bindchange="bindRegionChange">
+        <text class="region{{userArea?' act':''}}">{{userArea||'请选择所在区域'}}</text>
+      </picker>
+
+    </view>
+    <view class='form'>
+      <text class="name">详细地址</text>
+      <input class="input" bindinput='getInput' data-type="userAddr" placeholder='请输入详细地址' />
+    </view> -->
+    <view class='textareaBox'>
+      <text class="name">买家留言:</text>
+      <textarea class="memoTextarea" maxlength="30" bindinput='getInput' data-type="memo" placeholder="留言建议提前协商(30字以内)"></textarea>
+      <!-- <input class="input" bindinput='getInput' data-type="memo" placeholder='请输入备注' /> -->
+    </view>
+
+  </view>
+
+  <!-- <view class='agree'>
+    <checkbox></checkbox>
+    <text>我已阅读，并同意</text>
+    <text class="msg">《平台用户服务协议》</text>
+  </view> -->
+
+</view>
+
+<view class='nav'>
+  <text>合计:</text>
+  <text class='money'>￥{{totalAmt}}</text>
+  <view class='btn' catchtap='submit'>支付</view>
+</view>
+
+<!-- <view class='mask'>
+  <view class='alert'>
+    <view class='alertTitlte'>平台用户服务协议</view>
+    <scroll-view scroll-y class='content' ></scroll-view>
+    <view class='clear'>确定</view>
+  </view>
+</view> -->

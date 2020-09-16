@@ -1,0 +1,39 @@
+.container{
+  border-top-left-radius: 9%;
+  border-top-right-radius: 9%;
+  margin-top: -32rpx;
+  position: relative;
+  z-index: 999999;
+  background-color: white;
+  padding-top: 200rpx;
+}
+
+.wx-swiper-dot{
+   margin-bottom: 30rpx;
+}
+
+
+.top-title{
+  display:flex;
+  height: 40rpx;
+  width: 90%;
+  text-align: center;
+  margin-top: -160rpx;
+}
+.top-title-itme{
+  display: flex;
+  font-size: 24rpx;
+  align-items:center;
+  color:#aaa;
+  flex-grow: 1;
+}
+
+.top-title-itme .icon{
+    border: 1px gainsboro solid;
+    width:44rpx;
+    height: 44rpx;
+    text-align: center;
+    line-height:44rpx;
+    border-radius: 50%;
+    color: red;
+}

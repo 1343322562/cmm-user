@@ -1,0 +1,14 @@
+<view class="body">
+	  <view wx:if="{{!userWxInfo&&!onlyGetPhoneNumber}}" class="user impower">
+	  	<image src="https://zksrimg.oss-cn-beijing.aliyuncs.com/images/cmm/user_impower_bg.png" mode="widthFix" class="img" />
+	  	<view class="h1">{{sourceName}}申请获得以下权限</view>
+	  	<view class="h2">获取您的公开信息 （昵称,头像等）</view>
+	  	<button class="btn c_background" bindgetuserinfo="getUserInfoSuccess" open-type="getUserInfo">授权微信用户信息</button>
+	  </view>
+	  <view wx:if="{{(!userInfo&&userWxInfo)||onlyGetPhoneNumber}}" class="login impower">
+	  	<image src="https://zksrimg.oss-cn-beijing.aliyuncs.com/images/cmm/login_impower_bg.png" mode="widthFix" class="img" />
+	  	<view class="h1">{{sourceName}}为您精挑细选</view>
+	  	<button class="btn c_background" bindgetphonenumber="getPhoneNumberSuccess" open-type="getPhoneNumber">微信用户一键登录</button>
+	  </view>
+    <view class='back' catchtap='backPage'>取消</view>
+	</view>

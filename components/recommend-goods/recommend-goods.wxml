@@ -1,0 +1,15 @@
+<view wx:if="{{list.length}}" class='box'>
+  <view class='title'><image class='icon' src="../../images/wishList_icon_use.png" /><text>猜你喜欢</text></view>
+  <view class='list'>
+    <view class='li' wx:for="{{list}}" wx:key="index">
+      <image  class="img" mode="aspectFit"  catchtap='goGoodsDetails' data-no="{{item.id}}" src="{{item.itemHomePic}}" />
+      <text class="nullStock" wx:if="{{item.stockNull}}">已售罄</text>
+      <view class='name'>{{item.itemName}}</view>
+      <view class='price'>
+        <text>￥{{item.itemNowPrice}}</text>
+        <text class='befored'>/{{item.itemUnit}}</text>
+      </view>
+      <image class='carts' catchtap='addCarts' data-index="{{index}}" mode="widthFix" src="../../images/like_goods_carts_icon.png" />
+    </view>
+  </view>
+</view>

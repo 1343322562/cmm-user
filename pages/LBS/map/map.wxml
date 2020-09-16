@@ -1,0 +1,49 @@
+<view class="head">
+  <!-- <picker class="city"><text>长沙市</text><image src="/images/go_right.png" class="icon" /></picker> -->
+  <view class="search">
+    <image src="/images/home-search-icon.png" class="icon" mode="widthFix" />
+    <view class='form' catchtap='goSearch'>搜索门店地址</view>
+    <!-- <input class="form" confirm-type="search" bindconfirm="confirmSearch" value="{{searchText}}" placeholder='搜索门店地址' /> -->
+  </view>
+</view>
+<map
+class="map"
+polygons="{{polygons}}"
+show-location="{{showLocation}}"
+longitude="{{centerLng}}"
+latitude="{{centerLat}}"
+bindregionchange="mapChange"
+scale="{{sizeNum}}"
+id="myMap"
+>
+  <cover-image class="centerIcon" src="/images/map_center_icon.png"></cover-image>
+  <cover-view class="nowLoactionIcon"><cover-image class="icon" catchtap='openNowLoaction' src="/images/now_loaction_icon.png"></cover-image></cover-view>
+  <cover-view class="size add" catchtap='changeSize' data-type="1">+</cover-view>
+  <cover-view class="size minus" catchtap='changeSize' data-type="0">-</cover-view>
+  
+  
+</map>
+<scroll-view class="content" scroll-y scroll-top="{{scrollTop}}">
+  <radio-group class="radio-group" bindchange="radioChange">
+    <!-- <view class='nowLocation' wx:if="{{nowLoaction}}">
+      <radio value="now" checked="{{select == 'now'}}">
+        
+        <text class="cnt">{{nowLoaction.title}}</text>
+        <view class='msg'>{{nowLoaction.address}}</view>
+      </radio>
+    </view> -->
+    <view class='list'>
+      <view class='item' wx:for="{{list}}" wx:key="index">
+        <radio value="{{index}}" checked="{{select == index}}">
+          
+          <view class='title'>
+            <text class='now' wx:if="{{!index}}">[当前]</text>
+            <text>{{item.title}}</text>
+          </view>
+          <view class="msg">{{item.address}}</view>
+        </radio>
+      </view>
+    </view>
+  </radio-group>
+</scroll-view>
+<view class="selected" catchtap='confirmSelect'>选好了</view>

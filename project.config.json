@@ -1,0 +1,129 @@
+{
+	"description": "项目配置文件。",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"enhance": false,
+		"postcss": false,
+		"preloadBackgroundData": false,
+		"minified": true,
+		"newFeature": true,
+		"coverView": true,
+		"nodeModules": false,
+		"autoAudits": false,
+		"showShadowRootInWxmlPanel": false,
+		"scopeDataCheck": false,
+		"uglifyFileName": false,
+		"checkInvalidKey": true,
+		"checkSiteMap": true,
+		"uploadWithSourceMap": true,
+		"compileHotReLoad": false,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		},
+		"useIsolateContext": true,
+		"useCompilerModule": false,
+		"userConfirmedUseCompilerModuleSwitch": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.12.0",
+	"appid": "wxb4809bbd857baf9a",
+	"projectname": "%E4%BB%93%E4%B9%B0%E4%B9%B0-%E7%94%A8%E6%88%B7%E7%AB%AF",
+	"scripts": {},
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"list": []
+		},
+		"gamePlugin": {
+			"current": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 2,
+			"list": [
+				{
+					"id": 0,
+					"name": "pages/startupPage/startupPage",
+					"pathName": "pages/startupPage/startupPage",
+					"query": "openType=share&colonelId=3583&isStore=true&storeId=2988",
+					"scene": 1007
+				},
+				{
+					"id": 1,
+					"name": "申请成为团长-邀请粉丝",
+					"pathName": "pages/startupPage/startupPage",
+					"query": "inviter=91&openType=share&colonelId=3560",
+					"scene": "1007"
+				},
+				{
+					"id": 2,
+					"name": "商品分享",
+					"pathName": "pages/goods/goods",
+					"query": "i=189186&openType=share&colonelId=5&storeId=2988&isStore=true",
+					"scene": 1007
+				},
+				{
+					"id": 3,
+					"name": "pages/activity/banner/banner",
+					"pathName": "pages/activity/banner/banner",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/selectSysCode/selectSysCode",
+					"pathName": "pages/selectSysCode/selectSysCode",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 5,
+					"name": "addSelfAddress",
+					"pathName": "pages/addSelfAddress/addSelfAddress",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 6,
+					"name": "pages/tabBar/tabBar",
+					"pathName": "pages/tabBar/tabBar",
+					"query": "",
+					"scene": 1007
+				},
+				{
+					"id": -1,
+					"name": "pages/tabBar/tabBar",
+					"pathName": "pages/tabBar/tabBar",
+					"query": "",
+					"scene": 1001
+				},
+				{
+					"id": 8,
+					"name": "扫码进goods",
+					"pathName": "pages/goods/goods",
+					"query": "scene=colonelId%3D51%26i%3D193508",
+					"scene": null
+				}
+			]
+		}
+	}
+}

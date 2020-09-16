@@ -1,0 +1,14 @@
+<view class="home-hade" style="padding-top:{{headHeight}}rpx;">购物车</view>
+<view class="pageBox" style="padding-top:{{85+headHeight}}rpx">
+
+  <view class="cartsBox"  wx:if="{{cartsNum}}">
+         <carts-goods id="homeCarts" type="home1" imgBaseUrl="{{imgBaseUrl}}" goods="{{cartsObj}}" bindgoLiquidation="goLiquidation" bindgetCartsNum="getCartsNum" />
+  </view>
+
+  <view class="carts_null" wx:if="{{!cartsNum}}"> 
+      <image class="icon" src="../../images/carts_null.png" mode="widthFix" />
+      <view class="text">空空如也~</view>
+      <view class="btn" bindtap="goIndexPage">去首页逛逛</view>
+  </view>
+  <recommend-goods id="recommendGoods"  bindrefreshPage="refreshPage" />
+</view>

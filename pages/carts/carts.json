@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "购物车",
+  "usingComponents": {
+    "carts-goods": "../../components/carts-goods/carts-goods",
+    "recommend-goods": "../../components/recommend-goods/recommend-goods"
+  }
+}

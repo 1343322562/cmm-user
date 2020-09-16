@@ -1,0 +1,10 @@
+{
+  "navigationStyle": "custom",
+  "onReachBottomDistance": 300,
+  "enablePullDownRefresh": true,
+  "backgroundColorBottom":"#f2f2f2",
+  "usingComponents": {
+    "newPeopleCoupons": "../../components/newPeopleCoupons/newPeopleCoupons",
+    "newColonelCoupons": "../../components/newColonelCoupons/newColonelCoupons"
+  }
+}

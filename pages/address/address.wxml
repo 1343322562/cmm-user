@@ -1,0 +1,72 @@
+<view class="pageBox">
+    <view class="list" wx:if="{{switchTransWay == 0}}">
+      <view class="li{{item.orderFlag =='0'?' null':''}}" wx:for="{{list}}" wx:key="index" bindtap="selected" data-index="{{index}}">
+        <view class="user block">
+          <text class="name">{{item.consignee}}</text>
+          <text class="phone">{{item.phone}}</text>
+        </view>
+        <view class="city block">
+        	<text class="text">{{item.province}}</text>
+        	<text class="text">{{item.city}}</text>
+        	<text class="text">{{item.area}}</text>
+        </view>
+        <view class="addr block">{{item.address}}</view>
+        <view class="settings">
+          <view class="default" catchtap="setDefault" data-index="{{index}}"  wx:if="{{item.orderFlag!='0'}}" >
+            <view class="checkbox{{item.toleration == '1'?' act':''}}">
+              <image class="icon" src="../../images/hook.png" />
+            </view>
+            <text class="text">设置为默认地址</text>
+          </view>
+          <view class="change" >
+            <view class="btn" catchtap="editAddr" data-index="{{index}}">
+              <image class="icon" src="../../images/address_edit.png" />
+              <text class="text">修改</text>
+            </view>
+            <view class="btn" catchtap="deleteAddr" data-index="{{index}}">
+              <image class="icon" src="../../images/address_delete.png" />
+              <text class="text">删除</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    
+    <view class="list" wx:if="{{switchTransWay == 1}}">
+      <view class="li" wx:for="{{list}}" wx:key="index" bindtap="selectedStoreAddrClick" data-index="{{index}}">
+        <view class="user block">
+          <text class="name">{{item.storeName}}</text>
+          <text class="phone">{{item.storePhone}}</text>
+        </view>
+        <view class="addr block">{{item.storeAddr}}</view>
+        <view class="settings">
+          <view class="default" catchtap="setStoreDefault" data-index="{{index}}" data-storeId="{{item.storeId}}">
+            <view class="checkbox{{item.toleration == '1'?' act':''}}">
+              <image class="icon" src="../../images/hook.png" />
+            </view>
+            <text class="text">设置为默认地址</text>
+          </view>
+          <view class="change" >
+            <!-- <view class="btn" catchtap="editAddr" data-index="{{index}}">
+              <image class="icon" src="../../images/address_edit.png" />
+              <text class="text">修改</text>
+            </view> -->
+            <view class="btn" catchtap="deleteStoreAddr" data-index="{{index}}" data-storeid="{{item.storeId}}">
+              <image class="icon" src="../../images/address_delete.png" />
+              <text class="text">删除</text>
+            </view>
+          </view>
+        </view>
+      </view>
+     </view>
+    
+    <view 
+      wx:if="{{switchTransWay}}" class="addAddress self" bindtap="addSelfAddr">添加自提点</view>
+    <view wx:else class="addAddress" bindtap="addAddr">添加收货地址</view>
+    
+    <view class="address_null" wx:if="{{(loading || switchTransWay) &&!list.length}}">
+      <image class="icon" src="../../images/carts_icon_loaction.png" mode="widthFix" />
+      <text class="text">请点击下方添加{{switchTransWay ? '自提点' : '收货地址'}}</text>
+    </view>
+    
+  </view>

@@ -1,0 +1,35 @@
+<view class="head">
+  <view class="act" style="left:{{(tabIndex*(100/tabTitle.length))}}%;width:{{(100/tabTitle.length)}}%"></view>
+  <view class="btn">
+    <block wx:for="{{tabTitle}}" wx:key="index">
+      <view class="view{{tabIndex==index?' act2':''}}"  bindtap="changeTab" data-index="{{index}}">{{item}}</view>
+    </block>
+  </view>
+</view>
+
+<view class="box">
+  <view class='li' wx:for="{{list}}" wx:key="index">
+    <view class='name'>
+      <image src="../../../images/eatDrinkPlayHappy/order-icon.png" class="icon" />
+      <text class='text'>{{item.goodsName}}</text>
+      <text class="status">{{item.statusStr}}</text>
+    </view>
+    <view class="info">
+      <image src="{{imgBaseUrl+item.imgUrl}}" mode="aspectFill" class="icon" />
+      <view class='content'>
+        <view class='p'>下单时间：{{item.createDateStr}}</view>
+        <!-- <view class='p'>剩余有效天数：7天</view> -->
+        <view class='p'>
+          <text>数量：{{item.totalNum}}</text>
+          <text>总价：￥{{item.totalAmt}}</text>
+        </view>
+      </view>
+    </view>
+    <view class="btn">
+        <text catchtap='openDetails' data-no="{{item.orderNo}}" >查看详情</text>
+        <text wx:if="{{(item.orderState=='0'&&item.payState=='1')||item.orderState=='4'}}" class="lookCode" catchtap='lookCode' data-index="{{index}}">查看券码</text>
+    </view>
+  </view>
+</view>
+
+<userCode id="userCode" show="{{showCode}}" bindhideCode="hideCode" />

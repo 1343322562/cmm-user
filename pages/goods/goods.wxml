@@ -1,0 +1,168 @@
+<view class="pageBox{{loading?' act':''}}">
+
+  <!-- 底部按钮 -->
+  <view class="goodsBottom" >
+    <view class="home back" bindtap="goPage" data-page="index">
+		  <image class="icon"  src="../../images/goods-goHome.png" mode="widthFix" />
+		</view>
+    <view class="carts back" bindtap="goPage" data-page="carts" style="border-right:0px">
+      <image class="icon"  src="../../images/goods-goCarts.png" mode="widthFix" />
+		  <text class="num" wx:if="{{cartsNum}}">{{cartsNum}}</text>
+    </view>
+    <!-- <view class="goIndexPage act"  bindtap="goDownOrders">立即结算</view> -->
+    <view class="goIndexPage act {{goods.stockNull?' null':''}}"  bindtap="changeGoodsNum" data-type="add">{{goods.stockNull?'已售罄':'加入购物车'}}</view>
+  </view>
+ <!-- end底部按钮 -->
+
+  <!-- 轮播图 -->
+  <swiper class="imgList" indicator-dots="true" circular="true" indicator-active-color="#868686">
+    <block wx:for="{{imgList}}" wx:key="index">
+    <swiper-item>
+      <image class="icon" src="{{item}}{{imgV}}" mode="aspectFit" />
+    </swiper-item>
+    </block>
+  </swiper>
+   <!-- end轮播图 -->
+
+   <view class='shareBtn' catchtap='openShare'><image class="icon" src="../../images/goods_share_icon.png" /></view>
+
+   <!-- 价格 -->
+  <view class="priceBox">
+      <view class="price_info{{allPromotionGoods[itemId]?' seckill':''}}">
+        <text class='now'>￥{{allPromotionGoods[itemId]?allPromotionGoods[itemId].price:goods.itemNowPrice}}</text>
+        <text class='unit'>/{{goods.itemUnit}}</text>
+        <text class='befored' wx:if="{{allPromotionGoods[itemId]}}" >￥{{goods.itemDisPrice}}</text>
+      </view>
+      <block wx:if="{{allPromotionGoods[itemId]}}">
+      <view class='countDown'>
+        <text>距离活动还剩:</text>
+        <view class='date'>
+          <text class='num'>{{seckillDate[0]}}</text>
+          <text>:</text>
+          <text class='num'>{{seckillDate[1]}}</text>
+          <text>:</text>
+          <text class='num'>{{seckillDate[2]}}</text>
+        </view>
+      </view>
+      <image class='seckill_price_bg' mode='widthFix' src="../../images/seckill_price_bg.png" />
+      </block>
+  </view>
+   <!-- end价格 -->
+
+   <!-- 商品信息 -->
+   <view class="info">
+      <view class="goodsName">
+	      <text>{{goods.itemName}}</text>
+	    </view>
+      <view class="goodsMsg">订货规格：{{goods.startSpec}}{{goods.itemUnit}}</view>
+      <view class='proposalPrice'>零售价: ￥{{goods.itemDisPrice}}</view>
+   </view>
+   <!-- end商品信息 -->
+
+   <!-- 购物车 -->
+
+   	<view class="changeGoodsNum">
+        <view class="title">购买数量</view>
+        <text class='startQty' wx:if="{{goods.startQty&&goods.startQty!=1}}">起订数量：{{goods.startQty}}</text>
+        <text class='startQty maxQty' wx:if="{{maxNum}}">秒杀限购{{maxNum}}{{goods.itemUnit}}</text>
+        <view class="btn">
+          <view catchtap="changeGoodsNum" class="minus form" data-no="185903" data-type="minus">-</view>
+          <text class="num">{{cartGoods[itemId]?cartGoods[itemId].num:0}}</text>
+          <view catchtap="changeGoodsNum" class="add form" data-no="185903" data-type="add">+</view>
+        </view>
+		</view>
+
+   <!-- end购物车 -->
+
+   <view class="tabContent  act">
+        <!-- --------- -->
+      <view class="block">
+        <view class="contentTitle c_background_before">商品详情</view>
+        <view class="goodsSize">
+          <view class='item act'>
+            <text class="text">生产日期：</text>
+            <text class="text">{{goods.productionDate||'见产品包装'}}</text>
+          </view>
+          <view class="item">
+            <text class="text">单位：</text>
+            <text class="text">{{goods.itemUnit}}</text>
+          </view>
+          <view class="item">
+            <text class="text">规格：</text>
+            <text class="text">{{goods.itemSizeDes}}</text>
+          </view>
+          <view class="item">
+            <text class="text">品牌：</text>
+            <text class="text">{{goods.itemBrand||'暂无'}}</text>
+          </view>
+          <view class="item">
+            <text class="text">保质期：</text>
+            <text class="text">{{goods.validDay||'见产品包装'}}天</text>
+          </view>
+          <!-- <view class="item">
+            <text class="text">产地：</text>
+            <text class="text">{{goods.itemArea}}</text>
+          </view> -->
+          <!-- <view class="item">
+            <text class="text">生产日期：</text>
+            <text class="text">{{goods.productionDate||'见产品包装'}}</text>
+          </view> -->
+           <view class="item">
+            <text class="text">条码：</text>
+            <text class="text">{{goods.itemSubno}}</text>
+          </view>
+            <view class="item">
+            <text class="text">货号：</text>
+            <text class="text">{{goods.itemNo}}</text>
+          </view>
+          <view class='item act'>
+            <text class="text">商品描述：</text>
+            <text class="text">{{goods.productDesc||''}}</text>
+          </view>
+        </view>
+      </view>
+      <!-- ----------- -->
+      <view class="block null">
+        <view class="contentTitle c_background_before">图文详情</view>
+      </view>
+       <!-- ----------- -->
+      <view class='itemDesc' wx:if="{{itemDescList.length}}">
+        <view wx:for="{{itemDescList}}" wx:key="index" style="{{item.style}}">
+          <text wx:for="{{item.content}}" wx:for-item="zItem" wx:for-index="zIndex" wx:key="zIndex" style="{{zItem.style}}">{{zItem.content}}</text>
+        </view>
+      </view>
+       <!-- ----------- -->
+        <view class="textAndImg">
+          <block wx:for="{{imgTextUrls}}" wx:key="index">
+            <image class="img" src="{{item}}{{imgV}}" mode="widthFix" />
+          </block>
+        </view>
+    
+   </view>
+  <!-- ----------- -->
+</view>
+
+<view class="mask{{!showShare?' hide':''}}"  wx:if="{{createShare}}" catchtouchmove="true">
+	  <canvas class="canvas" canvas-id="mycanvas"></canvas>
+	  <view class="shareBottom">
+	    <view class="title">分享</view>
+	    <view class="btn">
+	      <view class="item">
+	        <view class="bg url">
+	          <image class="icon"  src="../../images/share_goods_wx.png" mode="widthFix" />
+	        </view>
+	        <text>分享给朋友</text>
+	        <button class="shareButton" open-type="share" ></button>
+	      </view>
+	      <view class="item" bindtap="savePhone">
+	        <view class="bg images">
+	          <image class="icon"  src="../../images/share_goods_updown.png" mode="widthFix" />
+	        </view>
+	        <text>下载到本地</text>
+	      </view>
+	    </view>
+	    <view class="quit" bindtap="hideShare">取消</view>
+	  </view>
+	
+	</view>
+  <newPeopleCoupons id="newPeopleCoupons" />

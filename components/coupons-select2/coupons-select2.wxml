@@ -1,0 +1,36 @@
+<view class="mask" wx:if="{{show}}">
+  <view class='content' style="bottom: {{bottom}};">
+    <view class='title'>满减优惠</view>
+    <view class='hide' catchtap='hideCouponsAlert'><image class="icon" src="../../images/coupons-select_clear.png" mode="widthFix" /></view>
+    <view class='clear' catchtap='selected' data-type="null">不使用优惠券</view>
+    <view class="tab-title">
+      <view class="tab-item" wx:for="{{titleList}}" wx:key="index">
+        <text class="{{queryType==item.type?'select':''}}" data-type='{{item.type}}' catchtap="queryCoupons">{{item.name}}({{ item.type =='canUse'?list.length:noUselist.length}})</text>
+      </view>
+    </view>
+    <scroll-view class="list" scroll-y>
+      <view class='box' wx:for="{{queryType=='canUse'?list:noUselist}}" wx:key="index">
+        <view class="li{{queryType=='canUse'?'':' null'}}" >
+          <view class="left {{queryType=='canUse'?'c_background':'h_background'}} c_border_before">
+            <view class='money'>￥<text class='text'>{{item.discountAmt}}</text></view>
+            <text class='msg'>{{item.explainStr}}券</text>
+          </view>
+          <view class='right'>
+            <view class='name'>{{item.useCondition?('满'+item.useCondition+'元使用'):'无门槛使用'}}</view>
+            <view class='time'>{{item.startDateStr}}—{{item.endDateStr}}</view>
+            <view class="goDetails{{selected[item.id]?' act':''}}" catchtap='open' data-id="{{item.id}}">
+              <text>使用说明</text>
+              <image src='../../images/coupon-down.png' class='icon' />
+            </view>
+            <view class='share' wx:if="{{queryType=='canUse'}}" catchtap='selected' data-type="{{index}}">{{nowSelected.id==item.id?'当前使用':'去使用'}}</view>
+          </view>
+        </view>
+        <view class='c' wx:if="{{selected[item.id]}}">
+          <view class='title'>{{item.explainTitle}}</view>
+          <view class='cnt'>{{ item.tempDesc || (item.explain||'所有商品都可用')}}</view>
+        </view>
+      </view>
+      <view style="height:100rpx;"></view>
+    </scroll-view>
+  </view>
+</view>

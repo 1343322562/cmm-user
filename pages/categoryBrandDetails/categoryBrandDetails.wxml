@@ -1,0 +1,18 @@
+<view class='list'>
+  <view class='li' wx:for="{{list}}" wx:for-item="zItem" wx:for-index="zIndex" wx:key="zIndex">
+    <image src="{{zItem.itemThumbPic}}{{imgV}}" catchtap="goGoodsDetails" data-no="{{zItem.itemId}}" class='img' mode='aspectFit' />
+    <text class="nullStock" wx:if="{{item.stockNull}}">已售罄</text>
+    <view class='info'>
+      <view class='name'>{{zItem.itemName}}</view>
+      <view class='price'>
+        <text class='now'>￥{{allPromotionGoods[zItem.itemId]?allPromotionGoods[zItem.itemId].price:zItem.itemNowPrice}}</text>
+        <text class='unit'>/{{zItem.itemUnit}}</text>
+        <text class='befored'>￥{{zItem.itemDisPrice}}/{{zItem.itemUnit}}</text>
+      </view>
+    </view>
+    <view class='btn'  catchtap="addCarts" catchtap="addCarts" data-index="{{zIndex}}">
+      <image class="icon" mode="widthFix" src="../../images/index_cart_3.png"  />
+    </view>
+  </view>
+</view>
+<text class='page-bottom-null' wx:if="{{list.length}}"></text>

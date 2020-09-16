@@ -1,0 +1,26 @@
+<view class="pageBox">
+  	
+	  <view class="head">
+      <!-- <view class="block area" bindtap="selectCity">
+	      <image class="icon" src="../../../images/area_location.png" mode="widthFix" />
+		    <text class="text">{{city}}</text>
+		  </view> -->
+	  
+		  <view class="search block">
+		    <image class="icon" src="/images/home-search-icon.png" mode="widthFix" />
+		    <input placeholder-style="color:#d7d7d7;font-size:24rxp" class="form" value="{{searchText}}" placeholder="请输入收货地址" bindconfirm="confirmSearch" bindinput='searchInputChange' bindblur="searchInputBlur" confirm-type="search"/> 
+		  </view>
+      <view class="quit block" bindtap="quit">取消</view>
+    </view>
+    
+		<view class="list">
+		  <!-- <view class="li now c_color">当前位置：{{address}}</view> -->
+		  <block wx:for="{{locationList}}" wx:key="index">
+		    <view class="li" bindtap="selected" data-index="{{index}}">
+		      <text>{{item.title}}</text>
+		      <view class="addr">{{item.address}}</view>
+		    </view>
+		  </block>
+		</view>
+		
+  </view>

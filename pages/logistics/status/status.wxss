@@ -1,0 +1,9 @@
+Page{background-color: #fff;padding: 40rpx}
+.item{display: flex}
+.item>.date{width: 130rpx;text-align: center;position: relative;top: -15rpx;color: #555;}
+.item>.date text,.item>.status text{display: block;}
+.item>.status{position: relative;margin-left: 30rpx;padding: 10rpx 0 20rpx 60rpx;width: 500rpx;border-left: 1px solid #FFC2C3;color: #777;min-height: 150rpx;}
+.item.one .title{color: #000}
+.item .title{font-size: 32rpx;}
+.item>.status .icon{position: absolute;top: -1rpx;left: -30rpx;width: 60rpx;height: 60rpx; }
+ 

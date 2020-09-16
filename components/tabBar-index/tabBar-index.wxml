@@ -1,0 +1,267 @@
+
+<view class="pageBox{{showShare?' act':''}}">
+
+  <view class="home-hade{{headAction?' act':''}}" style="padding-top:{{height0}}rpx;">
+    <image src="/images/logo{{headAction?'2':''}}.png"   mode="widthFix" class='icon' />
+    <view class='search' bindtap="goSearchGoods">
+      <image src="/images/home-search-icon.png" class='icon' />
+      <text class='text'>挑选宝贝~</text>
+    </view>
+    <image src="/images/goods_share_icon{{headAction?'2':''}}.png" class='goodsShare' catchtap='showShareFun'  />
+  </view>
+
+  <image class="defaultBanner" wx:if="{{!activityList.length}}"  src="https://zksrimg.oss-cn-beijing.aliyuncs.com/images/cmm/defaultBanner.png" mode="widthFix" />
+
+  <view class="home-advert" wx:if="{{activityList.length}}">
+
+       <swiper style="width:750rpx;height:581rpx" indicator-dots="true"
+       indicator-color="rgba(255,255,255,0.6)" indicator-active-color="#fff"
+        autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{true}}">
+        <block wx:for="{{activityList}}" wx:key="index">
+          <swiper-item>
+            <image style="width:750rpx;height:581rpx"  catchtap='goActivity'  data-index="{{index}}"  src="{{item.picture}}{{imgV}}" mode="widthFix"></image>
+          </swiper-item>
+        </block>
+      </swiper>
+  </view>
+
+  <view class="home-content">
+
+      <view class="content-top">
+
+        <view class="top-title">
+            <view class="top-title-itme"><view class="icon">省</view><text>零售也是批发价</text></view>
+            <view class="top-title-itme"><view class="icon">快</view><text>本地仓送到家</text></view>
+            <view class="top-title-itme"><view class="icon">多</view><text>生活一网打尽</text></view>
+        </view>
+
+        <scroll-view scroll-x  bindscroll="categoryListScroll" style="height:360rpx;width:100%;">
+          <view class="top-content">
+            <view class='class-btn' wx:for="{{categoryList}}" wx:key="item" catchtap="onClickClsItem" data-clsno="{{item.clsNo}}" data-clsname="{{item.clsName}}">
+              <view class="img">
+                <image src="{{item.imgName}}{{imgV}}" mode="widthFix"></image>
+              </view>
+              <view class="title">{{item.clsName}}</view>
+            </view>
+          </view>
+        </scroll-view>
+        <view class='pagination' wx:if="{{categoryList.length>10}}"><text class='spot' style="left:{{paginationSpotLeft}}rpx;width:{{paginationSpotWidth+'rpx'}}"></text></view>
+      </view>
+      <!-- 自提点开团 -->
+      <view class='storeOpenGroup' wx:if="{{(currentStoreAddr.openStore == 1) && switchTransWay}}"> <!-- currentStoreAddr.openStore == 1 && storePromotion.storeId  \ currentStoreMode || storeMode-->
+        <view class='storeName'>{{currentStoreAddr.storeName || storePromotion.storeName}}</view>
+        <view class='countDown'>
+          <text>截团还剩</text>
+          <view class="date">
+            <text class='t'>{{storePromotionTime[0]}}</text>
+            <text>:</text>
+            <text class='t'>{{storePromotionTime[1]}}</text>
+            <text>:</text>
+            <text class='t'>{{storePromotionTime[2]}}</text>
+          </view>
+        </view>
+        <view class='info'>
+          <view class='l'>
+            <text class='title'>满{{storePromotion.promotionAmt}}元成团,次日送达自提点。</text>
+            <text class="msg">每天{{storePromotion.promotionEndTime}}截单,未成团100%自动退款。</text>
+          </view>
+          <view class='r'>
+            <text class="title">组团情况</text>
+            <text class="total">{{storePromotion.totalAmt}}/{{storePromotion.totalNum}}人</text>
+            <text class="status">{{storePromotion.status?'已成团':'未成团'}}</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 限时秒杀 -->
+      <view class='seckill' wx:if="{{seckillGoods}}">
+        <view class='title'>限时秒杀</view>
+        <view class='countDown'>
+          <text>{{seckillGoods.state==0?'距离开始还剩':(seckillGoods.state==1?'距离结束还剩':'秒杀活动已结束，别灰心，明日再来')}}</text>
+          <view class="date" wx:if="{{seckillGoods.state!=2}}">
+            <text class='t'>{{seckillDate[0]}}</text>
+            <text>:</text>
+            <text class='t'>{{seckillDate[1]}}</text>
+            <text>:</text>
+            <text class='t'>{{seckillDate[2]}}</text>
+          </view>
+        </view>
+        <scroll-view class='goodsBox' scroll-x>
+          <view class='list'>
+
+            <view class='li' wx:for="{{seckillGoods.details}}" wx:key="index" bindtap="goGoodsDetails" data-no="{{item.otherId}}">
+              <image src="{{item.imageUrl}}{{imgV}}"  class='img' mode='aspectFit' />
+              <text class="nullStock" wx:if="{{item.buyQty<=0&&seckillGoods.state==1}}">已抢光</text>
+              <view class='name'>{{item.name}}</view>
+              <view class='info'>
+                <view class='price'><text class='now'>￥{{item.discountAmt}}</text><text class='befored'>￥{{item.itemDisPrice}}</text></view>
+                <view class="btn{{((item.buyQty<=0&&seckillGoods.state==1)||seckillGoods.state==2)?' null':(seckillGoods.state==1?' act':'')}}">{{(seckillGoods.state==0?'马上开抢':(seckillGoods.state==1?(item.buyQty<=0?'已抢完':'立即抢购'):'已结束'))}}</view>
+              </view>
+            </view>
+    
+          </view>
+        </scroll-view>
+      </view>
+      <!-- 限时秒杀 end -->
+
+      <!-- <view class='content-box content-box-coupons' >
+        <view class="content">
+            <image class="home_get_coupon" src="/images/home_get_coupon.png" mode="widthFix"></image>
+        </view>
+      </view> -->
+
+              <!-- 领券中心 -->
+        <view class="content-coupon" wx:if="{{couponList.length>0}}">
+          <view class="title">领券中心</view>
+           <scroll-view scroll-x style="width:100%; height:{{290/couponListHeight}}rpx;">
+           <view class="swiper">
+              <block wx:for="{{couponList}}" wx:key="item">
+              <view class="list" style="width:{{100}}%;">
+                <view class="item" wx:for="{{item}}" wx:key="item">
+                  <view class="price" wx:if="{{item.name}}">
+                  <text class="sign1">{{item.discountAmt}}</text>
+                  <view class="sign4">
+                    <view class="sign2">RMB</view>
+                    <view class="sign3">优惠卷</view>
+                  </view>
+                  </view>
+                  <view class="line" wx:if="{{item.name}}"></view>
+                  <view class="title" wx:if="{{item.name}}">{{item.name}}</view>
+                  <view class="get-coupon" catchtap="getCoupon" data-id="{{item.id}}" wx:if="{{item.name}}">领取</view>
+                  <image src="/images/yhq.png" wx:if="{{item.name}}"></image>
+                  <image  wx:if="{{item.state=='5'||item.state=='3'}}"
+                  style="position: absolute;left:0" src="/images/yhq-5.png" ></image>
+                  <image style="position: absolute;left:100rpx;top:50rpx; width:142rpx; height:46rpx" 
+                  src="/images/ylq.png" wx:if="{{item.state=='5'}}"></image>
+                  <image style="position: absolute;left:100rpx;top:50rpx; width:142rpx; height:46rpx" 
+                  src="/images/ylw.png" wx:if="{{item.state=='3'}}"></image>
+              </view>
+               </view>
+              </block>
+             </view>
+          </scroll-view>
+        </view>
+        <!-- end领券中心 -->
+      
+     <!-- 整站主推 -->
+     <view class='content-box content-box-zzzt' wx:if="{{ZZZTGoodsList.length>0}}">
+        <view class="top">
+          <view class="left">
+             <image class="icon" src="/images/home_zzzt_title.png" mode="widthFix"></image>
+          </view>
+          <view class="right">
+              <!-- <text>更多商品</text>
+              <image class="goRight" src="/images/go_right.png" mode="widthFix"></image> -->
+          </view>
+        </view>
+        <view class='goodsList_x3'>
+          <view class='li' wx:for="{{ZZZTGoodsList}}" wx:key="index">
+            <view class='img' catchtap="goGoodsDetails" data-no="{{item.itemId}}">
+            <image class='icon' src="{{item.itemThumbPic}}{{imgV}}" mode='aspectFit' /></view>
+            <text class="nullStock" wx:if="{{item.stockNull}}">已售罄</text>
+            <view class='name'>{{item.itemName}}</view>
+            <view class='price'>
+              <text class='now'>￥{{allPromotionGoods[item.itemId]?allPromotionGoods[item.itemId].price:item.itemNowPrice}}</text>
+              <text class='unit'>/{{item.itemUnit}}</text>
+              <view class='befored'>￥{{item.itemDisPrice}}/{{item.itemUnit}}</view>
+            </view>
+            <view class='btn'  catchtap="addCarts" data-no="{{item.itemId}}">
+              <image class="icon" mode="widthFix" src="/images/like_goods_carts_icon.png"  />
+            </view>
+          </view>
+        </view>
+      </view>
+      <!-- end整站主推 -->
+
+      <view class="categoryList" wx:for="{{categoryBrandList}}" wx:key="index">
+        <image class="titleImg" catchtap='goCategoryBrandDetails' data-id="{{item.itemList.length>=6?item.id:''}}" src="{{item.mainPicture}}{{imgV}}" mode="widthFix" />
+        <!-- <view class='title' style="background-image:url({{item.mainPicture}}{{imgV}})">
+          <view class='rise'>{{item.mainName}}</view>
+          <text class='msg'>{{item.minTitle}}</text>
+          <view class='btn' wx:if="{{item.itemList.length>=6}}" catchtap='goCategoryBrandDetails' data-id="{{item.id}}">更多</view>
+        </view> -->
+        <view class='list'>
+ 
+          <view class="li s{{item.pictureStyle||'3'}}" wx:for="{{item.itemList}}" wx:for-item="zItem" wx:for-index="zIndex" wx:key="zIndex">
+            <!-- <image src="{{zItem.itemThumbPic}}{{imgV}}" catchtap="goGoodsDetails" data-no="{{zItem.itemId}}" class='img' mode='aspectFill' /> -->
+            <view catchtap="goGoodsDetails" data-no="{{zItem.itemId}}" class='img' style="background-image:url({{zItem.itemThumbPic}}{{imgV}})"></view>
+            <text class="nullStock" wx:if="{{item.stockNull}}">已售罄</text>
+            <view class='info'>
+              <view class='name'>{{zItem.itemName}}</view>
+              <view class="bottom">
+                <view class='price'>
+                  <text class='now'>￥{{allPromotionGoods[zItem.itemId]?allPromotionGoods[zItem.itemId].price:zItem.itemNowPrice}}</text>
+                  <text class='unit'>/{{zItem.itemUnit}}</text>
+                  <view class='befored'>￥{{zItem.itemDisPrice}}/{{zItem.itemUnit}}</view>
+                </view>
+                
+                <view class='btn'  catchtap="addCarts" catchtap="addCarts" data-no="{{zItem.itemId}}">
+                  <image class="icon" mode="widthFix" src="/images/like_goods_carts_icon.png"  />
+                </view>
+              </view>
+              
+            </view>
+          </view>
+
+        </view>
+      </view>
+    <!-- 吃喝玩乐商品 -->
+    <view class='eatDrinkPlayHappy' wx:if="{{playGoodsList.length}}">
+      <image src="https://zksrimg.oss-cn-beijing.aliyuncs.com/images/cmm/play-home-banner.png" mode='widthFix' class="banner" />
+
+      <view class='list'>
+
+        <view class='li' wx:for="{{playGoodsList}}" wx:key="index">
+          <image catchtap='goPlayGoodsDetails' data-index="{{index}}" src="{{imgBaseUrl+item.imgUrl}}" class="img"/>
+          <view class='box'>
+            <view class='name'>{{item.itemName}}</view>
+            <view class='msg'>{{item.productDesc}}</view>
+            <view class='price'>
+              <text class='now'>￥{{item.itemNowPrice}}</text>
+              <text class="before">门市价 ￥{{item.itemPrePrice}}</text>
+              <text class="sell">销量:{{item.saleAlreadyQty}}</text>
+            </view>
+            <view class="look" catchtap='goPlayGoodsDetails' data-index="{{index}}">去看看</view>
+          </view>
+        </view>
+
+      </view>
+
+      <view class='lookMore' bindtap='onClickClsItem' data-clsno="play" wx:if="{{showPlayGoodsMore}}">查看更多</view>
+
+    </view>
+
+    <!-- <view class="content-bottom">
+      <text  class="page-bottom-null"></text>
+      <view class="placeholder"></view>
+    </view> -->
+  </view>
+  
+  <view class="mask{{(showShare?' show':'')+(createShare?'':' shareMaxheight')}}" catchtap='hideShare'>
+      <canvas class="canvas{{createShare?' show':''}}" canvas-id="mycanvas"></canvas>
+      <view class="shareBottom">
+        <!-- <view class="title">分享</view> -->
+        <view class="btn">
+          <view class="item">
+            <view class="bg url">
+              <image class="icon"  src="/images/share_goods_wx.png" mode="widthFix" />
+            </view>
+            <text>分享给朋友</text>
+            <button class="shareButton" open-type="share" ></button>
+          </view>
+          <view class="item" catchtap="savePhone">
+            <view class="bg images">
+              <image class="icon"  src="/images/{{createShare?'share_goods_updown':'createShareCanvas'}}.png" mode="widthFix" />
+            </view>
+            <text>{{createShare?'下载到本地':'生成海报'}}</text>
+          </view>
+        </view>
+        <view class="quit" catchtap="hideShare">取消</view>
+      </view>
+    </view>
+  <view class='technicalSupport'>
+    <image src="/images/technicalSupport.png" mode="widthFix" class="icon" />
+  </view>
+</view>
+<newPeopleCoupons id="newPeopleCoupons" />
+<newColonelCoupons id="newColonelCoupons" />

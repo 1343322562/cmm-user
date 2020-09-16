@@ -1,0 +1,18 @@
+<view class="content">
+    <view class="icon">
+    	<image class="img"  src="../../images/payOk.png" mode="widthFix" />
+    </view>
+  <view class="title">支付成功!</view>
+  <view class="orderNo">
+    <text class="text">订单号：</text>
+    <text class="text">{{orderNo}}</text>
+  </view>
+  <view class="btn">
+    <view class="button gw"  bindtap="goIndex">继续购物</view>
+    <view class="button fx"  bindtap="goShare" wx:if="{{openType!='play'}}">去分享</view>
+  </view>
+  <view class="security">
+    <image class="icon" src="../../images/security.png" mode="widthFix" />
+    <text>安全提醒：我们不会以任何理由要求您提供银行卡信息或支付额外费用，请谨防钓鱼链接或咋骗电话。</text>
+  </view>
+</view>

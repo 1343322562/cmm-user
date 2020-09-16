@@ -1,0 +1,28 @@
+Page{background-color: #da2a2a;}
+.box{text-align:center;position: relative;padding-top: 40rpx;}
+.bg{width: 740rpx;height: 902rpx;}
+.head{position: absolute;width: 545rpx;top: 190rpx;left: 100rpx;height: 260rpx;background:white;}
+
+.info{
+  position: absolute;
+  top:490rpx;
+  width: 530rpx;
+  margin-left:-272rpx;
+  left:50%;
+  text-align: left;
+  padding-left: 30rpx;
+}
+
+.info view{
+  line-height: 50rpx;
+  font-size: 32rpx;
+}
+.btn{
+  color:red;
+  font-size: 42rpx;
+  position: absolute;
+  bottom:50rpx;
+  width: 620rpx;
+  line-height: 90rpx;
+  left: 60rpx;
+}

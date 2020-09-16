@@ -1,0 +1,27 @@
+<!--index.wxml-->
+<nav-bar inner-title='{{nvabarData.title}}'>
+
+  <view class="home-swiper" style="height:500rpx;">
+       <swiper indicator-dots="{{indicatorDots}}"  style="height:100%;"
+        autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{true}}">
+        <block wx:for="{{background}}" wx:key="*this">
+          <swiper-item>
+            <image src="../../images/test1.png" style="height:500rpx;width:100%"></image>
+          </swiper-item>
+        </block>
+      </swiper>
+  </view>
+
+</nav-bar>
+
+<view class="container">
+
+  <view class="top-title">
+      <view class="top-title-itme"><view class="icon">省</view><text>零售也是批发价</text></view>
+      <view class="top-title-itme"><view class="icon">快</view><text>本地仓送到家</text></view>
+      <view class="top-title-itme"><view class="icon">多</view><text>生活一网打尽</text></view>
+  </view>
+
+  
+</view>
+

@@ -1,0 +1,9 @@
+@import "../../app.wxss";
+.newColonelGetCouponsBox{width: 600rpx;position: absolute;top: 50%;height: 696rpx;left: 50%;margin-top: -368rpx;margin-left: -300rpx;} 
+.newColonelGetCouponsBox>.bg{width: 100%;height: 100%;}
+.newColonelGetCouponsBox>.money{text-align: center;position: absolute;top: 200rpx;left: 105rpx;width: 280rpx;color: #ad7e32;font-size: 110rpx;font-weight: bold;letter-spacing: -2rpx;}
+.newColonelGetCouponsBox>.money .symbol{font-size: .5em;vertical-align: top;display: inline-block;padding-top: 20rpx;}
+.newColonelGetCouponsBox>.clear{border: 4rpx solid #fff;border-radius: 100%;position: absolute;top:-80rpx;left: 50%;width: 60rpx;height: 60rpx;text-align: center;margin-left: -30rpx;}
+.newColonelGetCouponsBox>.clear .icon{width: 30rpx;height: 30rpx;margin-top: 16rpx;}
+.newColonelGetCouponsBox>.get{position: absolute;left: 0;bottom: 50rpx;text-align: center;width: 100%;}
+.newColonelGetCouponsBox>.get text{color: #ee3114;background:linear-gradient(90deg,#ffffea, #e6ce90);display: inline-block;border-radius: 50rpx;line-height: 90rpx;padding: 0 60rpx;font-size: 36rpx;}

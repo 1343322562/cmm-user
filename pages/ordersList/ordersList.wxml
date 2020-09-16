@@ -1,0 +1,56 @@
+<view class="pageBox{{showExpress?' act':''}}" >
+  <!-- <view class="orderType" wx:if="{{showExpress}}">
+      <view wx:for="{{orderType}}"  wx:key="index" class="item{{orderType == index?' act c_background_before c_color':''}}" bindtap="changeType" data-index="{{index}}" >{{item}}</view>
+  </view> -->
+    <view class="head{{showExpress?' act':''}}">
+      <view class="act c_background_before" style="left:{{(tabIndex*(100/tabTitle[orderType].length))}}%;width:{{(100/tabTitle[orderType].length)}}%"></view>
+      <view class="btn">
+        <block wx:for="{{tabTitle[orderType]}}" wx:key="index">
+          <view class="view{{tabIndex==index?' act2 c_color':''}}"  bindtap="changeTab" data-index="{{index}}">{{item}}</view>
+        </block>
+      </view>
+    </view>
+    
+      <view  class="box" >
+        <view class="order_null" wx:if="{{!data.length&&isLoading}}">
+          <image class="icon" src="../../images/orderNull.png" mode="widthFix" />
+          <text class="text">您目前没有订单哦~~</text>
+        </view>
+        
+        <view class="list">
+        	
+          <block wx:for="{{data}}" wx:for-index="zIndex" wx:for-item="zItem" wx:key="zItem"  >
+            <view class="li" bindtap="goDetails" data-no="{{zItem}}">
+              <view class="no">
+                <text class="text">订单号：{{zItem}}</text>
+                <!-- <text class="text status" 
+                  wx:if="{{allObj[zItem].orderState=='1'&&allObj[zItem].payState!='0'&&allObj[zItem].deliveryNo}}">提货单号: {{allObj[zItem].deliveryNo}}                                   </text> -->
+                <text class="text status" >{{allObj[zItem].orderStateName}}</text>
+              </view>
+              <view class="img">
+                <block wx:for="{{allObj[zItem].images}}" wx:for-item="xItem" wx:for-index="xIndex"  wx:key="xIndex">
+                  <view class="li2"><image class="icon" indicator-dots="true"  src="{{xItem}}" mode="widthFix" /></view>
+                </block>
+                <view class="right"><image class="icon" indicator-dots="true"  src="../../images/go_right.png" mode="widthFix" /></view>
+              </view>
+              
+              <view class="info">
+                <text class="text">{{allObj[zItem].createDate}}</text>
+                <view class="money">共{{allObj[zItem].totalNum}}件商品  共计：<text class="xtext">￥{{allObj[zItem].payAmt}}</text></view>
+              </view>
+              
+              <view class="btn" wx:if="{{allObj[zItem].orderState=='1'&&allObj[zItem].payState=='0'}}">
+                <view class="view c_color c_border"  catchtap="pay" data-no="{{zItem}}">去支付</view>
+                <text class="countDown" wx:if="{{allObj[zItem].payState=='0'&&countDownObj[zItem]}}">订单将在 {{countDownObj[zItem]&&countDownObj[zItem].countDown}} 分钟后自动取消</text>
+              </view>
+              
+            </view>
+          </block>
+          
+        </view>
+        <text wx:if="{{(nowPageIndex==totalPageNum||totalPageNum==0)&&isLoading&&data.length}}" class="page-bottom-null"></text>
+      </view>
+  
+    <view class="c_backIndex c_background" bindtap="goIndex">返回首页</view>
+  
+  </view>

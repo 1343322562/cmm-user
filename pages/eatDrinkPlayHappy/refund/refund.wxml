@@ -1,0 +1,29 @@
+<view class='title'>退还内容:</view>
+<view class='content'>
+  <checkbox-group bindchange="checkboxChange">
+    <!-- <label class="checkbox" wx:for="{{list}}">
+      <checkbox value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
+    </label> -->
+    <view class="item" wx:for="{{list}}" wx:key="index"><checkbox value="{{item.receiveCodeNo}}" checked="{{item.isChecked}}"  >券码: {{item.receiveCodeNo}}</checkbox><view class="right">￥{{item.itemNowPrice}}</view></view>
+  </checkbox-group>
+</view>
+<view class='cont'>
+  <text>现金</text>
+  <text class='red'>￥{{money}}</text>
+</view>
+<view class='title'>
+  <text>现金退还方式：</text>
+  <text class='right'>{{refundAll?'整单退款':'部分退款'}}</text>
+</view>
+<view class='cont'>
+  <text>原路退回</text>
+  <text class='yellow'>（1-3个工作日内退款到原支付方）</text>
+</view>
+<view class='title'>
+  <text>退款原因</text>
+  <text class='must'>(必填)</text>
+</view>
+<view class="input">
+  <textarea bindinput='getInput' placeholder="请输入退款原因"></textarea>
+</view>
+<view class="submit{{money?' act':''}}" catchtap='submist'>退款申请</view>

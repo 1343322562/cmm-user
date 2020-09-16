@@ -1,0 +1,10 @@
+Page{background-color:#fff}
+.box{width:80%;margin:0 auto;padding-top:100rpx;padding-bottom:100rpx;}
+.input{border-bottom:1px solid #e8e8e8;position:relative;margin-bottom:40rpx;height:80rpx;line-height:80rpx;}
+.input>input{position:absolute;height:100%;left:20rpx;top:0;right:20rpx}
+.input>input.code{right:200rpx;}
+.loginBtn,.getCodeBtn{background-color:#f49b1e;color:#fff;border-radius:15rpx;text-align:center;}
+.loginBtn{width:80%;margin:0 auto;height:100rpx;line-height:100rpx;font-size:34rpx;}
+.getCodeBtn{position:absolute;top:10rpx;right:0;height:60rpx;line-height:60rpx;width:180rpx;}
+.getCodeBtn.act{background-color:#bbb;}
+.textColor{color:#d8d8d8}

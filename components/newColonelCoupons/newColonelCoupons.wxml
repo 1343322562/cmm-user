@@ -1,0 +1,11 @@
+<view class='mask' catchtouchmove="true" wx:if="{{show}}">
+    <view class='newColonelGetCouponsBox'>
+      <image class='bg' mode="widthFix" src="../../images/newColonelGetCouponsBg.png" />
+      <view class='money'>
+        <text class='symbol'>￥</text>
+        <text>{{data.discountAmt}}</text>
+      </view>
+      <view class='clear' catchtap='clear'><image class='icon' mode="widthFix" src="../../images/clear.png" /></view>
+      <view class='get' catchtap='getCoupons'><text>{{isGet?'领取成功去查看':'立即领取'}}</text></view>
+    </view>
+  </view>

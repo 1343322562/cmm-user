@@ -1,0 +1,9 @@
+@import "../../app.wxss";
+.tabBar{position: fixed;left:0;bottom: 0;width: 100%;display:flex;z-index: 99;border-top: 1px solid #e8e8e8;background-color: #fff;}
+.tabBar .item{flex-grow: 1;height: 100rpx;text-align:center;font-size: 24rpx;color:#555;position: relative;display: none;}
+.tabBar .item.act{color: #f49b1e;}
+.tabBar .item.show{display: block}
+.tabBar .item .icon{width: 50rpx;height: 50rpx;margin:10rpx auto 0rpx auto; display: block; }
+.tabBar .item .title{margin-top: 0;height: 80rpx;}
+.tabBar .item .num{color:#fff;background-color: red;position: absolute;top: 9%;left: 60%;line-height: 40rpx;padding: 0 10rpx;border-radius: 40rpx;font-size: 26rpx;min-width: 20rpx;}
+cover-view,cover-image{line-height: 0}

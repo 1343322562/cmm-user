@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "结算页",
+  "usingComponents": {
+    "coupons-select": "../../components/coupons-select/coupons-select"
+  }
+}

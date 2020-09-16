@@ -1,0 +1,38 @@
+.imgList{height: 332rpx;background-color: #fff}
+.imgList .img{width: 750rpx;height: 332rpx;}
+.block{background-color: #fff;}
+.padding{padding: 0 20rpx}
+.goodsName{font-weight: bold;font-size: 30rpx;padding-top: 30rpx}
+.goodsPrice{padding-top: 20rpx;}
+.goodsPrice .now{color:red;font-size: 40rpx;font-weight: bold}
+.goodsPrice .before{color: #999;text-decoration: line-through;padding-left: 20rpx;}
+.sell{display: flex;color: #999;padding-bottom: 30rpx;}
+.sell>text{display: block;flex-grow: 1;}
+.sell>.stock{text-align: right}
+.blockTitle{padding: 20rpx;display: block;}
+.goodsSize{padding: 30rpx 0 0 0;display: flex;flex-wrap: wrap;font-size: 24rpx;}
+.goodsSize>.item{margin-left: 20rpx;display: block;position: relative;border: 1px solid #ddd;padding: 20rpx 30rpx;border-radius: 10rpx;margin-bottom: 20rpx;}
+.goodsSize>.item.act{border-color: red;overflow: hidden}
+.goodsSize>.item.act::before{content:"";position: absolute;top: 0;right: 0;width: 0;height: 0;border-width:20rpx;border-color: red;border-style: solid;border-left-color: transparent;border-bottom-color: transparent;}
+.goodsSize>.item.act::after{content:"";position: absolute;top: 2rpx;right: 2rpx;width: 16rpx;height: 8rpx;border: 3rpx solid #fff;border-top: none;border-right: none;transform:rotate(-40deg)}
+.shop{padding: 20rpx;position: relative;}
+.shop>.icon{width: 50rpx;height: 50rpx;position: absolute;top: 30rpx;left: 20rpx;}
+.shop>.info{margin-left: 63rpx;width: 550rpx;}
+.shop>.info text{display: block}
+.shop>.info .addr{color: #777;}
+.shop>.tel{position: absolute;top: 20rpx;right: 20rpx;width: 80rpx;height: 80rpx;text-align: center}
+.shop>.tel .icon{width: 40rpx;height: 40rpx;margin-top: 20rpx;}
+.goodsInfo{padding: 20rpx;}
+.nav{position: fixed;left: 0;bottom: 0;display: flex;background-color: #fff;width: 100%;border-top: 1px solid #e8e8e8;}
+.nav>view{flex-grow: 1;text-align: center;line-height: 100rpx;font-size: 30rpx;}
+.nav .icon{width: 35rpx;height: 35rpx;vertical-align: middle;margin-right: 10rpx;}
+.nav>.btn{color: #777;position: relative}
+.nav>.btn:first-child{border-right: 1px solid #e8e8e8;}
+.nav>.shopping{background: linear-gradient(90deg,#ea1543, 50%, #fa6e4f);color: #fff;}
+.contentBox{padding: 30rpx 20rpx;}
+.contentBox>.item{overflow: hidden;padding-bottom: 20rpx;}
+.contentBox .size{color: #999;padding-left: 10rpx;}
+.contentBox .num{float: right;}
+.itemDetailsList{padding-bottom: 120rpx;overflow: hidden}
+.itemDetailsList image{width: 100%;float: left;}
+.btn .kefu{width: 100%;height: 100%;background: transparent;position: absolute;top: 0;left: 0;bottom: 0;opacity: 0}

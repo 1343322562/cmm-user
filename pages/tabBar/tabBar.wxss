@@ -1,0 +1,14 @@
+.pageBox{padding-bottom: 120rpx;}
+.tabBar{position: fixed;left: 0;bottom: 0;display: flex;background-color: #fff;width: 100%;height: 100rpx;z-index: 1000;border-top: 1px solid #e8e8e8;}
+.tabBar>.item{width: 200rpx;text-align: center;padding-top: 8rpx;position: relative}
+.tabBar>.item .block{overflow: hidden}
+.tabBar>.item .icon{width: 45rpx;height: 45rpx;margin: 0 auto;display: inline-block}
+.tabBar .title{text-align: center;font-size: 25rpx;padding-bottom: 20rpx;display: block;}
+.tabBar .title.act{color: #e93323}
+.tabBar>.goColonel{width: 200rpx;position: relative;}
+.tabBar>.goColonel .openBtn{position: absolute;width: 100%;height: 100%;top: 0;left: 0;}
+.tabBar>.goColonel .block{position: absolute;width: 80rpx;height: 80rpx;line-height: 80rpx;border-radius: 100%;background: red;text-align: center;top: -35rpx;left: 50%;margin-left: -50rpx;border: 4px solid #fff;}
+.tabBar>.goColonel .title{padding-top: 62rpx;}
+.tabBar>.goColonel .icon{width: 45rpx;height: 45rpx;margin-top: 16rpx;}
+.hide{display: none}
+.tabBar .num{color:#fff;background-color: red;position: absolute;top: -5rpx;left: 60%;line-height: 40rpx;padding: 0 10rpx;border-radius: 40rpx;font-size: 26rpx;min-width: 20rpx;}

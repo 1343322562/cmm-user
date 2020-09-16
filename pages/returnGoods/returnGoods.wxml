@@ -1,0 +1,99 @@
+<view class="item">
+  <view class="title">退款订单:</view>
+  <view class="value right" catchtap="handleSelectOrder">
+    <text wx:if="{{confirmOrderIndex==-1}}">请选择退款订单</text>
+    <text wx:if="{{confirmOrderIndex!=-1}}">{{orderList[confirmOrderIndex].orderNo}}</text>
+    <image class="goRight" src="../../images/go_right.png" mode="widthFix" />
+  </view>
+</view>
+
+<view class="item">
+  <view class="title">退款原因及描述:</view>
+  <view class="value">
+    <textarea  bindinput="handleInput" data-key="returnReason" maxlength="200" wx:if="{{!showOrderList}}" class="textarea" placeholder="请输入原因及描述"></textarea>
+  </view>
+</view>
+
+
+<view class="item">
+  <view class="title">退款情况:</view>
+  <view class="value">
+    <text>{{returnType}}</text>
+  </view>
+</view>
+
+<view class="item">
+  <view class="title">退款申请金额合计:</view>
+  <view class="value">
+    <text class="price">{{totalReturnAmt}}元</text>
+  </view>
+</view>
+
+<view class="item">
+  <view class="title">退款运费:</view>
+  <view class="value">
+    <text class="price">{{returnPostage}}元</text>
+  </view>
+</view>
+
+<view class="item">
+  <view class="title">退款明细:</view>
+  <view class="value">
+    <textarea wx:if="{{!showOrderList}}" disabled maxlength="1000" class="textarea" value="{{returnDetailed}}"></textarea>
+  </view>
+</view>
+
+
+<view class="btn" catchtap="handleSave">提交申请</view>
+
+<view class="mask" wx:if="{{showOrderList}}"></view>
+
+<view class="orderList" wx:if="{{showOrderList}}">
+  <view class="close">
+    <image src="/images/btnX.png" catchtap="handleCloseOrder"></image>
+  </view>
+
+  <scroll-view class="list" scroll-y="{{true}}">
+    <view wx:for="{{orderList}}" wx:key="index" class="li" data-index="{{index}}" catchtap="handleClickOrder">
+      <view class="title">
+        <view class="line">
+          <image class="icon" src="/images/{{index==selectOrderIndex?'xz@3x':'wx@3x'}}.png"></image>
+          <text class="text">订单号：{{item.orderNo}}</text>
+        </view>
+        <image class="icon2" src="/images/{{index==selectOrderIndex?'xia':'shang'}}.png"></image>
+      </view>
+      <block wx:if="{{index==selectOrderIndex}}">
+
+        <view wx:for="{{item.orderDetailVOList}}" wx:key="index" class="goodsItem" wx:if="{{item.saleNum}}">
+          <view class="row">
+            <view>{{item.itemName}}
+              <text class="count">x{{item.saleNum}}{{item.itemUnit}}</text>
+            </view>
+            <view class="red" style="width:120rpx;padding-left:20rpx;">{{item.contributionQuotaAmt}}元</view>
+          </view>
+          <view class="row">
+            <view class=line ">
+            <text class="red ">退货数量</text>
+            <input class="input" data-index="{{index}}" type="number" bindinput="handleChangeCount" data-max="{{item.saleNum}}" value="{{item.inputReturnCount}}" maxlength="10 "/>
+          </view>
+           <view class="line ">
+            <text class="red ">退货原因</text>
+            <picker bindchange="bindPickerChange" data-index="{{index}}" range="{{array}}">
+                <view class="input" >{{item.returnCause}}</view>
+            </picker>
+           
+          </view>
+        </view>
+      </view>
+      
+      </block>
+     
+    </view>
+  </scroll-view>
+
+  <view class="btnBox">
+    <view class="btn1" catchtap="handleReturnAll">整单退</view>
+    <view class="btn2">合计退款:{{returnAmt+returnPostage}}元</view>
+    <view class="btn3" catchtap="handleSelectOk">确定</view>
+  </view>
+</view>

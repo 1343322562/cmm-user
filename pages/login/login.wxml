@@ -1,0 +1,12 @@
+
+<view class="box">
+  <view class="input">
+    <input data-type="tel" value="{{tel}}" maxlength="11" bindinput="input" type="number" placeholder="请输入手机号码" class="tel"  />
+  </view>
+  <view class="input">
+    <input data-type="code" maxlength="10" value="{{code}}" bindinput="input" class="code" placeholder="请输入验证码" placeholder-style="textColor"  />
+    <view class="{{'getCodeBtn'+(count?' act':'')}}" catchtap="getCode">{{count?(count+"s"):"获取验证码"}}</view>
+  </view>
+</view>
+
+<view class="loginBtn" catchtap="login">登录</view>

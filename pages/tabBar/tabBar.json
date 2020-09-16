@@ -1,0 +1,12 @@
+{
+  "navigationStyle": "custom",
+  "onReachBottomDistance": 200,
+  "enablePullDownRefresh": true,
+  "backgroundColorBottom": "#f2f2f2",
+  "usingComponents": {
+    "tabBar-index": "../../components/tabBar-index/tabBar-index",
+    "tabBar-list": "../../components/tabBar-list/tabBar-list",
+    "tabBar-carts": "../../components/tabBar-carts/tabBar-carts",
+    "tabBar-my": "../../components/tabBar-my/tabBar-my"
+  }
+}

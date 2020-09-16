@@ -1,0 +1,175 @@
+<view class="pageBox" id="pageBox">
+
+  <view class="orders" wx:if="{{type}}" bindtap="switchStore">
+    <image class="icon" src="../../images/border.png" />
+    <view class="user">
+      <text class="c_border c_color type  act">{{switchTransWay?'自提点信息':'收货人信息'}}</text>
+      <text class='text' wx:if="{{switchTransWay}}">{{storeInfo.storeName || storeInfo.title}}</text>
+      <block wx:else>
+        <text class="text">{{receivingAddr.consignee}}</text>
+        <text class="text">{{receivingAddr.phone}}</text>
+      </block>
+    </view>
+
+    <view class="express">
+      <view wx:if="{{switchTransWay}}" class="addr">提货地点：{{storeInfo.storeAddr || storeInfo.address}}</view>
+      <view wx:else class="addr">收货人地址: {{receivingAddr.province}} {{receivingAddr.city}} {{receivingAddr.area}} {{receivingAddr.address}}</view>
+    </view>
+
+    <view class="location_null" wx:if="{{fase}}">
+      <image class="icon2" src="../../images/carts_icon_loaction.png" mode="widthFix" />
+      <text class="text">请填写收货地址</text>
+    </view>
+
+    <image class="goRight" src="../../images/go_right.png" mode="widthFix" />
+
+  </view>
+  <view class="cartsType c_color act">
+      <view class="cartsTypeC">
+        <image class="icon" src="../../images/{{switchTransWay?'selfT': 'express_order_icon'}}.png" mode="widthFix" /> 	
+        <text class="text {{switchTransWay ? 'self' : ''}}" >{{switchTransWay ?'自提点取货商品':'送到家商品'}}</text>
+      </view>
+      <view 
+        class="switchTransWayBtn {{switchTransWay ? 'home' : 'self'}}" 
+        bindtap="changeTransWay"
+      >
+        {{ switchTransWay ? '切换送货到家' : '切换到自提点' }} 
+      </view>
+  </view>
+
+  <view class="li" wx:for="{{itemsIds}}" wx:key="index">
+    <view class="goods">
+
+      <view class="img">
+		    <image class="icon" src="{{goods[item].itemThumbPic}}" mode="widthFix" />
+        <text class='seckillTag' wx:if="{{goods[item].isMS}}">限时秒杀</text>
+	    </view>
+
+      <view class="info">
+        <text class="name">{{goods[item].itemName}}</text>
+        <view class="itemSize">{{goods[item].itemSizeDes}}</view>
+        <view class="price">
+		      <text class="now">￥{{goods[item].itemNowPrice}}</text>
+          <text style="font-size:26rpx;color:red">/{{goods[item].itemUnit}}</text>
+		      <text class="before">￥{{goods[item].itemDisPrice}}</text>
+		    </view>
+      </view>
+
+      <view class="num">X{{goods[item].num}}</view>
+    </view>
+  </view>
+
+   <view class='couponsSelect'>
+      <view class='type'>
+        <image class="icon" src="../../images/liquidation_coupons.png" mode="widthFix" />
+        <text class='text'>优惠券</text>
+      </view>
+      <view class='money' catchtap='showCoupons'>
+        <text class="text{{(couponsList.length&&selectedCoupons)?' act':''}}">{{couponsList.length?(selectedCoupons?('立省'+selectedCoupons.discountAmt+'元'):'不使用优惠券'):'无可用优惠券'}}</text>
+        <image class="icon" src="../../images/go_right.png" mode="widthFix" />
+      </view>
+    </view>
+
+  <view class="liquidation">
+    <view class="total"><text>总计:</text><text class="money">￥{{cartsMoney}}</text></view>
+    <view class="num">
+	    <text class="text">商品数量: {{selectNum}}</text>
+	  </view>
+
+    <view class="payMoeny">
+	    <text>应付:</text>
+	    <text class="money">￥{{payAmt}}</text>
+    </view>
+  </view>
+
+  <view class="payWay">
+    <text class="text">支付方式：</text>
+    <image class="icon" src="../../images/weixin.png" mode="widthFix" />
+    <text class="payWayTitle">微信支付</text>
+  </view>
+
+  <view class="payWay">
+     <text class="text">起送金额：</text>
+     <text class="payWayTitle">{{startDeliveMoney || 0}}元</text>
+  </view>
+
+  <view class="payWay" wx:if="{{!switchTransWay || true}}">
+     <text class="text">运费金额：</text>
+     <text class="payWayTitle">{{postageMoney || 0}}元</text>
+     <view style="padding:20rpx;">
+        <block wx:for="{{postageSection}}" wx:key="index">
+            <text wx:if="{{item.postage==0}}">消费 ：{{item.minAmt}}元以上免运费\r\n</text> 
+            <text wx:if="{{item.postage>0}}">消费 ：{{item.minAmt}}元以上 - {{item.maxAmt==0?'':item.maxAmt+'元'}}  运费：{{item.postage}}元\r\n</text> 
+        </block>
+     </view>
+  </view>
+
+  <view class="remark">
+    <view class="contentTitle c_background_before" >备注信息</view>
+    <textarea class="form" bindinput="getMemo" maxlength="50"  bindfocus="inputFocus" bindblur="inputBlur"/>
+  </view>
+  <view style="height:{{tempHeight}}rpx;"></view>
+
+  <cover-view class="downOrderBottom" wx:if="{{!confirm}}">
+    <cover-view class='title'>合计:</cover-view>
+    <cover-view class="money">￥{{totalPayAmt}}</cover-view>
+    <cover-view class="saveOrders c_background{{type!='home'?' act':''}}"  catchtap="showConfirm">提交订单</cover-view>
+  </cover-view>
+
+  <view class="mask" wx:if="{{confirm}}" catchtouchmove="true">
+    <view class="confirm">
+      <view class="title  red">{{'订单确定'}}</view>
+      <view class="content">
+        <block wx:if="{{storeInfo.id || switchTransWay}}">
+          <view class="item">
+            <text>收货人：</text>
+            <text>{{userInfo.nickName}}</text>
+          </view>
+          <view class="item">
+            <text>联系电话：</text>
+            <text>{{userInfo.userPhone}}</text>
+          </view>
+          <view class="item">
+            <text>自提点：</text>
+            <text>{{storeInfo.storeName}}</text>
+          </view>
+          <view class="item">
+            <text>提货地址：</text>
+            <text>{{storeInfo.storeAddr}}</text>
+          </view>
+        </block>
+        <block wx:else >
+          <view class="item">
+            <text>收货人：</text>
+            <text>{{receivingAddr.consignee}}</text>
+          </view>
+          <view class="item">
+            <text>联系电话：</text>
+            <text>{{receivingAddr.phone}}</text>
+          </view>
+          <view class="item">
+            <text>收货地址：</text>
+            <text>{{receivingAddr.province}} {{receivingAddr.city}} {{receivingAddr.area}} {{receivingAddr.address}}</text>
+          </view>
+        </block>
+        
+      </view>
+      <view class="btn">
+		      <text bindtap="hideConfirm">取消订单</text>
+		      <text class="c_background" bindtap="submitOrders">确认订单</text>
+		  </view>
+    </view>
+
+  </view>
+
+</view>
+
+<coupons-select 
+  show="{{showCouponsSelect}}" 
+  queryType='canUse' 
+  nowSelected="{{selectedCoupons}}" 
+  list="{{couponsList}}"  
+  noUselist="{{couponsNoUseList}}" 
+  bindhideCoupons="hideCoupons" 
+  bindchange="couponsSelect" 
+/>

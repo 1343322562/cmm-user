@@ -1,0 +1,30 @@
+
+.list{padding: 110rpx 20rpx 0 20rpx;}
+.box{margin-bottom: 20rpx;}
+.li{background-color: #fff;position: relative;height: 200rpx;padding-right: 20rpx;}
+.li .left{position: absolute;top: 0;left: 0;color: #fff;width: 220rpx;height: 100%;text-align: center;z-index: 10;}
+.li.null .left{background: #d0cdcd;}
+.li.null .left::before{border-color: #d0cdcd;}
+.li .left::before{content: '';position: absolute;top: 0;left: -5rpx;width: 0;height: 100%;border-left: 10rpx dotted #6093ff;}
+.li .left>.money{padding-top: 35rpx;}
+.li .left>.money .text{font-size: 60rpx;font-weight: bold;}
+.li .right{margin-left: 240rpx;}
+.li .right>.name{padding: 20rpx 0;}
+.li .right>.time{color: #666;font-size: 26rpx;}
+.li .right>.goDetails{border-top: 3rpx  dashed #e8e8e8;font-size: 26rpx;line-height: 60rpx;color: #666;position: absolute;bottom: 0;left: 240rpx;width: 455rpx;}
+.li .right>.goDetails .icon{width: 40rpx;height: 40rpx;float: right;margin-top: 10rpx;transition: all .4s ease;transform:rotate3d(0deg);}
+.li .right>.goDetails.act .icon{transform:rotate(180deg);}
+.li .right>.share{position: absolute;bottom: 80rpx;right: 20rpx;color: #ff5454;border: 1px solid #ff5454;border-radius: 40rpx;line-height: 55rpx;width: 130rpx;text-align: center;font-size: 22rpx;}
+.li .right>.status{position: absolute;top: 0;right: 0;width: 120rpx;height: 120rpx;}
+.couponsNull{text-align: center;color:#666;}
+.couponsNull>.icon{width: 200rpx;height: 234rpx;}
+.c{background-color:#fff;box-shadow:0px 5px 10px #eee inset;}
+.title{text-align:center;height:80rpx;line-height:80rpx;width:90%;border-bottom:1px solid #ddd;margin:0 auto;}
+.cnt{width:90%;margin:0 auto;color:#999;font-size:28rpx;padding: 20rpx 0;word-wrap:break-word;}
+
+.head{background-color:#fff;position:fixed;height:90rpx;border-bottom:2rpx solid #e8e8e8;top: 0;left: 0;width: 100%;z-index: 50;}
+.head>.act{position:absolute;left:0;bottom:0;transition: left 0.2s ease-in-out;}
+.head>.act:before{content:"";height:3px;width:50%;position:absolute;left:25%;bottom:0;background-color:#f49b1e;}
+.head>.btn{display:flex;}
+.head>.btn .view{flex-grow:1;text-align:center;color:#999;height:90rpx;line-height:90rpx;width:0px;}
+.head>.btn .act{color:#F49B1E;}

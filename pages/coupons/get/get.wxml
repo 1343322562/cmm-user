@@ -1,0 +1,16 @@
+<view class='box'>
+  <image class="bg" mode='widthFix' src="../../../images/coupons_get_bg.png" />
+  <canvas class='head' canvas-id="mycanvas" />
+  <view class='info'>
+    <view style="color:red">{{conponsInfo.name}}</view>
+    <view>使用时间：{{conponsInfo.startDateStr}}-{{conponsInfo.endDateStr}}</view>
+    <view>使用规则：<text style="font-size:24rpx;line-height:10rpx;word-wrap:break-word">{{conponsInfo.explainTitle}} ( {{ conponsInfo.tempDesc || (conponsInfo.explain||'所有商品都可用')}})</text></view>
+  
+  </view>
+  <view wx:if="{{loadInfoComplete}}">
+    <view class="btn" wx:if="{{!haveReceived&&!couponsInvalid}}" bindtap="HandleGetCoupons">点击领取</view>
+    <view class="btn" wx:if="{{haveReceived&&!couponsInvalid}}" bindtap="HandleGoIndexPage">去使用</view>
+    <view class="btn" wx:if="{{couponsInvalid}}" bindtap="HandleGoIndexPage">进入首页</view>
+  </view>
+
+</view>

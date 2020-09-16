@@ -1,0 +1,20 @@
+.head{background-color:#fff;position:fixed;height:90rpx;border-bottom:2rpx solid #e8e8e8;top: 0;left: 0;width: 100%;z-index: 50;}
+.head>.act{position:absolute;left:0;bottom:0;transition: left 0.2s ease-in-out;}
+.head>.act:before{content:"";height:3px;width:50%;position:absolute;left:25%;bottom:0;background-color:#ea1543}
+.head>.btn{display:flex;}
+.head>.btn .view{flex-grow:1;text-align:center;color:#999;height:90rpx;line-height:90rpx;width:0px;}
+.head>.btn .act2{color:#ea1543}
+.head.act{border-bottom: 1px solid #e8e8e8;}
+.box{padding: 110rpx 20rpx 20rpx 20rpx}
+.box>.li{background-color: #fff;border-radius: 20rpx;padding: 20rpx 20rpx 110rpx 20rpx;position: relative;margin-bottom: 20rpx;}
+.box>.li .name>.text{font-weight: bold;font-size: 30rpx;vertical-align: middle;display: inline-block;width: 480rpx;}
+.box>.li .name>.icon{width: 40rpx;height: 40rpx;vertical-align: middle;margin-right: 15rpx}
+.box>.li .status{float: right;color: #ea1543}
+.info{display: flex;padding: 20rpx 0 0 0;}
+.info>.icon{width: 120rpx;height: 120rpx;background: #f2f2f2;overflow: hidden;border-radius: 10rpx;}
+.info>.content{margin-left: 20rpx;width: 500rpx;color: #666;font-size: 26rpx;}
+.p{line-height: 42rpx;}
+.p>text{padding-right: 30rpx;}
+.box .btn{position: absolute;bottom: 20rpx;right: 20rpx;}
+.box .btn>text{line-height: 60rpx;width: 140rpx;text-align: center;display: inline-block;margin-left: 20rpx;border-radius: 10rpx;border: 1px solid #999;color: #777;font-size: 26rpx;}
+.box .btn>.lookCode{color: #ea1543;border-color: #ea1543;}

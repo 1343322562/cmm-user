@@ -1,0 +1,30 @@
+/**app.wxss**/
+/* .container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+}  */
+
+Page{background-color: #f2f2f2;font-size:28rpx;}
+.mask{position:fixed;top:0;left:0;width:100%;bottom:0;background-color:rgba(0,0,0,.4);z-index:1001}
+.page-bottom-null{display:block;width:80%;margin:40rpx auto 0 auto;position:relative;padding-top:40rpx;font-size: 28rpx;}
+.page-bottom-null::before{content:"我也是有底线的~";position:absolute;text-align:center;top:-15rpx;left:50%;margin-left:-90rpx;height:30rpx;line-height:30rpx;color:#999}
+.pageBottomPlaceholder{height: 120rpx;}
+.c_backIndex{width:80%;height:80rpx;line-height:80rpx;border-radius:40rpx;background-color:#f49b1e;position:fixed;bottom:30rpx;left:10%;text-align:center;color:#fff;z-index:10}
+/*主题色*/
+.c_color{color: #ed0012!important}
+.c_border,c_border_after::after,.c_border_before::before{border-color: #ed0012!important}
+.c_background_after::after,.c_background_before::before,.c_background{background-color:#ed0012!important}
+
+.h_background{background-color:#999!important}
+
+/*LBS*/
+.c_LBS_border_left_after::after,.c_LBS_border_right_icon_before:before{border-color:  transparent  transparent transparent #ed0012!important;}
+.c_LBS_border_right_before::before{border-color:  transparent  #ed0012 transparent transparent!important;}
+/*秒杀标签*/
+.seckillTag{position: absolute;left: 50%;margin-left: -60rpx;bottom: 0;color: #fff;background: #f73238;border-radius: 30px;width: 120rpx;text-align: center;line-height:45rpx;display:block;font-size: 20rpx;opacity: .8}
+/*库存不足*/
+.c-stock_null{position: absolute;top: 0;left: 0;display: flex;justify-content: center;align-items: center;text-align: center;background-color: rgba(0,0,0,.6);color: #fff;font-size: 35rpx;z-index: 10;width: 100%;height: 100%;}

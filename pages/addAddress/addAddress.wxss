@@ -1,0 +1,19 @@
+.saveAddress{background-color: #FF5800;color: #fff;text-align: center;width: 80%;line-height: 80rpx;border-radius: 40rpx;position: fixed;left: 10%;bottom: 30rpx;font-size: 32rpx;}
+
+.pageBox{padding-top: 20rpx;}
+.pageBox>.set{background-color: #fff;margin-top: 20rpx;line-height: 90rpx; padding:0 20rpx;}
+.pageBox>.set .text{color: #999;}
+.pageBox>.set .switch{float: right;}
+.pageBox>.item{background-color: #fff;border-bottom: 1px solid #e8e8e8;display:flex;padding:0 20rpx;}
+.pageBox>.item .name{color: #666;width: 0;flex-grow: 1;line-height: 90rpx;}
+.pageBox>.item .form{width: 0;flex-grow: 4;}
+.pageBox>.item .form .input{width: 100%;height: 100%;}
+.pageBox>.item .form .placeholder{color: #999;}
+.pageBox>.item .form .text{line-height: 90rpx;}
+.pageBox>.particulars{background-color: #fff;padding: 20rpx;}
+.pageBox>.particulars .textarea{width: 100%;height: 160rpx;}
+.address{padding: 27rpx 0;}
+
+
+.setting{background-color:green;color: #fff;text-align: center;width: 80%;line-height: 80rpx;border-radius: 40rpx;position: fixed;left: 10%;
+bottom: 120rpx;font-size: 32rpx;}

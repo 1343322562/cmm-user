@@ -1,0 +1,73 @@
+<view class="box">
+    <view class="cartsType">
+      <view class="type">
+        <view class="text">本地仓商品</view>
+        <view class="text2">
+        <icon type="info" size="14" color="#F03200" class="info" />
+        <text>本地仓直接配送到家，48小时内送达。</text>
+        </view>
+      </view>
+      <view class='delete' catchtap='deleteAllGoods'>
+        <image class="icon" src="../../images/address_delete.png" mode="widthFix" />
+      </view>
+      <!-- <view class="select" bindtap="selectAllGoods">
+        <view class="checkbox{{isSelectAll?' act c_background c_border':''}}" >
+          <image class="icon" src="../../images/hook.png" />
+        </view>
+        <text class="text">全选</text>
+      </view>   -->
+    </view>
+    
+    <view class="li" wx:for="{{itemsIds}}"  wx:key="index">
+       <view class="goods{{leftAnimation?' act':''}}"  data-no="{{item}}" style="left:-{{(goods[item].goodsLeft||0)}}px" bindtouchstart="touchstart" bindtouchmove="touchmove" bindtouchend="touchend" bindtouchcancel="touchend">
+        <view class='seckillCountDown'wx:if="{{goods[item].isMS}}">
+          <text>距离活动结束时间还剩：</text>
+          <view class="date">
+            <text class='t'>{{seckillDate[item][0]}}</text>
+            <text>:</text>
+            <text class='t'>{{seckillDate[item][1]}}</text>
+            <text>:</text>
+            <text class='t'>{{seckillDate[item][2]}}</text>
+          </view>
+          <view class='maxNum'>限购数量({{goods[item].msMaxNum}})</view>
+        </view>
+        <view  class="checkbox{{!goods[item].cancelSelected?' act c_background c_border':''}}" data-no="{{item}}"  bindtap="selectGoods">
+          <image class="icon" src="../../images/hook.png" />
+        </view>
+        <view class="img" data-no="{{item}}" bindtap="goGoodsDetails" >
+          <image class="icon" src="{{goods[item].itemThumbPic}}{{imgV}}" />
+          <text class='seckillTag' wx:if="{{goods[item].isMS}}">限时秒杀</text>
+        </view>
+        <view class="info" data-no="{{item}}" bindtap="goGoodsDetails">
+          <text class="name">{{goods[item].itemName}}</text>
+           <view class="itemSize">{{goods[item].itemSizeDes}}</view>
+          <view class="price">
+            <text class="now">￥{{goods[item].isMS?goods[item].MSprice:goods[item].itemNowPrice}}</text>
+            <text class='unit'>/{{goods[item].itemUnit}}</text>
+          </view>
+        </view>
+        <view class="btn">
+          <view class="minus form{{goods[item].disabled?' disabled':''}}" catchtap='changeGoodsNum' data-no="{{item}}" data-type="minus">-</view>
+          <text class="num">{{goods[item].num}}</text>
+          <view class="add form{{goods[item].disabled?' disabled':''}}" catchtap='changeGoodsNum' data-no="{{item}}" data-type="add">+</view>
+        </view>
+        <view class="delete c_background" data-no="{{item}}" data-type="delete" bindtap="changeGoodsNum">删除</view>
+       </view>
+    </view>
+
+    <view class="liquidation">
+      <view class="select" bindtap="selectAllGoods">
+        <view class="checkbox{{isSelectAll?' act c_background c_border':''}}" >
+          <image class="icon" src="../../images/hook.png" />
+        </view>
+        <text class="text">全选</text>
+      </view>
+      <view class="total"><text>总计:</text><text class="money">￥{{cartsMoney}}</text></view>
+       <view class="num">
+        <!-- <text class="text">商品种类: {{selectTypeNum}}</text> -->
+        <text class="text">商品数量: {{selectNum}}</text>
+      </view>   
+      <view class="btn c_background"  bindtap="goLiquidation">去结算</view>
+    </view>
+    
+</view>

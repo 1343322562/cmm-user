@@ -1,0 +1,27 @@
+<view class="pageBox">
+
+  <view class="sysCodeList">
+      <view class="item" wx:for="{{dcCodeList}}" data-syscode="{{item.SysCode}}" data-dcid="{{item.dcId}}" catchtap="onClickCity">
+        {{item.dcName}}
+      </view>
+  </view>
+
+</view>
+
+<view class="masker-container" wx:if="{{isShowPasswordDialog}}">
+  <view class="box">
+    <view class="body">
+      <view class="content">请输入密码</view>
+      <input 
+        type="password" 
+        placeholder="请输入密码" 
+        value="{{passwordValue}}" 
+        bindinput="passwordBind"
+      />
+    </view>
+    <view class="btn" bindtap="confirm">
+      <view class="b back" data-type="0">返回</view>
+      <view class="b confirm" data-type="1">确定</view>
+    </view>
+  </view>
+</view>

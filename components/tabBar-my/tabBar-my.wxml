@@ -1,0 +1,120 @@
+<view class="pageBox">
+    <view class="contentBox" style="padding-top:{{headHeight}}rpx">
+      <image class='logo' mode='widthFix' src="../../images/logo.png" />
+      <view class='user'>
+        <image src="{{userInfo.userPic}}" class='img' />
+        <text class='name'>{{userInfo.nickName}}</text>
+      </view>
+		</view>
+
+		<view class="orders">
+		  <view class="title">
+		    <text>我的订单</text>
+		    <view class="goAll" bindtap="goOrder" data-type="0" > 
+		      <text>查看全部订单</text>
+		      <image  class="icon" src="../../images/go_right.png" mode="widthFix" />
+		    </view>
+		  </view>
+		  <view class="btnList">
+		    <view class="li" bindtap="goOrder" data-type="1">
+		      <image class="icon"  src="../../images/dfk.png" mode="widthFix" />
+		      <view class="text">待付款</view>
+		    </view>
+		    <view class="li"  bindtap="goOrder" data-type="2">
+		      <image class="icon"  src="../../images/dfh.png" mode="widthFix" />
+		      <view class="text">待发货</view>
+		    </view>
+		    <view class="li" bindtap="goOrder" data-type="3">
+		      <image class="icon"  src="../../images/dsh.png" mode="widthFix" />
+		      <view class="text">待完成</view>
+		    </view>
+		    <view class="li"  bindtap="goOrder" data-type="4">
+		      <image class="icon"  src="../../images/ywc.png" mode="widthFix" />
+		      <view class="text">已完成</view>
+		    </view>
+        <view class="li"  bindtap="goPage" data-page="returnGoods">
+		      <image class="icon"  src="../../images/tksq.png" mode="widthFix" />
+		      <view class="text">退款申请</view>
+		    </view>
+        <view class="li"  bindtap="goPage" data-page="returnGoodsList">
+		      <image class="icon" style="height: 45rpx;width: 49rpx;padding: 8rpx;"  src="../../images/y.png" mode="widthFix" />
+		      <view class="text">退款/售后</view>
+		    </view>
+		  </view>
+		</view>
+
+    <view class="orders play">
+		  <view class="title"  bindtap="goPage" data-page="{{['eatDrinkPlayHappy','orderList']}}" >
+		    <text>吃喝玩乐订单</text>
+		    <view class="goAll" > 
+		      <text>查看全部订单</text>
+		      <image  class="icon" src="../../images/go_right.png" mode="widthFix" />
+		    </view>
+		  </view>
+		</view>
+
+		<view class="block" wx:if="{{ComData.userUpgradeCol=='1'}}">
+		  <view class="btn" bindtap="goPage" data-page="colonelApply" wx:if="{{!isColonel}}">
+		    <image class="icon" src="../../images/search_gooods_title.png" mode="widthFix" />
+		    <text>成为团长</text>
+		    <image class="goRight"  src="../../images/go_right.png" mode="widthFix" />
+		  </view>
+      <navigator wx:if="{{isColonel}}" class="btn" target="miniProgram" open-type="navigate" app-id="wx798866c719ac74cd" path="pages/login/login"  version="release">
+        <image class="icon" src="../../images/wdsy.png" mode="widthFix" />
+		    <text>我的收益</text>
+		    <image class="goRight"  src="../../images/go_right.png" mode="widthFix" />
+      </navigator>
+      <!-- 开发 develop  正式 release 体验 trial -->
+      <view class="btn" wx:if="{{fansList.length&&!isColonel}}">
+		    <text>我的粉丝（{{fansList.length}}）</text>
+        <view class='goRightText fans' >
+          <text>再拉</text>
+          <text class='num'>{{10-fansList.length}}</text>
+          <text>粉丝 升级为团长</text>
+        </view>
+		  </view>
+		</view>
+		<view class="block">
+      <view class="btn" wx:if="{{ComData.customerService}}">
+          <text>在线客服</text>
+          <image class="goRight"  src="../../images/go_right.png" mode="widthFix" />
+          <button class='kefu'  session-from='{"kefu":{{ComData.customerService}},"nickName":"{{userInfo.nickName}}","avatarUrl":"{{userInfo.userPic}}"}'  open-type="contact"></button>
+      </view>
+      
+		  <view class="btn" bindtap="goPage" data-page="address">
+		    <!-- <image class="icon" src="../../images/my_address_icon.png" mode="widthFix" /> -->
+		    <text>收货地址</text>
+		    <image class="goRight"  src="../../images/go_right.png" mode="widthFix" />
+		  </view>
+      <view class="btn"  bindtap="goPage" data-page="{{['coupons','list']}}" >
+		    <!-- <image class="icon"  src="../../images/my_coupons_icon.png" mode="widthFix" /> -->
+		    <text>优惠券</text>
+		    <image class="goRight"  src="../../images/go_right.png" mode="widthFix" />
+		  </view>
+      <view class="btn"  bindtap="switchCity" wx:if="{{dcName}}" >
+		    <!-- <image class="icon"  src="../../images/my_shop_icon.png" mode="widthFix" /> -->
+		    <text>{{dcName}}</text>
+		    <image class="goRight"  src="../../images/go_right.png" mode="widthFix" />
+		  </view>
+		</view>
+    <view class="cksj" wx:if="{{ComData.warehousePic}}">
+        <view class="title">
+          <view class="icon"><image src="../../images/cksj.png"/></view>
+          <view class="sm">仓库实景</view>
+        </view>
+        <view class="img">
+          <image src="{{ComData.warehousePic}}"></image>
+        </view>
+    </view>
+
+    <view class="cksj" wx:if="{{ComData.warehouseAdressPic}}">
+        <view class="title">
+          <view class="icon"><image src="../../images/wmzn.png"/></view>
+          <view class="sm">我们在哪</view>
+        </view>
+        <view class="img">
+          <image src="{{ComData.warehouseAdressPic}}"></image>
+        </view>
+    </view>
+  </view>
+  <!-- <button type='default' session-from='{"kefu":["113067"],"nickName":"{{userInfo.nickName}}","avatarUrl":"{{userInfo.userPic}}"}'  open-type="contact">打开客服</button> -->

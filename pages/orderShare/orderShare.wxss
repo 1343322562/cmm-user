@@ -1,0 +1,16 @@
+
+.canvas{width: 750rpx;border-bottom: 1px solid #ddd;}
+.saveImg{color: #fff;text-align: center; width: 80%;height: 80rpx;line-height: 80rpx;border-radius: 40rpx;background-color: #d82a29;background:linear-gradient(#ef3957, 50%, #d82a29);margin: 40rpx auto;}
+.user{text-align: center;padding: 40rpx 0 20rpx 0;font-size: 35rpx;}
+.user>.img{width: 110rpx;height: 110rpx;overflow: hidden;border-radius: 100%;vertical-align: middle;margin-right: 20rpx;}
+.list>.li{width: 680rpx;margin: 0 auto;position: relative;}
+.list .bg{width: 100%;}
+.list .img{background-color: #f2f2f2;position: absolute;top: 23rpx;left: 22rpx;width: 120rpx;height: 120rpx;border-radius: 100%;overflow: hidden;}
+.list .info{position: absolute;top: 36rpx;left: 200rpx;}
+.list .name{padding-bottom: 10rpx;overflow: hidden; text-overflow:ellipsis;white-space: nowrap;width: 440rpx;}
+.list .name>.text{color: #8b4021;font-size: 32rpx;padding-left: 15rpx;vertical-align: middle;}
+.list .name>.sx{display: inline-block;width: 40rpx;line-height: 40rpx;border-radius: 100%;overflow: hidden;color: #fff;background-color: #fc4044;text-align: center;vertical-align: middle;}
+.list .price>.now{font-size: 35rpx;color: #fb5301;padding-left: 40rpx;}
+.list .price>.befored{font-size: 26rpx;color: #c5a78f;text-decoration: line-through;padding-left: 10rpx;}
+.list .num{position: absolute;top: 80rpx;right: 40rpx;color: #9e9e9e;}
+.goIndex{margin: 40rpx auto 20rpx auto;text-align: center;color: #fff;font-size: 32rpx;line-height: 80rpx;width: 80%;border-radius: 40rpx;background:linear-gradient(#ef3957, 50%, #d82a29);}

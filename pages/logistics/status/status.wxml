@@ -1,0 +1,15 @@
+<view class="box">
+
+  <view class="item{{index?'':' one'}}" wx:for="{{list}}" wx:key="index">
+    <view class='date'>
+      <text>{{item.dateArr[0]}}</text>
+      <text>{{item.dateArr[1]}}</text>
+    </view>
+    <view class='status'>
+      <text wx:for="{{item.statusStr}}"wx:for-item="zItem" wx:for-index="zIndex" class="{{zIndex?'':'title'}}" wx:key="zIndex">{{zItem}}</text>
+      <image src="/images/logistics/{{item.status}}{{index?'':'_yes'}}.png" class="icon" mode="widthFix" />
+    </view>
+  </view>
+
+
+</view>

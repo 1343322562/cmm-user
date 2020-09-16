@@ -1,0 +1,38 @@
+<view class="item" wx:for="{{orderList}}" wx:key="{{OIndex}}" wx:for-index="OIndex">
+  <view class="li">
+    <view>
+      <view class="titleTop">订单号：{{item.returnOrderNo}}</view>
+      <view class="titleBottom color1">
+        退款合计:<text class="color2">{{item.returnAllAmt}}元</text>
+        运费:<text class="color2">{{item.postage||0}}元</text>
+      </view>
+    </view>
+    <view class="state">{{item.returnStateName}}</view>
+  </view>
+  <view class="li" wx:for="{{item.bdOrderReturnDetailList}}" wx:for-index="GIndex">
+    <view>
+     <view class="titleTop">{{item.itemName}} <text class="color1">x{{item.returnedNum}}{{item.itemUnit}}</text></view> 
+     <view class="titleBottom color1">退款金额：<text class="color2">{{item.returnAmt}}元</text></view>
+    </view>
+    <view class="btnDetailed" data-oindex="{{OIndex}}" data-gindex="{{GIndex}}" catchtap="handleClickDetailed">查看详情</view>
+  </view>
+</view>
+
+
+
+<view class="mask" wx:if="{{showBox}}"></view>
+
+<view class="alertBox" wx:if="{{showBox}}">
+  <view class="alertClose">
+    <image src="/images/btnX.png" catchtap="handleCloseBox"></image>
+  </view>
+  <view class="alertTitle">退款详情</view>
+  <scroll-view class="alertContent" scroll-y="{{true}}">
+    <view class="li">退款原因：{{selectGoodsInfo.returnReason}}</view>
+    <view class="li">退款金额：{{selectGoodsInfo.returnAmt}}</view>
+    <!-- <view class="li">退款运费：{{selectOrderInfo.postage||0}}</view> -->
+    <view class="li">退款数量：{{selectGoodsInfo.returnedNum}}{{selectGoodsInfo.itemUnit}}</view>
+    <view class="li">申请时间：{{selectOrderInfo.createdName}}</view>
+    <view class="li">退款编号：{{selectOrderInfo.returnOrderNo}}</view>
+  </scroll-view>
+</view>

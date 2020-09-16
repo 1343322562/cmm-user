@@ -1,0 +1,83 @@
+
+.sysCodeList{
+  /* border: 1px red solid; */
+  /* height: 300rpx; */
+   position: relative;
+  width:100%;
+  height: 100%;
+  /* position:fixed;
+  bottom: 1rpx; */
+  background-color: white;
+  align-content:center;
+  display: flex;
+  align-items:center;
+  flex-wrap: wrap;
+  justify-items:center; 
+  padding: 2%;
+}
+
+.sysCodeList .item{
+  position: relative;
+  height: 80rpx;
+  border: 1px #aaa solid;
+  margin: 8rpx;
+  text-align: center;
+  line-height: 80rpx;
+  padding: 10rpx;
+}
+
+.masker-container {
+  height: 100vh;
+  width: 100%;
+  position: absolute;
+  background-color: #aaa;
+  display: flex;
+  top: 0;
+  justify-content: center;
+  align-items: center;
+}
+.masker-container .box{
+  background-color: #fff;
+  width: 500rpx;
+  border-radius: 10rpx;
+  margin-bottom: 30%;
+}
+.masker-container .box .content {
+  font-size: 36rpx;
+  padding-bottom: 65rpx;
+}
+
+.masker-container .box .body{
+  padding: 30rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.masker-container .box .body input{
+  padding: 10rpx 35rpx;
+  border: 1px solid #bbb;
+  margin-bottom: 35rpx;
+  font-size: 29rpx;
+}
+.masker-container .box .btn{
+  width: 100%;
+  display: flex;
+  border-top: 1px solid #ccc;
+  background-color: #eeeeee20;
+}
+.masker-container .box .btn .b{
+  flex: 1;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  line-height: 90rpx;
+  height: 90rpx;
+  font-size: 34rpx;
+}
+.masker-container .box .btn .back{
+  border-right: 1px solid #ccc; 
+}
+.masker-container .box .btn .confirm{
+  color: green;
+}

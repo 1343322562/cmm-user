@@ -1,0 +1,98 @@
+
+<view class="home-hade act" style="padding-top:{{headHeight}}rpx;">
+  <image src="../../images/logo2.png"   mode="widthFix" class='icon' />
+  <view class='search' bindtap="goSearchGoods">
+    <image src="../../images/home-search-icon.png" class='icon' />
+    <text class='text'>挑选宝贝~</text>
+  </view>
+</view>
+<scroll-view style="top:{{85+headHeight}}rpx" scroll-x class="top" scroll-into-view="{{toView}}" scroll-with-animation="true">
+  <view class="content-top">
+
+      <view catchtap="onClickLeftCls" data-index="{{index}}" id="index_{{item.clsNo}}" class="top-item {{selectFatherClsNo==item.clsNo?'select':''}}" wx:for="{{categoryList}}" 
+      data-clsNo="{{item.clsNo}}" data-clsname="{{item.clsName}}" wx:key="index">
+         <view class="img">
+            <image src="{{item.imgName}}{{imgV}}" mode="widthFix"></image>
+          </view>
+          <view class="title">{{item.clsName}}</view>
+      </view>
+  </view>
+  </scroll-view>
+
+
+  <block wx:if="{{selectFatherClsNo!='play'}}">
+  
+  <scroll-view class="left" style="top:{{220+headHeight}}rpx" scroll-y >
+    <view class="content-left">
+      <view catchtap="onClickLeftCls2" class="content-left-item {{selectFatherClsNo2==item.clsNo?'select':''}}" wx:for="{{categoryList2}}" data-clsNo="{{item.clsNo}}" data-clsname="{{item.clsName}}" wx:key="index">
+        <view class="title">{{item.clsName}}</view>
+      </view>
+    </view>
+  </scroll-view>
+
+    <view class="content-right" style="padding-top:{{220+headHeight}}rpx"  bindtouchstart="touchstart" bindtouchend="touchend">
+        <view class="content-item" wx:for="{{goodsList}}" wx:key="index" catchtap="addCarts2" data-itemid="{{item.itemId}}">
+            <view class="left-image">
+               <image class="img" src="{{item.itemThumbPic}}{{imgV}}" mode="aspectFit"></image>
+               <text class='seckillTag' wx:if="{{allPromotionGoods[item.itemId]&&allPromotionGoods[item.itemId].type=='MS'}}">限时秒杀</text>
+               <view class='c-stock_null' wx:if="{{item.stockNull}}">已售罄</view>
+            </view>
+            <view class="right-info">
+                <view class="itemName">{{item.itemName}}</view>
+                <view class="itemSize">{{item.itemSizeDes}}</view>
+              
+            </view>
+            <view class="itemPrice"><text class="now">￥{{allPromotionGoods[item.itemId]?allPromotionGoods[item.itemId].price:item.itemNowPrice}}</text><text style="font-size:26rpx;">/{{item.itemUnit}}</text><text class='befored'>￥{{item.itemDisPrice}}</text></view>
+            <text class='startQty' wx:if="{{!cartGoods[item.itemId]&&item.startQty&&item.startQty!=1}}">起订数量{{item.startQty}}</text>
+            <view catchtap="addCarts" data-itemid="{{item.itemId}}" class="goodsBtn{{(cartGoods[item.itemId]?' act':' null')}} show">
+              <view class="num">{{cartGoods[item.itemId]&&cartGoods[item.itemId].num}}</view>
+              <view class="carts">
+                <image class="icon" mode="widthFix" src="../../images/index_cart_{{(cartGoods[item.itemId]?'3':'1')}}.png" role="img"></image>
+              </view>
+            </view>
+        </view>
+        
+        <view class="null-goods" wx:if="{{!goodsList.length&&pageLoading}}">
+          <image class="icon" src="../../images/member_list_null.png" mode="widthFix" />
+          <view class='title'>此专区暂无商品！</view>
+          <view class='goIndex' catchtap='goIndexPage'>去首页逛逛</view>
+        </view>
+
+        <!-- <text class='page-bottom-null' wx:if="{{isLoadingAllGoods}}"></text> -->
+        <view class='pullUp' wx:if="{{isLoadingAllGoods&&upClsObj}}" id="pullUp">
+          <image src="/images/pullUp.png" class='icon' />
+          <text>上拉</text>
+          <text>查看分类</text>
+          <text class='b'>{{upClsObj.name}}</text>
+        </view>
+        <view class="content-bottom" wx:if="{{isLoading}}">
+         <view class="loading">
+            <view class="icon">
+              <image src="../../images/icon-loading.gif"></image>
+            </view>
+            <text>正在载入更多...</text>
+          </view>
+        </view>
+    </view>
+
+    </block>
+
+    <block wx:if="{{selectFatherClsNo=='play'}}">
+      <view class='playContent' style="padding-top:{{220+headHeight}}rpx" >
+      
+        <view class='li' wx:for="{{playGoodsList}}" wx:key="index">
+          <image catchtap='goPlayGoodsDetails' data-index="{{index}}" src="{{imgBaseUrl+item.imgUrl}}" class="img"/>
+          <view class='box'>
+            <view class='name'>{{item.itemName}}</view>
+            <view class='msg'>{{item.productDesc}}</view>
+            <view class='price'>
+              <text class='now'>￥{{item.itemNowPrice}}</text>
+              <text class="before">门市价 ￥{{item.itemPrePrice}}</text>
+              <text class="sell">销量:{{item.saleAlreadyQty}}</text>
+            </view>
+            <view class="look" catchtap='goPlayGoodsDetails' data-index="{{index}}">去看看</view>
+          </view>
+        </view>
+
+      </view>
+    </block>

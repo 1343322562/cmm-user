@@ -1,0 +1,19 @@
+<view style="height:500rpx;">
+  <view class="hh-header">
+    <view class="status-bar" style="height:{{someData.statusBarHeight}}px"></view>
+    <view class="title-bar" style="height:{{someData.titleBarHeight}}px">
+      <view class='hh-nav-left'>{{innerTitle}}</view>
+      <view class="hh-title search">
+       <view class='search_box'>
+        <input placeholder-style="color:silver;font-size:24rxp" confirm-type="search" class='form' placeholder="搜索" />
+        <image class="icon" src="../../images/search.png" mode="widthFix" />
+      </view>
+      </view>
+      <view class="hh-nav-right">
+        <image class="icon" mode="widthFix" src="../../images/location.png"></image>
+        长沙市</view>
+    </view>
+  </view>
+  <slot></slot>
+</view>
+

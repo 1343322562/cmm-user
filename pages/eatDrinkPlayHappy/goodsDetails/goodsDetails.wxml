@@ -1,0 +1,73 @@
+<swiper class="imgList">
+  <swiper-item class="item" wx:for="{{goods.itemThumbPic}}" wx:key="index" ><image src="{{imgBaseUrl+item}}" class='img' /></swiper-item>
+</swiper>
+<view class="block padding">
+  <view class='goodsName'>{{goods.itemName}}</view>
+  <view class="goodsMsg">{{goods.productDesc}}</view>
+  <view class='goodsPrice'>
+    <text class="now">￥{{goods.itemNowPrice}}</text>
+    <text class="before">门市价：￥{{goods.itemPrePrice}}</text>
+  </view>
+  <view class="sell">
+    <text class="sellNum">已售: {{goods.saleAlreadyQty}}</text>
+    <text class="stock">库存: {{goods.buynum}}</text>
+  </view>
+</view>
+<!-- <text class="blockTitle">规格选择</text>
+<view class="goodsSize block">
+  <text class="item act">109元双人套餐</text>
+  <text class="item">204元4人套餐</text>
+  <text class="item">204套餐</text>
+  <text class="item">204套餐</text>
+</view> -->
+<block wx:if="{{shop.supplierNo}}">
+<text class="blockTitle">商家信息</text>
+<view class='shop block'>
+  <image  catchtap='openLoaction' src="../../../images/dw.png" mode='widthFix' class="icon" />
+  <view class='info' catchtap='openLoaction'>
+    <text class='name'>{{shop.supplierName}}</text>
+    <text class='addr'>{{shop.address}}</text>
+  </view>
+  <view class='tel'>
+    <image src="../../../images/eatDrinkPlayHappy/dh.png" catchtap='callPhone' mode='widthFix' class="icon" />
+  </view>
+</view>
+</block>
+<block wx:if="{{goods.productDetail.length}}">
+
+<text class="blockTitle">套餐内容</text>
+<view class='block padding'>
+  <view class='contentBox'>
+
+    <view class='item' wx:for="{{goods.productDetail}}" wx:key="index">
+      <text class="name">{{item.name}}</text>
+      <text class="size">({{item.num}}份)</text>
+      <text class="num">￥{{item.price}}</text>
+    </view>
+    
+  </view>
+</view>
+
+</block>
+
+<block wx:if="{{goods.useRuler}}">
+  <text class="blockTitle">使用说明</text>
+  <view class='goodsInfo block'>{{goods.useRuler}}</view>
+</block>
+
+<view class='itemDetailsList'>
+  <image wx:for="{{goods.itemDetailPic}}" mode="widthFix" wx:key="index" src="{{imgBaseUrl+item}}" />
+</view>
+
+<view class='nav'>
+  <view class='btn' catchtap='backPage'>
+    <image src="../../../images/eatDrinkPlayHappy/sy.png" mode='widthFix' class="icon" />
+    <text>商城首页</text>
+  </view>
+  <view class='btn' wx:if="{{custServiceId}}">
+    <image src="../../../images/eatDrinkPlayHappy/kf.png" mode='widthFix' class="icon" />
+    <text>咨询客服</text>
+    <button class='kefu'  send-message-path="{{'/pages/eatDrinkPlayHappy/goodsDetails/goodsDetails?openType=share&itemNo=' + goods.id }}" show-message-card="{{showMessageCard}}"  session-from='{"kefu":{{custServiceId}},"nickName":"{{userInfo.nickName}}","avatarUrl":"{{userInfo.userPic}}"}'  open-type="contact"></button>
+  </view>
+  <view class='shopping' catchtap='submit'>立即购物</view>
+</view>

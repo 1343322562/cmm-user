@@ -1,0 +1,44 @@
+@import "../../app.wxss";
+.mask{position: fixed;top: 0;left: 0;width: 100%;height: 100%;background-color: rgba(0,0,0,.7);z-index: 10;}
+.content{background-color: #fff;position: absolute;left: 0;width: 100%;padding-bottom: 20rpx;transition: bottom .3s ease-in-out;}
+.content>.title{text-align: center;font-weight: bold;font-size: 35rpx;line-height: 100rpx;}
+.content>.clear{position: absolute;top: 27rpx;left: 20rpx;color: #fff;line-height: 60rpx;font-size: 24rpx;background-color: #bbb;border-radius: 10rpx;padding: 0 10rpx;}
+.content>.hide{position: absolute;top: 0;right: 0;text-align: center;width: 100rpx;height: 100rpx;}
+.content>.hide .icon{width: 50rpx;height: 50rpx;margin-top: 20rpx;}
+/*列表*/
+.content>.list{height: 800rpx;width: 94%;margin: 0 auto;border-top: 1px solid #e8e8e8;margin-top: 20rpx;padding-top: 20rpx;}
+.content>.list .box{margin-bottom: 20rpx;}
+.content>.list .li{background-color: #fff;position: relative;height: 200rpx;border: 1px solid #e4e4e4;border-left: none;}
+.content>.list .li .left{position: absolute;top: 0;left: 0;color: #fff;width: 220rpx;height: 100%;text-align: center;z-index: 10;}
+.content>.list .li .left::before{content: '';position: absolute;top: 0;left: -5rpx;width: 0;height: 100%;}
+.content>.list .li .left>.money{padding-top: 35rpx;}
+.content>.list .li .left>.money .text{font-size: 60rpx;font-weight: bold;}
+.content>.list .li .right{margin-left: 240rpx;}
+.content>.list .li .right>.name{padding: 20rpx 0;}
+.content>.list .li .right>.time{color: #666;font-size: 26rpx;}
+.content>.list .li .right>.share{position: absolute;bottom: 125rpx;right: 20rpx;color: #ff5454;border: 1px solid #ff5454;border-radius: 40rpx;line-height: 55rpx;width: 130rpx;text-align: center;font-size: 22rpx;}
+
+.goDetails{border-top: 3rpx  dashed #e8e8e8;font-size: 26rpx;line-height: 60rpx;color: #666;position: absolute;bottom: 0;left: 240rpx;width: 455rpx;}
+.goDetails .icon{width: 40rpx;height: 40rpx;float: right;margin-top: 10rpx;transition: all .4s ease;transform:rotate3d(0deg);}
+.goDetails.act .icon{transform:rotate(180deg);}
+.c{background-color:#fff;box-shadow:0px 5px 10px #eee inset;width: 98%;margin: 0 auto;border: 1px solid #f2f2f2;}
+.c>.title{text-align: center;height: 80rpx;line-height:80rpx;width:90%;border-bottom:1px solid #ddd;margin:0 auto;}
+.c>.cnt{width:90%;margin:0 auto;color:#999;font-size:28rpx;padding: 20rpx 0;}
+
+.tab-title{
+  height: 120rpx;
+  display: flex;
+  align-items: center;
+  justify-content:space-between;
+}
+
+.tab-title>.tab-item{
+ width: 49%;
+ text-align: center;
+}
+.tab-title>.tab-item>.select{
+ border-bottom: 4px red solid;
+ line-height: 50rpx;
+ padding-bottom: 10rpx;
+ font-weight: bold;
+}

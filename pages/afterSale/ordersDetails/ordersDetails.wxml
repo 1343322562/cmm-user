@@ -1,0 +1,24 @@
+<view class="date">
+  <text class='c_background_after'>退款金额：{{data.returnAmt}}元</text>
+  <text class='c_background_after'>退款时间：{{data.refundState =='2'?data.refundTimeStr:'无'}}</text>
+  <view class='status'>{{data.refundStateStr}}</view>
+</view>
+<view class='block'>
+  <text class='title'>退款信息</text>
+  <view class="goods">
+    <image class="icon" src="{{data.itemThumbPic}}" />
+    <view class='info'>
+      <view class='name'>{{data.itemName}}</view>
+      <text class='size'>规格：{{data.itemSize}}</text>
+      <view class='money'>实付金额:￥{{data.returnAmt}}</view>
+    </view> 
+    <view class='num'>X{{data.returnNum}}</view>
+  </view>
+  <text class='text'>退款原因：{{data.returnReason}}</text>
+  <text class='text'>申请时间：{{data.createDate}}</text>
+  <text class='text'>订单编号：{{data.orderNo}}</text>
+
+</view>
+
+<view class='item'>联系电话：{{data.userPhone}}</view>
+<view class='item'>备注：{{data.returnMemo||'无'}}</view>

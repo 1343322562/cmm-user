@@ -1,0 +1,32 @@
+.box{padding: 20rpx;}
+.block{background-color: #fff;margin-bottom: 10rpx;border-radius: 10rpx;padding: 20rpx;position: relative}
+.goods{display: flex;}
+.goods>.icon{width: 120rpx;height: 120rpx;border-radius: 10rpx;overflow: hidden;background-color: #f2f2f2}
+.goods>.info{padding: 0 20rpx;}
+.goods>.info text{display: block;}
+.goods>.info .name{width: 480rpx;}
+.goods .price{color: red}
+.goods .type{color: #999;}
+.blockTitle{font-size: 32rpx;}
+.blockTitle>.icon{width: 35rpx;height: 35rpx;margin: 0 10rpx;}
+
+.blockContent{padding: 30rpx  0 20rpx 50rpx;}
+.location>.addr .icon{width: 30rpx;height: 30rpx;margin-right: 10rpx;}
+.location>.addr text{color: #999}
+.location>.tel{position: absolute;right: 20rpx;top: 20rpx;border: 1px solid #e8e8e8;font-size: 24rpx;padding: 10rpx}
+.location>.tel .icon{width: 25rpx;height: 25rpx;margin-right: 10rpx}
+
+.blockTitle>text,.blockTitle>.icon,.location>.tel .icon,.location>.tel text,.location>.addr .icon,.location>.addr text{vertical-align: middle}
+.codeIcon{width: 70rpx;height: 70rpx;position: absolute;right: 30rpx;bottom: 30rpx;}
+.blockContent .state{padding-left: 20rpx;color: #999}
+.shopInfo{padding: 5rpx 0;}
+.shopInfo>text:first-child{color: #666;padding-right: 10rpx;}
+.btnList{padding: 40rpx 0;text-align: center;display: flex}
+.btnList>.item{display: block;line-height: 70rpx;margin: 0 15rpx;border-radius: 35rpx;color: #fff;width: 0;flex-grow: 1;}
+.btnList>.item.tk{background-color: #999}
+.btnList>.item.look{background: linear-gradient(90deg,#ea1543, 50%, #fa6e4f)}
+
+.setMeal{padding: 10rpx 20rpx;}
+.setMeal>.item{overflow: hidden;padding-bottom: 20rpx;}
+.setMeal .size{color: #999;padding-left: 10rpx;}
+.setMeal .num{float: right;}

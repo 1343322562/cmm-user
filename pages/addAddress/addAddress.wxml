@@ -1,0 +1,58 @@
+<view class="pageBox">
+    <view class="item">
+      <view class="name">收货人</view>
+      <view class="form">
+        <input class="input" maxlength="6" placeholder="请填写收货人" value="{{consignee}}" confirm-type="next" bindinput="getConent" data-type="consignee" />
+      </view>
+    </view>
+    <view class="item">
+      <view class="name">电话</view>
+      <view class="form">
+        <input class="input" maxlength="11" type="number"  placeholder="请填写联系电话" value="{{phone}}" confirm-type="next" bindinput="getConent" data-type="phone" />
+      </view>
+    </view>
+    <!-- <view class="item">
+      <view class="name">收货地址</view>
+      <picker mode="region" bindchange="selectCity" class="form">
+        <block wx:if="{{selectedCity.length}}">
+        	<text class="text">{{selectedCity[0]}}</text>
+        	<text class="text">{{selectedCity[1]}}</text>
+        	<text class="text">{{selectedCity[2]}}</text>
+        </block>
+        <text class="placeholder text" wx:else >所在城市</text>
+		  </picker>
+    </view>  -->
+    <view class="item">
+      <view class="name">收货地址</view>
+      <view   bindtap="selectCity3" class="form">
+        <view class="address" wx:if="{{selectedCity.length}}" >{{selectedCity[0]+selectedCity[1]+selectedCity[2]+address}}</view>
+        <!-- <block wx:if="{{selectedCity.length}}">
+        	<text class="text">{{selectedCity[0]}}</text>
+        	<text class="text">{{selectedCity[1]}}</text>
+        	<text class="text">{{selectedCity[2]}}</text>
+        </block> -->
+        <text class="placeholder text" wx:else >填写收货地址</text>
+		  </view>
+    </view> 
+    <!-- <view class="item">
+      <view class="name">收货地址</view>
+      <view  bindtap="selectCity2" class="form" style="height:auto">
+        <block wx:if="{{selectedCity.length}}">
+        	<text class="text" style="line-height:10rpx;">{{selectedCity[2]}}</text>
+        </block>
+        <text class="placeholder text" wx:else >所在城市</text>
+		  </view>
+    </view> -->
+    <view class="particulars">
+      <textarea class="textarea" bindinput="getConent" value="{{house}}" data-type="house"  placeholder="详情地址,如11号楼3单元1001"/>
+    </view>
+    <view class="set" wx:if="{{orderFlag!='0'}}">
+      <text class="text">设置为默认地址</text>
+      <switch class="switch" color="#FF5800" checked="{{isDefault}}" bindchange="setDefault" />
+    </view>
+    
+    <view class="setting" wx:if="{{showOpenSetting}}" bindtap="Setting">请授权使用我的地理位置</view>
+
+    <view class="saveAddress" bindtap="sava">保存</view>
+    
+  </view>

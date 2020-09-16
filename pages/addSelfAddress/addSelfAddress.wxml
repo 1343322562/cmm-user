@@ -1,0 +1,51 @@
+<!--pages/addSelfAddress/addSelfAddress.wxml-->
+<map 
+  class="map"
+  longitude="{{currentPosition.longitude}}" 
+  latitude="{{currentPosition.latitude}}"
+  markers="{{markers}}"
+  scale="12"
+  bindtap="getCurrentMarkersClick"
+>
+</map>
+
+
+<view class="pullbtn {{pullStatu ? 'pullList' : ''}}">
+  <!-- <image class="icon {{pullStatu ? 'pullListIcon' : ''}}" src="../../images/pull_b.png" bindtap="pullListClick" /> -->
+  <!-- <input 
+    type="text"
+    confirm-typ="搜索"
+    class="searchBar" 
+    placeholder="请输入地点" 
+    value="{{searchValue}}" 
+    bindinput="bindSearchVal"
+    bindblur="searchData"
+    bindconfirm="searchData"
+  ></input> -->
+  <button disabled="{{list.length == 0 && currentSelectIndex != -1 ? true : false}}" style="width: 100px;line-height: 37px;margin-top: 7px;border-radius: 50rpx;font-size: 30rpx;position: absolute;bottom: 60rpx;right: 30rpx;z-index: 999;opacity: .7;" bindtap="confirmAddClick" type="primary">确认添加</button>
+  <scroll-view
+    class="listBox {{pullStatu ? '' : 'hiddenList'}}" 
+    scroll-y="{{true}}"
+  >
+    <view class="item" wx:for="{{list}}" wx:key="index">
+      <view class="name">
+        <view class="text">{{item.title}}</view>
+        <radio value="1" bindtap="selectClick" data-currentStoreId="{{item.ud_id}}" checked="{{item.isSelected}}" data-index="{{index}}" data-selected="{{item.isSelected}}"/>
+      </view>
+      <view class="body">
+        <!-- <image class="shopImg" src="{{item.imgUrl}}" /> -->
+        <view class="info">
+          <view class="address">{{item._distance + ' 内'}} | {{item.address}} </view>
+          <view class="content">
+            <view style="margin-top: 20rpx;">
+              <view wx:if="{{item.service_des}}">服务描述:{{item.service_des}}</view>
+              <view>联系电话:{{item.tel}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="null" wx:if="{{!list.length}}">此位置附件暂无自提点~~~</view>
+    
+  </scroll-view>
+</view>

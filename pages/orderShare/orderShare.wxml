@@ -1,0 +1,29 @@
+
+<view wx:if="{{openType == 'share'}}">
+  <view class='user'>
+    <image src="{{userInfo.img}}" class='img' />
+    <text>{{userInfo.name}}的订单</text>
+  </view>
+  <view class='list'>
+    <view class='li' wx:for="{{goodsList}}" wx:key="index">
+      <image src="../../images/order_share_goods_bg.png"  mode="widthFix" class='bg' />
+      <image src="{{item.img}}"  class="img" />
+      <view class='num'>x{{item.num}}{{item.unit}}</view>
+      <view class='info'>
+        <view class='name'>
+          <text class='sx'>{{index+1}}</text>
+          <text class='text'>{{item.name}}</text>
+        </view>
+        <view class='price'>
+          <text class='now'>￥{{item.itemNowPrice}}/{{item.unit}}</text>
+          <text class='befored'>￥{{item.itemDisPrice}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='goIndex' catchtap='goIndex'>去首页逛逛</view>
+</view>
+<view wx:else>
+  <canvas  class="canvas" style="height:{{295+494+(goodsList.length * 173)}}rpx" canvas-id="mycanvas"></canvas>
+  <view class="saveImg" catchtap='saveImg'>保存图片</view>
+</view>

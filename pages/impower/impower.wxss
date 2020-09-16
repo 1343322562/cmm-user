@@ -1,0 +1,10 @@
+.body{height: 100%;background-color: #fff;position: absolute; width: 100%; left: 0;top: 0;}
+.body>.impower{padding-top: 200rpx;text-align: center;}
+.body>.impower .img{width: 600rpx;height: 356rpx;}
+.body>.impower .btn,.back{color: #fff;border-radius: 40rpx;border: none;width: 600rpx;line-height: 90rpx;}
+.body>.login .h1{font-size:26rpx;color: #999;	margin-top: 60rpx;}
+.body>.login .btn{background-color: #40ba20;margin-top: 60rpx;}
+.body>.user .h1{font-size:28rpx;margin-top: 20rpx;}
+.body>.user .h2{font-size:28rpx;color: #999;}
+.body>.user .btn{background-color: #f49b1e;margin-top: 50rpx;}
+.back{background-color: #ddd;margin: 30rpx auto;text-align: center;font-size: 36rpx;}

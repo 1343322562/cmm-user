@@ -1,0 +1,17 @@
+<view class="tabBar" style="padding-bottom:{{btuBottom}}" id="tabBarBox">
+  <view class="{{item.class}}" wx:for="{{tabBar}}" wx:key="index"  catchtap='select' data-index="{{index}}" wx:if="{{item.show}}">
+    <view class="block">
+      <image src="/images/{{selected ==item.id?item.selectedIcon:item.icon}}" class="icon" />
+    </view>
+    <text class="title{{selected ==item.id?' act':''}}">{{item.name}}</text>
+    <navigator wx:if="{{(item.class=='goColonel')&&userIsColonel}}" class="openBtn" target="miniProgram" open-type="navigate" app-id="wx798866c719ac74cd"path="pages/login/login" extra-data="" version="release">
+    </navigator>
+    <view class='num' wx:if="{{item.id=='carts'&&cartsNum}}">{{cartsNum}}</view>
+  </view>
+</view>
+
+<view class="{{selected!='index'?'hide':'pageBox'}}"><tabBar-index bindgetCartsNum="getCartsNum" bindchangePage="changePage" bindsetNavTitle="setNavTitle" id="index" /></view>
+<view class="{{selected!='list'?'hide':'pageBox'}}"><tabBar-list bindgetCartsNum="getCartsNum" bindchangePage="changePage" id="list" /></view>
+<view class="{{selected!='carts'?'hide':'pageBox'}}"><tabBar-carts bindgetCartsNum="getCartsNum" bindsetNavTitle="setNavTitle" bindchangePage="changePage" id="carts" /></view>
+<view class="{{selected!='my'?'hide':'pageBox'}}"><tabBar-my bindchangePage="changePage" id="my" /></view>
+

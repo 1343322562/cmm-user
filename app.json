@@ -1,0 +1,59 @@
+{
+  "pages": [
+    "pages/startupPage/startupPage",
+    "pages/LBS/storeList/storeList",
+    "pages/colonelApply/colonelApply",
+    "pages/tabBar/tabBar",
+    "pages/LBS/map/map",
+    "pages/logistics/status/status",
+    "pages/eatDrinkPlayHappy/refund/refund",
+    "pages/eatDrinkPlayHappy/goodsDetails/goodsDetails",
+    "pages/eatDrinkPlayHappy/orderList/orderList",
+    "pages/eatDrinkPlayHappy/orderDetails/orderDetails",
+    "pages/eatDrinkPlayHappy/purchase/purchase",
+    "pages/orderShare/orderShare",
+    "pages/my/my",
+    "pages/searchGoods/searchGoods",
+    "pages/home/home",
+    "pages/coupons/get/get",
+    "pages/carts/carts",
+    "pages/goodsCls/goodsCls",
+    "pages/categoryBrandDetails/categoryBrandDetails",
+    "pages/ordersList/ordersList",
+    "pages/paySuccess/paySuccess",
+    "pages/ordersDetails/ordersDetails",
+    "pages/afterSale/apply/apply",
+    "pages/afterSale/ordersList/ordersList",
+    "pages/afterSale/ordersDetails/ordersDetails",
+    "pages/liquidation/liquidation",
+    "pages/coupons/list/list",
+    "pages/LBS/searchLocation/searchLocation",
+    "pages/goods/goods",
+    "pages/impower/impower",
+    "pages/login/login",
+    "pages/address/address",
+    "pages/addAddress/addAddress",
+    "pages/selectSysCode/selectSysCode",
+    "pages/returnGoods/returnGoods",
+    "pages/returnGoodsList/returnGoodsList",
+    "pages/activity/banner/banner",
+    "pages/addSelfAddress/addSelfAddress"
+  ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于定位"
+    }
+  },
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTitleText": "仓买买",
+    "backgroundColor": "#f2f2f2",
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "default"
+  },
+  "navigateToMiniProgramAppIdList": [
+    "wx798866c719ac74cd"
+  ],
+  "sitemapLocation": "sitemap.json"
+}

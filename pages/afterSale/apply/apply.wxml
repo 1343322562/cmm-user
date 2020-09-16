@@ -1,0 +1,59 @@
+<view class="goods">
+  <image class="icon" src="{{goods.itemThumbPic}}" />
+  <view class='info'>
+    <view class='name'>{{goods.itemName}}</view>
+    <text class='size'>规格：{{goods.itemSizeDes}}</text>
+    <view class='money'>实付金额:￥{{goods.subtotalAmt}}</view>
+  </view> 
+  <view class='num'>X{{goods.saleNum}}</view>
+</view>
+
+
+<view class='changeGoodsNum'>
+    <text class='title'>退款数量:</text>
+    <view class="btn">
+        <view catchtap="changeGoodsNum" class="minus form"  data-type="minus">-</view>
+        <text class="num">{{returnNum}}</text>
+        <view catchtap="changeGoodsNum" class="add form" data-type="add">+</view>
+    </view>
+</view>
+
+<view class='block'>
+  <text class='title'>退款原因:</text>
+  <view class='list'>
+    <view class='li' wx:for="{{list}}" wx:key="index" catchtap='selectd' data-index="{{index}}">
+      <view  class="checkbox {{select===index?' c_background c_border':''}}">
+        <image class="icon" src="../../../images/hook.png" />
+      </view>
+      <text>{{item}}</text>
+    </view>
+  </view>
+</view>
+
+<view class='block'>
+  <text class='title'>上传凭证</text>
+  <text class='msg'>(最多可上传3张)</text>
+  <view class='imgList'>
+    <view class='item' catchtap='openImg' data-index="{{index}}" wx:for="{{imgList}}" wx:key="index">
+      <image src="{{item}}" class='icon' />
+    </view>
+    <view class='item null' catchtap='openImg' wx:if="{{imgList.length<3}}">
+      <text class='text'>+</text>
+    </view>
+  </view>
+</view>
+<view class='block padding null'>
+  <text class='title'>联系电话:</text>
+  <input class='input' value="{{basePhone}}" maxlength="11"  bindinput='input' data-type="userPhone" />
+</view>
+<view class='block padding'>
+  <text class='title'>备注:</text>
+  <textarea class='textarea' maxlength="25" bindinput='input' data-type="returnMemo"/>
+</view>
+<view class='block'>
+  <text class='title'>退款金额:</text>
+  <text class='red'>￥{{returnAmt}}</text>
+  <text class='right'>最多可退:￥{{goods.subtotalAmt}}</text>
+</view>
+
+<view class='submist c_background' catchtap='submist' >提交</view>

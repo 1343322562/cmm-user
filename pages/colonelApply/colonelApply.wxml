@@ -1,0 +1,80 @@
+<view class='pageBack' style="padding-top:{{headHeight}}rpx" catchtap='pageBack'>
+  <image src="/images/go_back.png" class='icon' mode="widthFix" />
+  <text>返回</text>
+</view>
+<view wx:if="{{pageLoading}}">
+<view class="head"  style="padding-top:{{headHeight+90}}rpx">
+  <image src="/images/colonelApply_title.png" class='icon' mode="widthFix" />
+</view>
+
+<view class='box'>
+  <view class='block'>
+    <view class='title'>
+      <text>1.需要在仓买买品台消费一笔</text>
+      <text class="status{{orderNum>=1?' act':''}}">{{orderNum>=1?'已完成':'未完成'}}</text>
+    </view>
+  </view>
+  <view class='block'>
+    <view class='title'>
+      <text>2.推荐10位新人</text>
+      <text class="status{{user.length>=10?' act':''}}">{{user.length>=10?'已完成':'未完成'}}</text>
+    </view>
+    <view class='user'>
+      <view class='li' wx:for="{{placeholder}}" wx:key="index">
+        <image class="icon{{user[index]=='d'?' null':''}}" wx:if="{{user[index]}}" src="{{ user[index]=='d'?'/images/createShareCanvas.png':user[index]}}" />
+        <text wx:else>+</text>
+      </view>
+    </view>
+    <button class='invitation' open-type='share'>分享网站给朋友</button>
+    <text class='msg'>邀粉小贴士：分享产买买给好友(新用户)—还有访问—邀粉成功</text>
+  </view>
+  <view class='blockTitle'><text>加入仓买买的理由</text></view>
+  <view class='info'>
+    <view class='item'>
+      <image src="/images/colonelApply_icon1.png" class="icon" mode='widthFix' />
+      <text>不用囤货,</text>
+      <text>没有风险!</text>
+    </view>
+    <view class='item'>
+      <image src="../../images/colonelApply_icon2.png" class="icon" mode='widthFix' />
+      <text>不用投资,</text>
+      <text>在家创业挣钱!</text>
+    </view>
+    <view class='item'>
+      <image src="../../images/colonelApply_icon3.png" class="icon" mode='widthFix' />
+      <text>大品牌,</text>
+      <text>低价格!</text>
+    </view>
+    <view class='item'>
+      <image src="../../images/colonelApply_icon4.png" class="icon" mode='widthFix' />
+      <text>不用接货送货,</text>
+      <text>仓库直接送到家!</text>
+    </view>
+    <view class='item' style='width:70%'>
+      <image src="../../images/colonelApply_icon5.png" class="icon" mode='widthFix' />
+      <text>人脉王,</text>
+      <text>轻轻松松月入2万!</text>
+    </view>
+  </view>
+  <view class='blockTitle'><text>团长权益</text></view>
+  <view class='benefit'>
+    <text>1.发展粉丝,团队</text>
+    <text>2.送新团长代金券</text>
+    <text>3.分享获取商品推广收益</text>
+  </view>
+
+
+  <view class="submit{{successNum>=2?' act':''}}" catchtap='submit'>立即开通</view>
+  <text class="remind" wx:if="{{successNum<2}}">当前有{{2-successNum}}个任务未完成,完成后可点亮开通!</text>
+</view>
+
+</view>
+
+<view class='mask' wx:if="{{showSuccess}}">
+  <view class="alert">
+    <image class="icon" mode="widthFix" src="/images/colonelApply_success.png" />
+    <navigator class="openBtn" target="miniProgram" open-type="navigate" app-id="wx798866c719ac74cd"path="pages/login/login" extra-data="" version="release">
+    </navigator>
+    <view class='backPage' catchtap='backPage'>返回首页</view>
+  </view>
+</view>
