@@ -80,7 +80,7 @@ Page({
       batchNo: pageObj.batchNo,
       teamType: pageObj.teamType,
       username,
-      sentQty: String(cartsObj.sentQty || 0),
+      sendQty: String(cartsObj.sentQty || 0),
       token,
       platform,
       username,
@@ -93,38 +93,31 @@ Page({
           const sheetNo = res.data
           this.sheetNo = sheetNo
           const openId = wx.getStorageSync('openId')
-          wx.login({
-            success: (codeData)=> {
-              API.Group.getMiniTeamPayParameters({
-                data: { code: codeData.code, sheetNo, body: '具体信息请查看团购订单', openId, platform, username, token},
-                success: ret => {
-                  const config = ret.data
-                  if (ret.code == 0 && config) {
-                    wx.requestPayment({
-                      'timeStamp': config.timeStamp,
-                      'nonceStr': config.nonceStr,
-                      'package': config.package,
-                      'signType': config.signType,
-                      'paySign': config.sign,
-                      'success':  ()=> {
-                        this.goSuccessPage(true)
-                      },
-                      'fail': ()=> {
-                        this.errorMsg('支付已取消')
-                      }
-                    })
-    
-                  } else  {
-                    this.errorMsg(ret.msg)
+          API.Group.getMiniTeamPayParameters({
+            data: { sheetNo, body: '具体信息请查看团购订单', openId, platform, username, token},
+            success: ret => {
+              const config = ret.data
+              if (ret.code == 0 && config) {
+                wx.requestPayment({
+                  'timeStamp': config.timeStamp,
+                  'nonceStr': config.nonceStr,
+                  'package': config.package,
+                  'signType': 'MD5',
+                  'paySign': config.sign,
+                  'success':  ()=> {
+                    this.goSuccessPage(true)
+                  },
+                  'fail': ()=> {
+                    this.errorMsg('支付已取消')
                   }
-                },
-                error: ()=> {
-                  this.errorMsg('获取支付配置失败,请检查网络是否正常。')
-                }
-              })
+                })
+
+              } else  {
+                this.errorMsg(ret.msg)
+              }
             },
-            fail: () => {
-              this.payError('获取code失败')
+            error: ()=> {
+              this.errorMsg('获取支付配置失败,请检查网络是否正常。')
             }
           })
         } else {
