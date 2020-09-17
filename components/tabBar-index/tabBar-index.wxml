@@ -216,12 +216,12 @@
           <view class='box'>
             <view class='name'>{{item.itemName}}</view>
             <view class='msg'>{{item.productDesc}}</view>
-            <view class='price'>
+            <!-- <view class='price'>
               <text class='now'>￥{{item.itemNowPrice}}</text>
               <text class="before">门市价 ￥{{item.itemPrePrice}}</text>
               <text class="sell">销量:{{item.saleAlreadyQty}}</text>
             </view>
-            <view class="look" catchtap='goPlayGoodsDetails' data-index="{{index}}">去看看</view>
+            <view class="look" catchtap='goPlayGoodsDetails' data-index="{{index}}">去看看</view> -->
           </view>
         </view>
 

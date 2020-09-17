@@ -122,6 +122,12 @@
 					"pathName": "pages/goods/goods",
 					"query": "scene=colonelId%3D51%26i%3D193508",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "chwlDetail",
+					"pathName": "pages/chwlDetail/chwlDetail",
+					"scene": null
 				}
 			]
 		}
