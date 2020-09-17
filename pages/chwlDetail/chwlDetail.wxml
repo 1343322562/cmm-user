@@ -3,3 +3,20 @@
   <view class="content">巴适得很费时擦拭大~~~打!</view>
   <image src=""></image>
 </view>
+
+
+<view class='list'>
+  <view class='li'  wx:key="index">
+    <image catchtap='goPlayGoodsDetails' data-index="{{index}}" />
+    <view class='box'>
+      <view class='name'>阿斯达大打算的</view>
+      <view class='msg'>阿斯达大所</view>
+      <view class='price'>
+        <text class='now'>￥546546</text>
+        <text class="before">门市价 ￥654</text>
+        <text class="sell">销量:{{100}}</text>
+      </view>
+      <view class="look" catchtap='goPlayGoodsDetails'>去看看</view>
+    </view>
+  </view>
+</view>
