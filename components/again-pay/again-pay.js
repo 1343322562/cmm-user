@@ -176,21 +176,45 @@ Component({
       }
       if (isUseBlendWay) {
         request['payWay'] = '4'
-        request['onlinePayway'] = 'WX'
         request.czPayAmtString = String(storedValue)
-        request[payWay == '0' ? 'codPayAmtString' : 'onlinePayAmtString'] = (realPayAmt - storedValue).toFixed(2)
+        if (payWay == 0) {
+          request['codPayAmtString'] = (realPayAmt - storedValue).toFixed(2)
+        } else if (payWay == 1) {
+          request['onlinePayAmtString'] = (realPayAmt - storedValue).toFixed(2)
+          request['onlinePayway'] = 'WX'
+        } else if (payWay == 2) {
+          request['czPayAmtString'] = (realPayAmt - storedValue).toFixed(2)
+        }
+        // request[payWay == '0' ? 'codPayAmtString' : 'onlinePayAmtString'] = (realPayAmt - storedValue).toFixed(2)
         console.log("request['onlinePayAmtString']", request['onlinePayAmtString']) // 线上支付金额
         console.log("request['czPayAmtString']", request['czPayAmtString'])         // 储值金额
         console.log("request['payWay']",  request['payWay'])
         console.log("request['onlinePayway']",  request['onlinePayway'])
       } else {
+        if (payWay == 0) {
+          request['codPayAmtString'] = realPayAmt.toFixed(2)
+        } else if (payWay == 1) {
+          request['onlinePayAmtString'] = realPayAmt.toFixed(2)
+          request['onlinePayway'] = 'WX'
+        } else if (payWay == 2) {
+          request['czPayAmtString'] = realPayAmt.toFixed(2)
+        }
         console.log(czPayAmt)
-        request.czPayAmtString = String(czPayAmt)
-        request[payWay == '0' ? 'codPayAmtString' : 'onlinePayAmtString'] = realPayAmt.toFixed(2)
+        // request.czPayAmtString = String(czPayAmt)
+        // request[payWay == '0' ? 'codPayAmtString' : 'onlinePayAmtString'] = realPayAmt.toFixed(2)
         console.log('czPayAmtString', request.czPayAmtString)
         console.log('onlinePayAmtString', request.onlinePayAmtString)
       }
       console.log('支付参数', request)
+      console.log(wx.getStorageSync('configObj'))
+      const { codPay, czPay, wxPay } = wx.getStorageSync('configObj')
+      if (payWay == 0) {
+        if (codPay != 1) return toast('货到付款暂未开启，请重新选择')
+      } else if (payWay == 1) {
+        if (wxPay != 1) return toast('微信支付暂未开启，请重新选择')
+      } else if (payWay == 2) {
+        if (czPay != 1) return toast('储值支付暂未开启，请重新选择')
+      }
       API.Orders.orderpay({
         data: request,
         success: res => {

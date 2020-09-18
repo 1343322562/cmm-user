@@ -183,6 +183,8 @@ Page({
     console.log(e,auto)
     let payWay = typeof e =='object'? e.currentTarget.dataset.type:e
     let { selectedCoupons, mjObj, selectedGiftNum, selectedGift, payWay: nowPayWay, storedValue, realPayAmt, isUseBlendWay } = this.data
+    // console.log(186,this.data, this.data.nowPayWay, this.data.payWay)
+    console.log(payWay)
     console.log(storedValue)
     if (isUseBlendWay && payWay == '2' && auto!='auto')return
     if (payWay=='0') {
@@ -498,7 +500,7 @@ Page({
     }
     if (this.notAllowLoading) return
     if (!payWay) {toast('请选择支付方式'); return}
-    if (payWay == '2' && storedValue < realPayAmt && !isUseBlendWay) {toast('余额不足')}
+    if (payWay == '2' && storedValue < realPayAmt && !isUseBlendWay) {toast('余额不足'); return}
     if(this.isClickLoading) return
     this.isClickLoading = true
     showLoading('提交订单...')
@@ -659,6 +661,15 @@ Page({
     console.log('支付参数:', request)
     console.log(this.data)
     // return hideLoading()
+    console.log(wx.getStorageSync('configObj'))
+    const { codPay, czPay, wxPay } = wx.getStorageSync('configObj')
+    if (payWay == 0) {
+      if (codPay != 1) return toast('货到付款暂未开启，请重新选择')
+    } else if (payWay == 1) {
+      if (wxPay != 1) return toast('微信支付暂未开启，请重新选择')
+    } else if (payWay == 2) {
+      if (czPay != 1) return toast('储值支付暂未开启，请重新选择')
+    }
     API.Liquidation.saveOrder({
       data: request,
       success: res => {
