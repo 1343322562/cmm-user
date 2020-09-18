@@ -27,6 +27,8 @@ export default {
     storeinfo: (param) => ajax.post(`portal/storeInfo`, param), //获取自提点是否开团
     storePromotion: (param) => ajax.post(`portal/storePromotion`, param), //获取自提点开团数据
     getDcInfo: (param) => ajax.post(`user/getDcInfo`, param), // 获取是否开启成为团长配置
+    getChSupplierList: (param) => ajax.post(`chOrder/supplierListPage`, param), // 获取吃喝玩乐列表
+    
   },
   Shop: {
     storeinfo: (param) => ajax.post(`portal/storeinfo2`, param) // 获取门店信息

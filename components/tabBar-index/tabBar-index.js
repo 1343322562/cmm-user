@@ -14,6 +14,7 @@ Component({
       statusBarHeight: app.globalData.statusBarHeight,
       titleBarHeight: app.globalData.titleBarHeight
     },
+    chwlList: [], // 吃喝玩乐商家列表
     height0: 50,
     cartGoods: [], //购物所有商品
     ZZZTGoodsList: [],
@@ -512,6 +513,26 @@ Component({
       clearInterval(this.storePromotionTimeInterval)
       this.countSeckillDate(true)
     },
+    // 获取吃喝玩乐列表
+    getChSupplierList() {
+      let { sysCode } = app.data
+      const _this = this
+      console.log(518,sysCode)
+      API.Public.getChSupplierList({
+        data: { sysCode },
+        success(res) {
+          console.log(522,res)
+          if (res.status == 200) {
+            _this.setData({ chwlList: res.data })
+          }
+        }
+      })
+    },
+    // 跳转吃喝玩乐商家详情
+    toCHDetailClick(e) {
+      const { supplierNo } = e.currentTarget.dataset
+      goPage('chwlDetail', { supplierNo })
+    },
     savePhone() {
       if (!this.data.createShare) {
         this.openShare()
@@ -713,6 +734,7 @@ Component({
         that.userId = userId;
         that.getPageData()
         that.getPlayGoods()
+        that.getChSupplierList() // 获取吃喝玩乐列表
         if ((userIsColonel || storeMode) && currentStoreMode == 1) {
           showLoading() 
           console.log(100)
