@@ -34,21 +34,25 @@
   <view class='callPhone' bindtap='callPhone' data-phone="{{salesmanObj.phone}}">拨打电话</view>
 </view>
 
-<view class='btnList'>
+<view class='btnList' wx:if="{{partnerCode == 1029}}">
   <view class='title'>
     <text>当月订单</text>
-    <text class='right'>  </text>
+    <view bindtap="showSelectTime" class='right'>
+      <text class="picker">{{startDate}}</text>
+      至 
+      <text class="picker">{{endDate}}</text>
+    </view>
   </view>
-  <view class='info'>
-    <view class='item'>
+  <view class='info' catchtap="toDetailOrderClick">
+    <view class='item' data-type="1">
       <view>0.0</view>
       <text class='text'>在途金额</text>
     </view>
-    <view class='item'>
+    <view class='item' data-type="2">
       <view>0.0</view>
       <text class='text'>到货金额</text>
     </view>
-    <view class='item'>
+    <view class='item' data-type="3">
       <view>0.0</view>
       <text class='text'>退货金额</text>
     </view>
@@ -142,3 +146,4 @@
 <view style='height:20rpx'></view>
 <recommend-goods />
 
+<select-storeTime show="{{isShowPicker}}" type="{{'order'}}"  bind:myEvent="orderTimeValue"/>

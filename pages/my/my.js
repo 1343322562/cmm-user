@@ -1,5 +1,6 @@
 import API from '../../api/index.js'
 import { goPage,toast,alert } from '../../tool/index.js'
+import { tim, timCurrentDay } from '../../tool/date-format.js'
 Page({
   data: {
     partnerCode: '',
@@ -7,12 +8,31 @@ Page({
     salesmanObj:null,
     orderNum: {},
     isInvoice:'',
-    couponsNum: 0
+    couponsNum: 0,
+    isShowPicker: false,
+    startDate: timCurrentDay(0),   // picker 选择时间
+    endDate: timCurrentDay(0)      // picker 选择时间
+  },
+  orderTimeValue(e) {
+    console.log(e)
+    let { startDate, endDate } = e.detail
+    this.setData({ startDate, endDate, isShowPicker: false })
+  },
+  // 跳转当月订单页
+  toDetailOrderClick(e) {
+    // 1：在途订单  2：到货订单 3：退货订单
+    const type = e.target.dataset
+    const name = type == 1 ? '在途订单' : (type == 2 ? '到货订单' : '退货订单')
+    const { startDate, endDate } = this.data
+    goPage('currentMonthOrder', { startDate, endDate, type , name })
   },
   goLogin () {
     goPage('login',{
       isLogin: true
     })
+  },
+  showSelectTime() {
+    this.setData({ isShowPicker: true })
   },
   goPage (e) {
     console.log(e)

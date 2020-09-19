@@ -40,7 +40,8 @@
     "pages/H5/H5",
     "pages/boxGoodSeach/boxGoodSeach",
     "pages/myList/myList",
-    "pages/myListDetail/myListDetail"
+    "pages/myListDetail/myListDetail",
+    "pages/currentMonthOrder/currentMonthOrder"
   ],
   "window": {
     "backgroundTextStyle": "light",

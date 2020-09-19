@@ -113,7 +113,8 @@ Page({
           order.itemNos = itemNos.join(',')
           order.czPayAmt = Number(Number(order.czPayAmt).toFixed(2))
           order.discountAmt = Number(order.discountAmt)
-          order.discountsTotalAmt = (order.orgiSheetAmt - order.realPayAmt - (order.vouchersAmt || 0) - (order.czPayAmt || 0)).toFixed(2)
+          // 不应该减去储值金额 czPayAmt
+          order.discountsTotalAmt = (order.orgiSheetAmt - order.realPayAmt - (order.vouchersAmt || 0)).toFixed(2)
           console.log(order.realSheetAmt)
           // 缺货金额 = 支付金额 + 优惠卷金额 - 出库金额 
           order.stockoutAmt = (Number(order.realPayAmt) + Number(order.vouchersAmt) - Number(order.doAmt)).toFixed(2)
