@@ -21,7 +21,8 @@ Page({
   // 跳转当月订单页
   toDetailOrderClick(e) {
     // 1：在途订单  2：到货订单 3：退货订单
-    const type = e.target.dataset
+    console.log(e)
+    const { type } = e.currentTarget.dataset
     const name = type == 1 ? '在途订单' : (type == 2 ? '到货订单' : '退货订单')
     const { startDate, endDate } = this.data
     goPage('currentMonthOrder', { startDate, endDate, type , name })

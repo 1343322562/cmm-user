@@ -1,1 +1,31 @@
 /* pages/currentMonthOrder/currentMonthOrder.wxss */
+.time-box {
+  width: 92%;
+  padding: 23rpx 4%;
+  display: flex;
+  justify-content: space-between;
+  color: #555555;
+}
+.time-box .start{
+  display: flex;
+  align-items: center;
+}
+
+.time-box .end{
+  display: flex;
+  align-items: center;
+}
+
+.time-box text{
+  font-size: 30rpx;
+}
+
+.input {
+  background-color: #fff;
+  width: 560rpx;
+  margin: 10rpx auto 25rpx;
+  border: 1rpx solid #eeeeee;
+  border-radius: 15rpx;
+  padding: 24rpx 35rpx;
+  font-size: 31rpx;
+}

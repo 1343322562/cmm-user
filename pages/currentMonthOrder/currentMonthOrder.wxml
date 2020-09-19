@@ -1,2 +1,13 @@
-<!--pages/currentMonthOrder/currentMonthOrder.wxml-->
-<text>pages/currentMonthOrder/currentMonthOrder.wxml</text>
+<view class="time-box">
+  <view class="start">
+    <view>开始时间：</view>
+    <text>{{startDate}}</text>
+  </view>
+  <view class="end">
+    <view>结束时间：</view>
+    <text>{{endDate}}</text>
+  </view>
+</view>
+
+
+<input placeholder="请输入订单号" class="input" value="{{searchValue}}" bindinput="bindValue"></input>
