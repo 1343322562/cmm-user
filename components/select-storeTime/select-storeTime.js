@@ -65,7 +65,18 @@ Component({
             D = Number(ymd.slice(8, 10)),
             H = Number(tim().slice(0, 2))
       console.log(H, ymd)
-      if (this.data.type == 'order') return this.setData({value: [years.length - 1, M-1, D-1, years.length - 1, M-1, D-1]}) 
+      if (this.data.type == 'order') {
+        return this.setData({
+          value: [
+            years.length - 1,
+            M-1, 
+            0, 
+            years.length - 1, 
+            M-1, 
+            D-1
+          ]
+        })
+      } 
       this.setData({value: [years.length - 1, M-1, D-1, H-1]})
     },
     detached: function() {

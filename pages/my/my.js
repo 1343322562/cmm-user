@@ -10,13 +10,16 @@ Page({
     isInvoice:'',
     couponsNum: 0,
     isShowPicker: false,
-    startDate: timCurrentDay(0),   // picker 选择时间
-    endDate: timCurrentDay(0)      // picker 选择时间
+    startDate: timCurrentDay(0).slice(0, 8) + '01',   // picker 选择时间
+    endDate: timCurrentDay(0),      // picker 选择时间
+    currentMonthData: { diAmt: 0.0, doAmt: 0.0, drAmt: 0.0 } // 当月订单数据
   },
+  // picker 组件传值
   orderTimeValue(e) {
     console.log(e)
     let { startDate, endDate } = e.detail
     this.setData({ startDate, endDate, isShowPicker: false })
+    this.getOrderData(startDate, endDate)
   },
   // 跳转当月订单页
   toDetailOrderClick(e) {
@@ -80,6 +83,18 @@ Page({
       wx.makePhoneCall({phoneNumber: phone})
     // }
   },
+  // 获取当月订单数据
+  getOrderData(startDate = timCurrentDay(0).slice(0, 8) + '01', endDate = timCurrentDay(0)) {
+    const { branchNo, token, username, platform, dbBranchNo } = wx.getStorageSync('userObj')
+    const _this = this
+    API.Orders.sheetAmtSearch({
+      data: { branchNo, token, username, platform, dbBranchNo, startDate, endDate },
+      success(res) {
+        console.log(res)
+        _this.setData({ currentMonthData: res.data})
+      }
+    })
+  },
   onLoad (opt) {
     const partnerCode = getApp().data.partnerCode
     if (partnerCode == 1052) {wx.setNavigationBarColor({ backgroundColor: '#e6c210', frontColor: '#ffffff' })}
@@ -95,6 +110,7 @@ Page({
     }
     this.getOrderNum()
     this.getSalesman()
+    this.getOrderData()
     this.setData({ partnerCode })
   },
   getOrderNum () {

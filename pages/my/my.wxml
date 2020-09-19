@@ -45,15 +45,15 @@
   </view>
   <view class='info'>
     <view class='item' data-type="1" bindtap="toDetailOrderClick">
-      <view>0.0</view>
+      <view>{{currentMonthData.doAmt}}</view>
       <text class='text'>在途金额</text>
     </view>
     <view class='item' data-type="2" bindtap="toDetailOrderClick">
-      <view>0.0</view>
+      <view>{{currentMonthData.diAmt}}</view>
       <text class='text'>到货金额</text>
     </view>
     <view class='item' data-type="3" bindtap="toDetailOrderClick">
-      <view>0.0</view>
+      <view>{{currentMonthData.drAmt}}</view>
       <text class='text'>退货金额</text>
     </view>
   </view>
