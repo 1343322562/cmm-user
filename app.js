@@ -24,14 +24,14 @@ App({
     
     // partnerCode: '1052',
     // baseImgUrl:'http://app.tmzyz.com/',
-    partnerCode: '1053',
+    // partnerCode: '1053',
     // partnerCode: '2222',
 
     // partnerCode: '1039',
     
 
-    // partnerCode: '1050',
-    // baseImgUrl:'http://erp.wgjnh.com',
+    partnerCode: '1050',
+    baseImgUrl:'http://erp.wgjnh.com',
     // 18569429872
     ww:'', // 屏幕宽度
     hh:'', // 屏幕高

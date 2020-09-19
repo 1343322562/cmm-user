@@ -89,7 +89,8 @@ Page({
           order.orderDetails.forEach(goods => {
             goods.goodsImgUrl = (order.transNo == 'YH' ? (goods.itemType == '0' ? zhGoodsUrl : goodsUrl): zcGoodsUrl) + goods.itemNo + '/' + getGoodsImgSize(goods.imgName)
             goods.differAmt = 'shippedQty' in goods ? (goods.subAmt-goods.shippedSpecAmt).toFixed(2) : false
-  
+            goods.differAmt = goods.differAmt == 'NaN' ? false : goods.differAmt
+            console.log(91, goods.differAmt, isNaN(goods.differAmt))
             console.log(87, order)
             console.log(92, order.supplyFlag, order.sheetSourceStr, order.memo)  
             if (order.supplyFlag == 5 || order.supplyFlag == 51) {
@@ -113,7 +114,12 @@ Page({
           order.itemNos = itemNos.join(',')
           order.czPayAmt = Number(Number(order.czPayAmt).toFixed(2))
           order.discountAmt = Number(order.discountAmt)
-          order.discountsTotalAmt = (order.orgiSheetAmt - order.realPayAmt - (order.vouchersAmt || 0) - (order.czPayAmt || 0)).toFixed(2)
+          
+          if (order.statusStr == '已完成') {
+            order.discountsTotalAmt = (order.orgiSheetAmt - order.realPayAmt - (order.vouchersAmt || 0)).toFixed(2)
+          } else {
+            order.discountsTotalAmt = (order.orgiSheetAmt - order.realPayAmt - (order.vouchersAmt || 0) - (order.czPayAmt || 0)).toFixed(2)
+          }
           console.log(order.realSheetAmt)
           // 缺货金额 = 支付金额 + 优惠卷金额 - 出库金额 
           order.stockoutAmt = (Number(order.realPayAmt) + Number(order.vouchersAmt) - Number(order.doAmt)).toFixed(2)
