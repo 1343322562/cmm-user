@@ -663,13 +663,14 @@ Page({
     // return hideLoading()
     console.log(wx.getStorageSync('configObj'))
     const { codPay, czPay, wxPay } = wx.getStorageSync('configObj')
-    if (payWay == 0) {
-      if (codPay != 1) return toast('货到付款暂未开启，请重新选择')
-    } else if (payWay == 1) {
-      if (wxPay != 1) return toast('微信支付暂未开启，请重新选择')
-    } else if (payWay == 2) {
-      if (czPay != 1) return toast('储值支付暂未开启，请重新选择')
-    }
+    // if (payWay == 0) {
+    //   if (codPay != 1) return toast('货到付款暂未开启，请重新选择')
+    // } else if (payWay == 1) {
+    //   if (wxPay != 1) return toast('微信支付暂未开启，请重新选择')
+    // } else if (payWay == 2) {
+    //   if (czPay != 1) return toast('储值支付暂未开启，请重新选择')
+    // }
+    if (payWay == 0) return toast('货到付款暂未开启，请重新选择')
     API.Liquidation.saveOrder({
       data: request,
       success: res => {
