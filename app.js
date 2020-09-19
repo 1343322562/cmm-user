@@ -4,8 +4,8 @@ App({
     // baseImgUrl:'http://39.98.78.85:8080/',
     // partnerCode: '1010',
     // baseImgUrl:'http://erp.guoanmall.com/',
-    //  partnerCode: '1029',
-    //  baseImgUrl:'http://39.98.164.194:8081/',
+     partnerCode: '1029',
+     baseImgUrl:'http://39.98.164.194:8081/',
     //  partnerCode: '1000', 
     //  baseImgUrl: 'http://mmj.zksr.cn:8888/',
     // 15576615400 
@@ -30,8 +30,8 @@ App({
     // partnerCode: '1039',
     
 
-    partnerCode: '1050',
-    baseImgUrl:'http://erp.wgjnh.com',
+    // partnerCode: '1050',
+    // baseImgUrl:'http://erp.wgjnh.com',
     // 18569429872
     ww:'', // 屏幕宽度
     hh:'', // 屏幕高
