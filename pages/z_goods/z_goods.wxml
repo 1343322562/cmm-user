@@ -24,5 +24,5 @@
 <!-- <view class="searchShop-box"><image height="30rpx" width="30rpx" src="../../images/search_page_icon.png" /></view> -->
 <view class="pageData_null" wx:if="{{!supplierKey[nowSelectedCls].length&&pageLoading}}">
   <image mode="widthFix" src="../../images/pageData-null.png"/>
-  <view class="page_text">当前类别无数据~</view>
+  <view class="page_text">{{username == '13212609575' ? '此模块即将开放，敬请期待' : '当前类别无数据'}}~</view>
 </view>

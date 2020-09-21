@@ -20,6 +20,12 @@ Page({
       coupons: [] 		// 优惠卷或通知
     }
   },
+  toTopClick(e) {
+    console.log(e)
+    wx.pageScrollTo({
+      scrollTop: 0
+    })
+  },
   toSearchPageClick() { goPage('searchGoods') }, // 跳转搜索页
   // 关闭弹窗
 	closePopup () {

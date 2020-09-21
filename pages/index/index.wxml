@@ -14,6 +14,9 @@
 	<button class="shareIcon" open-type="share">
 		<image src="../../images/shareIcon.png"  />
 	</button>
+	<view class="toTopIcon" bindtap="toTopClick">
+		<image src="../../images/toTop.png"  />
+	</view>
 	<block wx:for="{{pageObj}}" wx:for-index="indexD" wx:for-item="list" wx:key="indexD">
 		<!--轮播图-->
 		<swiper id="{{list.moduleId}}" wx:if="{{list.templetType=='1'}}" autoplay="true" circular="true" style="position: relative;{{'margin:'+list.marginTop+'px 0 '+list.marginBottom+'px 0;height:'+(pageObjKey[indexD]||'180rpx;')}}">

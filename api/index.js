@@ -79,6 +79,8 @@ export default {
     saveEvaluation: (param) => ajax.post(`supplymini/saveEvaluation.do`, param), // 提交评价
     getOrderDetailNoToken: (param) => ajax.post(`supplymini/getOrderDetailNoToken.do`, param), // 获取分享的订单详情
     searchReturnOrder: (param) => ajax.post(`supplymini/searchReturnOrder.do`, param), // 获取退货订单列表
+    sheetSearch: (param) => ajax.post(`supplymini/sheetSearch.do`, param), // 当月订单查询
+    sheetAmtSearch: (param) => ajax.post(`supplymini/sheetAmtSearch.do`, param),   // 当月订单金额查询
   },
   BankBalance: {
     getAccountFlow: (param) => ajax.post(`supplymini/getAccountFlow.do`, param), // 获取账户流水列表

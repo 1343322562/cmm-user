@@ -6,7 +6,8 @@ Page({
     clsList: [],
     supplierObj: {},
     supplierKey: {},
-    pageLoading: false
+    pageLoading: false,
+    username: ''
   },
   changeCls (e) {
     this.setData({ nowSelectedCls: e.currentTarget.dataset.no})
@@ -58,13 +59,14 @@ Page({
   },
   onShareAppMessage() { },
   onLoad (opt) {
+    const { username } = wx.getStorageSync('userObj')
     // 此处缓存在 login 页面中设置
     const clsList = wx.getStorageSync('supcustAllCls')||[]
     let supplierKey = {all:[]}
     clsList.forEach(item => {
       supplierKey[item.supcustCls] = []
     })
-    this.setData({ clsList, supplierKey})
+    this.setData({ clsList, supplierKey, username})
     this.getList()
   },
   onShow () {

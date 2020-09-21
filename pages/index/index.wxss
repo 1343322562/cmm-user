@@ -1,8 +1,10 @@
 Page{background-color:#fff;padding-bottom: 1000rpx;}
 
 view{-webkit-overflow-scrolling: touch}
-.shareIcon{position: fixed !important;height: 90rpx !important;width: 90rpx !important;bottom: 12px !important;right: 25rpx !important;z-index: 100 !important;background-color: #dd4032 !important;border-radius: 50% !important;padding: 20rpx !important;opacity: .8 !important;display: flex !important;}
-.shareIcon image {height: 50rpx; width: 50rpx;}
+.shareIcon{position: fixed !important;height: 80rpx !important;width: 80rpx !important;bottom: 12px !important;right: 25rpx !important;z-index: 100 !important;background-color: #dd4032 !important;border-radius: 50% !important;padding: 20rpx !important;opacity: .8 !important;display: flex !important;}
+.shareIcon image {height: 45rpx; width: 45rpx;}
+.toTopIcon {position: fixed;height: 50rpx;width: 50rpx;bottom: 65px;right: 25rpx;z-index: 100;background-color: #059656;border-radius: 50%;padding: 16rpx;opacity: .8;display: flex;justify-content: center;}
+.toTopIcon image{height: 50rpx; width: 46rpx; transform: rotate(180deg);}
 .pageScroll{bottom:0px}
 .tdBox{position: absolute;z-index: 9999;-webkit-overflow-scrolling: touch;}
 .tdBox.act{top: 90rpx;}
