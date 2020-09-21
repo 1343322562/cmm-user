@@ -28,6 +28,13 @@ Page({
     itemBrandnos:{},
     bounding: app.data.bounding
   },
+  
+  toTopClick(e) {
+    console.log(e)
+    wx.pageScrollTo({
+      scrollTop: 0
+    })
+  },
   onPullDownRefresh () {
     const { nowSelectOneCls, nowSelectTwoCls } = this.data
     this.getGoodsList()

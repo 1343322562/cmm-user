@@ -6,6 +6,10 @@
 	</view>
 </Navbar>
 
+<view class="toTopIcon" bindtap="toTopClick">
+  <image src="../../images/toTop.png"  />
+</view>
+
 <block wx:if="{{pageLoading}}">
 <view class='pageLeft' wx:if="{{classifyList.length}}" style="top: {{bounding.top + bounding.height + 7}}px;">
   <!-- <view class='search' bindtap='goSearchPage'>
