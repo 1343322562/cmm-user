@@ -468,7 +468,7 @@ Page({
     console.log(1)
     this.getAreaList()
     console.log(1)
-    // this.fetchTakePhotoOnOff()
+    this.fetchTakePhotoOnOff()
     console.log(1)
     const partnerCode = getApp().data.partnerCode
     this.setData({ partnerCode })
@@ -499,5 +499,11 @@ Page({
     console.log(3)
   },
   onReady () {
+  },
+  onShareAppMessage() {
+    return {
+      title: '用户注册',
+      path: '/pages/verificationPhone/verificationPhone'
+    }
   }
 })

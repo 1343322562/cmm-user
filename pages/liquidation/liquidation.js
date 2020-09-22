@@ -670,7 +670,7 @@ Page({
     // } else if (payWay == 2) {
     //   if (czPay != 1) return toast('储值支付暂未开启，请重新选择')
     // }
-    // if (payWay == 0) return toast('货到付款暂未开启，请重新选择')
+    if (this.data.partnerCode == 1053 && payWay == 0) return toast('货到付款暂未开启，请重新选择')
     API.Liquidation.saveOrder({
       data: request,
       success: res => {
