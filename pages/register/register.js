@@ -162,7 +162,7 @@ Page({
           let da = res.data
           console.log(1)
           let indexArr = da.map(item => {
-            if (item.branchClsparent == '') return item
+            if (item.branchClsparent == '' || item.branchClsparent == '1.00') return item
           }).filter(e => {return e})
           let indexArr2 = []
           indexArr.forEach((item, index) => {
