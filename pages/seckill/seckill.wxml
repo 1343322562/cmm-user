@@ -29,12 +29,17 @@
     <view class="li"  wx:for="{{list[nowSelectDate].item}}" wx:key="index">
       <view class="goods_img" >
         <image class='icon' src="{{item.itemImgUrls}}" />
-        <text class='text'>商品剩余{{item.buyQty}}{{item.unit}}</text>
+        <text class='text' wx:if="{{partnerCode != 1053}}">商品剩余{{item.buyQty+item.unit}}</text>
       </view>
       <view class="goods_info">
         <view class="goods_info_name">{{item.itemName}}</view>
         <view class="goods_info_size">{{item.itemSize}}</view>
-        <view class="goods_info_price"><view>￥<text>{{item.promotionPrice}}</text>元/{{item.unit}}</view>    原价:{{item.price}}元</view>
+        <view class="goods_info_price">
+          <view>
+            ￥<text>{{list[nowSelectDate].type == 0 || list[nowSelectDate].type == 2 ? '???' : item.promotionPrice}}</text>元/{{item.unit}}
+          </view>    
+          原价:{{item.price}}元
+        </view>
         <view class='goods_info_purchase'>每个账户限购{{item.qty}}{{item.unit}}</view>
         <view class="goods_info_date" wx:if="{{item.productionTime}}">生产日期: {{item.productionTime}}</view>
         <view catchtap="addCarts" data-index="{{index}}" class="{{'goods_info_btn'+((list[nowSelectDate].type!='1'||item.stockQty<=0)?' act':'')}}">{{item.stockQty<=0?"抢光了":"立即抢购"}}</view>

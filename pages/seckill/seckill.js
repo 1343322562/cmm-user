@@ -2,6 +2,7 @@ import API from '../../api/index.js'
 import { showLoading, hideLoading, alert, getTime, getGoodsImgSize, deepCopy} from '../../tool/index.js'
 Page({
   data: {
+    partnerCode: getApp().data.partnerCode,
     list: [],
     pageLoading: false,
     nowSelectDate: 0,

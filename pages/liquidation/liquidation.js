@@ -184,7 +184,7 @@ Page({
     let payWay = typeof e =='object'? e.currentTarget.dataset.type:e
     let { selectedCoupons, mjObj, selectedGiftNum, selectedGift, payWay: nowPayWay, storedValue, realPayAmt, isUseBlendWay } = this.data
     // console.log(186,this.data, this.data.nowPayWay, this.data.payWay)
-    console.log(payWay)
+    console.log(payWay, nowPayWay)
     console.log(storedValue)
     if (isUseBlendWay && payWay == '2' && auto!='auto')return
     if (payWay=='0') {
@@ -222,6 +222,7 @@ Page({
       this.setData({ selectedGift, selectedGiftNum})
     }
     this.switchPayWay(payWay)
+    console.log(225, payWay)
   },
   switchPayWay(payWay) {
     console.log(payWay)
@@ -671,6 +672,7 @@ Page({
     //   if (czPay != 1) return toast('储值支付暂未开启，请重新选择')
     // }
     if (this.data.partnerCode == 1053 && payWay == 0) return toast('货到付款暂未开启，请重新选择')
+
     API.Liquidation.saveOrder({
       data: request,
       success: res => {
