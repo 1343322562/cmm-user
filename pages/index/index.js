@@ -22,9 +22,18 @@ Page({
   },
   toTopClick(e) {
     console.log(e)
-    wx.pageScrollTo({
-      scrollTop: 0
-    })
+    setTimeout(() => {
+      wx.pageScrollTo({
+        scrollTop: 1,
+        success(res) {
+          console.log(res)
+        }
+      })
+    }, 1000)
+    console.log(e)
+  },
+  onPageScroll: function (ev) {
+    　　console.log(ev.scrollTop);
   },
   toSearchPageClick() { goPage('searchGoods') }, // 跳转搜索页
   // 关闭弹窗

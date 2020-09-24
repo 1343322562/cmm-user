@@ -3,6 +3,8 @@ import * as types from './types.js'
 import commit from './mutations.js'
 import { getGoodsImgSize, toast } from '../tool/index.js'
 import { timCurrentDay, tim } from '../tool/date-format.js'
+
+const app = getApp()
 const actions = {
   [types.GET_OPEN_ID](param) {
     const openId = wx.getStorageSync('openId')
@@ -255,6 +257,9 @@ const actions = {
       && this.maxLimitAdd(param.goods, param.type, cartsObjs) == 1 // 1：达到最大限购值,停止执行
     ){
       return 
+    }
+    if(app.data.partnerCode == 1050 && 'msMaxQty' in param.goods && param.type != 'minus' && param.goods.realQty >= param.goods.msMaxQty) {
+      return toast('此商品已达秒杀最大限购数量!')
     }
     let cartsObj = commit[types.GET_CARTS]()
     if (cartsObj.keyArr.length>=300){
