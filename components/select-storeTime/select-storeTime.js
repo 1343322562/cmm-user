@@ -9,7 +9,7 @@ const days = []
 const hours = []
 
 // 从 2020 年开始
-for (let i = 2020; i <= date.getFullYear(); i++) {
+for (let i = 2019; i <= date.getFullYear(); i++) {
   years.push(i)
 }
 
@@ -38,6 +38,7 @@ Component({
    * 组件的属性列表
    */
   properties: {
+    type: String,
     show: Boolean,
     time: String
   },
@@ -50,7 +51,7 @@ Component({
     months,
     days,
     hours,
-    value: [0, 0, 0, 0]
+    value: [0, 0, 0, 0, 0, 0]
   },
 
 
@@ -64,6 +65,18 @@ Component({
             D = Number(ymd.slice(8, 10)),
             H = Number(tim().slice(0, 2))
       console.log(H, ymd)
+      if (this.data.type == 'order') {
+        return this.setData({
+          value: [
+            years.length - 1,
+            M-1, 
+            0, 
+            years.length - 1, 
+            M-1, 
+            D-1
+          ]
+        })
+      } 
       this.setData({value: [years.length - 1, M-1, D-1, H-1]})
     },
     detached: function() {
@@ -72,6 +85,18 @@ Component({
   },
 
   methods: {
+    confirm() {
+      const { years, months, days, value } = this.data // 选择的时间
+      console.log(value)
+      const startDate = `${years[value[0]]}-${months[value[1]]}-${days[value[2]]}`
+      const endDate = `${years[value[3]]}-${months[value[4]]}-${days[value[5]]}`
+      let start = startDate.replace(/-/g, ''); start = Number(start)
+      let end = endDate.replace(/-/g, ''); end = Number(end)
+      console.log(start, end)
+      if (start > end) return toast ('请选择正确的时间') 
+      console.log(startDate, endDate)
+      this.triggerEvent('myEvent', { startDate, endDate })
+    },
     // 绑定级联框
     bindChange(e) {
       let value = e.detail.value

@@ -14,7 +14,7 @@
 		"enhance": false,
 		"postcss": false,
 		"preloadBackgroundData": false,
-		"minified": false,
+		"minified": true,
 		"newFeature": true,
 		"coverView": true,
 		"nodeModules": false,
@@ -181,6 +181,13 @@
 					"id": -1,
 					"name": "pages/ordersList/ordersList",
 					"pathName": "pages/ordersList/ordersList",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/my/my",
+					"pathName": "pages/my/my",
 					"scene": null
 				}
 			]

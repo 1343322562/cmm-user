@@ -12,7 +12,7 @@
     </view>
     <view class="info">
       <text class="t-red">{{item.statusStr}}{{item.sheetSourceStr}}</text>
-      <view><text>共{{item.sheetQty}}件商品</text> 合计:<text class="t-red">￥{{item.realPayAmt}}</text></view>      
+      <view><text>共{{item.sheetQty}}件商品</text> 合计:<text class="t-red">￥{{item.realPayAmt}}</text></view>
     </view>
   </view>
   
