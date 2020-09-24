@@ -391,7 +391,6 @@ Page({
               // this.hideLoadingImg()
               this.setData({ pageLoading: true})
             }
-            
           } 
         },
         error: () => {

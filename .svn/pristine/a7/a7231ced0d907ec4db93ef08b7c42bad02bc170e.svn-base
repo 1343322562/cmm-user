@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "个人中心",
+  "navigationBarBackgroundColor": "#d40000",
+  "navigationBarTextStyle": "white",
+  "backgroundColorTop": "#d40000",
+  "usingComponents": {
+    "select-storeTime": "../../components/select-storeTime/select-storeTime",
+    "recommend-goods": "../../components/recommend-goods/recommend-goods"
+  },
+  "backgroundColorBottom": "#f2f2f2"
+}

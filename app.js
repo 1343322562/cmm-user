@@ -8,10 +8,6 @@ App({
     //  baseImgUrl:'http://39.98.164.194:8081/',
      partnerCode: '1000', 
      baseImgUrl: 'http://mmj.zksr.cn:8888/',
-    //  partnerCode: '1029',
-    //  baseImgUrl:'http://39.98.164.194:8081/',
-    //  partnerCode: '1000', 
-    //  baseImgUrl: 'http://mmj.zksr.cn:8888/',
     // 15576615400 
     // partnerCode: '1036',
     // baseImgUrl: 'http://erp.yhfws.cn/',
@@ -26,9 +22,10 @@ App({
     // baseImgUrl:'https://39.100.103.135:8080/',
     // partnerCode: '1026',
     
-    // partnerCode: '1052',
+    // partnerCode: '1051',
     // baseImgUrl:'http://app.tmzyz.com/',
     // partnerCode: '1053',
+    // partnerCode: '1054',
     // partnerCode: '2222',
 
     // partnerCode: '1039',

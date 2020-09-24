@@ -1,0 +1,40 @@
+<view class="selecter-time-conainer" wx:if="{{show}}" catchtouchmove>
+  <view class="selecter-time-box">
+    <view class="btn-box">
+      <text bindtap='close'>取消</text>
+      <text bindtap='{{type == "order" ? "confirm" : "come"}}'>确定</text>
+    </view>
+    <picker-view indicator-style="height: 50px;" style="margin: 0 8%; width: 84%; height: 300px;" value="{{value}}" bindchange="bindChange">
+  <picker-view-column>
+    <view wx:for="{{years}}" wx:key="{{years}}" style="line-height: 50px; text-align: center;">{{item}}</view>
+  </picker-view-column>
+  <picker-view-column>
+    <view wx:for="{{months}}" wx:key="{{months}}" style="line-height: 50px; text-align: center;">{{item}}</view>
+  </picker-view-column>
+  <picker-view-column>
+    <view wx:for="{{days}}" wx:key="{{days}}" style="line-height: 50px; text-align: center;">{{item}}</view>
+  </picker-view-column>
+  <block wx:if="{{type != 'order'}}">
+    <view style="padding-right: 10rpx;display: flex;justify-content: center;align-items: center;font-size: 12px;font-weight: 100;">—</view>
+    <picker-view-column>
+      <view wx:for="{{hours}}" wx:key="{{hours}}" style="line-height: 50px; text-align: center;">{{item}}</view>
+    </picker-view-column>
+    <view style="padding-right: 10rpx;display: flex;justify-content: center;align-items: center;font-size: 14px;font-weight: 100;position:relative;left: -45rpx;">时</view>
+  </block>
+  <block wx:else>
+    <view style="padding-right: 10rpx;display: flex;justify-content: center;align-items: center;font-size: 12px;font-weight: 100;">至</view>
+    <picker-view-column>
+      <view wx:for="{{years}}" wx:key="{{years}}" style="line-height: 50px; text-align: center;">{{item}}</view>
+    </picker-view-column>
+    <picker-view-column>
+      <view wx:for="{{months}}" wx:key="{{months}}" style="line-height: 50px; text-align: center;">{{item}}</view>
+    </picker-view-column>
+    <picker-view-column>
+      <view wx:for="{{days}}" wx:key="{{days}}" style="line-height: 50px; text-align: center;">{{item}}</view>
+    </picker-view-column>
+  </block>
+  
+</picker-view>
+  </view>
+  
+</view>

@@ -1,0 +1,56 @@
+
+<block wx:if="{{list.length}}">
+
+
+<scroll-view scroll-x class="seckill_title">
+  <view wx:for="{{list}}" wx:key="index" class="{{'title_li'+(nowSelectDate==index?' act':'')}}" bindtap="selectDate"  data-index="{{index}}">
+    <text>{{item.time[0][0]}}/{{item.time[0][1]}}/{{item.time[0][2]}}</text>
+    <text class="title_time">{{item.time[1][0]}}:{{item.time[1][1]}}</text>
+    <text>{{item.type=='0'?'已结束':(item.type=='1'?'进行中':'即将开始')}}</text>
+  </view>
+</scroll-view>
+
+
+<view class="countDown">
+  <text>{{list[nowSelectDate].type=="0"?"本场已结束":("距本场"+(list[nowSelectDate].type=="1"?"结束":"开始")+"还有")}}</text>
+  <view class="date">
+    <text class='t'>{{nowChangeTime[0]}}</text>
+    <text>:</text>
+    <text class='t'>{{nowChangeTime[1]}}</text>
+    <text>:</text>
+    <text class='t'>{{nowChangeTime[2]}}</text>
+  </view>
+<!-- {{list[nowSelectDate].type=="0"?"本场已结束":("距本场"+(list[nowSelectDate].type=="1"?"结束":"开始")+"还有 "+nowChangeTime[0]+"小时"+nowChangeTime[1]+"分钟"+nowChangeTime[2]+"秒")}} -->
+</view>
+
+
+<scroll-view scroll-y  class="seckill_goods">
+  <view class="goods">
+    <view class="li"  wx:for="{{list[nowSelectDate].item}}" wx:key="index">
+      <view class="goods_img" >
+        <image class='icon' src="{{item.itemImgUrls}}" />
+        <text class='text' wx:if="{{partnerCode != 1053}}">商品剩余{{item.buyQty+item.unit}}</text>
+      </view>
+      <view class="goods_info">
+        <view class="goods_info_name">{{item.itemName}}</view>
+        <view class="goods_info_size">{{item.itemSize}}</view>
+        <view class="goods_info_price">
+          <view>
+            ￥<text>{{list[nowSelectDate].type == 0 || list[nowSelectDate].type == 2 ? '???' : item.promotionPrice}}</text>元/{{item.unit}}
+          </view>    
+          原价:{{item.price}}元
+        </view>
+        <view class='goods_info_purchase'>每个账户限购{{item.qty}}{{item.unit}}</view>
+        <view class="goods_info_date" wx:if="{{item.productionTime}}">生产日期: {{item.productionTime}}</view>
+        <view catchtap="addCarts" data-index="{{index}}" class="{{'goods_info_btn'+((list[nowSelectDate].type!='1'||item.stockQty<=0)?' act':'')}}">{{item.stockQty<=0?"抢光了":"立即抢购"}}</view>
+      </view>
+    </view>
+  </view>
+  <text  class="page-bottom-null" wx:if="{{list[nowSelectDate].item.length}}"></text>
+</scroll-view>
+</block>
+
+<view class="pageData_null" wx:if="{{!list.length&&pageLoading}}">
+  <image mode="widthFix" src="../../images/pageData-null.png"/>
+  <view class="page_text">活动已结束~~</view>
+</view>

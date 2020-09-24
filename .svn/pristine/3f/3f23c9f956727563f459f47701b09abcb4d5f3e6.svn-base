@@ -305,7 +305,6 @@ const actions = {
         cartsObj.num -= (minSupplyQty || 1)
         String(cartsObj.num).includes('.') && (cartsObj.num = cartsObj.num.toFixed(1))
       }
-      console.log(308,'直配进来')
     } else {
       let item = {
         itemNo: itemNo,
@@ -337,7 +336,6 @@ const actions = {
       //   return
       // }
       // 判断了直配和统配都判断了库存
-      console.log(339,'直配进来')
       if (param.type != 'minus' && (item.realQty > maxSupplyQty || (item.realQty > (deliveryType == '3' ? 9999 : stockQty)))) {
         toast(item.realQty > maxSupplyQty ? '已达到最大购买数量' :'库存不足')
         return
