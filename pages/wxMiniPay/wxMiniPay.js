@@ -77,6 +77,7 @@ Page({
     })
   },
   onLoad (opt) {
+    console.log(80, opt)
     if (!opt.payType&&!opt.orderNo) {
       this.result('获取订单失败', 3)
       return

@@ -58,7 +58,7 @@ export default {
   '1049': 'https://wx.hongrinongye.com/zksrb2b-web/', //  新红日  erp.hongrinongye.com  wx5d91e1c91a9a3848 (1. 价格在商品列表页不显示 2. 隐藏直配，统配改分类)
   '1050': 'https://xcx.wgjnh.com/zksrb2b-web/', // 重庆旺购  图片 erp.wgjnh.com    wxb1a96fdeb3dae970  (1. 隐藏直配 2. 统配改自营分类)
   '10522': 'http://192.168.2.10:8080/zksrb2b-web/', // 唐娟
-  '1051': 'http://192.168.2.96:8080/zksrb2b-web/', // 文艺
+  '1051': 'http://192.168.2.96:8089/zksrb2b-web/', // 文艺
   '10511': 'http://192.168.2.223:8080/zksrb2b-web/', // 肖硕凯
   // 
   '1052': 'https://zjj.tqls.cn/', // 绵阳鸭子  app.tmzyz.com  zksr   1234   (隐藏直配，隐藏购物车配送中心type/常温/低温) 
