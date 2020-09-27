@@ -1,22 +1,32 @@
 <view class="top-block">
-  <view class="title">大红包重庆老火锅</view>
-  <view class="content">巴适得很费时擦拭大~~~打!</view>
-  <image src=""></image>
+  <view class="title">{{supplierObj.supplierName}}</view>
+  <view class="content">{{supplierObj.supplierDesc || supplierObj.address}}</view>
+  <image aspectFit src="{{imgBaseUrl + supplierObj.avatar}}"></image>
 </view>
 
 
 <view class='list'>
-  <view class='li'  wx:key="index">
-    <image catchtap='goPlayGoodsDetails' data-index="{{index}}" />
+  <view class='li'  wx:for="{{list}}" wx:key="index">
+    <image
+      catchtap='goPlayGoodsDetails' 
+      src="{{item.itemThumbPic}}" 
+      data-index="{{index}}"
+    />
     <view class='box'>
-      <view class='name'>阿斯达大打算的</view>
-      <view class='msg'>阿斯达大所</view>
+      <view class='name'>{{item.itemName}}</view>
+      <view class='msg'>销售时间：{{item.saleStartTime+' 至 '+item.saleEndTime}}</view>
       <view class='price'>
-        <text class='now'>￥546546</text>
-        <text class="before">门市价 ￥654</text>
-        <text class="sell">销量:{{100}}</text>
+        <text class='now'>￥{{item.itemNowPrice}}</text>
+        <text class="before" wx:if="{{item.itemNowPrice > item.itemNowPrice}}">门市价 {{item.itemNowPrice}}</text>
+        <text class="sell">销量:{{item.saleAlreadyQty}}</text>
       </view>
-      <view class="look" catchtap='goPlayGoodsDetails'>去看看</view>
+      <view class="look"  catchtap='goPlayGoodsDetails' data-index="{{index}}">去看看</view>
     </view>
   </view>
+</view>
+
+
+<view class="none" wx:if="{{list.length == 0}}">
+  <image src="../../images/none.png"></image>
+  <view>暂无商品详情信息~~</view>
 </view>

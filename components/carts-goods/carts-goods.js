@@ -11,7 +11,7 @@ Component({
   },
   data: {
     leftAnimation: false,
-    isSelectAll: true,
+    isSelectAll: false,
     cartsMoney: 0,
     selectNum: 0,
     selectTypeNum: 0,
@@ -225,6 +225,7 @@ Component({
       itemsIds.map(item => {
         goods[item].cancelSelected = !isSelectAll
       })
+      wx.setStorage({ data: goods, key: 'ShoppingCartGoodsList' })
       this.setData({ isSelectAll, goods })
       this.countMoney()
     },
@@ -234,11 +235,14 @@ Component({
       let { goods, isSelectAll } = this.data
       const is = !goods[itemId].cancelSelected
       goods[itemId].cancelSelected = is
+      wx.setStorage({ data: goods, key: 'ShoppingCartGoodsList' })
       if (is) isSelectAll = false
+      console.log(goods[itemId], goods)
       this.setData({ goods, isSelectAll })
       this.countMoney()
     },
     changeGoodsNum(e) {
+      console.log(e)
       const itemId = e.currentTarget.dataset.no
       const type = e.currentTarget.dataset.type
       let carts = this.data.goods
@@ -265,8 +269,10 @@ Component({
       } else {
         if (type == "minus") {
           shoppingCart.minusGoods(goods);
+          console.log(1)
         } else {
           shoppingCart.addGoods(goods);
+          console.log(2, goods)
         }
         this.judgeSeckillGoods()
         this.triggerEvent('getCartsNum')

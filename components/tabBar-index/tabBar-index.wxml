@@ -211,18 +211,16 @@
 
       <view class='list'>
 
-        <view class='li' wx:for="{{chwlList}}" wx:key="index" catchtap="toCHDetailClick" data-no="{{item.supplierNo}}">
-          <image 
-            style="background: url('../../images/createShareCanvas.png');background-size: 60px 50px;background-repeat:no-repeat;" 
-            mode="center" 
-            catchtap='goPlayGoodsDetails' 
+        <view class='li' wx:for="{{chwlList}}" wx:key="index" catchtap="toCHDetailClick" data-item="{{item}}">
+          <image
+            catchtap='' 
             data-index="{{index}}" 
             src="{{imgBaseUrl+item.avatar}}" 
             class="img"
           />
           <view class='box'>
             <view class='name'>{{item.supplierName}}</view>
-            <view class='msg'>{{item.address}}</view>
+            <view class='msg'>{{item.supplierDesc || item.address}}</view>
             <!-- <view class='price'>
               <text class='now'>￥{{item.itemNowPrice}}</text>
               <text class="before">门市价 ￥{{item.itemPrePrice}}</text>
@@ -234,7 +232,7 @@
 
       </view>
 
-      <view class='lookMore' bindtap='onClickClsItem' data-clsno="play" wx:if="{{showPlayGoodsMore}}">查看更多</view>
+      <view class='lookMore' bindtap='onClickClsItem' data-clsno="play" wx:if="{{showPlayGoodsMore && false}}">查看更多</view>
 
     </view>
 

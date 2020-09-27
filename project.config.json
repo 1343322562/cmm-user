@@ -127,6 +127,13 @@
 					"id": -1,
 					"name": "chwlDetail",
 					"pathName": "pages/chwlDetail/chwlDetail",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "paySuccess",
+					"pathName": "pages/paySuccess/paySuccess",
 					"scene": null
 				}
 			]

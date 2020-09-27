@@ -91,7 +91,7 @@
 }
 
 .liquidation .total{
-  z-index: 99999;
+  z-index: 99;
   background-color: transparent;
   position: absolute;
   right: 220rpx;
@@ -103,7 +103,7 @@
 
 .liquidation .num{
    text-align: right;
-  z-index: 99999;
+  z-index: 99;
   position: absolute;
   right: 220rpx;
   bottom:4rpx;

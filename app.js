@@ -95,36 +95,36 @@ App({
     }
     
     
-    // if (wx.getUpdateManager) {
-    //   const updateManager = wx.getUpdateManager()
-    //   updateManager.onUpdateReady(() => {
-    //     wx.showModal({
-    //       title: '更新提示',
-    //       content: '新版本已经准备好，是否重启应用？',
-    //       showCancel: false,
-    //       success: res => {
-    //         if (res.confirm) {
-    //           updateManager.applyUpdate()
-    //         }
-    //       }
-    //     })
-    //   })
-    // }
-    console.log('版本号' ,'2.0.5')
-    console.log('wx.getUpdateManager', wx.getUpdateManager())
-    const updateManager = wx.getUpdateManager()
-    updateManager.onUpdateReady(() => {
-      wx.showModal({
-        title: '更新提示',
-        content: '新版本已经准备好，是否重启应用？',
-        showCancel: false,
-        success: res => {
-          if (res.confirm) {
-            updateManager.applyUpdate()
+    if (wx.getUpdateManager) {
+      const updateManager = wx.getUpdateManager()
+      updateManager.onUpdateReady(() => {
+        wx.showModal({
+          title: '更新提示',
+          content: '新版本已经准备好，是否重启应用？',
+          showCancel: false,
+          success: res => {
+            if (res.confirm) {
+              updateManager.applyUpdate()
+            }
           }
-        }
+        })
       })
-    })
+    }
+    console.log('113版本号' ,'2.0.5')
+    console.log('114wx.getUpdateManager', wx.getUpdateManager())
+  //   const updateManager = wx.getUpdateManager()
+  //   updateManager.onUpdateReady(() => {
+  //     wx.showModal({
+  //       title: '更新提示',
+  //       content: '新版本已经准备好，是否重启应用？',
+  //       showCancel: false,
+  //       success: res => {
+  //         if (res.confirm) {
+  //           updateManager.applyUpdate()
+  //         }
+  //       }
+  //     })
+  //   })
   },
   onLaunch: function (options) {
 

@@ -530,8 +530,9 @@ Component({
     },
     // 跳转吃喝玩乐商家详情
     toCHDetailClick(e) {
-      const { supplierNo } = e.currentTarget.dataset
-      goPage('chwlDetail', { supplierNo })
+      let { item } = e.currentTarget.dataset
+      item = JSON.stringify(item)
+      goPage('chwlDetail', { item })
     },
     savePhone() {
       if (!this.data.createShare) {
@@ -610,15 +611,15 @@ Component({
         ctx.lineTo(beforePriceWidth + beforedX + 10, beforedY - 5)
         ctx.stroke()
       })
-      ctx.drawImage('/images/home_share_warehouse_bg_left.png', rpxToPx(130), rpxToPx(2420), rpxToPx(28), rpxToPx(50))
+      ctx.drawImage('/images/home_share_warehouse_bg_left.png', rpxToPx(130), rpxToPx(2370), rpxToPx(28), rpxToPx(50))
 
       ctx.setFillStyle('#fff')
       ctx.setFontSize(rpxToPx(25))
       const dcName = setCheckText(ctx, this.data.dcName, rpxToPx(160), 1)
       const dcNameWidth = ctx.measureText(dcName).width
-      ctx.drawImage('/images/home_share_warehouse_bg_right.png', rpxToPx(153) + dcNameWidth, rpxToPx(2420), rpxToPx(28), rpxToPx(50))
-      ctx.drawImage('/images/home_share_warehouse_bg_center.png', rpxToPx(155), rpxToPx(2420), dcNameWidth, rpxToPx(49))
-      ctx.fillText(dcName, rpxToPx(155), rpxToPx(2454))
+      ctx.drawImage('/images/home_share_warehouse_bg_right.png', rpxToPx(153) + dcNameWidth, rpxToPx(2370), rpxToPx(28), rpxToPx(50))
+      ctx.drawImage('/images/home_share_warehouse_bg_center.png', rpxToPx(155), rpxToPx(2370), dcNameWidth, rpxToPx(49))
+      ctx.fillText(dcName, rpxToPx(155), rpxToPx(2404))
 
       ctx.restore()
       ctx.draw()

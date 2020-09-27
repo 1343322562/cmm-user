@@ -37,6 +37,10 @@ class ShoppingCartGoods {
 
   addGoods(goods, success){
     wx.vibrateShort()
+    // 首次加购时 选中商品
+    if (typeof goods['cancelSelected'] != 'boolean') {
+      goods['cancelSelected'] = false
+    }
     const startQty = parseInt(goods.startQty) || 1
     const startSpec = parseInt(goods.startSpec) || 1
     const itemId = goods.itemId
@@ -83,6 +87,9 @@ class ShoppingCartGoods {
       })
       success=null
     }
+    console.log(86, data)
+    
+    // 加购购物车时定义 cancelSelected
     wx.setStorageSync('ShoppingCartGoodsList', data);
     success && success()
     this.setCartCount()
@@ -159,8 +166,7 @@ class ShoppingCartGoods {
     return count;
   }
 
-  setCartCount()
-  {
+  setCartCount() {
     let count=this.getGoodsCount()
     if(count&&count>0){
       wx.setTabBarBadge({
