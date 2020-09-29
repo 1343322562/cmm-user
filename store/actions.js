@@ -258,6 +258,7 @@ const actions = {
     ){
       return 
     }
+    if (param.goods.fillState == 1) return toast('商品补货中')
     if(app.data.partnerCode == 1050 && 'msMaxQty' in param.goods && param.type != 'minus' && param.goods.realQty >= param.goods.msMaxQty) {
       return toast('此商品已达秒杀最大限购数量!')
     }

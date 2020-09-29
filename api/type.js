@@ -64,5 +64,5 @@ export default {
   '1052': 'https://zjj.tqls.cn/', // 绵阳鸭子  app.tmzyz.com  zksr   1234   (隐藏直配，隐藏购物车配送中心type/常温/低温) 
   // 样式配置：1. app.wxss配置 2. app.js配置tabbar 3. 结算页 json 配置 导航栏颜色
   '1053': 'https://xcx.lelsc.com/',  // 乐尔乐 wx78d2ac1098a5c9d4  18932487553 12345678
-  '1054': 'https://xcx.xzkj.ltd/'  //  武汉酒业 wxd473e65be033c5ee http://47.92.86.135:8080 
+  '1054': 'https://xcx.xzkj.ltd/'  //  武汉酒业 wxd473e65be033c5ee http://47.92.86.135:8080   !!不要直配
 }

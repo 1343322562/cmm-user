@@ -9,7 +9,7 @@
 		]
 	},
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": true,
 		"enhance": false,
 		"postcss": false,
@@ -36,8 +36,8 @@
 		"userConfirmedUseCompilerModuleSwitch": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.12.2",
-	"appid": "wxd1fd45ecfed2216a",
+	"libVersion": "2.13.0",
+	"appid": "wx78d2ac1098a5c9d4",
 	"projectname": "%E5%AE%9C%E6%98%8C%E9%87%91%E8%B4%9D%E6%BA%90n",
 	"scripts": {},
 	"simulatorType": "wechat",

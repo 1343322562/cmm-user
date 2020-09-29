@@ -96,7 +96,7 @@ Page({
                 imgList.push((goodsType ? this.zcGoodsUrl : this.goodsUrl) + goods.itemNo + '/' + getGoodsImgSize(url, 2))
               })
             }
-            goods.isStock = (goods.stockQty > 0 || goods.deliveryType == '3' || goods.specType == '2') ? true : false
+            goods.isStock = ((goods.stockQty > 0 || goods.deliveryType == '3' || goods.specType == '2') && goods.fillState == 0) ? true : false
             if (this.productionDateFlag == '1' && (goods.productionDate || goods.newProductionDate)) {
               let dateArr = []
               goods.productionDate && dateArr.push(goods.productionDate.replace(new RegExp(/(-)/g), '.'))
@@ -280,7 +280,7 @@ Page({
             item.goodsImgUrl = this.goodsUrl + item.itemNo + '/' + getGoodsImgSize(item.picUrl)
           })
           wx.setNavigationBarTitle({ title: goods.itemName })
-          goods.isStock = (goods.stockQty > 0 || goods.deliveryType == '3') ? true : false
+          goods.isStock = ((goods.stockQty > 0 || goods.deliveryType == '3') && goods.fillState == 0) ? true : false
           if (goods.bdPsPrice) goods.discountMoney = Number((goods.bdPsPrice - goods.price).toFixed(2))
           this.setData({ goods, imgList })
         } else if (Object.keys(tag).length) {

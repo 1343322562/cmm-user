@@ -112,7 +112,7 @@ Page({
             for (let i in zhGoodsObj) {
               let goods = zhGoodsObj[i]
               if (goods.itemNo.indexOf(searchText) != -1 || goods.itemName.indexOf(searchText)!=-1) {
-                goods.isStock = (goods.stockQty > 0 || goods.deliveryType == '3') ? true : false
+                goods.isStock = ((goods.stockQty > 0 || goods.deliveryType == '3') && goods.fillState == 0) ? true : false
                 goodsObj[i] = goods
                 goods.stockQty > 0 ? promotionGoodsList.push(i) : promotionFineGoodsList.push(i)
               }
@@ -136,7 +136,7 @@ Page({
               } else {
                 (goods.stockQty > 0 || goods.deliveryType == '3' || goods.specType == '2') ? goodsList.push(itemNo) : fineGoodsList.push(itemNo)
               }
-              goods.isStock = (goods.stockQty > 0 || goods.deliveryType == '3' || goods.specType == '2') ? true : false
+              goods.isStock = ((goods.stockQty > 0 || goods.deliveryType == '3' || goods.specType == '2') && goods.fillState == 0) ? true : false
               if (this.productionDateFlag != '0' && goods.isStock) {
                 let dateArr = []
                 if ((this.productionDateFlag == '1' || this.productionDateFlag == '3') && goods.productionDate) dateArr.push(goods.productionDate.replace(new RegExp(/(-)/g), '.'))

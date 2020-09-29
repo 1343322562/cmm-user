@@ -151,7 +151,7 @@ Page({
         if (zhGoodsList) { // 类别下组合商品 
           zhGoodsList.forEach(no => {
             const goods = getGoodsDataSize(zhGoodsObj[no])
-            goods.isStock = (goods.stockQty > 0 || goods.deliveryType == '3') ? true : false
+            goods.isStock = ((goods.stockQty > 0 || goods.deliveryType == '3') && goods.fillState == 0) ? true : false
             if (zhGoodsObj[no].bdPsPrice) goods.discountMoney = Number((zhGoodsObj[no].bdPsPrice - goods.price).toFixed(2))
             goodsObj[no] = goods
             goods.stockQty > 0 ? promotionGoodsList.push(no) : promotionFineGoodsList.push(no)
@@ -217,7 +217,7 @@ Page({
             } else {
               (goods.stockQty > 0 || goods.deliveryType == '3' || goods.specType =='2') ? goodsList.push(itemNo) : fineGoodsList.push(itemNo)
             }
-            goods.isStock = (goods.stockQty > 0 || goods.deliveryType == '3' || goods.specType == '2' ) ? true : false
+            goods.isStock = (goods.stockQty > 0 || goods.deliveryType == '3' || goods.specType == '2' && goods.fillState == 0) ? true : false
             if (this.productionDateFlag != '0' && goods.isStock) {
               let dateArr = []
               if ((this.productionDateFlag == '1' || this.productionDateFlag == '3') && goods.productionDate) dateArr.push(goods.productionDate.replace(new RegExp(/(-)/g), '.'))
