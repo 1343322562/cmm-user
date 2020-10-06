@@ -63,7 +63,7 @@ const UserBusiness = {
       data: {locationX: res.longitude,locationY: res.latitude,openid: getApp().data.openid},
       success: (res) => {
         if (res.data == null) {
-          goPage('selectSysCode', {openId: getApp().data.openid,t: 'home'})
+          goPage('selectSysCode', {openId: getApp().data.openid,t: 'home',type:0})
         } else {
           //getApp().data.dcId = res.data.dcId
           //getApp().data.sysCode = res.data.sysCode
