@@ -1,5 +1,6 @@
 import API from '../../api/index.js'
 import { toast, alert, showLoading, hideLoading } from '../../tool/index.js'
+let app = getApp()
 Component({
   properties: {
     show: Boolean,
@@ -245,7 +246,15 @@ Component({
         success: (codeData)=> {
           console.log({ code: codeData.code, out_trade_no: sheetNo, body: '具体信息请查看小程序订单中心', openId: openId, platform, username })
           API.Liquidation.getMiniPayParameters({
-            data: { code: codeData.code, out_trade_no: sheetNo, body: '具体信息请查看小程序订单中心', openId: openId, platform, username },
+            data: { 
+              code: codeData.code,
+              out_trade_no: sheetNo,
+              body: '具体信息请查看小程序订单中心',
+              openId: openId, 
+              platform, 
+              username,
+              userIp: app.data.userIp
+            },
             success: res => {
               console.log('成功',res)
               if (res.code == 0 && res.data) {
@@ -254,7 +263,7 @@ Component({
                   'nonceStr': res.data.nonceStr,
                   'package': res.data.package,   // prepay_id 参数值
                   'signType': res.data.signType,
-                  'paySign': res.data.sign,
+                  'paySign': res.data.sign || res.data.paySign,
                   success: ret => {
                     this.paySuccess()
                   },

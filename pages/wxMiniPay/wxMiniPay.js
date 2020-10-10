@@ -1,4 +1,4 @@
-import { showLoading, hideLoading, getGoodsImgSize, deepCopy, getGoodsTag, toast, alert, getTime, goPage, getIp } from '../../tool/index.js'
+import { showLoading, hideLoading, getGoodsImgSize, deepCopy, getGoodsTag, toast, alert, getTime, goPage, getIP } from '../../tool/index.js'
 import API from '../../api/index.js'
 import dispatch from '../../store/actions.js'
 import * as types from '../../store/types.js'
@@ -27,6 +27,7 @@ Page({
           userIp,
           openId,
           platform,
+          merchantTerminalId: wx.getSystemInfoSync().system, // 用户当前设备号
           username
         }
         if (payType == 'CZ') {
@@ -47,7 +48,7 @@ Page({
                 'nonceStr': res.data.nonceStr || JSON.parse(res.data).nonceStr,
                 'package': res.data.package || JSON.parse(res.data).package,
                 'signType': res.data.signType || JSON.parse(res.data).signType,
-                'paySign': res.data.sign || JSON.parse(res.data).paySign,
+                'paySign': res.data.sign || res.data.paySign || JSON.parse(res.data).paySign,
                 success: ret => {
                   console.log(49, ret)
                   this.result('支付成功','')
@@ -79,6 +80,17 @@ Page({
       }
     })
   },
+  // 有时候会请求不到 ip 地址，请求不到时重复请求
+  repeatGetIp() {
+    const _this = this
+    getIP({
+      complete(ip) {
+        if (!ip) return _this.repeatGetIp()
+        _this.data.userIp = userIp
+        _this.wxPay(openId, opt)
+      }
+    })
+  },
   onLoad (opt) {
     const _this = this
     console.log(80, opt)
@@ -90,12 +102,7 @@ Page({
     this.setData({ orderNo: opt.orderNo || '', payMoney: opt.payAmt, payType: opt.payType})
     dispatch[types.GET_OPEN_ID]((openId)=>{
       if (openId) {
-        getIp({
-          complete(userIp) {
-            _this.data.userIp = userIp
-            _this.wxPay(openId, opt)
-          }
-        })
+        _this.repeatGetIp()
       }else {
         this.result('获取微信支付配置失败:openId',2)
       }

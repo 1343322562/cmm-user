@@ -281,6 +281,7 @@ const actions = {
       isBind = '0',
       parentItemNo
     } = param.goods
+    parentItemNo || (parentItemNo = '')
     stockQty || (stockQty=0)
     maxSupplyQty || (maxSupplyQty = 9999)
     minSupplyQty || (minSupplyQty = 1)
@@ -317,7 +318,7 @@ const actions = {
         branchNo: branchNo,
         sourceType: sourceType,
         sourceNo: sourceNo,
-        parentItemNo: parentItemNo,
+        parentItemNo: parentItemNo || '',
         // createDate: timCurrentDay(0) + ' ' + tim() 
       }
       console.log(timCurrentDay(0) + tim())
@@ -390,7 +391,7 @@ const actions = {
                   branchNo: config.branchNo,
                   sourceType: config.sourceType,
                   sourceNo: config.sourceNo,
-                  parentItemNo: goods.parentItemNo
+                  parentItemNo: goods.parentItemNo || ''
                 }
                 newCartsObj.num += goods.realQty
               })

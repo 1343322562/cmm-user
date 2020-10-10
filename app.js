@@ -1,11 +1,12 @@
+import { getIp } from './tool/index.js'
 App({
   data: { 
     // partnerCode: '1027',
     // baseImgUrl:'http://39.98.78.85:8080/',
-    // partnerCode: '1010',
-    // baseImgUrl:'http://erp.guoanmall.com/',
-    // partnerCode: '10112',
-    // baseImgUrl:'http://erp.guoanmall.com/',
+    // partnerCode: '1029',
+    // baseImgUrl:'http://39.98.164.194:8081/',
+    // partnerCode: '1043',
+    // baseImgUrl:'http://erp.jhdd.cn/',
     //  partnerCode: '10299',
     //  baseImgUrl:'http://39.98.164.194:8081/',
     //  partnerCode: '1000', 
@@ -25,8 +26,9 @@ App({
     // partnerCode: '1026',
     
     // partnerCode: '1051',
-    // baseImgUrl:'http://app.tmzyz.com/',
-    partnerCode: '1053',
+    partnerCode: '10510',
+    baseImgUrl:'http://app.tmzyz.com/',
+    // partnerCode: '1053',
     // partnerCode: '1054',
     // partnerCode: '2222',
 
@@ -47,6 +49,7 @@ App({
     userObj: '',
     bounding: {}, // 右上角胶囊信息
     phoneType:'',// 手机系统
+    userIp: '' // 用户的ip地址
   },
   editData (key ,val) {
     this.setData({
@@ -74,7 +77,28 @@ App({
       })
     }
   },
-  onShow(opt) { 
+  // 获取用户ip地址
+  getIp() {
+    const _this = this
+    wx.request({
+      url: 'https://open.onebox.so.com/dataApi?type=ip&src=onebox&tpl=0&num=1&query=ip&url=ip',
+      data: {
+      },
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      success: function (res) {
+        console.log(92,res)
+        if(!res.data) _this.getIp() // 没有ip则再次请求
+       _this.data.userIp = res.data.ip
+      }
+    })
+  },
+  onShow(opt) {
+    this.getIp()
+    setTimeout(()=>console.log(this.data.userIp), 10000)
+    
     let bounding = wx.getMenuButtonBoundingClientRect()
     this.data.bounding = bounding
     if (wx.getUpdateManager) {

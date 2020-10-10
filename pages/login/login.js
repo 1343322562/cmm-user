@@ -5,7 +5,7 @@ import commit from '../../store/mutations.js'
 import CryptoJS from '../../tool/aes.js'
 import MD5 from '../../tool/md5.js'
 import urlConfig from '../../api/type'
-import { showLoading, hideLoading, goPage, toast, alert, setUrl} from '../../tool/index.js'
+import { showLoading, hideLoading, goPage, toast, alert, setUrl } from '../../tool/index.js'
 Page({
   data: {
     tabBarList:['账号登录','验证码登录'],
@@ -361,11 +361,12 @@ Page({
     console.log(e)
   },
   onLoad (opt) {
+    console.log(364, opt)
     this.getAgreement()
     const nowDate = new Date()
     const dateStr = String(nowDate.getFullYear()) + (nowDate.getMonth() + 1) + nowDate.getDate()
     const user = wx.getStorageSync('userObj')
-    if (dateStr == '20209300' && !opt.isLogin && !wx.getStorageSync('isWxLogin') && (!user || user.isLogin)) {
+    if (dateStr == '20201010' && !opt.isLogin && !wx.getStorageSync('isWxLogin') && (!user || user.isLogin)) {
       console.log(1)
       showLoading()
       let request = {
