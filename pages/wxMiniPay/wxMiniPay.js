@@ -25,6 +25,7 @@ Page({
           out_trade_no: orderNo,
           body: '具体信息请查看小程序订单中心',
           userIp,
+          merchantTerminalId: wx.getSystemInfoSync().system,
           openId,
           platform,
           username
