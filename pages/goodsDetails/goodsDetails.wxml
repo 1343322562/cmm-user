@@ -11,7 +11,8 @@
     <view class='goodsName'>
       <text class='goodsType' wx:if="{{goods.isBind!='1'}}">{{goods.deliveryType =='2'?'统配':(goods.deliveryType =='3'?'统配直送':'直配')}}</text>
       <text>{{goods.itemName}}</text>
-      <text wx:if="{{(goods.enReturnGoods=='0'&&goods.deliveryType!='1')||goods.isProhibit=='1'}}" class="noReturn">不可退</text>
+      <text wx:if="{{goods.isBind!='1'&&((goods.enReturnGoods=='0'&&goods.deliveryType!='1')||goods.isProhibit=='1')}}" class="noReturn">不可退</text>
+      <text wx:if="{{goods.isBind=='1'}}" class="noReturn">{{goods.enReturnGoods==0?'不可退':'可退'}}</text>
       <!-- <text class="yesRetrns">{{((goods.enReturnGoods=='0'&&goods.deliveryType!='1')||goods.isProhibit=='1')?'不可退':'可退'}}</text> -->
     </view>
     <view class='goodsMsg' wx:if="{{goods.attachInfo}}">{{goods.attachInfo}}</view>

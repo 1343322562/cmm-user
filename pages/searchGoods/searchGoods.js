@@ -298,5 +298,6 @@ Page({
   onShow () {
     this.getAllPromotion()
     this.getCartsData()
+    setTimeout(() => console.log(this.data), 10000)
   }
 })
