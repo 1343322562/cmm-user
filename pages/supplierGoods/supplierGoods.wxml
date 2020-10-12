@@ -1,4 +1,8 @@
 <view class="head">
+  <view class="search">
+    <image src="../../images/search_page_icon.png" />
+    <input value="{{searchValue}}" bindinput="bindSearchValue" placeholder="请输入搜索内容" bindconfirm="searchConfirm"></input>
+  </view>
   <view class='img'><image src="{{config.goodsImgUrl}}" class="icon" /></view>
   <view class='info'>
     <view class='name'>{{config.supplierName}}</view>

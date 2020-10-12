@@ -776,7 +776,7 @@ Page({
     const partnerCode = getApp().data.partnerCode
     if (partnerCode == 1052) wx.setNavigationBarColor({ backgroundColor: '#e6c210', frontColor: '#ffffff' })
 
-    const { replenish } = opt
+    const { replenish, cartsType } = opt
     // 补货
     if(replenish) {
       this.setData({ replenish: true,  })  // 补货则不显示自提选择
@@ -808,9 +808,11 @@ Page({
     this.goodsUrl = goodsUrl
     let payWayList = this.data.payWayList
     console.log(deepCopy(payWayList))
+    console.log(811, partnerCode)
     payWayList[0].show = czPay == '1' //&& obj.items[0].sourceType == '0'
     payWayList[1].show = wxPay == '1' //&& obj.items[0].sourceType == '0'
     payWayList[2].show = codPay == '1'
+    if (partnerCode == '1029' && cartsType == 'sup') payWayList[1].show = false // 怡星 ZC 单不开微信支付 
     let goodsList = obj.items[0].datas
     const sourceType = obj.items[0].sourceType
     console.log(sourceType)

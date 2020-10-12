@@ -16,7 +16,19 @@ Page({
     totalLength: '',
     partnerCode: getApp().data.partnerCode,
     nowSelectCls: '',
-    cartsObj: {}
+    cartsObj: {},
+    searchValue: '' // 搜索框 value
+  },
+  // 确认搜索
+  searchConfirm() {
+    const { searchValue } = this.data
+    console.log(searchValue)
+    this.getGoodsList(searchValue)
+  },
+  // 搜索框数据绑定
+  bindSearchValue(e) {
+    let { value } = e.detail
+    this.setData({ searchValue: value })
   },
   changeCarts(e) {
     const { type, no } = e.currentTarget.dataset
@@ -89,7 +101,7 @@ Page({
   changeTab (e) {
     const no = e.currentTarget.dataset.no
     if (no != this.data.nowSelectCls) {
-      this.setData({ nowSelectCls:no})
+      this.setData({ nowSelectCls:no, searchValue: '' })
       this.getGoodsList()
     }
   },
@@ -139,14 +151,14 @@ Page({
       }
     })
   },
-  getGoodsList () {
+  getGoodsList (condition = '') {
     showLoading('请稍候...')
     const { nowSelectCls: itemClsNo } = this.data
     const supcustNo = this.supplierNo
     console.log('supcustNo', supcustNo)
     const { branchNo, token, platform, username } = this.userObj
     API.Goods.supplierItemSearch({
-      data: { condition:'', modifyDate:'', supcustNo, pageIndex: 1, pageSize: 1000, itemClsNo, token, platform, username},
+      data: { condition, modifyDate:'', supcustNo, pageIndex: 1, pageSize: 1000, itemClsNo, token, platform, username},
       success: res => {
         if(res.code == 0 && res.data) {
           console.log(res)

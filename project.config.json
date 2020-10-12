@@ -195,12 +195,20 @@
 					"id": -1,
 					"name": "wxMiniPay",
 					"pathName": "pages/wxMiniPay/wxMiniPay",
+					"query": "",
 					"scene": null
 				},
 				{
 					"id": -1,
 					"name": "wxMiniPay",
 					"pathName": "pages/wxMiniPay/wxMiniPay",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "supplierGoods",
+					"pathName": "pages/supplierGoods/supplierGoods",
 					"scene": null
 				}
 			]
