@@ -46,7 +46,7 @@
   >
     起送价：￥{{classifyObj.nowSelectOneCls.minDeliveryMomey || classifyObj[classifyList[0]].minDeliveryMomey}}
   </view>
-  <view class='li' wx:for="{{goodsList}}" wx:for-item="itemNo" wx:key="index" data-no="{{itemNo}}" bindtap='goGoodsDetails'>
+  <view class='li' wx:for="{{goodsList}}" wx:for-item="itemNo" wx:key="index" data-supNo="{{goodsObj[itemNo].supcustNo}}" data-no="{{itemNo}}" bindtap='goGoodsDetails'>
     <view class='img'>
       <image class='icon' src="{{goodsObj[itemNo].goodsImgUrl}}" />
       <view class='goodsType' wx:if="{{goodsObj[itemNo].specType=='2'}}">多规格</view>

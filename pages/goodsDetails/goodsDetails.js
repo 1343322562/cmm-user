@@ -427,6 +427,7 @@ Page({
     })
   },
   onLoad (opt) {
+    console.log(opt)
     const goodsType = opt.supcustNo ? 1 : 0
     const itemNo = opt.itemNo
     const userObj = wx.getStorageSync('userObj')

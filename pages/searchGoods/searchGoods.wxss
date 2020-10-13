@@ -41,7 +41,7 @@ Page{background-color: #fff;}
 .goCartsPage>text{display: block;margin-top: -5rpx;}
 
 .minSupplyQty{position: absolute;bottom: 47rpx;right: 81rpx;font-size: 24rpx;background-color: #fff;color:#04a1ff }
-
+.goodsTypeBottom {color: #fff;background-color: #dd4242;position: absolute;left: 0%;width: 40%;text-align: center;line-height: 40rpx;font-size: 23rpx;border-radius: 5rpx;bottom: 0;}
 .noReturn {
   position: absolute;
   right: 0rpx;

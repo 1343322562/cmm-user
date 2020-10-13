@@ -36,7 +36,13 @@ Page({
     })
   },
   onPullDownRefresh () {
-    const { nowSelectOneCls, nowSelectTwoCls } = this.data
+    const { nowSelectOneCls, nowSelectTwoCls, classifyObj: clsObj, classifyList: clsList } = this.data
+    console.log(nowSelectOneCls, nowSelectTwoCls, clsObj, clsList)
+    if (nowSelectOneCls.includes('s') || (!nowSelectOneCls && clsList[0].includes('s'))) { // 直配
+      let { supplierNo } = (nowSelectOneCls in clsObj && clsObj[nowSelectOneCls].children[0]) || clsObj[clsList[0]].children[0]
+      this.getSupGoodList(supplierNo, nowSelectTwoCls)
+      return
+    }
     this.getGoodsList()
     console.log(nowSelectOneCls, nowSelectTwoCls)
   },
@@ -125,8 +131,15 @@ Page({
     this.getGoodsList()
   },
   goGoodsDetails (e) {
+    console.log(e , this.data.goodsObj)
     const itemNo = e.currentTarget.dataset.no
-    goPage('goodsDetails', { itemNo })
+    const supcustNo = e.currentTarget.dataset.supno
+    if (supcustNo) {
+      goPage('goodsDetails', { itemNo, supcustNo })   // 直配
+    } else {
+      goPage('goodsDetails', { itemNo })    // 统配
+    }
+    
   },
   // 获取 今日限购的促销信息(直配)
   getSupplierPromotionInfo(branchNo, token, platform, username, goodsObj, totalLength) {
@@ -176,6 +189,7 @@ Page({
   },
   // 获取直配商品
   getSupGoodList(supcustNo, itemClsNo) {
+    showLoading('加载中...')
     const { branchNo, token, platform, username } = wx.getStorageSync('userObj')
     API.Goods.supplierItemSearch({
       data: { condition: '', modifyDate:'', supcustNo, pageIndex: 1, pageSize: 1000, itemClsNo, token, platform, username},

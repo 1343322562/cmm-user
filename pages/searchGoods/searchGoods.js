@@ -126,7 +126,11 @@ Page({
             console.log(list, _this.data.supplierData)
             list.forEach(goods => {
               const itemNo = goods.itemNo
-              goods.goodsImgUrl = this.goodsUrl + goods.itemNo + '/' + getGoodsImgSize(goods.picUrl)
+              if (goods.supcustNo) {
+                goods.goodsImgUrl = this.zcGoodsUrl + goods.itemNo + '/' + getGoodsImgSize(goods.picUrl)
+              } else {
+                goods.goodsImgUrl = this.goodsUrl + goods.itemNo + '/' + getGoodsImgSize(goods.picUrl)
+              }
               const tag = getGoodsTag(goods, promotionObj)
               if (Object.keys(tag).length) { // 促销商品
                 goods.stockQty > 0 ? promotionGoodsList.push(itemNo) : promotionFineGoodsList.push(itemNo)
@@ -287,6 +291,7 @@ Page({
     const historyList = wx.getStorageSync('historyList') || []
     this.userObj = wx.getStorageSync('userObj')
     this.goodsUrl = getApp().data.goodsUrl
+    this.zcGoodsUrl = getApp().data.zcGoodsUrl
     this.productionDateFlag = config.productionDateFlag
     let hotrList = []
     for (let i = 1 ;i<7;i++) {
