@@ -180,6 +180,7 @@ Component({
       API.Carts.getSettlementPageInfo({
         data: { branchNo, token, username, platform, items, itemNos},
         success: res => {
+          console.log(res)
           if (res.code == 0) {
             if(res.msg) {
               alert(res.msg,{
@@ -187,6 +188,7 @@ Component({
                 showCancel: true,
                 confirmText: '继续下单',
                 success: ret=> {
+                  console.log(ret)
                   if (ret.confirm) {
                     this.saveLiquidationObj(res.data, replenish)
                   }

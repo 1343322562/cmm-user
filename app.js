@@ -3,12 +3,13 @@ App({
   data: { 
     // partnerCode: '1027',
     // baseImgUrl:'http://39.98.78.85:8080/',
-    partnerCode: '1029',
-    baseImgUrl:'http://39.98.164.194:8081/',
+    // partnerCode: '1029',
+    // baseImgUrl:'http://39.98.164.194:8081/',
     // partnerCode: '1043',
     // baseImgUrl:'http://erp.jhdd.cn/',
     //  partnerCode: '10299',
     //  baseImgUrl:'http://39.98.164.194:8081/',
+    // partnerCode: '00', 
     //  partnerCode: '1000', 
     //  baseImgUrl: 'http://mmj.zksr.cn:8888/',
     // 15576615400 
@@ -29,12 +30,15 @@ App({
     // partnerCode: '10510',
     // baseImgUrl:'http://app.tmzyz.com/',
     // partnerCode: '1053',
-    // partnerCode: '1054',
+    partnerCode: '1054',
     // partnerCode: '1055',
     // partnerCode: '2222',
 
     // partnerCode: '1039',
     
+    
+    //  partnerCode: '1056', 
+    //  partnerCode: '1057',
 
     // partnerCode: '1050',
     // baseImgUrl:'http://erp.wgjnh.com',

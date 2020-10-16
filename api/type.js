@@ -1,8 +1,11 @@
 export default {
+  '00': 'http://192.168.2.7:8082/zksrb2b-web/',       // 王玉建
+  '01': 'http://192.168.2.96:8089/zksrb2b-web/',      // 文艺
+  '02': 'http://47.92.249.124:8082/zksrb2b-web/',     // 文艺
+  '03': 'http://192.168.2.223:8080/zksrb2b-web/',     // 肖硕凯
+  '04': 'http://192.168.1.223:8081/zksrb2b-web/',     // 李盼
+  '05': 'http://192.168.2.113:8091/zksrb2b-web/',     // 向丽红
   '1111': 'http://47.94.172.87:8088/zksrb2b-web/', // 国安e购测试
-  '2222': 'http://192.168.2.96:8085/zksrb2b-web/', // 文艺
-  '0000': 'http://192.168.1.223:8081/zksrb2b-web/', // 李盼
-  '6666': 'http://192.168.2.113:8091/zksrb2b-web/', // 向丽红
   '0001': 'http://125.76.225.59:8083/zksrb2b-web/', // 帮便利测试服 图片 bbladmin.bangbianli.com
   '0002': 'http://47.92.249.124:8084/zksrb2b-web/', // 广西测试服 图片 39.98.164.194:8081
   '1000': 'https://mmj.zksr.cn/zksrb2b-web/', // 中科商软 买卖佳  图片 mmj.zksr.cn:8888
@@ -58,14 +61,11 @@ export default {
   '1048': 'https://mp.baibaoxiang2018.com/zksrb2b-web/', //  丹江口  erp.baibaoxiang2018.com
   '1049': 'https://wx.hongrinongye.com/zksrb2b-web/', //  新红日  erp.hongrinongye.com  wx5d91e1c91a9a3848 (1. 价格在商品列表页不显示 2. 隐藏直配，统配改分类)
   '1050': 'https://xcx.wgjnh.com/zksrb2b-web/', // 重庆旺购  图片 erp.wgjnh.com    wxb1a96fdeb3dae970  (1. 隐藏直配 2. 统配改自营分类)
-  '10522': 'http://192.168.2.10:8080/zksrb2b-web/', // 唐娟
-  '1051': 'http://192.168.2.96:8089/zksrb2b-web/', // 文艺
-  '10510': 'http://47.92.249.124:8082/zksrb2b-web/', // 文艺
-  '10511': 'http://192.168.2.223:8080/zksrb2b-web/', // 肖硕凯
-  // 
   '1052': 'https://zjj.tqls.cn/', // 绵阳鸭子  app.tmzyz.com  zksr   1234   (隐藏直配，隐藏购物车配送中心type/常温/低温) 
   // 样式配置：1. app.wxss配置 2. app.js配置tabbar 3. 结算页 json 配置 导航栏颜色
   '1053': 'https://xcx.lelsc.com/',  // 乐尔乐 wx78d2ac1098a5c9d4  18932487553 12345678
-  '1054': 'https://xcx.xzkj.ltd/',  //  武汉酒业 wxd473e65be033c5ee http://47.92.86.135:8080   !!不要直配
-  '1055': 'http://xcx.ugou360.com/' // 客诚  wxf23abc012b304264  http://39.100.70.234:8080/  17775767355 123546
+  '1054': 'https://xcx.xzkj.ltd/',  //  武汉酒业 wxd473e65be033c5ee http://47.92.86.135:8080 123456  123456  !!不要直配
+  '1055': 'http://xcx.ugou360.com/', // 客诚  wxf23abc012b304264  http://39.100.70.234:8080/  17775767355 123546
+  '1056': 'https://wx.qshygyl.com/', // 承德 wx60319370721265b9  http://wx.qshygyl.com  15233484260 123456  统配改分类,隐藏直配
+  '1057': 'https://xcx.lszx888.com/zksrb2b-web/', // 零食甄选 wxff89d54fc5013ad5  13212609585 123456  统配改分类,隐藏直配
 }
