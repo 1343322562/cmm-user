@@ -234,6 +234,7 @@ Page({
     this.setData({ pageObjKey: obj });
   },
   goPage (e) {
+    console.log(e.currentTarget)
     let { type, val, title,supplier} = e.currentTarget.dataset
     console.log(type, val, title)
     val = val?val.replace(/\s+/g, ""):''
@@ -261,6 +262,8 @@ Page({
       goPage('supplierGoods', { supplierNo: val })
     } else if (type == '12' ) { // 海报
       goPage('H5', { connectionNo: val})
+    } else if (type == '13' ) { // 海报
+      wx.switchTab({ url: '/pages/t_goods/t_goods' })
     }
     
   },

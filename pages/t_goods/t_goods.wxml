@@ -1,3 +1,4 @@
+
 <!-- 导航栏 -->
 <Navbar id="navbar" background='{{partnerCode == 1053?"#059656":"#d40000"}}' leftIconText='分类' color='#ffffff' isShowLeftIcon='{{false}}'>
 	<view class="nav-seach-bar-box">
@@ -44,6 +45,7 @@
     wx:if="{{nowSelectOneCls && classifyObj[nowSelectOneCls].minDeliveryMomey || (!nowSelectOneCls && classifyObj[classifyList[0]].minDeliveryMomey)}}" 
     class="supTop"
   >
+  {{nowSelectOneCls}}
     起送价：￥{{classifyObj.nowSelectOneCls.minDeliveryMomey || classifyObj[classifyList[0]].minDeliveryMomey}}
   </view>
   <view class='li' wx:for="{{goodsList}}" wx:for-item="itemNo" wx:key="index" data-supNo="{{goodsObj[itemNo].supcustNo}}" data-no="{{itemNo}}" bindtap='goGoodsDetails'>
@@ -91,8 +93,9 @@
           catchtap='changeCarts' 
           data-no="{{itemNo}}" 
           data-type="minus"
-        ><image class='icon' src="{{partnerCode == 1052?'../../images/yz_sub.png':'../../images/goodsList_minus_carts.png'}}" /></view>
-
+        >
+          <image class='icon' src="{{partnerCode == 1052?'../../images/yz_sub.png':'../../images/goodsList_minus_carts.png'}}" />
+        </view>
         <text class='num'>{{cartsObj[itemNo].realQty}}</text>
         </block>
         <view 

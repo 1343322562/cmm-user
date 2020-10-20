@@ -84,7 +84,9 @@ Page({
   getItemCls () {
     const { classifyList, classifyObj} = wx.getStorageSync('AllCls')
     this.setData({ classifyList, classifyObj, pageLoading: true})
-    console.log(classifyList[0])
+    console.log(classifyList[0], classifyList)
+    console.log(88,classifyObj)
+    if (classifyList[0].includes('s')) return this.tapOneCls(classifyList[0],'no') // 供应商类别展开
     this.tapOneCls(classifyList[0],'one')
   },
   goSearchPage () {
@@ -94,6 +96,8 @@ Page({
     console.log(86,e,type, this)
     if (e) {
       let no = typeof e == 'object' ? e.currentTarget.dataset.no : e
+      if (no == this.data.nowSelectOneCls) return
+      console.log('这是 no', no)
       const beforeNo = this.data.nowSelectOneCls
       const twoCls = this.data.classifyObj[no].children || []
       no == beforeNo && (no = null)
@@ -116,10 +120,10 @@ Page({
   },
   tapTwoCls (e) {
     const no = typeof e == 'object' ? e.currentTarget.dataset.no : e
-    console.log(110, no, this.data.nowSelectOneCls , this)
-    if (this.data.nowSelectTwoCls == no) return
+    console.log(110, no, this.data.nowSelectTwoCls, this.data.nowSelectOneCls, typeof e)
+    if (this.data.nowSelectTwoCls == no && typeof e == 'object') return
     this.setData({ nowSelectTwoCls: no, itemBrandnos:{}})
-    const nowSelectOneCls = this.data.nowSelectOneCls ? this.data.nowSelectOneCls : this.data.classifyList[0]
+    const nowSelectOneCls = this.data.nowSelectOneCls || this.data.classifyList[0]
     // 直配
     if (nowSelectOneCls.includes('s')) {
       const { classifyObj } = this.data
@@ -147,7 +151,7 @@ Page({
     API.Public.getSupplierAllPromotion({
       data: { branchNo, token, platform, username, supplierNo: this.supplierNo },
       success: res => {
-        let data= res.data
+        let data = res.data
         if (res.code == 0 && res.data) {
           let promKey // 获取 以 RSD 开头的下标 (促销信息)
           for (let key in data) {
@@ -455,6 +459,16 @@ Page({
     this.productionDateFlag = wx.getStorageSync('configObj').productionDateFlag
     this.goodsUrl = getApp().data.goodsUrl
     this.getAllPromotion()
+    console.log(this)
+    let cartsObj = this.getCartsObj()
+    this.setData({ cartsObj })
+  },
+  // 获取 cartsObj 会有获取不到的情况,如果没有值就递归获取
+  getCartsObj() {
+    console.log(1)
+    let cartsObj = wx.getStorageSync('cartsObj')
+    if (!cartsObj) setTimeout(() => { this.getCartsObj() },200) 
+    return cartsObj
   },
   onReady () {
   },

@@ -7,6 +7,9 @@ var filters = {
   },
   toNum: function (value) {       
       return value.toNumber()
+  },
+  includes: function (value, str) {
+    return value.includes(str)
   }
 }
 
