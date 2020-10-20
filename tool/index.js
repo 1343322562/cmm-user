@@ -131,7 +131,7 @@ export const getGoodsImgSize = (url,type = 0) => { // 获取多规格的图片�
   return name.substring(0,name.indexOf('-')+1) + type + name.substr(name.indexOf('.'))
 }
 export const setTabBarNum = (num) => { // 设置底部购物车数量
-  const cartsIndex = 2
+  const cartsIndex = 3
   if (num) {
     wx.setTabBarBadge({
       index: cartsIndex,
@@ -169,7 +169,7 @@ export const getGoodsTag = (goods, promotionObj,type) => { // 获取促销标签
   const itemNo = goods.itemNo
   const brandNo = goods.itemBrandno
   const itemClsno = goods.itemClsno
-  const BG = promotionObj.BG.cls[itemClsno] ? 'cls' : (promotionObj.BG.brand[brandNo] ? 'brand' : (promotionObj.BG.goods[itemNo] ? 'goods' : false))
+  const BG = 'BG' in promotionObj && promotionObj.BG.cls[itemClsno] ? 'cls' : (promotionObj.BG.brand[brandNo] ? 'brand' : (promotionObj.BG.goods[itemNo] ? 'goods' : false))
   const MJ = promotionObj.MJ.fullReduction ? 'fullReduction' : (promotionObj.MJ.cls[itemClsno] ? 'cls' : (promotionObj.MJ.brand[brandNo] ? 'brand' : (promotionObj.MJ.goods[itemNo] ? 'goods' : false)))
   const ZK = promotionObj.ZK.allDiscount || (promotionObj.ZK.cls[itemClsno] || (promotionObj.ZK.brand[brandNo] || promotionObj.ZK.goods[itemNo] || false))
   const BF = promotionObj.BF.all.length || (promotionObj.BF.cls[itemClsno] || (promotionObj.BF.brand[brandNo] || promotionObj.BF.goods[itemNo] || false))

@@ -69,6 +69,7 @@ Component({
         autoCoupons, // 货到付款是否支持优惠券 1:支持
         codPayMzFlag, // 货到付款是否支持满赠 1:支持
       } = wx.getStorageSync('configObj')
+      console.log(wx.getStorageSync('configObj'))
       this.userObj = wx.getStorageSync('userObj')
       this.codPayMjFlag = codPayMjFlag
       this.autoCoupons = autoCoupons
@@ -259,11 +260,11 @@ Component({
               console.log('成功',res)
               if (res.code == 0 && res.data) {
                 wx.requestPayment({
-                  'timeStamp': res.data.timeStamp, // 时间戳
-                  'nonceStr': res.data.nonceStr,
-                  'package': res.data.package,   // prepay_id 参数值
-                  'signType': res.data.signType,
-                  'paySign': res.data.sign || res.data.paySign,
+                  'timeStamp': res.data.timeStamp || JSON.parse(res.data).timeStamp, // 时间戳
+                  'nonceStr': res.data.nonceStr || JSON.parse(res.data).nonceStr,
+                  'package': res.data.package || JSON.parse(res.data).package,   // prepay_id 参数值
+                  'signType': res.data.signType || JSON.parse(res.data).signType,
+                  'paySign': res.data.sign || res.data.paySign || JSON.parse(res.data).paySign,
                   success: ret => {
                     this.paySuccess()
                   },

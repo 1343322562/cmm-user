@@ -10,11 +10,11 @@ App({
     //  partnerCode: '10299',
     //  baseImgUrl:'http://39.98.164.194:8081/',
     // partnerCode: '00', 
-    //  partnerCode: '1000', 
-    //  baseImgUrl: 'http://mmj.zksr.cn:8888/',
+     partnerCode: '1000', 
+     baseImgUrl: 'http://mmj.zksr.cn:8888/',
     // 15576615400 
-    // partnerCode: '1036',
-    // baseImgUrl: 'http://erp.yhfws.cn/',
+    // partnerCode: '1042',
+    // baseImgUrl: 'http://erp.tlnmlx.com/',
     // partnerCode: '1047',
     // baseImgUrl: 'http://106.124.142.203:8081/',
     // lttest001
@@ -30,11 +30,12 @@ App({
     // partnerCode: '10510',
     // baseImgUrl:'http://app.tmzyz.com/',
     // partnerCode: '1053',
-    partnerCode: '1054',
+    // partnerCode: '1054',
     // partnerCode: '1055',
     // partnerCode: '2222',
 
     // partnerCode: '1039',
+    // partnerCode: '10112',
     
     
     //  partnerCode: '1056', 

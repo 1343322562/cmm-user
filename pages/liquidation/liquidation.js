@@ -739,7 +739,7 @@ Page({
                   this.goSuccessPage(true)
                 },
                 fail: (ret) => {
-                  console.log(res.data.timeStamp || data.timeStamp)
+                  // console.log(res.data.timeStamp || JSON.parse(res.data.timeStamp))
                   console.log(ret, { code: codeData.code, out_trade_no: this.orderNo, body: '具体信息请查看小程序订单中心', openId: openId, platform, username})
                   this.errorMsg('支付已取消')
                 }
