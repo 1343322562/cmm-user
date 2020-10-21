@@ -86,7 +86,12 @@ Page({
     this.setData({ classifyList, classifyObj, pageLoading: true})
     console.log(classifyList[0], classifyList)
     console.log(88,classifyObj)
-    if (classifyList[0].includes('s')) return this.tapOneCls(classifyList[0],'no') // 供应商类别展开
+    if (app.data.supplierNo) {       // 首页跳转至入驻商类别
+      return this.tapOneCls(app.data.supplierNo ,'no')
+      app.data.supplierNo = ''
+    } else if (classifyList[0].includes('s')) {   // 供应商类别展开
+      return this.tapOneCls(classifyList[0],'no')
+    } 
     this.tapOneCls(classifyList[0],'one')
   },
   goSearchPage () {
@@ -99,7 +104,7 @@ Page({
       if (no == this.data.nowSelectOneCls) return
       console.log('这是 no', no)
       const beforeNo = this.data.nowSelectOneCls
-      const twoCls = this.data.classifyObj[no].children || []
+      const twoCls = (no in this.data.classifyObj && this.data.classifyObj[no].children) || []
       no == beforeNo && (no = null)
       this.setData({ beforeOneCls: beforeNo })
       setTimeout(()=>{
@@ -476,6 +481,12 @@ Page({
     const userObj = wx.getStorageSync('userObj')
     if (userObj) this.userObj = userObj
     const pageLoadingTime = this.pageLoadingTime
+    console.log(deepCopy(this))
+    console.log(deepCopy(this.data.nowSelectOneCls))
+    if (this.data.nowSelectOneCls && app.data.supplierNo) {
+      this.tapOneCls(app.data.supplierNo ,'no')
+      app.data.supplierNo = ''
+    } 
     if (pageLoadingTime) {
       const now = +new Date()
       const time = now - pageLoadingTime

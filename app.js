@@ -44,6 +44,7 @@ App({
     // partnerCode: '1050',
     // baseImgUrl:'http://erp.wgjnh.com',
     // 18569429872
+    supplierNo: '', // 首页跳转入驻商类别
     ww:'', // 屏幕宽度
     hh:'', // 屏幕高
     imgUrl: '', // erp图片域名
@@ -72,7 +73,7 @@ App({
   },
   onLaunch () {
     // 绵阳鸭子tabbar 
-
+    console.log(wx)
     if (wx.getSystemInfo) {
       wx.getSystemInfo({
         success: (res) => {

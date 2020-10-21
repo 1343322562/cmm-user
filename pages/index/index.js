@@ -3,6 +3,7 @@ import API from '../../api/index.js'
 import dispatch from '../../store/actions.js'
 import commit from '../../store/mutations.js'
 import { showLoading, hideLoading, goPage, toast, alert, getGoodsImgSize } from '../../tool/index.js'
+let app = getApp()
 Page({
   data: {
     pageLoading: false,
@@ -262,8 +263,9 @@ Page({
       goPage('supplierGoods', { supplierNo: val })
     } else if (type == '12' ) { // 海报
       goPage('H5', { connectionNo: val})
-    } else if (type == '13' ) { // 海报
+    } else if (type == '13' ) { // 入驻商类别
       wx.switchTab({ url: '/pages/t_goods/t_goods' })
+      app.data.supplierNo = 's' + val
     }
     
   },
