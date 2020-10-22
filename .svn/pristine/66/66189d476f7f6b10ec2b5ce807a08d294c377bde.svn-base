@@ -1,0 +1,20 @@
+var filters = {    
+  toFixed: function (value) {       
+      return value.toFixed(2)
+  },
+  toStr: function (value) {       
+      return value.toString()
+  },
+  toNum: function (value) {       
+      return value.toNumber()
+  },
+  includes: function (value, str) {
+    return value.includes(str)
+  }
+}
+
+module.exports = {   
+  toFixed: filters.toFixed,
+  toStr: filters.toStr,
+  toNum: filters.toNum,//暴露接口调用
+}
