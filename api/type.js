@@ -13,7 +13,7 @@ export default {
   '1002': 'https://mp.jiuleshangmao.com/zksrb2b-web/', // 许昌久乐  图片 erp.jiuleshangmao.com (隐藏补货)
   '1003': 'https://www.yk5000.com/zksrb2b-web/', // 辽宁营口伍仟家  图片 www.yk5000.com
   '1004': 'https://mp.gst100.com/zksrb2b-web/', // 贵商通  图片 erp.gst100.com
-  '1005': 'https://mp.djlscs.cn/zksrb2b-web/', // 河北顿洁  图片 erp.djlscs.cn (直配隐藏储值支付，余额页隐藏账户授信内容,组合促销子商品隐藏价格)
+  '1005': 'https://mp.djlscs.cn/zksrb2b-web/', // 河北顿洁  图片 erp.djlscs.cn (直配隐藏储值支付，余额页隐藏账户授信内容,组合促销子商品隐藏价格和商品优惠价格)
   '1006': 'https://wxmini.dmkx.top/zksrb2b-web/', // 济南大名快销  图片 erp.dmkx.top
   '1007': 'https://wx.zfyxok.com/zksrb2b-web/', // 鞍山佳泰华  图片 erp.zfyxok.com
   '1008': 'https://mp.jicaiyoupei.com/zksrb2b-web/', // 集采优配平台  图片 erp.jicaiyoupei.com  （零售指导价隐藏）

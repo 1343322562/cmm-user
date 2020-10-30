@@ -214,6 +214,7 @@ Page({
     })
   },
   onLoad (opt) {
+    setTimeout(() => {console.log(this.data), 500})
     showLoading('请稍后...')
     opt.title = decodeURIComponent(opt.title)
     opt.value = decodeURIComponent(opt.value)

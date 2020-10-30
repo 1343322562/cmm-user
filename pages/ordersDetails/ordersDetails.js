@@ -150,13 +150,13 @@ Page({
             3、如果supplyFlag 字段为 5 ，值为 realPayAmt
             4、其他情况为0
           */
-         console.log(acctFlagStr , order.payWay, order.czPayAmt)
+         console.log(acctFlagStr , order.payWay, order.czPayAmt, order.supplyFlag)
           let paymentAmtStr
           if (acctFlagStr == '2') {
             paymentAmtStr = (order.realPayAmt - order.codPayAmt).toFixed(2)
           } else if ((acctFlagStr == '0' || acctFlagStr == 3) && order.payWay == '4') {
             paymentAmtStr = order.czPayAmt
-          } else if (order.supplyFlag == '5') {
+          } else if (order.supplyFlag == '5' && this.data.partnerCode != 1027) {
             paymentAmtStr = order.realPayAmt
           } else {
             paymentAmtStr = 0
