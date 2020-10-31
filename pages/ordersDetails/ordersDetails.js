@@ -83,7 +83,9 @@ Page({
     API.Orders[this.openType == 'share' ? 'getOrderDetailNoToken' :'getOrderDetail']({
       data: { token, platform, username, sheetNo, branchNo },
       success: res => {
-        if (res.code == 0) {      
+        if (res.code == 0) {
+          const { transportFeeType } = wx.getStorageSync('configObj') // 配送费计算方式 0：没有配送费 1：按照固定金额 2：按照订单比例  
+          const { transportFee } = wx.getStorageSync('userObj')
           const order = res.data
           let itemNos =[]
           order.orderDetails.forEach(goods => {
@@ -109,22 +111,30 @@ Page({
           order.couponsAmt = Number(order.couponsAmt)
           order.codPayAmt = Number(order.codPayAmt)
           // order.realPayAmt = Number(order.realPayAmt || 0)
-          order.realPayAmt = order.onlinePayway == 'WX' ? Number(order.onlinePayAmt).toFixed(2) : Number(order.realPayAmt || 0)
+          order.realPayAmt = order.onlinePayway == 'WX' ? Number(Number(order.onlinePayAmt).toFixed(2)) : Number(order.realPayAmt || 0)
           order.orgiSheetAmt = Number(order.orgiSheetAmt || order.realPayAmt)
           order.itemNos = itemNos.join(',')
           order.czPayAmt = Number(Number(order.czPayAmt).toFixed(2))
           order.discountAmt = Number(order.discountAmt)
           
-          if (order.statusStr == '已完成') {
-            order.discountsTotalAmt = (order.orgiSheetAmt - order.realPayAmt - (order.vouchersAmt || 0)).toFixed(2)
-          } else {
-            order.discountsTotalAmt = (order.orgiSheetAmt - order.realPayAmt - (order.vouchersAmt || 0) - (order.czPayAmt || 0)).toFixed(2)
+          
+          order.transportFeeAmt = 0
+          if (transportFeeType) {
+            const { realPayAmt } = order
+            order.transportFeeAmt = transportFeeType == 1 ? transportFee : Number((realPayAmt * transportFee).toFixed(2)) 
           }
+          console.log(126, order.transportFeeAmt)
+          order.discountsTotalAmt = Number((order.orgiSheetAmt - order.realPayAmt - (order.vouchersAmt || 0)).toFixed(2))
+          // if (order.statusStr == '已完成') {
+          // order.discountsTotalAmt = (order.orgiSheetAmt - order.realPayAmt - (order.vouchersAmt || 0)).toFixed(2)
+          // } else {
+          //   order.discountsTotalAmt = (order.orgiSheetAmt - order.realPayAmt - (order.vouchersAmt || 0) - (order.czPayAmt || 0)).toFixed(2)
+          // }
           console.log(order.realSheetAmt)
           // 缺货金额 = 支付金额 + 优惠卷金额 - 出库金额 
           order.stockoutAmt = (Number(order.realPayAmt) + Number(order.vouchersAmt) - Number(order.doAmt)).toFixed(2)
           console.log('缺货金额：', order.stockoutAmt, order.realPayAmt, order.vouchersAmt, order.doAmt)
-          order.vouchersAmt = (Number(order.vouchersAmt)).toFixed(2)
+          order.vouchersAmt = Number(Number(order.vouchersAmt).toFixed(2))
           console.log(order)
           /*
             1、如果payWay 字段 是  0，并且sheetSource 字段为： "yewuyuan"（平台业务员）或者是   "huozhu" （货主业务员）,就是“未付款"

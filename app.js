@@ -9,7 +9,8 @@ App({
     // baseImgUrl:'http://erp.jhdd.cn/',
     //  partnerCode: '10299',
     //  baseImgUrl:'http://39.98.164.194:8081/',
-    // partnerCode: '00', 
+    // partnerCode: '00',
+    // partnerCode: '05', 
     //  partnerCode: '1000', 
     //  baseImgUrl: 'http://mmj.zksr.cn:8888/',
     // 15576615400 

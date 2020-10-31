@@ -35,6 +35,10 @@ Page({
       { name: '微信支付', type: '1', icon: 'wx',show:false },
       { name: '货到付款', type: '0', icon: 'hdfk',show:false }
     ],
+    transportFeeChoiceWay: '',  // 配送方式配送费选择 0:配送  3:物流  4：配送和物流
+    transportFeeType: '', // 配送费计算方式 0：没有配送费 1：按照固定金额 2：按照订单比例 
+    transportFeeAmt: 0, // 配送费
+    transportFee: '',
     isUseBlendWay: false, // 是否使用混合支付
     payWay: '', // 支付方式 0货到付款 1在线支付 2储值支付 4混合支付
     isPickDate: 0, // 自提点时间选择 0: 关闭 ，开启时默认当前时间
@@ -44,9 +48,12 @@ Page({
   },
   // 选择配送方式 0 配送  1 自提 3 第三方物流
   selectTransWayClick(e) {
-    const deliveryType = e.currentTarget.dataset.type
-    if (deliveryType == 1) return this.setData({ deliveryType, selectedStoreTime: true, storeTime: this.getStoreDefaultTime() })
-    this.setData({ deliveryType })
+    const deliveryType = Number(e.currentTarget.dataset.type)
+    let transportFeeAmt = 0 
+    if (deliveryType != 1)  transportFeeAmt = this.transportFeeHandle()
+    if (deliveryType == 1) return this.setData({ transportFeeAmt ,deliveryType, selectedStoreTime: true, storeTime: this.getStoreDefaultTime() })
+    console.log(deliveryType, this.data)
+    this.setData({ deliveryType, transportFeeAmt })
   },
   showStoreTime() {
     this.setData({ selectedStoreTime: true })
@@ -461,8 +468,19 @@ Page({
         this.setData({ selectedGift: bestGift }) 
       } 
       discountsMoney = discountsMoney.toFixed(2)
-      this.setData({ realPayAmt, discountsMoney, selectedCoupons, mjObj, showSelectMzgoods })
+      let transportFeeAmt = this.transportFeeHandle(realPayAmt)
+      
+      this.setData({ transportFeeAmt, realPayAmt, discountsMoney, selectedCoupons, mjObj, showSelectMzgoods })
     }
+  },
+  // 计算配送费
+  transportFeeHandle(realPayAmt = this.data.realPayAmt) {
+    const { transportFeeType, transportFee } = this.data
+    let transportFeeAmt = 0 
+    if (transportFeeType) {
+      transportFeeAmt = Number(transportFeeType == 1 ? transportFee : (transportFee * realPayAmt).toFixed(2))
+    }
+    return (transportFeeAmt || 0)
   },
   // 选择最优惠的赠品(只计算第一组赠品)
   chooseBestGift(giftList) {
@@ -487,9 +505,9 @@ Page({
   },
   submit(ignore) {
     const { branchNo, token, username, platform, dbBranchNo: dbranchNo } = this.userObj
-    const { payWay, memo, selectedCoupons, totalMoney, selectedDhCoupons, dhCouponsList, realPayAmt, mjObj, giftList, selectedGift, selectedGiftNum, goodsList, storedValue, ticketType, isUseBlendWay} = this.data
+    const { transportFeeAmt: transportFee, payWay, memo, selectedCoupons, totalMoney, selectedDhCoupons, dhCouponsList, realPayAmt, mjObj, giftList, selectedGift, selectedGiftNum, goodsList, storedValue, ticketType, isUseBlendWay } = this.data
     if (this.wxPayRateOpen == '1' && payWay == '1' && ignore !='ignore') { 
-      alert('使用微信支付将收取您' + this.wxPayRate + '%的手续费-(手续费:' + Number((((realPayAmt - (isUseBlendWay ? Number(storedValue):0)) * this.wxPayRate) / 100).toFixed(2))+')',{
+      alert('使用微信支付将收取您' + this.wxPayRate + '%的手续费-(手续费:' + Number((((realPayAmt + (transportFee || 0) - (isUseBlendWay ? Number(storedValue):0)) * this.wxPayRate) / 100).toFixed(2))+')',{
         showCancel: true,
         success: ret => {
           if (ret.confirm) {
@@ -508,6 +526,7 @@ Page({
     let itemNos = []
     let goodsData = []
     let request = {
+      transportFee,
       username,
       branchNo,
       token,
@@ -787,6 +806,7 @@ Page({
     this.userObj = wx.getStorageSync('userObj')
     this.liquidationObj = deepCopy(obj)
     wx.removeStorageSync('invoiceSelectedIndex')
+    const { transportFee } = this.userObj
     const {
       defaultPayWay, // 默认为空   0货到付款   1储值支付    2微信支付  3支付宝支付  4易宝支付   --- 0货到付款 1在线支付 2储值支付 4混合支付
       codPay, // 货到付款
@@ -798,8 +818,15 @@ Page({
       isInvoice, // 不开启发票  1：开启发票
       wxPayRate, //微信手续费率
       wxPayRateOpen,  //微信手续费开关
+      transportFeeChoice, //配送方式配送费选择 1:配送  2:物流  1,2：配送和物流
+      transportFeeType,  //配送费计算方式 0：没有配送费 1：按照固定金额 2：按照订单比例 
       replenishSheet //  补单是否使用订单号 0 不使用 1 使用
     } = wx.getStorageSync('configObj')
+    let transportFeeChoiceWay
+    if (transportFeeChoice) {
+      // 配送方式配送费选择 0:配送  3:物流  4：配送和物流
+      transportFeeChoiceWay = transportFeeChoice == 1 ? 0 : (transportFeeChoice == 2 ? 3 : 4)
+    }
     console.log({ codPay, czPay, wxPay })
     this.codPayMjFlag = codPayMjFlag
     this.autoCoupons = autoCoupons
@@ -844,7 +871,12 @@ Page({
       requestItemList.push(data)
     })
     this.itemNos = itemNos
+    this.data.transportFeeType = transportFeeType
+    this.data.transportFee = transportFee
     this.setData({
+      transportFee,
+      transportFeeChoiceWay,
+      transportFeeType,
       wxPayRate,
       wxPayRateOpen,
       goodsList,

@@ -29,10 +29,14 @@ Component({
     totalMoney: 0, // 商品总金额
     discountsMoney: 0,// 优惠总金额
     realPayAmt: 0, // 实付金额
-    isUseBlendWay: false // 混合支付
+    isUseBlendWay: false, // 混合支付
+    wxPayRate: '', //微信手续费率
+    wxPayRateOpen: 0 ,  //微信手续费开关 0:关
   },
   attached () {
     console.log(this)
+    console.log(this.data)
+    console.log(this.data.order)
     //this.init()
   },
   methods: {
@@ -60,6 +64,8 @@ Component({
     },
     
     init (type) {
+      console.log('init', this.data.order)
+      this.userObj = wx.getStorageSync('userObj')
       const {
         defaultPayWay, // 默认为空   0货到付款   1储值支付    2微信支付  3支付宝支付  4易宝支付
         codPay, // 货到付款
@@ -68,9 +74,11 @@ Component({
         codPayMjFlag, // 货到付款是否支持满减 1:支持
         autoCoupons, // 货到付款是否支持优惠券 1:支持
         codPayMzFlag, // 货到付款是否支持满赠 1:支持
+        wxPayRate,
+        wxPayRateOpen
       } = wx.getStorageSync('configObj')
-      console.log(wx.getStorageSync('configObj'))
-      this.userObj = wx.getStorageSync('userObj')
+      this.data.wxPayRate = wxPayRate
+      this.data.wxPayRateOpen = wxPayRateOpen
       this.codPayMjFlag = codPayMjFlag
       this.autoCoupons = autoCoupons
       this.codPayMzFlag = codPayMzFlag
@@ -79,6 +87,8 @@ Component({
       payWayList[1].show = wxPay == '1'
       payWayList[2].show = codPay == '1'
       this.setData({
+        wxPayRate,
+        wxPayRateOpen,
         payWayList: payWayList,
         payWay: (defaultPayWay ? (
           (defaultPayWay == '1' && payWayList[0].show) ? '2' :
@@ -87,9 +97,11 @@ Component({
         )
       })
     },
+    // order.discountsTotalAmt + order.vouchersAmt
     setOrderAction(payWay, isUseBlendWay) { // discountAmt 满减  couponsAmt 优惠券
+      if(payWay == this.data.payWay) return
       const { sheetAmt, couponsAmt, discountAmt, realSheetAmt } = this.baseOrderObj
-      // const payWay = this.data.payWay
+      const order = this.data.order
       const storedValue = this.data.storedValue
       // const isUseBlendWay = this.data.isUseBlendWay
       const nowPayWay = payWay ? payWay : this.data.payWay
@@ -98,16 +110,27 @@ Component({
       let totalMoney = Number(realSheetAmt)||sheetAmt
       let realPayAmt = totalMoney
       let discountsMoney = 0
-      if ((payWay != '0' || this.autoCoupons == '1') && couponsAmt) {
-        discountsMoney += couponsAmt
+      if ((payWay != '0' || this.autoCoupons == '1') && order.vouchersAmt) {
+        // discountsMoney += couponsAmt
+        discountsMoney += order.vouchersAmt
       }
-      if ((payWay != '0' || this.codPayMjFlag == '1') && discountAmt) {
-        discountsMoney += discountAmt
+      if ((payWay != '0' || this.codPayMjFlag == '1') && order.discountsTotalAmt) {
+        // discountsMoney += discountAmt
+        discountsMoney += order.discountsTotalAmt
       }
-      console.log(nowPayWay, nowIsUseBlendWay)
+      console.log(nowPayWay, nowIsUseBlendWay, discountsMoney)
       
-      // realPayAmt = (nowIsUseBlendWay) ? Number((realPayAmt - discountsMoney - storedValue).toFixed(2)) : Number((realPayAmt - discountsMoney).toFixed(2))
-      realPayAmt = Number((realPayAmt - discountsMoney).toFixed(2))
+      
+      // realPayAmt = Number((realPayAmt - discountsMoney).toFixed(2))
+      realPayAmt = order.onlinePayway == 'WX' ? Number(Number(order.onlinePayAmt).toFixed(2)) : Number(order.realPayAmt || 0)
+      if (payWay == '0' && this.data.discountsMoney && discountsMoney == 0) { // 货到付款，不支持优惠时，要加上优惠的金额
+        realPayAmt = realPayAmt + this.data.discountsMoney
+        console.log(100, realPayAmt)
+      }
+      if (nowIsUseBlendWay) {
+        realPayAmt = Number((realPayAmt - discountsMoney - storedValue).toFixed(2))
+      }
+      console.log(payWay, discountsMoney, this.data.discountsMoney)
       console.log(nowPayWay,this.data.payWay, nowIsUseBlendWay, realPayAmt)
       this.setData({ totalMoney, realPayAmt, discountsMoney})
     },
@@ -120,8 +143,8 @@ Component({
       let { isUseBlendWay } = this.data
       console.log(payWay)
       if (isUseBlendWay && payWay == '2' && auto!='auto') return   // 混合支付
+      this.setOrderAction(payWay)
       this.setData({ payWay })
-      this.setOrderAction()
     },
     payError (msg) {
       hideLoading()
@@ -135,10 +158,21 @@ Component({
         })
       }, 200)
     },
-    confirmPay () {
-      let { payWay, realPayAmt, storedValue, isUseBlendWay} = this.data
+    confirmPay (ignore) {
+      let { payWay, realPayAmt, storedValue, isUseBlendWay, order, wxPayRateOpen, wxPayRate} = this.data
       if (!payWay) { toast('请选择支付方式'); return }
       if (payWay == '2' && storedValue < realPayAmt) { toast('余额不足'); return }
+      if (wxPayRateOpen == '1' && payWay == '1' && ignore !='ignore') { 
+        alert('使用微信支付将额外收取您' + wxPayRate + '%的手续费-(手续费:' + Number((((realPayAmt + (order.transportFeeAmt || 0) - (isUseBlendWay ? Number(storedValue):0)) * wxPayRate) / 100).toFixed(2))+')',{
+          showCancel: true,
+          success: ret => {
+            if (ret.confirm) {
+              this.confirmPay('ignore')
+            }
+          }
+        })
+        return
+      }
       showLoading('支付中...')
       const { memo, itemNos, sheetNo, transNo, ticketType, couponsAmt, payWay: orderPayWay, czPayAmt} = this.baseOrderObj
       console.log(czPayAmt)
@@ -158,11 +192,13 @@ Component({
         poundage:'0',
         inBranchNo: branchNo,
         outBranchNo: dbBranchNo,
+        transportFee: order.transportFeeAmt || 0,
         onlinePayway: payWay == '1' ? 'WX' : '',/* 在线支付方式  WX微信支付ZFB支付宝YEE易宝支付TL通联支付UN银联支付 */
         onlinePayAmtString: String(payWay == '1' ? realPayAmt : 0),/*线上支付金额*/
         czPayAmtString: String(payWay == '2' ? realPayAmt : 0), // 储值支付金额
         codPayAmtString: String(payWay == '0' ? realPayAmt : 0), // 货到付款
       }
+
       console.log('realPayAmt', realPayAmt)
       if (orderPayWay == '4') {
         request.czPayAmtString = String(czPayAmt)

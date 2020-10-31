@@ -5,7 +5,7 @@
 .box>.content{text-align: center;margin-top: 30rpx;}
 .box>.content .money{color: #444;font-size: 70rpx;font-weight: bold;}
 .box>.content .moneyType{background-color: #f2f2f2;font-size: 22rpx;color: #888;display: inline-block;margin-left: 10rpx;border-radius: 10rpx;padding: 5rpx 10rpx;}
-.box>.msg{color: #888;font-size: 24rpx;text-align: center;padding-bottom: 30rpx;}
+.box>.msg{color: #888;font-size: 24rpx;text-align: center;padding: 5rpx 10rpx 20rpx;}
 .contentBlock{overflow: hidden;line-height: 80rpx;border-bottom: 2rpx solid #eee;padding: 0 20rpx}
 .contentBlock>.icon{width: 60rpx;height: 60rpx;vertical-align: middle;}
 .contentBlock>.text{color: #333;margin: 0 5rpx;}
