@@ -1,6 +1,6 @@
 
 import API from '../../api/index.js'
-import { showLoading, hideLoading, getGoodsImgSize, alert, getTime,toast,goPage} from '../../tool/index.js'
+import { showLoading, hideLoading, getGoodsImgSize, alert, getTime,toast,goPage, deepCopy} from '../../tool/index.js'
 import * as types from '../../store/types.js'
 import commit from '../../store/mutations.js'
 Page({
@@ -83,6 +83,7 @@ Page({
     API.Orders[this.openType == 'share' ? 'getOrderDetailNoToken' :'getOrderDetail']({
       data: { token, platform, username, sheetNo, branchNo },
       success: res => {
+        console.log(deepCopy(res))
         if (res.code == 0) {
           const { transportFeeType } = wx.getStorageSync('configObj') // 配送费计算方式 0：没有配送费 1：按照固定金额 2：按照订单比例  
           const { transportFee } = wx.getStorageSync('userObj')
@@ -119,10 +120,11 @@ Page({
           
           
           order.transportFeeAmt = 0
-          if (transportFeeType != 0) {
+          if (transportFee != 0) {
             console.log('transportFeeType', transportFeeType)
             const { realPayAmt } = order
-            order.transportFeeAmt = transportFeeType == 1 ? transportFee : Number((realPayAmt * transportFee).toFixed(2)) 
+            // order.transportFeeAmt = transportFeeType == 1 ? transportFee : Number((realPayAmt * transportFee).toFixed(2)) 
+            order.transportFeeAmt = transportFee
           }
           console.log(126, order.transportFeeAmt)
           order.discountsTotalAmt = Number((order.orgiSheetAmt - order.realPayAmt - (order.vouchersAmt || 0)).toFixed(2))
