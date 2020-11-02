@@ -5,6 +5,7 @@ view{-webkit-overflow-scrolling: touch}
 .shareIcon image {height: 45rpx; width: 45rpx;}
 .toTopIcon {position: fixed;height: 50rpx;width: 50rpx;bottom: 65px;right: 25rpx;z-index: 100;background-color: #059656;border-radius: 50%;padding: 16rpx;opacity: .8;display: flex;justify-content: center;}
 .toTopIcon image{height: 50rpx; width: 46rpx; transform: rotate(180deg);}
+.frequentPurchase{font-size: 30rpx;font-weight: bold;padding: 3rpx;transition: all .15s;height: 80rpx;width: 80rpx; position: fixed;border-radius: 50%;color: #ffffff;background: #ff4822b1;z-index: 9999;line-height: 80rpx;text-align: center;}
 .pageScroll{bottom:0px}
 .tdBox{position: absolute;z-index: 9999;-webkit-overflow-scrolling: touch;}
 .tdBox.act{top: 90rpx;}

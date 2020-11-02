@@ -49,8 +49,9 @@ Page({
   // 选择配送方式 0 配送  1 自提 3 第三方物流
   selectTransWayClick(e) {
     const deliveryType = Number(e.currentTarget.dataset.type)
+    const { transportFeeType }= wx.getStorageSync('configObj')
     let transportFeeAmt = 0 
-    if (deliveryType != 1)  transportFeeAmt = this.transportFeeHandle()
+    if (deliveryType != 1 && transportFeeType != 0)  transportFeeAmt = this.transportFeeHandle()
     if (deliveryType == 1) return this.setData({ transportFeeAmt ,deliveryType, selectedStoreTime: true, storeTime: this.getStoreDefaultTime() })
     console.log(deliveryType, this.data)
     this.setData({ deliveryType, transportFeeAmt })
@@ -433,6 +434,7 @@ Page({
     if (this.mjmzLoading) {
       hideLoading()
       let { totalMoney, couponsList, payWay, selectedCoupons, selectedGiftNum, giftList} = this.data
+      const { transportFeeType }  = wx.getStorageSync('configObj') 
       let realPayAmt = totalMoney
       let discountsMoney = 0
 
@@ -468,7 +470,7 @@ Page({
         this.setData({ selectedGift: bestGift }) 
       } 
       discountsMoney = discountsMoney.toFixed(2)
-      let transportFeeAmt = this.transportFeeHandle(realPayAmt)
+      let transportFeeAmt = transportFeeType != 0 ? this.transportFeeHandle(realPayAmt) : 0
       
       this.setData({ transportFeeAmt, realPayAmt, discountsMoney, selectedCoupons, mjObj, showSelectMzgoods })
     }

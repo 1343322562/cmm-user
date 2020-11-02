@@ -119,7 +119,8 @@ Page({
           
           
           order.transportFeeAmt = 0
-          if (transportFeeType) {
+          if (transportFeeType != 0) {
+            console.log('transportFeeType', transportFeeType)
             const { realPayAmt } = order
             order.transportFeeAmt = transportFeeType == 1 ? transportFee : Number((realPayAmt * transportFee).toFixed(2)) 
           }

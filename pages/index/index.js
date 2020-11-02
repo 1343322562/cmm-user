@@ -19,8 +19,45 @@ Page({
     getPopupObj: {
       popupType: 2, 	// 0：优惠卷， 1：通知  2: 无弹窗
       coupons: [] 		// 优惠卷或通知
+    },
+    // 常购商品位置
+    position: {
+      startX: 0,
+      startY: 0,
+      X: '20px' ,
+      Y: '85vh'
     }
   },
+  // 常购商品触摸开始
+  touchstartFrequentPurchase(e){
+    console.log(0,e)
+    const { offsetLeft: clientX, offsetTop: clientY } = e.currentTarget
+    this.data.position.startX = parseInt(clientX)
+    this.data.position.startY = parseInt(clientY)
+  },
+  // 常购商品触摸结束
+  touchendFrequentPurchase(e){
+    console.log(0,e)
+    const { offsetLeft: clientX, offsetTop: clientY } = e.currentTarget
+    const { startX, startY } = this.data.position
+    console.log(startX, startY)
+    console.log(clientX, clientY)
+    if (startX == parseInt(clientX) && startY == parseInt(clientY)) console.log('点击')
+  },
+  // 常购商品触摸
+  touchmoveFrequentPurchase(e){
+    // console.log(1,e)
+    // const { screenHeight, screenWidth } = this.systemInfo
+    const { clientX, clientY } = e.touches[0]
+    // if (clientX >= screenWidth-20 || clientX <= 20 || clientY < 105 || clientY >= screenHeight-90) return
+    const _this = this
+    // console.log(_this.moveTimer, _this)
+    if (_this.moveTimer) clearTimeout(_this.moveTimer)
+    _this.moveTimer = setTimeout(() => {
+      _this.setData({ ['position.X']: parseInt(clientX)-20 + 'px', ['position.Y']: parseInt(clientY)-20 + 'px' })
+    }, 20)
+  },
+
   toTopClick(e) {
     console.log(e)
     wx.pageScrollTo({
@@ -312,7 +349,7 @@ Page({
       wx.setTabBarItem({ index: 2, text: '购物车', iconPath: 'images/yz_car.png', selectedIconPath: 'images/yz_car_act.png' })
       wx.setTabBarItem({ index: 3, text: '我的', iconPath: 'images/yz_my.png', selectedIconPath: 'images/yz_my_act.png' })
     }
-
+    this.systemInfo = wx.getSystemInfoSync()
     this.userObj = getApp().data['userObj'] || wx.getStorageSync('userObj')
     this.getPopup()
     getApp().data.goodsUrl || (commit[types.SET_ALL_GOODS_IMG_URL]())

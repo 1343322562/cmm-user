@@ -135,7 +135,16 @@
 		<image mode="widthFix" src="../../images/pageData-null.png" />
 		<view class="page_text">没有设置首页哦~</view>
 	</view>
-
+	
+	<view 
+		style="top:{{position.Y}}; left: {{position.X}};display: none;" 
+		catch:touchstart="touchstartFrequentPurchase" 
+		catch:touchmove="touchmoveFrequentPurchase"
+		catch:touchend="touchendFrequentPurchase" 
+		class="frequentPurchase"
+	>
+	常购
+	</view>
 
 	<!-- <movable-view class="oftenBuy" direction="all" inertia="true" x="{{400}}" y="{{350}}" bindtap="goPage" data-type="100">常购商品</movable-view> -->
 </scroll-view>
