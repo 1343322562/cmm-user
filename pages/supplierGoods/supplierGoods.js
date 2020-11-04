@@ -112,6 +112,7 @@ Page({
     API.Public.getSupplierAllPromotion({
       data: { branchNo, token, platform, username, supplierNo: this.supplierNo },
       success: res => {
+        console.log('促销信息' ,res)
         let data= res.data
         if (res.code == 0 && res.data) {
           let promKey // 获取 以 RSD 开头的下标 (促销信息)

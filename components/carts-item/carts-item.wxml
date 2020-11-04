@@ -32,19 +32,19 @@
 		    </view>
         <view class='tag'>
         <!-- 统配 -->
-          <text wx:if="{{goods.BF}}">买满赠</text>
-          <text wx:if="{{goods.FS}}">首单特价</text>
-          <text wx:if="{{goods.BG}}">买赠</text>
-          <text wx:if="{{goods.SD}}">单日限购</text>
-          <text wx:if="{{goods.MQ}}">数量满减</text>
-          <text wx:if="{{goods.SZInfo.length}}">首赠</text> 
-          <text wx:if="{{goods.MJ}}">满减</text>
-          <text wx:if="{{goods.promotionType =='MS'||goods.MS}}">秒杀</text>
-          <text wx:if="{{goods.ZK}}">{{goods.discount}}</text>
+          <text wx:if="{{goods.BF && type=='cw'}}">买满赠</text>
+          <text wx:if="{{goods.FS && type=='cw'}}">首单特价</text>
+          <text wx:if="{{goods.BG && type=='cw'}}">买赠</text>
+          <text wx:if="{{goods.SD && type=='cw'}}">单日限购</text>
+          <text wx:if="{{goods.MQ && type=='cw'}}">数量满减</text>
+          <text wx:if="{{goods.SZInfo.length && type=='cw'}}">首赠</text> 
+          <text wx:if="{{goods.MJ && type=='cw'}}">满减</text>
+          <text wx:if="{{(goods.promotionType =='MS'||goods.MS) && type=='cw'}}">秒杀</text>
+          <text wx:if="{{goods.ZK && type=='cw'}}">{{goods.discount}}</text>
         <!-- 直配 -->
-        <text wx:if="{{goods.RBF}}">买满赠</text>
-        <text wx:if="{{goods.RMJ}}">满减</text>
-        <text wx:if="{{goods.RSD}}">限时促销</text>
+          <text wx:if="{{goods.RBF}}">买满赠</text>
+          <text wx:if="{{goods.RMJ}}">满减</text>
+          <text wx:if="{{goods.RSD}}">限时促销</text>
           <!-- <text>{{(goods.enReturnGoods=='0'||goods.isProhibit=='1')?'不可退':'可退'}}</text> -->
         </view>
       </view>

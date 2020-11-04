@@ -137,10 +137,11 @@
 	</view>
 	
 	<view 
-		style="top:{{position.Y}}; left: {{position.X}};display: none;" 
+		style="top:{{position.Y}}; left: {{position.X}};" 
 		catch:touchstart="touchstartFrequentPurchase" 
 		catch:touchmove="touchmoveFrequentPurchase"
 		catch:touchend="touchendFrequentPurchase" 
+		catchtap="s"
 		class="frequentPurchase"
 	>
 	常购

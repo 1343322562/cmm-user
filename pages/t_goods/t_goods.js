@@ -26,7 +26,9 @@ Page({
     brandList:[],
     brandObj: {},
     itemBrandnos:{},
-    bounding: app.data.bounding
+    bounding: app.data.bounding,
+    rmj: false,
+    rbf: false
   },
   
   toTopClick(e) {
@@ -67,9 +69,16 @@ Page({
   },
   selectScreen (e) {
     const types = e.currentTarget.dataset.type
-    const screenSelect = this.data.screenSelect
+    const { screenSelect, nowSelectOneCls, nowSelectTwoCls } = this.data
     this.setData({ screenSelect: types == '1' ? (screenSelect=='1'?'2':'1'): types })
-    this.getGoodsList()
+
+    if (nowSelectOneCls.includes('s')) {
+      const { classifyObj } = this.data
+      let { supplierNo } = classifyObj[nowSelectOneCls].children[0]
+      this.getSupGoodList(supplierNo, nowSelectTwoCls)
+    } else {
+      this.getGoodsList()
+    }
   },
   getAllPromotion(type) {
     console.log(deepCopy(this), deepCopy(this.data))
@@ -151,11 +160,12 @@ Page({
     
   },
   // 获取 今日限购的促销信息(直配)
-  getSupplierPromotionInfo(branchNo, token, platform, username, goodsObj, totalLength) {
+  getSupplierPromotionInfo(branchNo, token, platform, username, goodsObj, totalLength, supcustNo) {
     // 获取促销信息
     API.Public.getSupplierAllPromotion({
-      data: { branchNo, token, platform, username, supplierNo: this.supplierNo },
+      data: { branchNo, token, platform, username, supplierNo: supcustNo },
       success: res => {
+        console.log('促销信息' ,res)
         let data = res.data
         if (res.code == 0 && res.data) {
           let promKey // 获取 以 RSD 开头的下标 (促销信息)
@@ -200,6 +210,7 @@ Page({
   getSupGoodList(supcustNo, itemClsNo) {
     showLoading('加载中...')
     const { branchNo, token, platform, username } = wx.getStorageSync('userObj')
+    const screenSelect = this.data.screenSelect
     API.Goods.supplierItemSearch({
       data: { condition: '', modifyDate:'', supcustNo, pageIndex: 1, pageSize: 1000, itemClsNo, token, platform, username},
       success: res => {
@@ -222,8 +233,10 @@ Page({
           let newArr = goodsList.concat(fineGoodsList)
           const totalLength = newArr.length
           console.log(newArr)
-          this.getSupplierPromotionInfo(branchNo, token, platform, username, goodsObj, totalLength) // 获取并处理今日限购的促销信息(直配)
-
+          this.getSupplierPromotionInfo(branchNo, token, platform, username, goodsObj, totalLength, supcustNo) // 获取并处理今日限购的促销信息(直配)
+          if (screenSelect!='0') {
+            newArr.sort((a, b) => (screenSelect == '1' ? (goodsObj[a].price - goodsObj[b].price) : (goodsObj[b].price - goodsObj[a].price)))
+          }
           setTimeout(()=>{
             this.setData({
               goodsList: newArr.splice(0, maxNum),
