@@ -218,6 +218,8 @@ Page({
         supplierPhone: shop.contactPhone,
         supplierName: shop.supplierName
       }
+      console.log(request)
+      hideLoading()
       API.Play.saveOrder2({
         data: request,
         success: ret => {

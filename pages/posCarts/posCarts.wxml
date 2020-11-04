@@ -1,0 +1,61 @@
+<!-- 购物车 -->
+<view bindtap="hideSwitchPayWayDialogClick" class="page" wx:if="{{pageType == 1}}">
+  <view class="title white-bg">商品信息</view>
+  <view class="good-card white-bg">
+    <image class="good-img" src="../../images/colonelApply_icon1.png"></image>
+    <view class="good-info">
+      <view class="good-name">这是商品的名称 500g</view>
+      <view class="good-saleinfo">
+        <view class="price">￥10</view>
+        <view class="num">x12</view>
+      </view>
+    </view>
+  </view>
+  <view class="good-card white-bg">
+    <image class="good-img" src="../../images/colonelApply_icon1.png"></image>
+    <view class="good-info">
+      <view class="good-name">这是商品的名称 500g</view>
+      <view class="good-saleinfo">
+        <view class="price">￥10</view>
+        <view class="num">x12</view>
+      </view>
+    </view>
+  </view>
+
+  <view catchtap="switchPayWayDialogClick" class="good-payway-box white-bg" hover-stay-time="120" hover-class="hover-btn1">
+    <view class="label">支付方式</view>
+    <view class="content"><view class="tag">推荐</view>微信支付 <view class="triangle-view"/></view>
+  </view>
+
+
+  <view catchtap="prevent" class="swicth-payway-box white-bg" style="height: {{switchPayWayTransition.height}};">
+    <view class="title">切换支付</view>
+    <view class="item" data-index="{{index}}" catchtap="checkChangeClick" wx:for="{{payWayList}}" wx:key="index">
+      <view class="label">
+        <image src="{{item.img}}"/>
+        余额支付
+      </view>
+      <view class="content">
+        <text class="balance" wx:if="{{item.type == 1}}">￥30.0</text>
+        <radio value="{{item.checkout.value}}" checked="{{item.checkout.checked}}"/>
+      </view>
+    </view>
+  </view>
+
+  <view class="bottom">
+    <view class="amt">合计: <text class="amt-t">￥20</text></view>
+    <button bindtap="confirmClick" class="submit" type="primary" hover-class="hover-btn2">微信支付</button>
+  </view>
+</view>
+
+<!-- 结算结果 -->
+<view class="page-res white-bg" wx:else>
+  <image class="res-logo" src="../../images/confirm.png"></image>
+  <view class="res-content">结算完成</view>
+  <view class="res-info">如需小票，请在仓店通上点击“打印小票”</view>
+  <view class="res-sheetamt">¥32.10</view>
+  <view class="res-btn-box">
+    <!-- <view class="res-btn order" hover-class="hover-btn2" hover-stay-time="120">查看订单</view> -->
+    <view class="res-btn confirm" hover-class="hover-btn2" hover-stay-time="120">完成</view>
+  </view>
+</view>

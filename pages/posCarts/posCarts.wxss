@@ -1,0 +1,180 @@
+/* pages/posCarts/posCarts.wxss */
+.title {
+  font-size: 32rpx;
+  font-weight: bold;
+  padding: 32rpx 35rpx;
+}
+
+.white-bg {
+  background-color: #ffffff;
+}
+
+.good-card {
+  width: 94%;
+  padding: 28rpx 3%;
+  display: flex;
+  align-items: center;
+  border-top: 1rpx solid #eeeeee;
+}
+.good-card .good-img{
+  height: 130rpx;
+width: 130rpx;
+
+}
+.good-card .good-info{
+  flex: 1;
+  padding: 5rpx 15rpx;
+  height: 130rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #333333;
+  font-size: 29rpx;
+  
+
+}
+
+.good-info .good-name{
+  
+}
+
+.good-info .good-saleinfo{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.good-saleinfo .price{
+  color: #FB5754;
+  font-size: 32rpx;
+}
+.good-saleinfo .num{
+  font-size: 27rpx;
+  padding-right: 25rpx;
+}
+
+.good-payway-box {
+  height: 100rpx;
+  width: 94%;
+  padding: 0 3%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 30rpx;
+}
+.good-payway-box .label{
+  font-size: 30rpx;
+  font-weight: bold;
+}
+.good-payway-box .content{
+  font-size: 29rpx;
+  display: flex;
+  align-items: center;
+}
+.good-payway-box .tag{
+  font-size: 27rpx;
+  background-color: #F69B38;
+  color: #fff;
+  padding: 3rpx 8rpx;
+  border-radius: 15rpx;
+  margin-right: 15rpx;
+}
+.triangle-view {
+  height: 20rpx;
+  width: 20rpx;
+  border-top: 4rpx solid #999999;
+  border-right: 4rpx solid #999999;
+  transform: rotate(45deg);
+}
+.bottom {
+  background-color: #555555;
+  height: 100rpx;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.bottom .amt {
+  flex: 1;
+  text-align: right;
+  padding-right: 30rpx;
+  color: #f4f4f4;
+  font-size: 32rpx;
+}
+
+.amt .amt-t {
+  font-size: 45rpx;
+  font-weight: bold;
+}
+
+.bottom .submit {
+  border-radius: 0;
+  height: 100%;
+  width: 225rpx;
+}
+
+.swicth-payway-box{
+  border-radius: 60rpx 60rpx 0 0;
+}
+
+.page-res {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+}
+
+.res-logo {
+  height: 170rpx;
+  width: 150rpx;
+  margin: 150rpx auto 0;
+  
+}
+
+.res-content {
+  color: #666666;
+  font-size: 32rpx;
+  margin: 10rpx 0 10rpx;
+
+}
+.res-info {
+  color: #999999;
+  font-size: 32rpx;
+  margin-bottom: 35rpx;
+
+}
+.res-sheetamt {
+  font-size: 70rpx;
+  margin-bottom: 80rpx;
+}
+
+.res-btn-box {
+  min-width: 550rpx;
+  width: 86%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.res-btn-box .res-btn{
+  width: 220rpx;
+  height: 90rpx;
+  line-height: 90rpx;
+  border-radius: 15rpx;
+  font-size: 32rpx;
+  text-align: center;
+}
+
+.res-btn-box .res-btn.order{
+  border: 1rpx solid #999999; 
+  color: #444444;
+}
+
+.res-btn-box .res-btn.confirm{
+  border: 1rpx solid #FF6F6E; 
+  color: #ffffff;
+  background-color: #FF6F6E;
+}

@@ -38,7 +38,8 @@
     "pages/returnGoodsList/returnGoodsList",
     "pages/activity/banner/banner",
     "pages/addSelfAddress/addSelfAddress",
-    "pages/chwlDetail/chwlDetail"
+    "pages/chwlDetail/chwlDetail",
+    "pages/posCarts/posCarts"
   ],
   "permission": {
     "scope.userLocation": {
