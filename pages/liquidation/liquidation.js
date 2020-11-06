@@ -1,4 +1,4 @@
-import { getFilterDataSize, emojiReg, toast, showLoading, hideLoading, alert, deepCopy, goPage, setNumSize } from '../../tool/index.js'
+import { getFilterDataSize, emojiReg, toast, showLoading, hideLoading, alert, deepCopy, goPage, setNumSize, showModal, backPage } from '../../tool/index.js'
 import API from '../../api/index.js'
 import { ShoppingCartGoods } from '../../tool/shoppingCart.js'
 let shoppingCart = new ShoppingCartGoods();//实例化类
@@ -551,6 +551,20 @@ Page({
 
     return true;
   },
+  // 下单时， 价格和商品数量的校验
+  reqDataCheck(reqData) {
+    const itemList = JSON.parse(reqData.itemList)
+    const { totalAmt, totalNum } = reqData // 总金额 和 总数量
+    let tempTotalAmt = 0
+    let tempTotalNum = 0
+    itemList.forEach(item => {
+      tempTotalNum += item.num
+      tempTotalAmt += item.itemNowPrice * item.num
+    })
+    console.log(tempTotalAmt, tempTotalNum, totalAmt == tempTotalAmt && totalNum == tempTotalNum)
+    if (totalAmt == tempTotalAmt && totalNum == tempTotalNum) return true
+    return false
+  },
 
   goOrdersDetails(msg, orderNo) {
     hideLoading()
@@ -671,8 +685,19 @@ Page({
     showLoading('提交订单...')
     let request=this.getSubmitOrdersInfo()
     console.log('保存订单的参数: ', request)
+    console.log('item', JSON.parse(request.itemList))
     if (!this.validationData(request)){return;}
-    
+    if (!this.reqDataCheck(request)) {
+      hideLoading()
+      alert(`支付错误，请重新核对订单数据并下单`, {
+        showCancel: false,
+        title: '温馨提示',
+        success(e) {
+          backPage()
+        }
+      })
+      return;
+    }
     API.Liquidation.saveOrder({
       data: request,
       success: res => {
