@@ -65,6 +65,7 @@ Page({
   goPay () {
     const { payMoney, cartsObj, pageObj} =  this.data
     const { username, branchNo, platform, token, dbBranchNo: dcBranchNo} = this.userObj
+    const _this = this
     if (!payMoney) return
     showLoading('下单中...')
     let data = {
@@ -93,31 +94,38 @@ Page({
           const sheetNo = res.data
           this.sheetNo = sheetNo
           const openId = wx.getStorageSync('openId')
-          API.Group.getMiniTeamPayParameters({
-            data: { sheetNo, body: '具体信息请查看团购订单', openId, platform, username, token},
-            success: ret => {
-              const config = ret.data
-              if (ret.code == 0 && config) {
-                wx.requestPayment({
-                  'timeStamp': config.timeStamp,
-                  'nonceStr': config.nonceStr,
-                  'package': config.package,
-                  'signType': 'MD5',
-                  'paySign': config.sign,
-                  'success':  ()=> {
-                    this.goSuccessPage(true)
-                  },
-                  'fail': ()=> {
-                    this.errorMsg('支付已取消')
+          wx.login({
+            success(codeData) {
+              const code = codeData.code
+              API.Group.getMiniTeamPayParameters({
+                data: { code , sheetNo, body: '具体信息请查看团购订单', openId, platform, username, token},
+                success: ret => {
+                  console.log(10, ret)
+                  const config = ret.data
+                  if (ret.code == 0 && config) {
+                    wx.requestPayment({
+                      'timeStamp': config.timeStamp,
+                      'nonceStr': config.nonceStr,
+                      'package': config.package,
+                      'signType': config.signType,
+                      'paySign': config.sign,
+                      'success':  (res)=> {
+                        console.log(1000, res)
+                        _this.goSuccessPage(true)
+                      },
+                      'fail': (err)=> {
+                        console.log(100,err)
+                        _this.errorMsg('支付已取消')
+                      }
+                    })
+                  } else  {
+                    _this.errorMsg(ret.msg)
                   }
-                })
-
-              } else  {
-                this.errorMsg(ret.msg)
-              }
-            },
-            error: ()=> {
-              this.errorMsg('获取支付配置失败,请检查网络是否正常。')
+                },
+                error: ()=> {
+                  _this.errorMsg('获取支付配置失败,请检查网络是否正常。')
+                }
+              })
             }
           })
         } else {
@@ -138,6 +146,14 @@ Page({
         url: '/pages/groupBuying/GB_payOk/GB_payOk?pageType=' + (type ? 1 : 2) + '&sheetNo=' + this.sheetNo,
       })
     }, 200)
+  },
+  onShareAppMessage() {
+    console.log('share')
+    const { branchName, dbBranchName } = wx.getStorageSync('userObj')
+    return {
+      title: branchName || dbBranchName,
+      path: '/pages/groupBuying/GB_index/GB_index'
+    }
   },
   errorMsg(msg) {
     hideLoading()

@@ -46,14 +46,12 @@ Page({
   },
   // 常购商品触摸
   touchmoveFrequentPurchase(e){
-    // console.log(1,e)
-    // const { screenHeight, screenWidth } = this.systemInfo
+    console.log(1, e)
     const { clientX, clientY } = e.touches[0]
-    // if (clientX >= screenWidth-20 || clientX <= 20 || clientY < 105 || clientY >= screenHeight-90) return
     const _this = this
-    // console.log(_this.moveTimer, _this)
     if (_this.moveTimer) clearTimeout(_this.moveTimer)
     _this.moveTimer = setTimeout(() => {
+      console.log(100)
       _this.setData({ ['position.X']: parseInt(clientX)-20 + 'px', ['position.Y']: parseInt(clientY)-20 + 'px' })
     }, 20)
   },

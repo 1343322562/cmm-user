@@ -31,6 +31,14 @@ Page({
       }
     })
   },
+  onShareAppMessage() {
+    console.log('share')
+    const { branchName, dbBranchName } = wx.getStorageSync('userObj')
+    return {
+      title: branchName || dbBranchName,
+      path: '/pages/groupBuying/GB_index/GB_index'
+    }
+  },
   getServerTime() {
     API.Public.getSystemTime({
       data: this.requestData,

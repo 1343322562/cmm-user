@@ -137,7 +137,7 @@
 	</view>
 	
 	<view 
-		style="top:{{position.Y}}; left: {{position.X}};" 
+		style="top:{{position.Y}}; left: {{position.X}};display: none;" 
 		catch:touchstart="touchstartFrequentPurchase" 
 		catch:touchmove="touchmoveFrequentPurchase"
 		catch:touchend="touchendFrequentPurchase" 

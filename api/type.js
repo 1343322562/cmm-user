@@ -68,4 +68,5 @@ export default {
   '1055': 'http://xcx.ugou360.com/', // 客诚  wxf23abc012b304264  http://39.100.70.234:8080/  17775767355 123546
   '1056': 'https://wx.qshygyl.com/', // 承德 wx60319370721265b9  http://wx.qshygyl.com  15233484260 123456  统配改分类,隐藏直配
   '1057': 'https://xcx.lszx888.com/zksrb2b-web/', // 零食甄选 wxff89d54fc5013ad5  13212609585 123456  统配改分类,隐藏直配
+  '1058': 'https://wx.yygyt.cn/zksrb2b-web/', // 益阳云商通 wx.yygyt.cn/zksrb2b-web wxb4ff1e1646959e36  15101512488 123456 
 }

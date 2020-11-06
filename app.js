@@ -3,12 +3,12 @@ App({
   data: { 
     // partnerCode: '1027',
     // baseImgUrl:'http://39.98.78.85:8080/',
-    partnerCode: '1029',
-    baseImgUrl:'http://39.98.164.194:8081/',
+    // partnerCode: '1029',
+    // baseImgUrl:'http://39.98.164.194:8081/',
     // partnerCode: '1043',
     // baseImgUrl:'http://erp.jhdd.cn/',
-    //  partnerCode: '10299',
-    //  baseImgUrl:'http://39.98.164.194:8081/',
+     partnerCode: '1012',
+     baseImgUrl:'http://erp.hnhlgyl.net/',
     // partnerCode: '00',
     // partnerCode: '05', 
     //  partnerCode: '1000', 
@@ -36,7 +36,7 @@ App({
     // partnerCode: '2222',
 
     // partnerCode: '1039',
-    // partnerCode: '10112',
+    // partnerCode: '1058',
     
     
     //  partnerCode: '1056', 
