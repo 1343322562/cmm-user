@@ -34,6 +34,7 @@ Page({
         dcId: this.dcId
       },
       success: ret => {
+        console.log(37,ret)
         const obj = ret.data
         if (ret.status == 200 && obj) {
           

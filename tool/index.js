@@ -112,7 +112,7 @@ export const setDistanceSize = (num) => { // 米转千米
   const str = (p ? Number((distance / 1000).toFixed(2)) : distance) + (p ? 'km' : 'm')
   return str
 }
-export const setUrlObj = (str) => { // url转obj
+export const setUrlObj = (str) => { // url转obj (包含 url)
   const arr = str.split('&')
   let obj = {}
   arr.map(item => {
@@ -121,6 +121,20 @@ export const setUrlObj = (str) => { // url转obj
   })
   return obj
 }
+
+export const setUrlObj2 = (str) => { // url转obj (不包含 url)
+  const arr = str.split('&')
+  let obj = {}
+  arr.map(item => {
+    let data = item.split('=')
+    if (data[0].includes('?')) {
+      data[0] = data[0].slice(data[0].indexOf('?')+1)
+    }
+    obj[data[0]] = data[1]
+  })
+  return obj
+}
+
 export const getRemainTime = (endTime, deviceTime, serverTime) => { // 获取倒计时
   let t = endTime - Date.parse(new Date()) - serverTime + deviceTime
   let seconds = Math.floor((t / 1000) % 60)

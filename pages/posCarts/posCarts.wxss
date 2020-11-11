@@ -51,7 +51,12 @@ width: 130rpx;
   font-size: 27rpx;
   padding-right: 25rpx;
 }
-
+.que {
+  width: 150%;
+  margin: 0 auto;
+  font-size: 17rpx;
+  overflow: scroll;
+}
 .good-payway-box {
   height: 100rpx;
   width: 94%;
@@ -65,6 +70,7 @@ width: 130rpx;
   font-size: 30rpx;
   font-weight: bold;
 }
+
 .good-payway-box .content{
   font-size: 29rpx;
   display: flex;
@@ -103,7 +109,11 @@ width: 130rpx;
   color: #f4f4f4;
   font-size: 32rpx;
 }
-
+.amt .num {
+  display: inline-block;
+  font-size: 24rpx;
+  vertical-align: text-bottom;
+}
 .amt .amt-t {
   font-size: 45rpx;
   font-weight: bold;

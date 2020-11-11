@@ -561,7 +561,9 @@ Page({
       tempTotalNum += item.num
       tempTotalAmt += item.itemNowPrice * item.num
     })
-    console.log(tempTotalAmt, tempTotalNum, totalAmt == tempTotalAmt && totalNum == tempTotalNum)
+    // console.log(1000000, tempTotalAmt)
+    tempTotalAmt = Number(tempTotalAmt.toFixed(2))
+    // console.log(tempTotalAmt,totalAmt, tempTotalNum,totalNum, totalAmt == tempTotalAmt && totalNum == tempTotalNum)
     if (totalAmt == tempTotalAmt && totalNum == tempTotalNum) return true
     return false
   },

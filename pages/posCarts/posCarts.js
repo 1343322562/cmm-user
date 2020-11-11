@@ -1,10 +1,14 @@
+import { setUrlObj2 } from '../../tool/index.js'
 // pages/posCarts/posCarts.js
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    page: '',
+    app: app.globalData.q,
     id: 0,
     pageType: 1, // 1: 购物车  2：结算结果
     switchPayWayTransition: { // 切换支付方式框过度效果
@@ -20,7 +24,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log('这是参数1', options.q)
+    console.log('这是参数1', options)
+    // const url = decodeURIComponent(JSON.parse(options).q)
+    const url = decodeURIComponent(options.q)
+    const obj = setUrlObj2(url)
+    console.log(obj)
   },
   confirmClick() {
     this.setData({ pageType: 2 })
