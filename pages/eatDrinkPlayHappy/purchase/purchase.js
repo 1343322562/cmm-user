@@ -31,7 +31,7 @@ Page({
     })
   },
   getPageData(itemId) {
-    showLoading()
+    showLoading('请稍后...')
     const { openId, sysCode, colonelId, dcId, userId } = getApp().data
     API.Play.itemDetail({
       data: {
@@ -172,6 +172,7 @@ Page({
     })
   },
   submit () {
+    showLoading('请稍后...')
     const {
       // userName,
       // userArea,
@@ -194,7 +195,6 @@ Page({
     //   ))
     //   return
     // }
-    showLoading()
     this.checkOrderdata((itemList)=> {
       let request = {
         dcId,
@@ -219,7 +219,6 @@ Page({
         supplierName: shop.supplierName
       }
       console.log(request)
-      hideLoading()
       API.Play.saveOrder2({
         data: request,
         success: ret => {
