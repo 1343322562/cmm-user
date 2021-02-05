@@ -25,8 +25,8 @@ App({
     dcName:"", //配送中心名称
     ww:0,
     mapKey: config[source].mapKey,
-    postageSection:[], //当前配送中心运费区间
-    startDeliveMoney: 0, //当前配送中心起送金额
+    postageSection:[], // 当前配送中心运费区间
+    startDeliveMoney: 0, // 当前配送中心起送金额
     storeMode: false, // 自提点模式
     storeColonelId: '', // 自提点团长ID
     userIsColonel: false, //  用户是不是团长

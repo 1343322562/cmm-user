@@ -687,6 +687,7 @@ Page({
     showLoading('提交订单...')
     let request=this.getSubmitOrdersInfo()
     console.log('保存订单的参数: ', request)
+    if (request['payAmt'] == '0') return toast('不能0元支付，请去购买更多商品')
     console.log('item', JSON.parse(request.itemList))
     if (!this.validationData(request)){return;}
     if (!this.reqDataCheck(request)) {

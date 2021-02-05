@@ -6,8 +6,8 @@ export default {
   // userURL: 'http://2916q61j60.zicp.vip:47451/',
 
   // 测试环境
-  // storeURL: 'http://244j07g355.zicp.vip/',
-  // userURL: 'http://244j07g355.zicp.vip/',
+  storeURL: 'http://244j07g355.zicp.vip/',
+  userURL: 'http://244j07g355.zicp.vip/',
   // storeURL: 'http://192.168.2.229:9000/',
   // userURL: 'http://192.168.2.229:9000/',
 
@@ -18,13 +18,16 @@ export default {
   // 堃
   // storeURL: 'http://192.168.2.17:8083/',
   // userURL: 'http://192.168.2.17:8083/',
+  // posCart
+  // storeURL: 'http://192.168.2.17:8081/pc-api/',
+  // userURL: 'http://192.168.2.17:8081/pc-api/',
 
   // storeURL: 'http://3236n0g263.qicp.vip/',
   // userURL: 'http://3236n0g263.qicp.vip/',
 
   // 生产版本
-  storeURL: 'https://cmm.colonel.kekejingxuan.com/',
-  userURL: 'https://cmm.user.kekejingxuan.com/',
+  // storeURL: 'https://cmm.colonel.kekejingxuan.com/',
+  // userURL: 'https://cmm.user.kekejingxuan.com/',
   // storeURL: 'http://192.168.1.6:9000/',
   // userURL: 'http://192.168.1.6:9000/',
 
@@ -33,13 +36,13 @@ export default {
   
   // storeURL: 'http://192.168.1.41:9000/',
   // userURL: 'http://192.168.1.41:9000/',
-  //storeURL: 'http://192.168.1.42:8102/',
+  // storeURL: 'http://192.168.1.42:8102/',
   // storeURL: 'http://keke.zksr.cn/',
-  //storeURL: 'https://www.fastmock.site/mock/abc992a494651eed439ee841a0ccdaaf/user/',
+  // storeURL: 'https://www.fastmock.site/mock/abc992a494651eed439ee841a0ccdaaf/user/',
   // storeURL: 'http://162i921y28.iok.la:17378/',
-  //userURL: 'http://192.168.1.42:8102/',
+  // userURL: 'http://192.168.1.42:8102/',
   // userURL: 'http://162i921y28.iok.la:17378/',
-  //userURL: 'https://www.fastmock.site/mock/abc992a494651eed439ee841a0ccdaaf/user/',
+  // userURL: 'https://www.fastmock.site/mock/abc992a494651eed439ee841a0ccdaaf/user/',
   post (url, param) {
     this.ajax('post', url, param)
   },

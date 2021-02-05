@@ -1,5 +1,5 @@
 import API from '../../api/index.js'
-import { getTime, deepCopy, getRemainTime, showLoading, hideLoading, goPage, alert, toast, downRefreshVerify, pxToRpx, defaultData } from '../../tool/index.js'
+import { getTime, deepCopy, getRemainTime, showLoading, hideLoading, goPage, alert, toast, downRefreshVerify, pxToRpx, defaultData, notEmpty } from '../../tool/index.js'
 import {
   ShoppingCartGoods
 } from '../../tool/shoppingCart.js'
@@ -161,8 +161,8 @@ Component({
     loadClsGoods() {
       let { playGoodsList, categoryList } = this.data
       if (this.playLoading && this.clsLoading && playGoodsList.length) {
-        if (categoryList[0].clsNo != 'play') {
-          categoryList.unshift({
+        if (categoryList[categoryList.length-1].clsNo != 'play') {
+          categoryList.push({
             clsNo: 'play',
             clsName: '吃喝玩乐',
             imgName: 'https://zksrimg.oss-cn-beijing.aliyuncs.com/images/cmm/play-cls-icon.png'
@@ -172,12 +172,13 @@ Component({
           categoryList,
         }
         console.log(`baseitemClsno:${this.baseitemClsno}`)
-        if (this.baseitemClsno) {
-          this.baseitemClsno = null
-        } else {
-          obj.selectFatherClsNo = 'play'
-          obj.toView = 'toView'
-        }
+        console.log('this.baseitemClsno', this.baseitemClsno)
+        // if (this.baseitemClsno) {
+        //   this.baseitemClsno = null
+        // } else {
+        //   obj.selectFatherClsNo = 'play'
+        //   obj.toView = 'toView'
+        // }
         this.setData(obj)
       }
     },
@@ -268,6 +269,7 @@ Component({
           if (obj.status === 200) {
 
             let list = types ? this.data.goodsList : []
+            let stockNullArr = []
             goodsList.forEach(item => {
               item.itemNowPrice = Number(item.itemNowPrice)
               item.startQty = Number(item.startQty) || 1
@@ -276,6 +278,14 @@ Component({
               item.itemDisPrice = Number(item.itemDisPrice)
               list.push(item)
             })
+            list.forEach((item, index) => {
+              if (item.stockNull) {
+                console.log(99,index, item)
+                stockNullArr.push(item)
+                list[index] = ''
+              }
+            })
+            list = [...notEmpty(list), ...stockNullArr]
             !types && this.setUpCls()
             this.setData({
               goodsList: list,
@@ -324,6 +334,7 @@ Component({
       this.getItemListPager();
     },
     getCategoryList() {
+      console.log('this', this.data)
       const { selectFatherClsNo } = this.data
       let {itemClsno} = getApp().data
       if (selectFatherClsNo == 'play'&&!itemClsno) {
@@ -348,6 +359,7 @@ Component({
                 getApp().data.itemClsno = null
               }
               this.setData({ selectFatherClsNo: selectTopCls, categoryList: categoryList, toView: "index_" + selectTopCls })
+              console.log(2, categoryList, selectTopCls)
               this.getCategoryList();
             } else {
 
@@ -357,6 +369,7 @@ Component({
                   this.data.selectFatherClsNo2 = categoryList[0].clsNo
                 }
               }
+              console.log(1, categoryList)
               this.setData({ selectFatherClsNo2: this.data.selectFatherClsNo2, categoryList2: categoryList })
               this.getItemListPager();
             }

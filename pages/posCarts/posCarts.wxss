@@ -8,7 +8,13 @@
 .white-bg {
   background-color: #ffffff;
 }
-
+.def-img {
+  padding: 10rpx;
+  height: 110rpx !important;
+  width: 110rpx !important;
+  background-color: #f1f1f1;
+  border-radius: 10rpx;
+}
 .good-card {
   width: 94%;
   padding: 28rpx 3%;
@@ -16,10 +22,14 @@
   align-items: center;
   border-top: 1rpx solid #eeeeee;
 }
+.title:last-child{
+  background-color: #333333;
+  color: #fff;
+  padding: 500rpx;
+}
 .good-card .good-img{
   height: 130rpx;
-width: 130rpx;
-
+  width: 130rpx;
 }
 .good-card .good-info{
   flex: 1;
@@ -30,8 +40,6 @@ width: 130rpx;
   justify-content: space-between;
   color: #333333;
   font-size: 29rpx;
-  
-
 }
 
 .good-info .good-name{
@@ -187,4 +195,24 @@ width: 130rpx;
   border: 1rpx solid #FF6F6E; 
   color: #ffffff;
   background-color: #FF6F6E;
+}
+
+.cancel-order {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 200rpx;
+}
+
+.cancel-order image{
+  height: 180rpx;
+  width: 180rpx;
+  margin-bottom: 25rpx;
+}
+
+.cancel-order text{
+  color: #888888;
+  font-size: 27rpx;
 }

@@ -153,5 +153,10 @@ export default {
     orderDetail: (param) => ajax.post(`chOrder/orderDetail`, param), //查询订单详情
     chOrderPay: (param) => ajax.post(`pay/chOrderPay`, param), //吃喝玩乐支付
     saveReturnOrder: (param) => ajax.post(`chOrder/saveReturnOrder`, param), //退款
+  },
+  Pos: {
+    getSelfCartList: (param) => ajax.post(`selfsale/order/getSelfCartList`, param), //
+    saveOrder: (param) => ajax.post(`selfsale/order/saveOrder`, param), //
+    orderPay: (param) => ajax.post(`selfsale/order/orderPay`, param), //
   }
 }

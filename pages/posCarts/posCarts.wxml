@@ -1,23 +1,13 @@
 <!-- 购物车 -->
 <view bindtap="hideSwitchPayWayDialogClick" class="page" wx:if="{{pageType == 1}}">
   <view class="title white-bg">商品信息</view>
-  <view class="good-card white-bg">
-    <image class="good-img" src="../../images/colonelApply_icon1.png"></image>
+  <view class="good-card white-bg" style="{{goodsData.length != 0 && goodsData.length-1 == index ? 'margin-bottom: 150rpx;' : ''}}" wx:for="{{goodsData}}" wx:key="index">
+    <image class="good-img {{item.defImg === true || !item.image   ? 'def-img' : ''}}" src="{{item.image || '../../images/moren.png'}}" binderror="defaultImg" data-index="{{index}}"></image>
     <view class="good-info">
-      <view class="good-name">这是商品的名称 500g</view>
+      <view class="good-name">{{item.title}}</view>
       <view class="good-saleinfo">
-        <view class="price">￥10</view>
-        <view class="num">x12</view>
-      </view>
-    </view>
-  </view>
-  <view class="good-card white-bg">
-    <image class="good-img" src="../../images/colonelApply_icon1.png"></image>
-    <view class="good-info">
-      <view class="good-name">这是商品的名称 500g</view>
-      <view class="good-saleinfo">
-        <view class="price">￥10</view>
-        <view class="num">x12</view>
+        <view class="price">￥{{item.price}}</view>
+        <view class="num">x{{item.num}}</view>
       </view>
     </view>
   </view>
@@ -26,14 +16,6 @@
     <view class="label">支付方式</view>
     <view class="content"><view class="tag">推荐</view>微信支付 <view class="triangle-view"/></view>
   </view>
-
- <view class="que">页面参数:{{page}}</view>
- <view class="que">1:{{page}}</view>
- <view class="que">2:{{page1}}</view>
-  <view>|</view>
- <view class="que">app参数:{{app}}</view>
- <view class="que">{{app}}</view>
- 
 
   <view catchtap="prevent" class="swicth-payway-box white-bg" style="height: {{switchPayWayTransition.height}};">
     <view class="title">切换支付</view>
@@ -51,21 +33,27 @@
 
   <view class="bottom">
     <view class="amt">
-      <view class="num">共5件商品</view>
-      合计: <text class="amt-t">￥20</text>
+      <view class="num">共{{totalNum}}件商品</view>
+      合计: <text class="amt-t">￥{{totalAmt}}</text>
     </view>
     <button bindtap="confirmClick" class="submit" type="primary" hover-class="hover-btn2">微信支付</button>
   </view>
 </view>
 
 <!-- 结算结果 -->
-<view class="page-res white-bg" wx:else>
+<view class="page-res white-bg" wx:if="{{pageType == 2}}" bindtap="orderComfire">
   <image class="res-logo" src="../../images/confirm.png"></image>
   <view class="res-content">结算完成</view>
   <view class="res-info">如需小票，请在仓店通上点击“打印小票”</view>
-  <view class="res-sheetamt">¥32.10</view>
+  <view class="res-sheetamt">¥{{totalAmt}}</view>
   <view class="res-btn-box">
     <!-- <view class="res-btn order" hover-class="hover-btn2" hover-stay-time="120">查看订单</view> -->
     <view class="res-btn confirm" hover-class="hover-btn2" hover-stay-time="120">完成</view>
   </view>
+</view>
+
+
+<view class="cancel-order" wx:if="{{pageType == 3 || pageType == 4}}">
+  <image src="../../images/member_list_null.png"></image>
+  <text>{{pageType == 3 ? '您的购物车不见啦，请重新扫码添加~~' : '请在自助收银台添加商品后, 再重新扫码支付~~'}}</text>
 </view>

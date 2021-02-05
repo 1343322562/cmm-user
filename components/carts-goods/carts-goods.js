@@ -202,7 +202,6 @@ Component({
       shoppingCart.setCartCount()
     },
     goLiquidation() {
-      
       const { goods, selectNum, selectTypeNum, cartsMoney, type } = this.data
       if (!selectNum) {
         toast('请选择购买商品')

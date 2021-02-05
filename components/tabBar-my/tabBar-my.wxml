@@ -1,7 +1,7 @@
 <view class="pageBox">
     <view class="contentBox" style="padding-top:{{headHeight}}rpx">
       <image class='logo' mode='widthFix' src="../../images/logo.png" />
-      <view class='user'>
+      <view class='user' bindtap="scancodes">
         <image src="{{userInfo.userPic}}" class='img' />
         <text class='name'>{{userInfo.nickName}}</text>
       </view>

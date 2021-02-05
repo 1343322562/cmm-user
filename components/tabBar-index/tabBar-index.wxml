@@ -35,7 +35,7 @@
             <view class="top-title-itme"><view class="icon">多</view><text>生活一网打尽</text></view>
         </view>
 
-        <scroll-view scroll-x  bindscroll="categoryListScroll" style="height:360rpx;width:100%;">
+        <scroll-view scroll-x  bindscroll="categoryListScroll" style="height:400rpx;width:100%;">
           <view class="top-content">
             <view class='class-btn' wx:for="{{categoryList}}" wx:key="item" catchtap="onClickClsItem" data-clsno="{{item.clsNo}}" data-clsname="{{item.clsName}}">
               <view class="img">
@@ -45,7 +45,9 @@
             </view>
           </view>
         </scroll-view>
-        <view class='pagination' wx:if="{{categoryList.length>10}}"><text class='spot' style="left:{{paginationSpotLeft}}rpx;width:{{paginationSpotWidth+'rpx'}}"></text></view>
+        <view class="paginationBox">
+          <view class='pagination' wx:if="{{categoryList.length>10}}"><text class='spot' style="left:{{paginationSpotLeft}}rpx;width:{{paginationSpotWidth+'rpx'}}"></text></view>
+        </view>
       </view>
       <!-- 自提点开团 -->
       <view class='storeOpenGroup' wx:if="{{(currentStoreAddr.openStore == 1) && switchTransWay}}"> <!-- currentStoreAddr.openStore == 1 && storePromotion.storeId  \ currentStoreMode || storeMode-->

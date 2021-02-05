@@ -40,18 +40,22 @@ Page({
     this.openType = opt.openType
   },
   openShare() {
-    const { createShare, goods, imgBaseUrl } = this.data
+    const { createShare, goods, imgBaseUrl, imgList } = this.data
+
     if (createShare) {
       this.setData({ showShare: true })
     } else {
       showLoading('生成海报中...')
       const itemHomePic = goods.itemHomePic.replace(new RegExp(/http:/g), 'https:')
+      console.log(itemHomePic)
       wx.downloadFile({
         url: itemHomePic,
         success: (ret) => {
+          console.log(ret)
           this.createCanvas(ret.tempFilePath)
         },
-        fail: () => {
+        fail: (err) => {
+          console.log(err)
           this.createCanvas()
         }
       })

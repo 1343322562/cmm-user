@@ -29,7 +29,7 @@
 }
 
 .home-advert{
-  height:581rpx;
+  height:588rpx;
 }
 .home-advert image{float: left;}
 
@@ -123,7 +123,7 @@ border-radius: 40rpx;position: relative;height: 60rpx;}
   flex-grow: 0;
   flex-shrink: 0; 
   flex-wrap: wrap;
-  height: 320rpx;
+  height: 360rpx;
 }
 .content-top .top-content .class-btn{
   flex-grow: 0;
@@ -132,8 +132,8 @@ border-radius: 40rpx;position: relative;height: 60rpx;}
   display:flex;
   justify-content:center;
   flex-wrap:wrap;
-  font-size: 24rpx;
-  margin-top: 10rpx;
+  font-size: 26rpx;
+  margin-top: 16rpx;
 }
 
 .content-top .top-content .class-btn .img{
@@ -148,7 +148,9 @@ border-radius: 40rpx;position: relative;height: 60rpx;}
    position: relative;
    bottom:0rpx;
    text-align: center;
-   margin-top: 10rpx;
+   margin-top: 15rpx;
+   padding: 5rpx 0;
+   color: #333333;
 }
 
 .yingoing{
@@ -595,7 +597,8 @@ display: -webkit-box; word-break: break-all; -webkit-box-orient: vertical; -webk
   text-align: center;
 }
 /*滚动页底部分页器*/
-.content-top .pagination{position: absolute;bottom: 20rpx;width: 100rpx;background-color: #eee;border-radius: 10rpx;height:10rpx;left: 50%;margin-left: -50rpx;overflow: hidden;}
+.paginationBox{ position: absolute;bottom: 20rpx;left: 0;right: 0;height: 10rpx;background-color: #fff;}
+.content-top .pagination{position: absolute;width: 100rpx;background-color: #eee;border-radius: 10rpx;height:10rpx;left: 50%;margin-left: -50rpx;overflow: hidden;}
 .content-top .pagination>.spot{height: 10rpx;background-color: red;border-radius:10rpx;position: relative;width: 10rpx;display: block;transition: left .05s ease;left: 0;opacity: .4}
 /*吃喝玩乐*/
 .eatDrinkPlayHappy{background: #fff;border-radius: 20rpx;overflow: hidden;margin: 20rpx auto 0 auto;width: 98%;}

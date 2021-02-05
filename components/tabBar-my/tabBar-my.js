@@ -8,6 +8,7 @@ Component({
   properties: {
   },
   data: {
+    scancodeNum: 0,
     someData: {
       statusBarHeight: app.globalData.statusBarHeight,
       titleBarHeight: app.globalData.titleBarHeight
@@ -20,6 +21,23 @@ Component({
     isColonel: false
   },
   methods: {
+    // 点击六次跳出扫码界面
+    scancodes() {
+      const _this = this
+      const scancodeNum = this.data.scancodeNum + 1
+      if (scancodeNum === 6) {
+        wx.scanCode({
+          success (res) {
+            console.log(1888, res)
+            const opt = res.result
+            _this.data.scancodeNum = 0
+            wx.navigateTo({url: '/pages/posCarts/posCarts?q=' + encodeURIComponent(opt)})
+          }
+        })
+        return
+      }
+      this.data.scancodeNum = scancodeNum
+    },
     getOrderNum() {
       API.Orders.getOrderNum({
         data: {

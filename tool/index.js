@@ -135,6 +135,19 @@ export const setUrlObj2 = (str) => { // url转obj (不包含 url)
   return obj
 }
 
+
+export const notEmpty = (arrList) => { // 去除数组空位
+  var arr = [];
+  arrList.map(function(val, index) {
+    //过滤规则为，不为空串、不为null、不为undefined，也可自行修改
+    if (val !== "" && val != undefined) {
+        arr.push(val);
+    }
+  });
+    return arr;
+}
+
+
 export const getRemainTime = (endTime, deviceTime, serverTime) => { // 获取倒计时
   let t = endTime - Date.parse(new Date()) - serverTime + deviceTime
   let seconds = Math.floor((t / 1000) % 60)
